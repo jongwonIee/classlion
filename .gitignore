@@ -19,3 +19,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+/.idea
+
+*.swp
+.env
+*.DS_Store
