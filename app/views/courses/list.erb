@@ -1,0 +1,42 @@
+<h1>강의 목록</h1>
+<table>
+  <tr>
+    <th>강의명</th>
+    <th>교수명</th>
+    <th>평점</th>
+    <th>학교</th>
+  </tr>
+
+  <% @courses.each do |c| %>
+      <tr>
+        <td><%= c.lecture.name %></td>
+        <td><%= c.professor.name %></td>
+        <td>평점입니다.</td>
+        <td><%= c.university.name %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+<h1>강평 목록</h1>
+<table>
+  <tr>
+    <th>강의명</th>
+    <th>교수명</th>
+    <th>학교</th>
+    <th>평점</th>
+    <th>내용</th>
+  </tr>
+
+  <% @evals.each do |e| %>
+      <tr>
+        <td><%= e.course.lecture.name %></td>
+        <td><%= e.course.professor.name %></td>
+        <td><%= e.course.university.name %></td>
+
+        <td><%= e.point_overall %></td>
+        <td><%= e.body.html_safe %></td>
+      </tr>
+  <% end %>
+</table>
+
