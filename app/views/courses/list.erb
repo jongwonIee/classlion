@@ -12,7 +12,7 @@
         <td><%= c.lecture.name %></td>
         <td><%= c.professor.name %></td>
         <td>평점입니다.</td>
-        <td><%= c.university.name %></td>
+        <td><%= c.university.local_name %></td>
       </tr>
   <% end %>
 </table>
@@ -32,7 +32,7 @@
       <tr>
         <td><%= e.course.lecture.name %></td>
         <td><%= e.course.professor.name %></td>
-        <td><%= e.course.university.name %></td>
+        <td><%= e.course.university.local_name %></td>
 
         <td><%= e.point_overall %></td>
         <td><%= e.body.html_safe %></td>
