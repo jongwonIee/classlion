@@ -1,0 +1,23 @@
+<!-- 10개짤라서 -->
+
+<h1>강평 목록</h1>
+<table>
+  <tr>
+    <th>강의명</th>
+    <th>교수명</th>
+    <th>학교</th>
+    <th>평점</th>
+    <th>내용</th>
+  </tr>
+
+  <% @evaluations.each do |e| %>
+      <tr>
+        <td><%= e.course.lecture.name %></td>
+        <td><%= e.course.professor.name %></td>
+        <td><%= e.course.university.local_name %></td>
+
+        <td><%= e.point_overall %></td>
+        <td><%= e.body.html_safe %></td>
+      </tr>
+  <% end %>
+</table>

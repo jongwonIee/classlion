@@ -1,2 +1,19 @@
-<p>hello classLion</p>
-<a href="/courses/list">강의목록&강평목록 보러가기</a>
+<!--강의 검색결과 -->
+<h1>강의 목록</h1>
+<table>
+  <tr>
+    <th>강의명</th>
+    <th>교수명</th>
+    <th>평점</th>
+    <th>학교</th>
+  </tr>
+
+  <% @courses.each do |c| %>
+      <tr>
+        <td><%= c.lecture.name %></td>
+        <td><%= c.professor.name %></td>
+        <td>평점입니다.</td>
+        <td><%= c.university.local_name %></td>
+      </tr>
+  <% end %>
+</table>

@@ -1,7 +1,11 @@
 class CoursesController < ApplicationController
-  def list
-    @courses = Course.all
-    @evals = Evaluation.all
+  include CoursesHelper
 
+  def index
+    @evaluations = all_evals
+  end
+
+  def list
+    @courses = all_courses
   end
 end

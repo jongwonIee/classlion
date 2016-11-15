@@ -8,7 +8,26 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <!--로그인 x-->
+    <a href="/courses/index">CLASSLION(로고)</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="120">
+
+    1000P
+    강평열람
+    위키열람
+    로그아웃
+
+    <a href="/mypages/index">마이페이지</a>
+
+  </header>
+
+
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+    <a href="/home/about"></a>
+  </footer>
 </html>
+

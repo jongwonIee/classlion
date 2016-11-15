@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'
 
@@ -14,11 +17,15 @@ Rails.application.routes.draw do
   get 'courses/index'
   get 'courses/list'
 
-  #강의평가
+  #강의평가 작성
   get 'evaluations/index'
+  get 'evaluations/create'
 
   #강의평가의 댓글
   get 'comments/index'
+
+  #마이페이지
+  get 'mypages/index'
 
   # get ':controller(/:action(/:id))'
   # post ':controller(/:action(/:id))'

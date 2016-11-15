@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout :false
   def sign_up
     #회원가입
   end
