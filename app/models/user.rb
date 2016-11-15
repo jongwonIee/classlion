@@ -1,7 +1,4 @@
-require 'bcypt'
 class User < ApplicationRecord
-  include BCrypt
-
   belongs_to :university
   belongs_to :major
 
@@ -56,6 +53,12 @@ class User < ApplicationRecord
   public
   def password?(password)
     BCrypt::Password.new(self.encrypt_password) == password
+  end
+
+  #탈퇴했을 경우
+  def dropout
+    self.dropped_out = true;
+    self.dropout_out_at = Time.now
   end
 
 

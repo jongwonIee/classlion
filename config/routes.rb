@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   #회원가입
   get 'users/sign_in'
   get 'users/sign_up'
+  post 'users/session'
+  post 'users/create'
 
   #강의 리스트
   get 'courses/index'

@@ -1,0 +1,27 @@
+<h1>회원가입</h1>
+<!-- 레일즈 helper 버전으로 작성하기 -->
+
+<%= form_for(@user, url: {action: "create"}, html: {method: "post"}) do |f| %>
+
+    <%= f.email_field :email, autofocus: true, placeholder: "이메일" %><br/>
+
+    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자 이상)" %><br/>
+
+    <%= f.password_field :password_confirm, autocomplete: "off", placeholder: "비밀번호 확인(8자 이상)" %><br/>
+
+    <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임" %><br/>
+
+    <%= f.select(:is_boy) do %>
+        <% [['여자', "false"], ['남자', "true"]].each do |s| %>
+            <%=  content_tag(:option, s.first, value: s.last) %>
+        <% end %>
+    <% end %><br/>
+
+    <!--자동완성 기능 구현할 부분 -->
+    <%= f.text_field :university, autofocus: true, placeholder: "학교" %><br/>
+    <%= f.text_field :major, autofocus: true, placeholder: "전공" %><br/>
+
+    <%= f.submit "가입하기" %>
+<% end %>
+<p>이미 회원이신가요? <a href="/users/sign_in"><u>로그인</u></a></p>
+<p>계속 진행하시면 <a href="#">개인정보 취급방침</a> 및 <a href="#">약관</a>에 동의하게됩니다</p>
