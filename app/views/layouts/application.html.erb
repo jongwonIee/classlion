@@ -12,22 +12,28 @@
     <!--로그인 x-->
     <a href="/evaluations/index">CLASSLION(로고)</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="120">
 
-    1000P
-    강평열람
-    위키열람
-    <!--여기다가 로그인한 사람 닉네임 뿌려주기-->
-    <%= User.find(session["user_id"]).nickname %>
-    <a href="/mypages/index">마이페이지</a>
-
+    <% if logged_in? %>
+        1000P
+        강평열람
+        위키열람
+        <%= current_user.nickname %>
+        <a href="/mypages/index">마이페이지</a>
+        <%= link_to "로그아웃", logout_path, method: :delete %>
+    <% else %>
+        <%= link_to "로그인", login_path %>
+    <% end %>
   </header>
 
 
   <body>
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
   </body>
 
   <footer>
-    <a href="/home/about"></a>
+    <a href="/home/about">ClassLion</a>
   </footer>
 </html>
 

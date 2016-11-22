@@ -15,7 +15,6 @@ class User < ApplicationRecord
   NICKNAME_LENGTH_MIN = 2
   #is_impressionable
 
-  #attr_accessor :password, :password_confirm #getter/setter
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #이메일 유효성체크
   validates :email,
@@ -42,20 +41,7 @@ class User < ApplicationRecord
   validates :password,
     presence: true,
     length: { minimum: PASSWORD_LENGTH_MIN, maximum: PASSWORD_LENGTH_MAX}
-  # def encrypt_password
-  #   if self.password != self.password_confirm
-  #     self.errors.add(:encrypt_password, "입력한 비밀번호 두개가 서로 다릅니다.")
-  #     throw :abort
-  #   elsif self.password.nil? or (self.password.length < PASSWORD_LENGTH_MIN)
-  #     self.errors.add(:encrypt_password, "비밀번호는 #{PASSWORD_LENGTH_MIN}자 이상이어야 합니다.")
-  #     throw :abort
-  #   elsif self.password.length > PASSWORD_LENGTH_MAX
-  #     self.errors.add(:encrypt_password, "비밀번호는 #{PASSWORD_LENGTH_MAX}자 이하여야 합니다.")
-  #     throw :abort
-  #   else
-  #     self.encrypted_password = BCrypt::Password.create(self.password)
-  #   end
-  # end
+
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
   def increase_user_count

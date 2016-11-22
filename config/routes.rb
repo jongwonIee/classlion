@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
 
+  get 'sessions/new'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'
 
@@ -10,10 +12,12 @@ Rails.application.routes.draw do
   get 'home/about'
 
   #회원가입
-  get 'users/sign_in'
-  get 'users/sign_up'
-  post 'users/session'
-  post 'users/create'
+  get  '/signup',  to: 'users#new'
+  post '/signup',  to: 'users#create'
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+  resources :users
 
   #강의 리스트
   get 'courses/index'

@@ -1,0 +1,18 @@
+<h1>ClassLion</h1>
+<p> 10개의 학교, 150000명,
+  <br/>116053개의 강의평가
+</p>
+
+<h1>로그인</h1>
+<%= form_for(:session, url: login_path) do |f| %>
+
+    <%= f.email_field :email, class: 'form-control', placeholder: "이메일" %><br/>
+
+    <%= f.password_field :password, class: 'form-control', placeholder: "비밀번호" %><br/>
+
+    <%= f.submit "시작하기" %><br/>
+<% end %>
+
+<br/>
+<p><a href="#">Forgot your password?</a></p>
+회원이 아니신가요? <%= link_to "가입하기", signup_path %>
