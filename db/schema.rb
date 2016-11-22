@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20161112184936) do
     t.string   "email",                                      null: false
     t.integer  "university_id",                              null: false
     t.integer  "major_id",                                   null: false
-    t.string   "password",                                   null: false
+    t.string   "password_digest",                            null: false
     t.boolean  "is_boy",                                     null: false
     t.boolean  "confirmed",                  default: false, null: false
     t.boolean  "dropped_out",                default: false, null: false
