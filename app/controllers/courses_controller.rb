@@ -1,8 +1,7 @@
 class CoursesController < ApplicationController
   include CoursesHelper
 
-  def index
+  def list
     @courses = all_courses
   end
-
 end

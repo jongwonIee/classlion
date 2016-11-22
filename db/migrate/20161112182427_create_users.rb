@@ -1,13 +1,13 @@
 class CreateUsers < ActiveRecord::Migration[5.0]
   def change
     create_table :users do |t|
-      t.string      :nickname,  null: false
-      t.string      :email,     null: false
+      t.string      :nickname,  null: false, unique: true
+      t.string      :email,     null: false, unique: true
       t.integer     :university_id,   null: false
       t.integer     :major_id,  null: false
 
       # password
-      t.string      :password,  null: false
+      t.string      :password_digest,  null: false
 
       t.boolean     :is_boy,        null: false #피지컬한 성별받는 걸로
       t.boolean     :confirmed,     null: false,  default: false #학교메일 인증 확인
@@ -25,6 +25,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       ## Confirmable
       t.boolean  :confirmation_is_needed,   null: false,  default: false
       t.string   :confirmation_token
+
       t.datetime :confirmation_sent_at
       t.datetime :confirmed_at
 
