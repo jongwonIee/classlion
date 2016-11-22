@@ -15,8 +15,8 @@
     1000P
     강평열람
     위키열람
-    로그아웃
-
+    <!--여기다가 로그인한 사람 닉네임 뿌려주기-->
+    <%= User.find(session["user_id"]).nickname %>
     <a href="/mypages/index">마이페이지</a>
 
   </header>

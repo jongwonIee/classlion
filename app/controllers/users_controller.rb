@@ -25,6 +25,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id #자동으로 로그인
       redirect_to "/evaluations/index" #강평 목록이 있는 곳으로 리다이렉트
     else
+      @errors = user.errors.full_messages.first if user.errors.any?
       print(user.errors.full_messages.first) if user.errors.any?
     end
 

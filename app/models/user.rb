@@ -56,7 +56,6 @@ class User < ApplicationRecord
   #     self.encrypted_password = BCrypt::Password.create(self.password)
   #   end
   # end
-
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
   def increase_user_count
