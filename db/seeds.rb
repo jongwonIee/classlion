@@ -24,7 +24,7 @@ end
 #
 # #사용자
 # puts "Inserting user data.."
-# [
+#
 #    [1, true, "이브이", "admin@snu.ac.kr", 1, "admin", 1],
 #    [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1, "jradoo2", 1],
 #    [3, false, "flyest", "minsu007@snu.ac.kr", 1, "minsu007", 2],
@@ -51,7 +51,7 @@ end
 # File.read("db/seed_data/professors.csv").split("\n").each do |line|
 #   data = line.strip.split("\t")
 #   Professor.create(
-#       id: data[0],
+#       id: data[0],ㄴ
 #       name: data[1],
 #       university_id: data[2]
 #   )
