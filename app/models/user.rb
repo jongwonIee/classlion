@@ -2,6 +2,7 @@ class User < ApplicationRecord
   belongs_to :university
   belongs_to :major
 
+  attr_accessor :remember_token
   before_create :increase_user_count
   before_destroy :decrease_user_count
   before_save { self.email = email.downcase }#이메일 저장 전 소문화화
@@ -42,6 +43,33 @@ class User < ApplicationRecord
     presence: true,
     length: { minimum: PASSWORD_LENGTH_MIN, maximum: PASSWORD_LENGTH_MAX}
 
+  #주어진 문자열에 대해서 hash digest를 반환
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  #random token 반환
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  def authenticated?(remember_token)
+    if remember_digest.nil?
+      false
+    else
+      BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    end
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
   def increase_user_count

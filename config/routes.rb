@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   #메인
   get 'home/index'
-  get 'home/about'
 
   #회원가입
   get  '/signup',  to: 'users#new'
