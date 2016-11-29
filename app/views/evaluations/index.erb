@@ -12,10 +12,9 @@
 
   <% @evaluations.each do |e| %>
       <tr>
-        <td><%= e.course.lecture.name %></td>
+        <td><a href='/courses/show/<%= e.course.id %>'><%= e.course.lecture.name %></a></td>
         <td><%= e.course.professor.name %></td>
         <td><%= e.course.university.local_name %></td>
-
         <td><%= e.point_overall %></td>
         <td><%= e.body.html_safe %></td>
       </tr>

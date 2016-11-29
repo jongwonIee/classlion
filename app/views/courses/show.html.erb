@@ -1,0 +1,21 @@
+<h1>강의정보</h1>
+
+      <p>교수님이름<%= @course.professor.name %></p>
+      <p>강의명<%= @course.lecture.name %></p>
+      <p>학교명<%= @course.university.local_name %></p>
+      <p>강평수<%= @course.evaluation_count %></p>
+      <p>전체평가평점</p>
+
+
+<h1>이 강의의 강평리스트</h1>
+<table>
+<% @evaluations.each do |e| %>
+  <tr>
+    <td><a href='/courses/show/<%= e.course.id %>'><%= e.course.lecture.name %></a></td>
+    <td><%= e.course.professor.name %></td>
+    <td><%= e.course.university.local_name %></td>
+    <td><%= e.point_overall %></td>
+    <td><%= e.body.html_safe %></td>
+  </tr>
+  <% end %>
+</table>

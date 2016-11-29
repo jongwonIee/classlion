@@ -23,9 +23,12 @@ Rails.application.routes.draw do
   get 'courses/index'
   get 'courses/list'
 
-  #강의평가 작성
+  #강의평가 목록
   get 'evaluations/index'
+  #강의평가 작성
   get 'evaluations/create'
+  #강의평가
+  get 'courses/show/:id' => 'courses#show'
 
   #강의평가의 댓글
   get 'comments/index'
