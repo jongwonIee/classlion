@@ -9,3 +9,11 @@ one: {}
 #
 two: {}
 # column: value
+
+woori:
+  nickname: Woori Examle
+  email: hello@example.com
+  password_digest: <%= User.digest('password') %>
+  university_id: 1
+  major_id: 1
+  is_boy: false
