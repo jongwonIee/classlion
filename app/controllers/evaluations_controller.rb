@@ -2,7 +2,7 @@ class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
   def index
-    if current_user.nil?
+    unless current_user
       redirect_to '/home/index'
     end
     @evaluations = all_evaluations
@@ -17,21 +17,21 @@ class EvaluationsController < ApplicationController
   end
 
   def create #디비에 넣는다
-    evaluation = Evaluation.new(
-        money: params[:money],
-        user_id: current_user.id,
-        course_id: params[:course_id],
-        point_overall: params[:point_overall],
-        # point_easiness
-        # point_gpa_satisfaction
-        # point_clarity
-        body: body[:body]
-    )
-
-    if evaluation.save
-      redirect_to "/mypages/index"
-    else
-      redirect_to "evaluations/new"
-    end
+    # evaluation = Evaluation.new(
+    #     money: params[:money],
+    #     user_id: current_user.id,
+    #     course_id: params[:course_id],
+    #     point_overall: params[:point_overall],
+    #     # point_easiness
+    #     # point_gpa_satisfaction
+    #     # point_clarity
+    #     body: body[:body]
+    # )
+    #
+    # if evaluation.save
+    #   redirect_to "/mypages/index"
+    # else
+    #   redirect_to "evaluations/new"
+    # end
   end
 end

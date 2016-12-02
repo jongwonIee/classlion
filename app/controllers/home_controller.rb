@@ -2,6 +2,9 @@ class HomeController < ApplicationController
   layout :false
   def index
     #가장 처음 마주하는 페이지
+    if current_user
+      redirect_to '/evaluations/index'
+    end
   end
 
   def about

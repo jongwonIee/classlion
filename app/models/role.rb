@@ -9,17 +9,4 @@ class Role < ApplicationRecord
             :allow_nil => true
 
   scopify
-
-
-  # # 평가
-  # def self.evaluator
-  #   user = User.find(params[:id])
-  #   user.add_role 'evaluator'
-  # end
-  #
-  # # 위키
-  # def self.wikier
-  #   user = User.find(params[:id])
-  #   user.add_role 'wikier'
-  # end
 end
