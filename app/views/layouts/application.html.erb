@@ -4,38 +4,54 @@
     <title>Classlion</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
+    <style>
+      .rolebutton {
+        display: inline-block;
+      }
+    </style>
   </head>
-
-  <header>
-    <!--로그인 x-->
-    <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="120">
-
-    <% if logged_in? %>
-        1000P
-        강평열람
-        <%= button_to 'Call Action', roles_evaluator_path, method: :post %>
-        <위키열람></위키열람>
-        <%= button_to 'Call Action', roles_wikier_path, method: :post %>
-        <%= current_user.nickname %>
-        <a href="/mypages/index">마이페이지</a>
-        <%= link_to "로그아웃", logout_path, method: :delete %>
-    <% else %>
-        <%= link_to "로그인", login_path %>
-    <% end %>
-  </header>
-
 
   <body>
     <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
+
+    <header>
+      <!--로그인 x-->
+      <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">
+      <% if logged_in? %>
+          <div class="rolebutton">
+            강평열람
+            <% unless current_user.has_role? 'evaluator' %>
+              <%= button_to '오픈하기', roles_evaluator_path, method: :post, :onClick => 'alert("강평열람 권한이 부여되었습니다")' %>
+            <% else %>
+              강의평가를 열람해보세요!
+            <% end %>
+          </div>
+          <div class="rolebutton">
+            위키열람
+            <% unless current_user.has_role? 'wikier' %>
+              <%= button_to '오픈하기', roles_wikier_path, method: :post, :onClick => 'alert("위키열람 권한이 부여되었습니다")'  %>
+            <% else %>
+                위키를 열람해보세요!
+            <% end %>
+          </div>
+          <%= current_user.nickname %>
+          <a href="/mypages/index">마이페이지</a>
+          <%= link_to "로그아웃", logout_path, method: :delete %>
+      <% else %>
+          <%= link_to "로그인", login_path %>
+      <% end %>
+    </header>
+
     <%= yield %>
+    <footer>
+      <a href="/home/about">ClassLion</a>
+      <%= button_to '권한삭제', roles_remove_path, method: :post %>
+    </footer>
+
   </body>
-
-  <footer>
-    <a href="/home/about">ClassLion</a>
-  </footer>
 </html>
-

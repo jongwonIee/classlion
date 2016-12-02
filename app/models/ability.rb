@@ -7,7 +7,7 @@ class Ability
       redirect_to '/home/index'
 
     # 평가 열람편집 권한 획득
-    elsif user.has_rol  e? :evaluator
+    elsif user.has_role? :evaluator
       can :manage, Course
 
     # 위키 열람편집 권한 획득
