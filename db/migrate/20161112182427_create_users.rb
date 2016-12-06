@@ -16,6 +16,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.datetime    :dropped_out_at
       t.boolean     :allowed,       null: false,  default: false #필수로 써야하는 강평 수를 채운 경우
 
+      t.integer     :point, null: false, default: 0 #강평 및 위키 읽기 구독을 획득하기 위한 점수
       ## Trackable
       t.integer  :sign_in_count,  default: 1, null: false
       t.datetime :current_sign_in_at
