@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 
       # password
       t.string      :password_digest,  null: false
+      t.string      :remember_digest
 
       t.boolean     :is_boy,        null: false #피지컬한 성별받는 걸로
       t.boolean     :confirmed,     null: false,  default: false #학교메일 인증 확인

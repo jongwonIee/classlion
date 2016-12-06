@@ -10,7 +10,12 @@
 
     <%= f.password_field :password, class: 'form-control', placeholder: "비밀번호" %><br/>
 
-    <%= f.submit "시작하기" %><br/>
+    <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span>기억해두기</span>
+    <% end %>
+
+    <%= f.submit "로그인" %><br/>
 <% end %>
 
 <br/>
