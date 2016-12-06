@@ -12,8 +12,6 @@
 //
 //= require jquery
 //= require tether
-//= require jquery-ui
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
