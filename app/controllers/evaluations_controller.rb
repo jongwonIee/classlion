@@ -14,27 +14,21 @@ class EvaluationsController < ApplicationController
 
   def new #글작성 폼을 준다
     #자동완성에 관련된 코드
-    @evaluations = Evaluation.new
+    @evaluation = Evaluation.new
   end
 
   def create #디비에 넣는다
-    evaluation = Evaluation.new(
-        user_id: current_user.id,
-        course_id: params[:course_id],
-        point_overall: params[:point_overall],
-        # point_easiness: params[:point_easiness],
-        # point_gpa_satisfaction: params[:point_gpa_satisfaction],
-        # point_clarity: params[:point_clarity],
-        body: body[:body]
-    )
-
+    evaluation = Evaluation.new(eval_params)
     if evaluation.save
-      @user = User.find(params[:id])
-      if @user.update!(params[:point])
-      redirect_to :back
-      end
+      redirect_to "/"
     else
-      redirect_to "evaluations/new"
+      redirect_to :back
     end
   end
+
+  private
+  def eval_params
+  params.require(:evaluation).permit(:user_id, :course_id, :point_overall, :body)
+  end
+
 end
