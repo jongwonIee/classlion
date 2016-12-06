@@ -37,7 +37,6 @@
       <!--로그인 x-->
       <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">
       <% if logged_in? %>
-          <%= current_user.point %> 점
           <div class="rolebutton">
             강평열람
             <% unless current_user.has_role? 'evaluator' %>
@@ -55,7 +54,6 @@
             <% end %>
           </div>
           <%= current_user.nickname %>
-          <a href="/evaluations/new">평가하기</a>
           <a href="/mypages/index">마이페이지</a>
           <%= link_to "로그아웃", logout_path, method: :delete %>
       <% else %>

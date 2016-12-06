@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'evaluations/index'
   #강의평가 작성
   get 'evaluations/new'
-  resources :evaluations
+  get 'evaluations/create'
 
   #강의평가의 댓글 - 강의 세부정보에 표시
   get 'comments/index'

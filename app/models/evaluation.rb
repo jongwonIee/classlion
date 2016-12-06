@@ -1,21 +1,14 @@
 class Evaluation < ApplicationRecord
-
   belongs_to :course
   belongs_to :user
   resourcify
   has_many :comment_of_evaluations
 
-  before_create :increase_evaluation_count, :increase_user_point
+  before_create :increase_evaluation_count
   before_destroy :decrease_evaluation_count
 
+
   private
-
-
-  def increase_user_point
-    user = self.user
-    point = user.point + 300
-    user.update_attribute(:point, point)
-  end
 
   def increase_evaluation_count
     course = self.course
