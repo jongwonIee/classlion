@@ -14,6 +14,6 @@ class RolesController < ApplicationController
   end
 
   def wikier
-    add_role_evaluator
+    add_role_wikier
   end
 end
