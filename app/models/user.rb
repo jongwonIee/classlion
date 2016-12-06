@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  rolify
+  #rolify
   belongs_to :university
   belongs_to :major
 

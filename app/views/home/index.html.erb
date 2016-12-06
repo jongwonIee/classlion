@@ -1,7 +1,21 @@
-<%= render 'main_top'%>
-<%= render 'main_middle'%>
-<%= render 'main_bottom'%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Classlion</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.rawgit.com/YJSoft/Webfonts/0.1/BM_JUA.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <%= render 'main_top'%>
+  <%= render 'main_middle'%>
+  <%= render 'main_bottom'%>
+</body>
+</html>
 
 
 
