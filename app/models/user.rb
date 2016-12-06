@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  #rolify
+  rolify
   belongs_to :university
   belongs_to :major
 
@@ -71,6 +71,16 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+
+  def major_name
+    major.try(:name)
+  end
+
+  def major_name=(name)
+    self.major = Major.find_or_create_by_name(name) if name.present?
+  end
+
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
   def increase_user_count

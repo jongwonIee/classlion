@@ -1,26 +1,129 @@
-<h1>회원가입</h1>
-<%= form_for(@user, url: signup_path) do |f| %>
-    <%= render 'shared/error_messages' %>
+<div class="main_container">
+  <div class="container">
+    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+    <div class="set_full col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
+      <div class="outer">
+        <div class="inner">
+          <div class="centered">
+            <p class="logo">CLASSLION</p>
 
-    <%= f.email_field :email, autofocus: true, placeholder: "이메일" %><br/>
+            <%= form_for(@user, url: signup_path) do |f| %>
+                <%= render 'shared/error_messages' %>
 
-    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자 이상)"%><br/>
+                <div class="input_group login_input email_input">
+                  <div class="join_gp">
+                    <div class="input_div">
+                      <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                    </div>
+                    <div class="check_div">
+                      <button type="button" onclick="check(user_email, this)">check</button>
+                    </div>
+                  </div>
+                </div>
 
-    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8자 이상)"%><br/>
+                <div class="input_group login_input">
+                  <div class="full_input input_div">
+                    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)"%><br>
+                  </div>
+                  <!--<div class="check_div">-->
+                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                  <!--</div>-->
+                </div>
 
-    <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임"%><br/>
+                <div class="input_group login_input">
+                  <div class="full_input input_div">
+                    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)"%><br/><br>
+                  </div>
+                  <!--<div class="check_div">-->
+                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                  <!--</div>-->
+                </div>
 
-    <%= f.select(:is_boy) do %>
-        <% [['여자', "false"], ['남자', "true"]].each do |s| %>
-            <%=  content_tag(:option, s.first, value: s.last) %>
-        <% end %>
-    <% end %><br/>
+                <div class="input_group login_input">
+                  <div class="join_gp">
+                    <div class="input_div">
+                      <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임(2~8자)"%>
+                    </div>
+                    <div class="check_div">
+                      <button type="button" onclick="check(user_nickname, this)">check</button>
+                    </div>
+                  </div>
+                </div>
 
-    <%#자동완성 기능 구현할 부분, 나중엔 사용자가 직접쓰고, 하단에 학교가 떠서 선택할 수 있는 식(cf.에브리타임)%>
-    <%= f.collection_select(:university_id, University.all, :id, :local_name )%><br/>
-    <%= f.collection_select(:major_id, Major.all, :id, :name)%>
+                <div class="gender_div">
+                  <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>
+                  <%= f.label :is_boy, "남자", class: "gender_input", for: "male" %>
 
-    <%= f.submit "가입하기" %>
-<% end %>
-<p>이미 회원이신가요? <%= link_to "로그인", login_path %></p>
-<p>계속 진행하시면 <a href="#">개인정보 취급방침</a> 및 <a href="#">약관</a>에 동의하게됩니다</p>
+                  <%= f.radio_button :is_boy, "false", id: "female" %>
+                  <%= f.label :is_boy, "여자", class: "gender_input", for: "female" %>
+                </div>
+
+                <div class="input_group login_input">
+                  <div class="full_input input_div">
+                    <%= f.collection_select(:university_id, University.all, :id, :local_name )%><br>
+                  </div>
+                  <!--<div class="check_div">-->
+                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                  <!--</div>-->
+                </div>
+
+                <div class="input_group login_input">
+                  <div class="full_input input_div">
+                    <%= f.text_field :major_name %>
+                    <%#= f.collection_select(:major_id, Major.all, :id, :name)%><br>
+                  </div>
+                  <!--<div class="check_div">-->
+                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                  <!--</div>-->
+                </div>
+
+                <%= f.submit "가입하기", class: "login_btn" %><br>
+            <% end %>
+            <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
+            <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+  </div>
+</div>
+
+<script> //우선 스크립트 분리하지 않았습니다. 추후 분리 예정
+function check(what, item) {
+  var s = ['master@co.kr', 'abc@naver.com']; //for test
+  var nick_l = document.getElementById("user_nickname").value.length;
+
+  if (what = 'user_email') {
+    for (i=0; i<s.length; i++) {
+      if (s[i] = document.getElementById("user_email").value) {
+        item.style.background = "#ff5a5f";
+        item.style.borderColor = "#ff5a5f";
+        item.innerHTML = "이미 사용중!";
+      }
+
+      else {
+        item.style.background = "#00c075";
+        item.style.borderColor = "#00c075";
+        item.innerHTML = "ok!";
+      }
+    }
+  }
+
+  if (what = 'user_nickname') {
+    if (nick_l < 2 || nick_l >8) {
+      item.style.background = "#ff5a5f";
+      item.style.borderColor = "#ff5a5f";
+      item.innerHTML = "이미 사용중!";
+    }
+
+    else {
+      item.style.background = "#00c075";
+      item.style.borderColor = "#00c075";
+      item.innerHTML = "ok!";
+    }
+  }
+}
+
+</script>
+
