@@ -1,4 +1,4 @@
-#대학교 4개 리스팅
+# 대학교 4개 리스팅
 puts "Inserting university data.."
 [
     ["서울대학교", "snu", true, "snu.ac.kr"],
@@ -22,17 +22,17 @@ puts "Inserting major data.."
   Major.create(id: x[0], name: x[1])
 end
 
-사용자
+#사용자
 puts "Inserting user data.."
-
-   [1, true, "이브이", "admin@snu.ac.kr", 1, "admin", 1],
-   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1, "jradoo2", 1],
-   [3, false, "flyest", "minsu007@snu.ac.kr", 1, "minsu007", 2],
-   [4, false, "korellas", "korellas@snu.ac.kr", 1, "korellas", 3],
-   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, "cjw1213", 4]
+[
+   [1, true, "이브이", "admin@snu.ac.kr", 1, 'password', 'password', 1],
+   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', 1],
+   [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', 2],
+   [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', 3],
+   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', 4]
 
 ].each do |x|
-  User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4], password: x[5], major_id: x[6])
+  User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4], password: x[5], password_confirmation: x[6], major_id: x[7])
 end
 
 puts "Inserting lecture data.."
