@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20161125080102) do
     t.boolean  "dropped_out",                default: false, null: false
     t.datetime "dropped_out_at"
     t.boolean  "allowed",                    default: false, null: false
+    t.integer  "point",                      default: 0,     null: false
     t.integer  "sign_in_count",              default: 1,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
