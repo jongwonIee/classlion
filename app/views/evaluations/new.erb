@@ -7,10 +7,12 @@
 <!--body: body[:body]-->
 
 <h1>강평작성</h1>
-<%= form_for(@evaluations) do |f| %>
-    <%= f.search_field :course_id, autocomplete: "on", placeholder: "수업아이디"%><br/>
+<%= form_for @evaluation do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %><br/>
 
-    <%= f.password_field :point_overall, autocomplete: "on", placeholder: "점수"%><br/>
+    <%= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%><br/>
+
+    <%= f.number_field :point_overall, autocomplete: "on", placeholder: "점수"%><br/>
 
     <%= f.text_field :body, autofocus: true, placeholder: "한줄평"%><br/>
 

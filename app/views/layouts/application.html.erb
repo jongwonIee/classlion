@@ -37,10 +37,11 @@
       <!--로그인 x-->
       <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">
       <% if logged_in? %>
+          <%= current_user.point %> 점
           <div class="rolebutton">
             강평열람
             <% unless current_user.has_role? 'evaluator' %>
-              <%= button_to '오픈하기', roles_evaluator_path, method: :post, :onClick => 'alert("강평열람 권한이 부여되었습니다")' %>
+              <%= button_to '오픈하기', roles_evaluator_path, method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %>
             <% else %>
               강의평가를 열람해보세요!
             <% end %>
@@ -48,12 +49,13 @@
           <div class="rolebutton">
             위키열람
             <% unless current_user.has_role? 'wikier' %>
-              <%= button_to '오픈하기', roles_wikier_path, method: :post, :onClick => 'alert("위키열람 권한이 부여되었습니다")'  %>
+              <%= button_to '오픈하기', roles_wikier_path, method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")'  %>
             <% else %>
                 위키를 열람해보세요!
             <% end %>
           </div>
           <%= current_user.nickname %>
+          <a href="/evaluations/new">평가하기</a>
           <a href="/mypages/index">마이페이지</a>
           <%= link_to "로그아웃", logout_path, method: :delete %>
       <% else %>

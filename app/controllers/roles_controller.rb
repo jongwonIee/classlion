@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  include RolesHelper
 
   #테스트용
   def remove
@@ -9,14 +10,10 @@ class RolesController < ApplicationController
   end
 
   def evaluator
-    user = User.find(current_user.id)
-    user.add_role 'evaluator'
-    redirect_to :back
+    add_role_evaluator
   end
 
   def wikier
-    user = User.find(current_user.id)
-    user.add_role 'wikier'
-    redirect_to :back
+    add_role_evaluator
   end
 end
