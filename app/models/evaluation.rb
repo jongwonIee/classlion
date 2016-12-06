@@ -4,7 +4,7 @@ class Evaluation < ApplicationRecord
   resourcify
   has_many :comment_of_evaluations
 
-  before_create :increase_evaluation_count, :decrease_user_mandatory_evaluation_count
+  before_create :increase_evaluation_count
   before_destroy :decrease_evaluation_count
 
 
@@ -34,12 +34,6 @@ class Evaluation < ApplicationRecord
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count - 1)
-  end
-
-  def decrease_user_mandatory_evaluation_count
-    user = self.user
-    user.mandatory_evaluation_count = user.mandatory_evaluation_count - 1 if user.mandatory_evaluation_count > 0
-    user.save
   end
 
 end
