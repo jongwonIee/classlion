@@ -12,14 +12,24 @@ end
 #전공
 puts "Inserting major data.."
 [
-    [1, "경영"],
-    [2, "IT"],
-    [3, "통계"],
-    [4, "미디어커뮤니케이션"],
-    [5, "국제통상"]
+    [1, "서울 경영", 1],
+    [2, "서울 IT", 1],
+    [3, "서울 통계", 1],
+
+    [4, "성균 미디어커뮤니케이션", 2],
+    [5, "성균 국제통상", 2],
+    [6, "성균 경영", 2],
+
+    [7, "숭실 IT", 3],
+    [8, "숭실 통계", 3],
+    [9, "숭실 미디어커뮤니케이션", 3],
+
+    [10, "성신 국제통상", 4],
+    [11, "성신 미디어커뮤니케이션", 4],
+    [12, "성신 국제통상", 4]
 
 ].each do |x|
-  Major.create(id: x[0], name: x[1])
+  Major.create(id: x[0], name: x[1], university_id: x[2])
 end
 
 #사용자
@@ -29,7 +39,8 @@ puts "Inserting user data.."
    [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', 1],
    [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', 2],
    [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', 3],
-   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', 4]
+   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', 4],
+   [6, false, "앙우리", "a@a.com", 1, '11111111', '11111111', 1]
 
 ].each do |x|
   User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4], password: x[5], password_confirmation: x[6], major_id: x[7])

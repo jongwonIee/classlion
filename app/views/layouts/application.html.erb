@@ -6,21 +6,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-
+    <!-- for encoding -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!--for mobile resize-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    <!--for font -->
     <link href="https://cdn.rawgit.com/YJSoft/Webfonts/0.1/BM_JUA.css" rel="stylesheet" type="text/css" />
 
+   <!-- 개발을 위한 임시 css -->
     <style>
       .rolebutton {
         display: inline-block;
@@ -29,10 +22,13 @@
   </head>
 
   <body>
-    <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <%# rails flash %>
+    <% flash.each do |name, msg| %>
+      <%= render 'flash', name: name, msg: msg %>
     <% end %>
 
+    <%# 로그인을 해야 상단 네비가 보여짐 %>
+    <% unless current_user.nil? %>
     <header>
       <!--로그인 x-->
       <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">
@@ -62,13 +58,15 @@
           <%= link_to "로그인", login_path %>
       <% end %>
     </header>
+    <% end %>
 
     <%= yield %>
 
+    <% unless current_user.nil? %>
     <footer>
       <a href="#">ClassLion</a>
       <%= button_to '권한삭제', roles_remove_path, method: :post %>
     </footer>
-
+    <% end %>
   </body>
 </html>

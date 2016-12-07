@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  layout :false
+  #layout :false
 
   def new
     #로그인 form
@@ -11,9 +11,10 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      flash[:notice] = '어서오세요!'
       redirect_to "/evaluations/index"
     else
-      flash[:danger] = 'email과 password를 다시 확인해주세요!'
+      flash[:warning] = 'email과 password를 다시 확인해주세요!'
       render 'new'
     end
   end
@@ -21,6 +22,7 @@ class SessionsController < ApplicationController
   def destroy
     #로그아웃 process
     log_out if logged_in?
+    flash[:success] = '로그아웃 되었습니다!'
     redirect_to root_url
   end
 end

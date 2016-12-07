@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout :false
+  #layout :false
 
   def show
     #마이페이지로 대처? 고민해볼 것
@@ -36,8 +36,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
     #업데이트 성공시
-
+      flash[:success] = "변경 완료!"
     else
+      flash[:warning] = "어머나, 문제가 생겼어요!"
       render 'edit'
     end
   end
