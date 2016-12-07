@@ -60,7 +60,7 @@
 
                 <div class="input_group login_input">
                   <div class="full_input input_div">
-                    <%= f.collection_select(:university_id, University.all, :id, :local_name )%><br>
+                    <%= f.text_field :university_name, placeholder: '학교', data: {autocomplete_source: University.order(:local_name).map(&:local_name)} %>
                   </div>
                   <!--<div class="check_div">-->
                   <!--<button type="button" onclick="check(mail, this)">check</button>-->
@@ -69,7 +69,7 @@
 
                 <div class="input_group login_input">
                   <div class="full_input input_div">
-                    <%= f.text_field :major_name %>
+                    <%= f.text_field :major_name, placeholder: '전공', data: {autocomplete_source: Major.order(:name).map(&:name)} %>
                     <%#= f.collection_select(:major_id, Major.all, :id, :name)%><br>
                   </div>
                   <!--<div class="check_div">-->
@@ -126,4 +126,3 @@ function check(what, item) {
 }
 
 </script>
-
