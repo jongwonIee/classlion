@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      flash[:notice] = "로그인 성공!"
+      flash[:success] = "로그인 성공!"
       log_in user #자동으로 로그인
       redirect_to "/evaluations/index" #강평 목록이 있는 곳으로 리다이렉트
     else
@@ -36,15 +36,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
     #업데이트 성공시
-
+      flash[:success] = "변경 완료!"
     else
+      flash[:warning] = "어머나, 문제가 생겼어요!"
       render 'edit'
     end
   end
   private
 
   def user_params
-    params.require(:user).permit(:email, :nickname, :is_boy, :password, :password_confirmation,
-                                 university_id: params[:user][:university_name].try(:id), major_id: params[:user][:major_name].try(:id))
+    params.require(:user).permit(:email, :nickname, :is_boy, :university_id,
+                                 :major_id,:password, :password_confirmation)
   end
 end

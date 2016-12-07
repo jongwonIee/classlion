@@ -1,3 +1,13 @@
+<style>
+  select{
+     background-color: transparent;
+     width: 100%;
+     border-width: 1px;
+     border-color: transparent;
+     border-image: initial;
+   }
+</style>
+
 <div class="main_container">
   <div class="container">
     <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
@@ -6,7 +16,6 @@
         <div class="inner">
           <div class="centered">
             <p class="logo">CLASSLION</p>
-
             <%= form_for(@user, url: signup_path) do |f| %>
                 <%= render 'shared/error_messages' %>
 
@@ -60,18 +69,19 @@
 
                 <div class="input_group login_input">
                   <div class="full_input input_div">
-                    <%= f.text_field :university_name, placeholder: '학교', data: {autocomplete_source: University.order(:local_name).map(&:local_name)} %>
-                  </div>
+                    <%#= f.text_field :university_id, placeholder: '학교', data: {autocomplete_source: University.order(:local_name).map(&:local_name)} %>
+                      <%= f.collection_select :university_id, University.all, :id, :local_name, {:prompt => '학교'} %><br>
+                    </div>
                   <!--<div class="check_div">-->
                   <!--<button type="button" onclick="check(mail, this)">check</button>-->
                   <!--</div>-->
                 </div>
 
                 <div class="input_group login_input">
-                  <div class="full_input input_div">
-                    <%= f.text_field :major_name, placeholder: '전공', data: {autocomplete_source: Major.order(:name).map(&:name)}%>
-                    <%#= f.collection_select(:major_id, Major.all, :id, :name)%><br>
-                  </div>
+                  <!--<div class="full_input input_div">-->
+                    <%#= f.text_field :major_name, placeholder: '전공', data: {autocomplete_source: Major.order(:name).map(&:name)}%>
+                    <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name%><br>
+                  <!--</div>-->
                   <!--<div class="check_div">-->
                   <!--<button type="button" onclick="check(mail, this)">check</button>-->
                   <!--</div>-->

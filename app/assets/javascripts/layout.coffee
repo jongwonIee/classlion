@@ -3,7 +3,7 @@ jQuery ->
     setTimeout(
       ->
         $('div.flash').fadeOut(1000)
-      5000
+      1000
     )
 
   $(document).on 'click', 'div.flash a.flash_close', (e) ->
