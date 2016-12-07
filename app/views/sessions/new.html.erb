@@ -1,23 +1,110 @@
-<h1>ClassLion</h1>
-<p> 10개의 학교, 150000명,
-  <br/>116053개의 강의평가
-</p>
+<div class="main_container">
+  <div class="container">
+    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+    <div class="set_full col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
+      <div class="outer">
+        <div class="inner">
+          <div class="centered">
+            <p class="logo">CLASSLION</p>
+            <p class="main_msg">10개의 학교, 150000명,<br>116053개의 강의평가</p>
 
-<h1>로그인</h1>
-<%= form_for(:session, url: login_path) do |f| %>
+            <!--<input type="email" class="login_input email_input" placeholder="이메일" /><br>-->
+            <!--<input type="password" class="login_input" placeholder="비밀번호" /><br>-->
+            <%= form_for(:session, url: login_path) do |f| %>
+            <div class="input_group login_input email_input">
+              <div class="full_input input_div">
+                <%= f.email_field :email, placeholder: "이메일" %><br>
+              </div>
+              <!--<div class="check_div">-->
+              <!--<button type="button" onclick="check(mail, this)">check</button>-->
+              <!--</div>-->
+            </div>
 
-    <%= f.email_field :email, class: 'form-control', placeholder: "이메일" %><br/>
+            <div class="input_group login_input">
+              <div class="full_input input_div">
+                <%= f.password_field :password, placeholder: "비밀번호" %><br/>
+              </div>
+              <!--<div class="check_div">-->
+              <!--<button type="button" onclick="check(mail, this)">check</button>-->
+              <!--</div>-->
+            </div>
+            <div>
+              <%= f.label :remember_me, class: "checkbox inline" do %>
+                  <%= f.check_box :remember_me %>
+                  <span>기억해두기</span>
+              <% end %>
+            </div>
 
-    <%= f.password_field :password, class: 'form-control', placeholder: "비밀번호" %><br/>
+            <div id="error_div"></div> <!--error msg가 삽입되는 div-->
+                <%= f.submit "로그인", type: "button", class: "login_btn", id: "login_btn", onclick: "login_check()" %><br><!--go to index-->
+            <% end %>
 
-    <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>기억해두기</span>
-    <% end %>
+            <div id="more_div">
+              <a href="#" class="go_about go_pw">forgot your password?</a>
+              <p class="main_msg">회원이 아니신가요? <%= link_to "가입하기", signup_path, class: "go_join" %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+  </div>
+</div>
 
-    <%= f.submit "로그인" %><br/>
-<% end %>
+<script> //우선 스크립트 분리하지 않았습니다. 추후 분리 예정
+var valid_cnt = 0; //계속 오류메시지 추가되는 것 방지용 count
+var error_cnt = 0;
 
-<br/>
-<p><a href="#">Forgot your password?</a></p>
-회원이 아니신가요? <%= link_to "가입하기", signup_path %>
+function login_check() {
+  var id = document.getElementById("email");
+  var pw = document.getElementById("password");
+  var login_btn = document.getElementById("login_btn");
+
+  var error_div = document.getElementById("error_div");
+  var msg_p = document.createElement("p");
+  msg_p.className = "main_msg error_msg";
+
+  //인증사용자 check
+  if (id.value == '1234') {
+    // alert('error!');
+    if (valid_cnt == 0) { //최초 1회만 추가
+      error_div.innerHTML = "";
+      msg_p.appendChild(document.createTextNode("미인증된 사용자입니다! 이메일을 확인해주세요."));
+      msg_p.appendChild(document.createElement("br"));
+      msg_p.appendChild(document.createElement("br"));
+      msg_p.appendChild(document.createTextNode("이메일을 받지 못하셨다면,"));
+      msg_p.appendChild(document.createElement("br"));
+      msg_p.appendChild(document.createTextNode("인증메일을 재발송하여 다시 메일을 확인해주세요."));
+
+      error_div.appendChild(msg_p);
+      login_btn.innerHTML="인증메일 재발송";
+      login_btn.setAttribute("onClick","location.replace='signup'"); //error!!!!
+      login_btn.style.marginTop = "0%";
+
+      pw.parentNode.parentNode.style.borderColor = "#ff5a5f";
+
+      document.getElementById("more_div").innerHTML = ""; //비번 찾기, 가입하기 문구 삭제
+
+      valid_cnt++;
+    }
+  }
+
+  //인증사용자라면 -> id, pw check
+  else {
+    if (pw.value != '1234') {
+      // alert('error!');
+      if (error_cnt == 0) { //최초 1회만 추가
+        error_div.innerHTML="";
+        msg_p.appendChild(document.createTextNode('아이디와 비밀번호를 올바르게 입력해주세요.'));
+
+        error_div.appendChild(msg_p);
+        login_btn.style.marginTop = "0%";
+
+        pw.parentNode.parentNode.style.borderColor = "#ff5a5f";
+
+        error_cnt++;
+      }
+    }
+  }
+}
+</script>

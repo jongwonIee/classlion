@@ -77,18 +77,9 @@ class User < ApplicationRecord
     major.try(:name)
   end
 
-  def major_name=(name)
-    self.major = Major.find_by_name(name) if name.present?
-  end
-
   def university_name
     university.try(:name)
   end
-
-  def university_name=(name)
-    self.university = University.find_by_local_name(local_name) if local_name.present?
-  end
-
 
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private

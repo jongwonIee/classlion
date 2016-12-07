@@ -22,11 +22,13 @@
   </head>
 
   <body>
-    <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <%# rails flash %>
+    <% flash.each do |name, msg| %>
+      <%= render 'flash', name: name, msg: msg %>
     <% end %>
 
-    <% unless current_user.nil? %><%# 로그인을 해야 상단 네비가 보여짐 %>
+    <%# 로그인을 해야 상단 네비가 보여짐 %>
+    <% unless current_user.nil? %>
     <header>
       <!--로그인 x-->
       <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  layout :false
+  #layout :false
 
   def new
     #로그인 form
