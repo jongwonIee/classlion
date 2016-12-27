@@ -9,7 +9,7 @@ module RolesHelper
   end
 
   def add_role_wikier
-    user = self.user
+    user = current_user
     user.add_role 'wikier'
     point = user.point - 1000
     user.update_attribute(:point, point)
