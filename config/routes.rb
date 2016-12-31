@@ -20,10 +20,6 @@ Rails.application.routes.draw do
   get 'courses/show'
   get 'courses/show/:id' => 'courses#show'
 
-  #강의평가 목록, 로그인 시 root
-  get 'evaluations/index'
-  #강의평가 작성
-  get 'evaluations/new'
   resources :evaluations
 
   #강의평가의 댓글 - 강의 세부정보에 표시

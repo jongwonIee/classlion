@@ -31,7 +31,7 @@ class User < ApplicationRecord
     format: { without: /\s/, message: "공백안돼요!"}
   #닉네임 유효성체크
   validates_length_of :words_in_nickname,
-    lmaximum: NICKNAME_LENGTH_MAX, minimum: NICKNAME_LENGTH_MIN,
+    maximum: NICKNAME_LENGTH_MAX, minimum: NICKNAME_LENGTH_MIN,
     too_long: "닉네임은 최대 #{NICKNAME_LENGTH_MAX}자 까지 가능합니다.",
     too_short: "닉네임은 최소 #{NICKNAME_LENGTH_MIN}자 이상이어야 합니다."
 
@@ -41,8 +41,13 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :password,
-    presence: true,
-    length: { minimum: PASSWORD_LENGTH_MIN, maximum: PASSWORD_LENGTH_MAX}
+    presence: true
+    # length: { minimum: PASSWORD_LENGTH_MIN, maximum: PASSWORD_LENGTH_MAX}
+
+  validates_length_of :password,
+    maximum: PASSWORD_LENGTH_MAX, minimum: PASSWORD_LENGTH_MIN,
+    too_long: "비밀번호는 최대 #{PASSWORD_LENGTH_MAX}자 까지 가능합니다.",
+    too_short:  "비밀번호는 최소 #{PASSWORD_LENGTH_MIN}자 이상이어야 합니다."
 
   #주어진 문자열에 대해서 hash digest를 반환
   def self.digest(string)
