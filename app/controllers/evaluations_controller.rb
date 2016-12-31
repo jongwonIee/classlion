@@ -1,17 +1,20 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
+
+
   def index
+    @search = Evaluation.search do
+      fulltext params[:search] do
+        fields(:professor, :lecture)
+      end
+    end
+    @evaluations = @search.results
+
     # unless current_user
     #   redirect_to '/home/index'
     # end
     # @evaluations = all_evaluations
-    @search = Evaluation.search do
-      fulltext params[:search] do
-        fields(:course)
-      end
-    end
-    @evaluations = @search.results
   end
 
   def show

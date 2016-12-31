@@ -9,10 +9,13 @@ class Evaluation < ApplicationRecord
   before_destroy :decrease_evaluation_count
 
   searchable do
-    text :course do
-      course.professor.name if course
-      course.lecture.name if course
+    text :professor do
+      course.professor.name
     end
+    text :lecture do
+      course.lecture.name
+    end
+
   end
 
   private

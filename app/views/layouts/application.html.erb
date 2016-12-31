@@ -18,6 +18,9 @@
       .rolebutton {
         display: inline-block;
       }
+      .searchfield {
+        display: inline-block;
+      }
     </style>
   </head>
 
@@ -31,7 +34,16 @@
     <% unless current_user.nil? %>
     <header>
       <!--로그인 x-->
-      <a href="/evaluations">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">
+      <a href="/evaluations">CLASSLION</a>
+      <div class="searchfield">
+        <%= form_tag evaluations_path, :method => :get do %>
+            <%= text_field_tag :search, params[:search], placeholder: "강의명, 교수명, 전공명으로 검색해보세요!" %>
+            <%= submit_tag "Search", :name => nil %>
+        <% end %>
+      </div>
+
+      <!--<input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">-->
+
       <% if logged_in? %>
           <%= current_user.point %> 점
           <div class="rolebutton">
