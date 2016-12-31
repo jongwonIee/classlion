@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if user.save
       flash[:success] = "로그인 성공!"
       log_in user #자동으로 로그인
-      redirect_to "/evaluations/index" #강평 목록이 있는 곳으로 리다이렉트
+      redirect_to "/evaluations" #강평 목록이 있는 곳으로 리다이렉트
     else
       render 'new'
       println(user.errors.full_messages)

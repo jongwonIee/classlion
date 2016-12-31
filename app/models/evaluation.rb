@@ -8,8 +8,14 @@ class Evaluation < ApplicationRecord
   before_create :increase_evaluation_count, :increase_user_point
   before_destroy :decrease_evaluation_count
 
-  private
+  searchable do
+    text :course do
+      course.professor.name if course
+      course.lecture.name if course
+    end
+  end
 
+  private
 
   def increase_user_point
     user = self.user

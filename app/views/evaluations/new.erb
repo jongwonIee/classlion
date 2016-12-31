@@ -1,21 +1,12 @@
-<!--user_id: current_user.id,-->
-<!--course_id: params[:course_id],-->
-<!--point_overall: params[:point_overall],-->
-<!--# point_easiness: params[:point_easiness],-->
-<!--# point_gpa_satisfaction: params[:point_gpa_satisfaction],-->
-<!--# point_clarity: params[:point_clarity],-->
-<!--body: body[:body]-->
-
 <h1>강평작성</h1>
 <%= form_for @evaluation do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %><br/>
 
-    <%= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%><br/>
+    <%#= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%><br/>
 
     <%= f.number_field :point_overall, autocomplete: "on", placeholder: "점수"%><br/>
 
     <%= f.text_field :body, autofocus: true, placeholder: "한줄평"%><br/>
 
     <%= f.submit "작성하기" %>
-
 <% end %>
