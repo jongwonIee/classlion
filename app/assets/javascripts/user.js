@@ -40,21 +40,21 @@ $(document).ready(function(){
 
         //이미 '비밀번호 확인'이 있는 경우
         if(passwordConfVal){
-            if (passwordVal===passwordConfVal) { //'비밀번호 확인'과 '비밀번호'가 같은경우
-                passwordConfError.text("일치").addClass('green');
-                passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#fff";
-            }else{//같지 않은 경우
-                passwordConfError.show().text("불일치").removeClass('green').addClass('red');
-                passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+            if(passwordVal.length >= 8) {
+                if (passwordVal === passwordConfVal) { //'비밀번호 확인'과 '비밀번호'가 같은경우
+                    passwordConfError.text("일치").addClass('green');
+                    passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#fff";
+                } else {//같지 않은 경우
+                    passwordConfError.show().text("불일치").removeClass('green').addClass('red');
+                    passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+                }
+            }else{
+                passwordConfError.hide();
             }
+
         }
 
-        if(!passwordVal) {//'비밀번호'가 비어있는 경우
-            passwordConfError.hide(); //일치 or 불일치 정보는 지우고 필수정보임만 알려줌
-            passwordValidate.show().text("필수정보 입니다.").addClass('red');
-            password[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
-            return false;
-        }else if(passwordVal.length >= 1 && passwordVal.length < 8){ //길이가 1이상 8보다 작은경우
+         if(passwordVal.length >= 1 && passwordVal.length < 8){ //길이가 1이상 8보다 작은경우
             passwordConfError.hide();
             passwordValidate.show().text("조금만 더! 비밀번호는 8자 이상이에요!").addClass('red');
             password[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
@@ -91,9 +91,13 @@ $(document).ready(function(){
         var passwordVal = password.val();
         var passwordConfVal = passwordConfirmation.val();
 
-        if(passwordVal && !passwordConfVal){ //'비밀번호'는 있지만, '비밀번호 확인'이 비어있는 경우
-            passwordConfError.show().text("불일치").removeClass('green').addClass('red'); //불일치 띄움
-            passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+        if(passwordVal.length >= 8) {
+            if(passwordVal && !passwordConfVal) { //'비밀번호'는 있지만, '비밀번호 확인'이 비어있는 경우
+                passwordConfError.show().text("불일치").removeClass('green').addClass('red'); //불일치 띄움
+                passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+            }
+        }else{
+            passwordConfError.hide();
         }
     });
 
@@ -111,16 +115,19 @@ $(document).ready(function(){
             password[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
         }
 
-        if (passwordVal==='') {
-            passwordConfError.hide();
-        }else if (passwordVal === passwordConfVal) {
-            passwordConfError.text("일치").addClass('green');
-            passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#fff";
+        if(passwordVal.length >= 8) {
+            if (passwordVal === '') {
+                passwordConfError.hide();
+            }else if (passwordVal === passwordConfVal) {
+                passwordConfError.text("일치").addClass('green');
+                passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#fff";
+            }else {
+                passwordConfError.show().text("불일치").removeClass('green').addClass('red');
+                passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+            }
         }else{
-            passwordConfError.show().text("불일치").removeClass('green').addClass('red');
-            passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+            passwordConfError.hide();
         }
-
     });
 
 }); //end document ready
