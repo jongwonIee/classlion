@@ -18,3 +18,5 @@ jQuery ->
     else
       $('#user_major_id').empty()
       $('#user_major_id').parent().hide()
+
+

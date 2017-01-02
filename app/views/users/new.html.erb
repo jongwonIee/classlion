@@ -28,6 +28,7 @@
                     </div>
                   </div>
                 </div>
+                <span class="error" id="email_error">이메일 형식 확인!</span>
 
                 <div class="input_group login_input">
                   <div class="full_input input_div">
@@ -37,6 +38,7 @@
                   <!--<button type="button" onclick="check(mail, this)">check</button>-->
                   <!--</div>-->
                 </div>
+                <span class="error" id="password_error"></span>
 
                 <div class="input_group login_input">
                   <div class="full_input input_div">
@@ -46,6 +48,7 @@
                   <!--<button type="button" onclick="check(mail, this)">check</button>-->
                   <!--</div>-->
                 </div>
+                <span class="error" id="password_confirmation_error"></span>
 
                 <div class="input_group login_input">
                   <div class="join_gp">
@@ -97,41 +100,3 @@
     <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
   </div>
 </div>
-
-<script> //우선 스크립트 분리하지 않았습니다. 추후 분리 예정
-function check(what, item) {
-  var s = ['master@co.kr', 'abc@naver.com']; //for test
-  var nick_l = document.getElementById("user_nickname").value.length;
-
-  if (what = 'user_email') {
-    for (i=0; i<s.length; i++) {
-      if (s[i] = document.getElementById("user_email").value) {
-        item.style.background = "#ff5a5f";
-        item.style.borderColor = "#ff5a5f";
-        item.innerHTML = "이미 사용중!";
-      }
-
-      else {
-        item.style.background = "#00c075";
-        item.style.borderColor = "#00c075";
-        item.innerHTML = "ok!";
-      }
-    }
-  }
-
-  if (what = 'user_nickname') {
-    if (nick_l < 2 || nick_l >8) {
-      item.style.background = "#ff5a5f";
-      item.style.borderColor = "#ff5a5f";
-      item.innerHTML = "이미 사용중!";
-    }
-
-    else {
-      item.style.background = "#00c075";
-      item.style.borderColor = "#00c075";
-      item.innerHTML = "ok!";
-    }
-  }
-}
-
-</script>
