@@ -19,41 +19,34 @@
             <%= form_for(@user, url: signup_path) do |f| %>
                 <%= render 'shared/error_messages' %>
                 <div class="input_group login_input email_input">
+                  <div class="full_input input_div">
+                    <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                  </div>
+                </div>
+                <p class="error" id="email_error"></p>
+
+                <div class="input_group login_input email_input">
+                  <div class="full_input input_div">
+                    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
+                  </div>
+                </div>
+
+                <div class="input_group login_input">
                   <div class="join_gp">
                     <div class="input_div">
-                      <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
                     </div>
                     <div class="check_div">
-                      <button type="button" onclick="check(user_email, this)">check</button>
+                      <span class="error" id="password_confirmation_error"></span>
                     </div>
                   </div>
                 </div>
-                <span class="error" id="email_error">이메일 형식 확인!</span>
+                <p class="error" id="password_validate"></p>
 
-                <div class="input_group login_input">
-                  <div class="full_input input_div">
-                    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)"%><br>
-                  </div>
-                  <!--<div class="check_div">-->
-                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
-                  <!--</div>-->
-                </div>
-                <span class="error" id="password_error"></span>
-
-                <div class="input_group login_input">
-                  <div class="full_input input_div">
-                    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)"%><br/><br>
-                  </div>
-                  <!--<div class="check_div">-->
-                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
-                  <!--</div>-->
-                </div>
-                <span class="error" id="password_confirmation_error"></span>
-
-                <div class="input_group login_input">
+                <div class="input_group login_input email_input">
                   <div class="join_gp">
                     <div class="input_div">
-                      <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임(2~8자)"%>
+                      <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임(2~8자)", maxlength: 8%>
                     </div>
                     <div class="check_div">
                       <button type="button" onclick="check(user_nickname, this)">check</button>
