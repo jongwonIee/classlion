@@ -19,8 +19,13 @@
             <%= form_for(@user, url: signup_path) do |f| %>
                 <%= render 'shared/error_messages' %>
                 <div class="input_group login_input email_input">
-                  <div class="full_input input_div">
-                    <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                  <div class="join_gp">
+                    <div class="input_div">
+                      <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                    </div>
+                    <div class="check_div">
+                      <span class="error" id="email_check"></span>
+                    </div>
                   </div>
                 </div>
                 <p class="error" id="email_error"></p>
@@ -46,13 +51,14 @@
                 <div class="input_group login_input email_input">
                   <div class="join_gp">
                     <div class="input_div">
-                      <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임(2~8자)", maxlength: 8%>
+                      <%= f.text_field :nickname, autofocus: false, placeholder: "닉네임(2~8자)", maxlength: 8%>
                     </div>
                     <div class="check_div">
-                      <button type="button" onclick="check(user_nickname, this)">check</button>
+                      <span class="error" id="nickname_check"></span>
                     </div>
                   </div>
                 </div>
+                <p class="error" id="nickname_error"></p>
 
                 <div class="gender_div">
                   <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>

@@ -9,11 +9,19 @@ $(document).ready(function(){
         emailError = $('#email_error'),
 
         passwordConfError = $('#password_confirmation_error'),
-        passwordValidate = $('#password_validate');
+        passwordValidate = $('#password_validate'),
+
+        nickname = $('#user_nickname'),
+        nicknameError = $('#nickname_error');
 
     $('.error').hide(); //에러메세지가 출력되는 span태그 숨기기
 
-
+    //input에 focus가 왔을 때
+    $('.login_input').focusin(function(){
+        $(this).addClass('focus');
+    }).focusout(function() {
+        $(this).removeClass('focus');
+    });
 
     //이메일 체크 - 이메일 포커스를 벗어났을 때 유효성 체크-----------------------------------------------
     function validateEmail(){
@@ -22,14 +30,15 @@ $(document).ready(function(){
 
         if(!emailVal){ //'이메일' 빈칸체크
             emailError.show().text("필수정보 입니다.").addClass('red');
-            email[0].parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
+            email[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
+            return false;
         }else if(!e.test(emailVal)){
             emailError.show().text("이메일 형식이 맞나요?").addClass('red');
-            email[0].parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
+            email[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
             return false;
         }else{
             emailError.hide();
-            email[0].parentNode.parentNode.style.borderColor = "#fff"; //input box색상 (흰)
+            email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff"; //input box색상 (흰)
             return true;
         }
     }
@@ -39,11 +48,9 @@ $(document).ready(function(){
         validateEmail();
     });
 
-    email.keyup(function(){ //입력값이 들어오면 '필수정보'안내 없앰
-        var emailVal = email.val();
-        if(emailVal){
-            emailError.hide();
-        }
+    email.focus(function(){ //입력값이 들어오면 '필수정보'안내 없앰
+        emailError.hide();
+        email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
     });
 
 
@@ -73,11 +80,9 @@ $(document).ready(function(){
             passwordConfError.hide();
             passwordValidate.show().text("조금만 더! 비밀번호는 8자 이상이에요!").addClass('red');
             password[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
-            return false;
         }else{ //1보다 작거나, 8보다 큰 경우
             passwordValidate.hide(); //"조금만 더! 비밀번호는 8자 이상이에요!" 메세지 사라짐
             password[0].parentNode.parentNode.style.borderColor = "#fff"; // 선색은 흰색
-            return true;
         }
 
     }
@@ -87,7 +92,7 @@ $(document).ready(function(){
         validatePassword();
     });
 
-    password.focus(function(){ //비밀번호 확인에서 거꾸로 텝으로 넘어올 때를 대비함
+    password.focus(function(){ //비밀번호에 포커스가 잡히면 에러메세지 없앰, 흰색 (비밀번호에서 거꾸로 탭할때의 버그 없애기 위함
         passwordValidate.hide();
         password[0].parentNode.parentNode.style.borderColor = "#fff";
     });
@@ -139,6 +144,37 @@ $(document).ready(function(){
     });
 
 
-    //닉네임 체크 - 키보드 칠 때 동적으로 체크---------------------------------------------------------
+    //닉네임 체크 - 포커스 벗어났을 때--------------------------------------------------------
+    function checkNickname(){
+        var nicknameVal = nickname.val();
+        if(!nicknameVal){
+            nicknameError.show().text("필수정보 입니다.").addClass('red');
+            nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f";
+        }else if(nicknameVal.length < 2 || nicknameVal.length > 8){
+            nicknameError.show().text("닉네임은 2자 이상, 8자 이하에요!").addClass('red');
+            nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f";
+        }else{
+            nicknameError.hide();
+            nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+        }
 
+    }
+
+    nickname.focus(function(){
+        nicknameError.hide();
+        nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+
+    });
+
+    nickname.blur(function(){
+        checkNickname();
+    });
+
+    nickname.keyup(function(){
+        var nicknameVal = nickname.val();
+        if(!nicknameVal) {
+            nicknameError.hide();
+            nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+        }
+    });
 }); //end document ready
