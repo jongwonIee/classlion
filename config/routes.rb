@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   resources :users
 
+  #이메일, 닉네임 유무 체크 (jQuery)
+  post '/check-user' => "users#check_user"
+
   #강의 리스트(검색결과)
   get 'courses/index'
   #강의 세부정보 - 강의평가 모음

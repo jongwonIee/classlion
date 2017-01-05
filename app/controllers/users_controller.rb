@@ -42,6 +42,35 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  #닉네임 중복검사
+  def check_user
+    puts('check_user 실행') #실행 확인용
+    nickname = params[:nickname]
+    user = User.where('nickname = ?', nickname).first
+    puts(user.nickname) #사용자 유무 확인용
+
+    if !user.present? #없으면
+      respond_to do |format|
+        format.jsonr do
+          render :json => {
+              :status => :ok,
+              :message => "없음",
+          }.to_json
+        end
+      end
+    else #있다
+      respond_to do |format|
+        format.jsonr do
+          render :json => {
+              :status => :error,
+              :message => "이미있음",
+          }.to_json
+        end
+      end
+    end
+  end
+
   private
 
   def user_params

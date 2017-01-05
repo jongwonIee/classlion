@@ -59,6 +59,7 @@ $(document).ready(function(){
     });
 
 
+
     //비밀번호 체크 - 키보드 칠 때 동적으로 체크---------------------------------------------------------
     function validatePassword(){
         var passwordVal = password.val();
@@ -161,7 +162,7 @@ $(document).ready(function(){
         }else{
             nicknameError.hide();
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
-            nicknameCheck.show().text('ok').addClass('green');
+            //nicknameCheck.show().text('ok').addClass('green');
         }
 
     }
@@ -169,7 +170,7 @@ $(document).ready(function(){
     nickname.focus(function(){
         nicknameError.hide();
         nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
-        nicknameCheck.hide();
+        //nicknameCheck.hide();
 
     });
 
@@ -182,6 +183,28 @@ $(document).ready(function(){
         if(!nicknameVal) {
             nicknameError.hide();
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+        }
+    });
+
+    //닉네임 중복검사
+    nickname.focusout(function() {
+        var nicknameVal = nickname.val();
+        if(nicknameVal.length >= 2 && nicknameVal.length <= 8  ) {
+            var request = $.ajax({
+                url: "/check-user",
+                method: "POST",
+                data: {nickname: nickname.val()},
+                dataType: "json"
+            });
+
+            request.done(function () {
+                nicknameCheck.show().text('중복').removeClass('green').addClass('red');
+            });
+            request.fail(function () {
+                nicknameCheck.show().text('ok').addClass('green');
+            });
+        }else{
+            nicknameCheck.hide();
         }
     });
 }); //end document ready
