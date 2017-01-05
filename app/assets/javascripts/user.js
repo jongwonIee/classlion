@@ -12,7 +12,10 @@ $(document).ready(function(){
         passwordValidate = $('#password_validate'),
 
         nickname = $('#user_nickname'),
-        nicknameError = $('#nickname_error');
+        nicknameError = $('#nickname_error'),
+
+        emailCheck = $('#email_check'),
+        nicknameCheck = $('#nickname_check');
 
     $('.error').hide(); //에러메세지가 출력되는 span태그 숨기기
 
@@ -39,6 +42,7 @@ $(document).ready(function(){
         }else{
             emailError.hide();
             email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff"; //input box색상 (흰)
+            emailCheck.show().text("ok").addClass('green');
             return true;
         }
     }
@@ -51,6 +55,7 @@ $(document).ready(function(){
     email.focus(function(){ //입력값이 들어오면 '필수정보'안내 없앰
         emailError.hide();
         email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+        emailCheck.hide();
     });
 
 
@@ -156,6 +161,7 @@ $(document).ready(function(){
         }else{
             nicknameError.hide();
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+            nicknameCheck.show().text('ok').addClass('green');
         }
 
     }
@@ -163,6 +169,7 @@ $(document).ready(function(){
     nickname.focus(function(){
         nicknameError.hide();
         nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+        nicknameCheck.hide();
 
     });
 
