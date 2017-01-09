@@ -18,6 +18,9 @@
       .rolebutton {
         display: inline-block;
       }
+      .searchfield {
+        display: inline-block;
+      }
     </style>
   </head>
 
@@ -31,23 +34,36 @@
     <% unless current_user.nil? %>
     <header>
       <!--로그인 x-->
-      <a href="/evaluations/index">CLASSLION</a> <input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">
+      <a href="/evaluations">CLASSLION</a>
+      <div class="searchfield">
+        <%= form_tag evaluations_path, :method => :get do %>
+            <%= text_field_tag :search, params[:search], placeholder: "강의명, 교수명, 전공명으로 검색해보세요!" %>
+            <%= submit_tag "Search", :name => nil %>
+        <% end %>
+      </div>
+
+      <!--<input placeholder="강의명, 교수명, 전공명으로 검색해보세요!" type="text" name="courses" size="80">-->
+
       <% if logged_in? %>
           <%= current_user.point %> 점
           <div class="rolebutton">
             강평열람
-            <% unless current_user.has_role? 'evaluator' %>
+            <% if !(current_user.has_role? 'evaluator') && current_user.point >= 1000 %>
               <%= button_to '오픈하기', roles_evaluator_path, method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %>
+            <% elsif !(current_user.has_role? 'evaluator') && current_user.point < 1000 %>
+              <%= button_to '오픈하기', roles_lack_path, method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %>
             <% else %>
               강의평가를 열람해보세요!
             <% end %>
           </div>
           <div class="rolebutton">
             위키열람
-            <% unless current_user.has_role? 'wikier' %>
-              <%= button_to '오픈하기', roles_wikier_path, method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")'  %>
+            <% if !(current_user.has_role? 'wikier') && current_user.point >= 1000 %>
+                <%= button_to '오픈하기', roles_wikier_path, method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")' %>
+            <% elsif !(current_user.has_role? 'wikier') && current_user.point < 1000 %>
+                <%= button_to '오픈하기', roles_lack_path, method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %>
             <% else %>
-                위키를 열람해보세요!
+                강의평가를 열람해보세요!
             <% end %>
           </div>
           <%= current_user.nickname %>
@@ -66,6 +82,7 @@
     <footer>
       <a href="#">ClassLion</a>
       <%= button_to '권한삭제', roles_remove_path, method: :post %>
+      <%= button_to '포인트초기화', roles_reset_path, method: :post %>
     </footer>
     <% end %>
   </body>

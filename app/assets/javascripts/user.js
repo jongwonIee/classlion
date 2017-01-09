@@ -207,4 +207,12 @@ $(document).ready(function(){
             nicknameCheck.hide();
         }
     });
+
+    $('#myselect').change(function() {
+        var state = $(this).val() == "0";
+        if (!state) {
+            $('#boss').prop('checked', true);
+        }
+        $('#manager, #crew').prop('disabled', !state);
+    });
 }); //end document ready

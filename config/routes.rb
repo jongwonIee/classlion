@@ -33,8 +33,10 @@ Rails.application.routes.draw do
 
   post 'roles/evaluator'
   post 'roles/wikier'
+  post 'roles/lack'
   #테스트용
   post 'roles/remove'
+  post 'roles/reset'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
