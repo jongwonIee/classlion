@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
       flash[:notice] = '어서오세요!'
       redirect_to "/main"
     else
-      flash[:warning] = 'email과 password를 다시 확인해주세요!'
+      #flash[:warning] = 'email과 password를 다시 확인해주세요!'
+      @msg = 'email과 password를 다시 확인해주세요!'
       render 'new'
     end
   end

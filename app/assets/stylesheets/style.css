@@ -175,7 +175,7 @@ html, body {
 .join_gp { /*check btn 필요한 그룹 묶어주기*/
     width: 100%;
     padding-left: 5%;
-    padding-right: 5%;
+    /*padding-right: 5%;*/
 }
 
 .join_gp > div > input {
@@ -201,6 +201,7 @@ html, body {
 .check_div {
     display: inline-block;
     width: 35%;
+    text-align: right;
     /*text-indent: -5%;*/
 }
 
@@ -210,6 +211,13 @@ html, body {
     border: 1px solid white;
     border-radius: 23px;
 }
+
+/* 우리 임의 추가 */
+.check_div span{
+    width: 100%;
+    font-size: 14px;
+}
+/* 여기까지 */
 
 .gender_div > input {
     display: none;
