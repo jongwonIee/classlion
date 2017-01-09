@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :evaluations
   get '/main' => 'evaluations#main'
+  get '/info' => 'evaluations#info'
 
   #강의평가의 댓글 - 강의 세부정보에 표시
   get 'comments/index'

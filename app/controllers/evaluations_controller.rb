@@ -8,6 +8,13 @@ class EvaluationsController < ApplicationController
     @evaluations = all_evaluations.order(:created_at).limit(10)
   end
 
+  def info
+    user = User.find(current_user.id)
+    if user.has_role? :evaluator
+      redirect_to '/main'
+    end
+  end
+
   def index
     @search = Evaluation.search do
       fulltext params[:search] do

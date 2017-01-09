@@ -1,8 +1,8 @@
 <h1>강평작성</h1>
 <%= form_for @evaluation do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %><br/>
+    <% f.hidden_field :user_id, value: current_user.id %>
 
-    <%#= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%><br/>
+    <%= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%><br/>
 
     <%= f.number_field :point_overall, autocomplete: "on", placeholder: "점수"%><br/>
 
