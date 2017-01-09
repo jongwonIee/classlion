@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'courses/show/:id' => 'courses#show'
 
   resources :evaluations
+  get '/main' => 'evaluations#main'
 
   #강의평가의 댓글 - 강의 세부정보에 표시
   get 'comments/index'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   #테스트용
   post 'roles/remove'
   post 'roles/reset'
+  post 'roles/charge'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

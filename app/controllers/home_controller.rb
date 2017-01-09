@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   #layout :false
   def index
     #가장 처음 마주하는 페이지
-    redirect_to "/evaluations" if logged_in?
+    redirect_to "/main" if logged_in?
   end
 
   def about

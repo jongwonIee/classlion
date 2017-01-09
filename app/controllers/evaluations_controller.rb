@@ -1,7 +1,12 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
-
+  def main
+    unless current_user
+      redirect_to '/home/index'
+    end
+    @evaluations = all_evaluations.order(:created_at).limit(10)
+  end
 
   def index
     @search = Evaluation.search do
@@ -10,11 +15,6 @@ class EvaluationsController < ApplicationController
       end
     end
     @evaluations = @search.results
-
-    # unless current_user
-    #   redirect_to '/home/index'
-    # end
-    # @evaluations = all_evaluations
   end
 
   def show

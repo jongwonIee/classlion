@@ -34,7 +34,7 @@
     <% unless current_user.nil? %>
     <header>
       <!--로그인 x-->
-      <a href="/evaluations">CLASSLION</a>
+      <a href="/main">CLASSLION</a>
       <div class="searchfield">
         <%= form_tag evaluations_path, :method => :get do %>
             <%= text_field_tag :search, params[:search], placeholder: "강의명, 교수명, 전공명으로 검색해보세요!" %>
@@ -83,6 +83,7 @@
       <a href="#">ClassLion</a>
       <%= button_to '권한삭제', roles_remove_path, method: :post %>
       <%= button_to '포인트초기화', roles_reset_path, method: :post %>
+      <%= button_to '포인트충전', roles_charge_path, method: :post %>
     </footer>
     <% end %>
   </body>

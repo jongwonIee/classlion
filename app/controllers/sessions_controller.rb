@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:notice] = '어서오세요!'
-      redirect_to "/evaluations"
+      redirect_to "/main"
     else
       flash[:warning] = 'email과 password를 다시 확인해주세요!'
       render 'new'

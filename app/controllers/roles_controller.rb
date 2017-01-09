@@ -15,6 +15,13 @@ class RolesController < ApplicationController
     redirect_to :back
   end
 
+  def charge
+    user = User.find(current_user.id)
+    point = 1000
+    user.update_attribute(:point, point)
+    redirect_to :back
+  end
+
   def evaluator
     add_role_evaluator
   end
