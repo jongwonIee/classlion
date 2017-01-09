@@ -13,7 +13,8 @@ jQuery ->
     options = $(majors).filter("optgroup[label='#{university}']").html()
 
     if options
-      $('#user_major_id').html(options)
+     #$('#user_major_id').html(options)
+      $('#user_major_id').html '<option value="" selected="selected">전공</option>' + options
       $('#user_major_id').parent().show()
     else
       $('#user_major_id').empty()

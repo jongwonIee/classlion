@@ -81,14 +81,14 @@
                 <div class="input_group login_input">
                   <!--<div class="full_input input_div">-->
                     <%#= f.text_field :major_name, placeholder: '전공', data: {autocomplete_source: Major.order(:name).map(&:name)}%>
-                    <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name%><br>
+                    <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name %><br>
                   <!--</div>-->
                   <!--<div class="check_div">-->
                   <!--<button type="button" onclick="check(mail, this)">check</button>-->
                   <!--</div>-->
                 </div>
 
-                <%= f.submit "가입하기", class: "login_btn" %><br>
+                <%= f.submit "가입하기", class: "login_btn", id: "join_btn" %><br>
             <% end %>
             <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
             <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>

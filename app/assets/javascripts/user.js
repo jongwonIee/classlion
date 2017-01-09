@@ -15,7 +15,13 @@ $(document).ready(function(){
         nicknameError = $('#nickname_error'),
 
         emailCheck = $('#email_check'),
-        nicknameCheck = $('#nickname_check');
+        nicknameCheck = $('#nickname_check'),
+
+        universityCheck = false,
+        majorCheck = false,
+
+        newUserForm = $('#join_btn');
+        ;
 
     $('.error').hide(); //에러메세지가 출력되는 span태그 숨기기
 
@@ -167,18 +173,18 @@ $(document).ready(function(){
 
     }
 
-    nickname.focus(function(){
+    nickname.focus(function(){ //input에 포커스가 잡히면 '필수정보입니다' 안내 보여주지 않기
         nicknameError.hide();
         nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
         //nicknameCheck.hide();
 
     });
 
-    nickname.blur(function(){
+    nickname.blur(function(){ //포커스를 벗어나면, 상단의 함수 실행
         checkNickname();
     });
 
-    nickname.keyup(function(){
+    nickname.keyup(function(){ //입력값이 들어오면, 중복검사 메세지 삭제
         var nicknameVal = nickname.val();
         if(!nicknameVal) {
             nicknameError.hide();
@@ -187,8 +193,9 @@ $(document).ready(function(){
     });
 
     //닉네임 중복검사
-    nickname.focusout(function() {
+    nickname.focusout(function() { //입력하다가 포커스가 빠져나오는데, 길이가 2이상 8이하이면 중복검사 실행
         var nicknameVal = nickname.val();
+
         if(nicknameVal.length >= 2 && nicknameVal.length <= 8  ) {
             var request = $.ajax({
                 url: "/check-user",
@@ -208,11 +215,27 @@ $(document).ready(function(){
         }
     });
 
-    $('#myselect').change(function() {
-        var state = $(this).val() == "0";
-        if (!state) {
-            $('#boss').prop('checked', true);
-        }
-        $('#manager, #crew').prop('disabled', !state);
+    //대학교 및 전공 체크--------------------------------------------------------
+
+    //대학교 체크여부 확인
+    $('#user_university_id').change(function() {
+        universityCheck = true;
+        alert('대학선택!');
     });
+    //학과 체크여부 확인
+    $('#user_major_id').change(function(){
+        majorCheck = true;
+        alert('전공선택!');
+    });
+
+    //빈칸없이, 모든 유효조건이 맞는지--------------------------------------------------------
+    newUserForm.submit(function(){
+        if(2>3){ //함수로 변경후 여기 조건 바꾸기
+            return true;
+        }else{
+            return false;
+        }
+    });
+
+
 }); //end document ready

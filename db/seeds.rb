@@ -26,7 +26,7 @@ puts "Inserting major data.."
 
     [10, "성신 국제통상", 4],
     [11, "성신 미디어커뮤니케이션", 4],
-    [12, "성신 국제통상", 4]
+    [12, "성신 IT", 4]
 
 ].each do |x|
   Major.create(id: x[0], name: x[1], university_id: x[2])

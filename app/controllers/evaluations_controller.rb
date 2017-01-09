@@ -1,8 +1,6 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
-
-
   def index
     @search = Evaluation.search do
       fulltext params[:search] do
@@ -10,11 +8,11 @@ class EvaluationsController < ApplicationController
       end
     end
     @evaluations = @search.results
-
     # unless current_user
     #   redirect_to '/home/index'
-    # end
+    # else
     # @evaluations = all_evaluations
+    # end
   end
 
   def show
