@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   get 'courses/show'
   get 'courses/show/:id' => 'courses#show'
 
-  resources :evaluations
+  resources :evaluations do
+    resources :comments
+  end
   get '/main' => 'evaluations#main'
   get '/info' => 'evaluations#info'
 
