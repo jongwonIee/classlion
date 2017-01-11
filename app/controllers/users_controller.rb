@@ -43,8 +43,6 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-<<<<<<< HEAD
-=======
 
   #닉네임 중복검사
   def check_nickname
@@ -96,8 +94,6 @@ class UsersController < ApplicationController
     end #if문 끝
   end
 
-
->>>>>>> error
   private
 
   def user_params
