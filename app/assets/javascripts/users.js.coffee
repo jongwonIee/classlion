@@ -19,5 +19,6 @@ jQuery ->
     else
       $('#user_major_id').empty()
       $('#user_major_id').parent().hide()
+      $('#major_error').hide() #에러메세지 없애기
 
 

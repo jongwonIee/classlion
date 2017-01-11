@@ -17,10 +17,12 @@ $(document).ready(function(){
         emailCheck = $('#email_check'),
         nicknameCheck = $('#nickname_check'),
 
-        universityCheck = false,
-        majorCheck = false,
+        university = $('#user_university_id'),
+        major =  $('#user_major_id'),
+        univError = $('#university_error'),
+        majorError = $('#major_error'),
 
-        newUserForm = $('#join_btn');
+        newUserForm = $('#new_user');
 
 //전체적으로 적용될 코드
     $('.error').hide(); //에러메세지가 출력되는 span태그 숨기기
@@ -45,11 +47,9 @@ $(document).ready(function(){
         if(!emailVal){ //'이메일' 빈칸체크
             emailError.show().text("필수정보 입니다.").addClass('red');
             email[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
-            return false;
         }else if(!e.test(emailVal)){
             emailError.show().text("이메일 형식이 맞나요?").addClass('red');
             email[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
-            return false;
         }else{ //빈칸도 아니고, 형식에 맞다면 '중복'/'ok' 체크
             var request =  $.ajax({
                 url: "/check-email",
@@ -61,15 +61,16 @@ $(document).ready(function(){
                 if(result.msg == "overlap"){
                     emailCheck.show().text('중복').removeClass('green').addClass('red');
                     //console.log(result.msg);
-                    return false;
                 }else if(result.msg == "ok"){
                     emailError.hide();
                     email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
                     emailCheck.show().text('ok').addClass('green');
                     //console.log(result.msg);
-                    return true;
                 }
             });
+        }
+        if(emailCheck.text() == 'ok'){ //ajax검사 후 일치 상태이면 true로 반환
+            return true;
         }
     }//이메일 함수 끝
 
@@ -100,7 +101,6 @@ $(document).ready(function(){
                 if (passwordVal === passwordConfVal) { //'비밀번호 확인'과 '비밀번호'가 같은경우
                     passwordConfError.text("일치").addClass('green');
                     passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#fff";
-                    return true;
                 } else { //'비밀번호 확인'과 '비밀번호'가 같지 않은 경우
                     passwordConfError.show().text("불일치").removeClass('green').addClass('red');
                     passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
@@ -184,17 +184,15 @@ $(document).ready(function(){
 
 //닉네임 체크--------------------------------------------------------
     //닉네임 함수정의
-    function checkNickname(){ //포커스 벗어났을 때
+    function validateNickname(){ //포커스 벗어났을 때
         var nicknameVal = nickname.val();
 
         if(!nicknameVal){
             nicknameError.show().text("필수정보 입니다.").addClass('red');
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f";
-            return false;
         }else if(nicknameVal.length < 2 || nicknameVal.length > 8){
             nicknameError.show().text("닉네임은 2자 이상, 8자 이하에요!").addClass('red');
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f";
-            return false;
         }else{ //빈칸도 아니고, 닉네임의 길이 제한도 넘어간 경우 '중복'/'ok' 체크
             var request =  $.ajax({
                 url: "/check-nickname",
@@ -206,22 +204,23 @@ $(document).ready(function(){
                 if(result.msg == "overlap"){
                     nicknameCheck.show().text('중복').removeClass('green').addClass('red');
                     //console.log(result.msg);
-                    return false;
                 }else if(result.msg == "ok"){
                     nicknameError.hide();
                     nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
                     nicknameCheck.show().text('ok').addClass('green');
                     //console.log(result.msg);
-                    return true;
                 }
             });
+        }
+        if(nicknameCheck.text() == 'ok'){ //ajax검사 후 일치 상태이면 true로 반환
+            return true;
         }
     }//닉네임 함수 끝
 
 
     //닉네임 관련 함수 호출
     nickname.blur(function(){ //포커스를 벗어나면, 상단의 함수 실행
-        checkNickname();
+        validateNickname();
     });
 
 
@@ -244,24 +243,60 @@ $(document).ready(function(){
 
 
 //대학교 및 전공 체크--------------------------------------------------------
-    $('#user_university_id').change(function() { //대학교 체크여부 확인
-        universityCheck = true;
-        alert('대학선택!');
+    //대학교 및 전공 함수정의
+    function validateUniversity(){
+        if(university.val() == ""){
+            univError.show().text("대학 선택해주세요.").addClass('red');
+            university[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+        }else{//뭔가 선택되었다!
+            univError.hide();
+            university[0].parentNode.parentNode.style.borderColor = "#fff";
+            return true;
+        }
+    }
+
+    function validateMajor(){
+        if(major.val() == ""){
+            majorError.show().text("전공 선택해주세요.").addClass('red');
+            major[0].parentNode.style.borderColor = "#ff5a5f";
+        }else{//뭔가 선택되었다!
+            majorError.hide();
+            major[0].parentNode.style.borderColor = "#fff";
+            return true;
+        }
+    }
+
+
+    //대학교 및 전공 함수실행
+    university.blur(function(){
+        validateUniversity();
     });
 
-    $('#user_major_id').change(function(){ //학과 체크여부 확인
-        majorCheck = true;
-        alert('전공선택!');
+    major.blur(function(){
+        validateMajor();
+    });
+
+
+    //대학교 및 전공 예외처리
+    university.change(function() { //대학교 체크여부 확인
+        univError.hide();
+        university[0].parentNode.parentNode.style.borderColor = "#fff";
+    });
+
+    major.change(function(){ //학과 체크여부 확인
+        majorError.hide();
+        major[0].parentNode.style.borderColor = "#fff";
     });
 
 
 
 //빈칸없이, 모든 유효조건이 맞는지 체크--------------------------------------------------------
     newUserForm.submit(function(){
-        if(2>3){ //함수로 변경후 여기 조건 바꾸기
+        if(validateEmail() & validatePasswordAndPasswordConf() & validateNickname() & validateUniversity() & validateMajor()) {
             return true;
-        }else{
+        }
+        else {
             return false;
         }
-    });
+    }); //end submit form
 }); //end document ready

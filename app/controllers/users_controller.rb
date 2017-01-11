@@ -20,10 +20,13 @@ class UsersController < ApplicationController
       log_in @user #자동으로 로그인
       redirect_to "/evaluations/index" #강평 목록이 있는 곳으로 리다이렉트
     else
-      render 'new'
-      puts(@user.errors.full_messages)
+      # render 'new'
+      # puts(@user.errors.full_messages)
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
-
   end
 
   def edit
