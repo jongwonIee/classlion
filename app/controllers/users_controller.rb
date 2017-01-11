@@ -44,32 +44,55 @@ class UsersController < ApplicationController
   end
 
   #닉네임 중복검사
-  def check_user
+  def check_nickname
     puts('check_user 실행') #실행 확인용
     nickname = params[:nickname]
     user = User.where('nickname = ?', nickname).first
-    puts(user.nickname) #사용자 유무 확인용
-
-    if !user.present? #없으면
+    if user.present? #있으면
+      puts(user.nickname) #사용자 유무 확인용
       respond_to do |format|
-        format.jsonr do
-          render :json => {
-              :status => :ok,
-              :message => "없음",
-          }.to_json
+        format.json do
+          render json: {
+              msg: "overlap"
+          }
         end
       end
-    else #있다
+    else #없으면
       respond_to do |format|
-        format.jsonr do
-          render :json => {
-              :status => :error,
-              :message => "이미있음",
-          }.to_json
+        format.json do
+          render json: {
+              msg: "ok"
+          }
         end
       end
-    end
+    end #if문 끝
   end
+
+  #이메일 중복검사
+  def check_email
+    puts('check_email 실행') #실행 확인용
+    email = params[:email]
+    user = User.where('email = ?', email).first
+    if user.present? #있으면
+      puts(user.email) #사용자 유무 확인용
+      respond_to do |format|
+        format.json do
+          render json: {
+              msg: "overlap"
+          }
+        end
+      end
+    else #없으면
+      respond_to do |format|
+        format.json do
+          render json: {
+              msg: "ok"
+          }
+        end
+      end
+    end #if문 끝
+  end
+
 
   private
 

@@ -21,17 +21,17 @@ $(document).ready(function(){
         majorCheck = false,
 
         newUserForm = $('#join_btn');
-        ;
 
     $('.error').hide(); //에러메세지가 출력되는 span태그 숨기기
 
-    //input에 focus가 왔을 때
+    //input에 focus가 왔을 때, css변경 (불투명 색상)
     $('.login_input').focusin(function(){
         $(this).addClass('focus');
     }).focusout(function() {
         $(this).removeClass('focus');
     });
 
+//여기서부터 유효성 체크
     //이메일 체크 - 이메일 포커스를 벗어났을 때 유효성 체크-----------------------------------------------
     function validateEmail(){
         var emailVal = email.val();
@@ -45,17 +45,32 @@ $(document).ready(function(){
             emailError.show().text("이메일 형식이 맞나요?").addClass('red');
             email[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
             return false;
-        }else{
-            emailError.hide();
-            email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff"; //input box색상 (흰)
-            emailCheck.show().text("ok").addClass('green');
-            return true;
+        }else{ //빈칸도 아니고, 형식에 맞다면 '중복'/'ok' 체크
+            var request =  $.ajax({
+                url: "/check-email",
+                method: "POST",
+                data: {email: emailVal},
+                dataType: "json"
+            });
+            request.success(function (result) {
+                if(result.msg == "overlap"){
+                    emailCheck.show().text('중복').removeClass('green').addClass('red');
+                    //console.log(result.msg);
+                    return false;
+                }else if(result.msg == "ok"){
+                    emailError.hide();
+                    email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+                    emailCheck.show().text('ok').addClass('green');
+                    //console.log(result.msg);
+                    return true;
+                }
+            });
         }
     }
 
     //이메일 관련 함수호출
     email.blur(function(){
-        validateEmail();
+        validateEmail(); //반환값이 true이면 이메일 형식에 맞는 것
     });
 
     email.focus(function(){ //입력값이 들어오면 '필수정보'안내 없앰
@@ -162,13 +177,31 @@ $(document).ready(function(){
         if(!nicknameVal){
             nicknameError.show().text("필수정보 입니다.").addClass('red');
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f";
+            return false;
         }else if(nicknameVal.length < 2 || nicknameVal.length > 8){
             nicknameError.show().text("닉네임은 2자 이상, 8자 이하에요!").addClass('red');
             nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#ff5a5f";
-        }else{
-            nicknameError.hide();
-            nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
-            //nicknameCheck.show().text('ok').addClass('green');
+            return false;
+        }else{ //빈칸도 아니고, 닉네임의 길이 제한도 넘어간 경우 '중복'/'ok' 체크
+            var request =  $.ajax({
+                url: "/check-nickname",
+                method: "POST",
+                data: {nickname: nicknameVal},
+                dataType: "json"
+            });
+            request.success(function (result) {
+                if(result.msg == "overlap"){
+                    nicknameCheck.show().text('중복').removeClass('green').addClass('red');
+                    //console.log(result.msg);
+                    return false;
+                }else if(result.msg == "ok"){
+                    nicknameError.hide();
+                    nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
+                    nicknameCheck.show().text('ok').addClass('green');
+                    //console.log(result.msg);
+                    return true;
+                }
+            });
         }
 
     }
@@ -192,50 +225,24 @@ $(document).ready(function(){
         }
     });
 
-    //닉네임 중복검사
-    nickname.focusout(function() { //입력하다가 포커스가 빠져나오는데, 길이가 2이상 8이하이면 중복검사 실행
-        var nicknameVal = nickname.val();
-
-        if(nicknameVal.length >= 2 && nicknameVal.length <= 8  ) {
-            var request = $.ajax({
-                url: "/check-user",
-                method: "POST",
-                data: {nickname: nickname.val()},
-                dataType: "json"
-            });
-
-            request.done(function () {
-                nicknameCheck.show().text('중복').removeClass('green').addClass('red');
-            });
-            request.fail(function () {
-                nicknameCheck.show().text('ok').addClass('green');
-            });
-        }else{
-            nicknameCheck.hide();
-        }
-    });
-
     //대학교 및 전공 체크--------------------------------------------------------
-
-    //대학교 체크여부 확인
-    $('#user_university_id').change(function() {
+    $('#user_university_id').change(function() { //대학교 체크여부 확인
         universityCheck = true;
         alert('대학선택!');
     });
-    //학과 체크여부 확인
-    $('#user_major_id').change(function(){
+
+    $('#user_major_id').change(function(){ //학과 체크여부 확인
         majorCheck = true;
         alert('전공선택!');
     });
 
     //빈칸없이, 모든 유효조건이 맞는지--------------------------------------------------------
-    newUserForm.submit(function(){
-        if(2>3){ //함수로 변경후 여기 조건 바꾸기
-            return true;
-        }else{
-            return false;
-        }
-    });
-
+    // newUserForm.submit(function(){
+    //     if(2>3){ //함수로 변경후 여기 조건 바꾸기
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // });
 
 }); //end document ready
