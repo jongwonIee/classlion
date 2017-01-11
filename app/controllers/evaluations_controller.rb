@@ -1,6 +1,7 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
+<<<<<<< HEAD
   def main
     unless current_user
       redirect_to '/home/index'

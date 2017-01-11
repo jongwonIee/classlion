@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   resources :users
 
   #이메일, 닉네임 유무 체크 (jQuery)
-  post '/check-user' => "users#check_user"
+  post '/check-nickname' => 'users#check_nickname'
+  post '/check-email' => 'users#check_email'
 
   #강의 리스트(검색결과)
   get 'courses/index'

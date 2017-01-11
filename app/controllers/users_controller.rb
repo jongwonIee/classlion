@@ -20,10 +20,11 @@ class UsersController < ApplicationController
       log_in user #자동으로 로그인
       redirect_to "/main" #강평 목록이 있는 곳으로 리다이렉트
     else
-      render 'new'
-      println(user.errors.full_messages)
+      respond_to do |format|
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
-
   end
 
   def edit
@@ -42,6 +43,61 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+<<<<<<< HEAD
+=======
+
+  #닉네임 중복검사
+  def check_nickname
+    puts('check_user 실행') #실행 확인용
+    nickname = params[:nickname]
+    user = User.where('nickname = ?', nickname).first
+    if user.present? #있으면
+      puts(user.nickname) #사용자 유무 확인용
+      respond_to do |format|
+        format.json do
+          render json: {
+              msg: "overlap"
+          }
+        end
+      end
+    else #없으면
+      respond_to do |format|
+        format.json do
+          render json: {
+              msg: "ok"
+          }
+        end
+      end
+    end #if문 끝
+  end
+
+  #이메일 중복검사
+  def check_email
+    puts('check_email 실행') #실행 확인용
+    email = params[:email]
+    user = User.where('email = ?', email).first
+    if user.present? #있으면
+      puts(user.email) #사용자 유무 확인용
+      respond_to do |format|
+        format.json do
+          render json: {
+              msg: "overlap"
+          }
+        end
+      end
+    else #없으면
+      respond_to do |format|
+        format.json do
+          render json: {
+              msg: "ok"
+          }
+        end
+      end
+    end #if문 끝
+  end
+
+
+>>>>>>> error
   private
 
   def user_params
