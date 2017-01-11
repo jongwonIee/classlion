@@ -8,26 +8,4 @@
 
 
 <h1>이 강의의 강평리스트</h1>
-<table>
-<% @evaluations.each do |e| %>
-    아이디:<%= e.user.nickname %><br>
-    점수:<%= e.point_overall %><br>
-    강평:<%= e.body.html_safe %><br>
-    댓글:<br>
-    <% e.comments.each do |c| %>
-      아이디:<%= c.user.nickname %><br>
-      내용:<%= c.body %><br>
-    <% end %>
-    <br>
-      <%= form_for Comment.new do |f| %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-
-          <%= f.hidden_field :evaluation_id, value: e.id %>
-
-          <%= f.text_field :body, autofocus: true, placeholder: "댓글"%><br/>
-
-          <%= f.submit "작성하기" %>
-      <% end %>
-    <hr>
-  <% end %>
-</table>
+<%= render "evaluations" %>

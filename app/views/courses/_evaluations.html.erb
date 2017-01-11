@@ -1,0 +1,22 @@
+<% @evaluations.each do |e| %>
+    아이디:<%= e.user.nickname %><br>
+    점수:<%= e.point_overall %><br>
+    강평:<%= e.body.html_safe %><br>
+    <br>
+    [댓글]<br>
+    <% e.comments.order(created_at: :desc).each do |c| %>
+        아이디:<%= c.user.nickname %><br>
+        내용:<%= c.body %><br>
+    <% end %>
+
+    <%= form_for Comment.new do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+
+        <%= f.hidden_field :evaluation_id, value: e.id %>
+
+        <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
+
+        <%= f.submit "작성하기" %>
+    <% end %>
+    <hr>
+<% end %>

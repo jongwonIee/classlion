@@ -5,7 +5,7 @@ class EvaluationsController < ApplicationController
     unless current_user
       redirect_to '/home/index'
     end
-    @evaluations = all_evaluations.order(created_at: :desc).limit(10)
+    @evaluations = all_evaluations.limit(10)
   end
 
   def info
