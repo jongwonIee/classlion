@@ -64,6 +64,7 @@ GEM
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    highline (1.7.8)
     hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.6.1)
@@ -102,7 +103,11 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    options (2.3.2)
     pr_geohash (1.0.0)
+    progress_bar (1.1.0)
+      highline (~> 1.6)
+      options (~> 2.3.0)
     puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -204,6 +209,7 @@ DEPENDENCIES
   jquery-ui-rails
   less-rails-bootstrap
   listen (~> 3.0.5)
+  progress_bar
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-tether (>= 1.1.0)!

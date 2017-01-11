@@ -6,6 +6,7 @@ gem 'cancancan'
 
 # 썬스팟
 gem 'sunspot_rails'
+gem 'progress_bar'
 
 #부트스트랩
 gem 'therubyracer'

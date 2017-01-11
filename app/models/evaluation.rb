@@ -3,7 +3,7 @@ class Evaluation < ApplicationRecord
   belongs_to :course
   belongs_to :user
   resourcify
-  has_many :comment_of_evaluations
+  has_many :comments
 
   before_create :increase_evaluation_count, :increase_user_point
   before_destroy :decrease_evaluation_count

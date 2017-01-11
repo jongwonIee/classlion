@@ -27,8 +27,7 @@ Rails.application.routes.draw do
   get '/main' => 'evaluations#main'
   get '/info' => 'evaluations#info'
 
-  #강의평가의 댓글 - 강의 세부정보에 표시
-  get 'comments/index'
+  resources :comments
 
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크
   get 'mypage' => 'mypages#index'
