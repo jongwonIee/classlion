@@ -94,7 +94,6 @@ class UsersController < ApplicationController
     end #if문 끝
   end
 
-
   private
 
   def user_params
