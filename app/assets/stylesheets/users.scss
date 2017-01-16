@@ -27,6 +27,13 @@ ul.ui-autocomplete {
   }
 }
 
+select{
+  background-color: transparent;
+  width: 100%;
+  border-width: 1px;
+  border-color: transparent;
+  border-image: initial;
+}
 //에러메세지 색상
 .red {
   color: #ff5a5f;

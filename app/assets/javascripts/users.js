@@ -58,10 +58,10 @@ $(document).ready(function(){
                 dataType: "json"
             });
             request.success(function (result) {
-                if(result.msg == "overlap"){
+                if(result.msg === "overlap"){
                     emailCheck.show().text('중복').removeClass('green').addClass('red');
                     //console.log(result.msg);
-                }else if(result.msg == "ok"){
+                }else if(result.msg === "ok"){
                     emailError.hide();
                     email[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
                     emailCheck.show().text('ok').addClass('green');
@@ -69,7 +69,7 @@ $(document).ready(function(){
                 }
             });
         }
-        if(emailCheck.text() == 'ok'){ //ajax검사 후 일치 상태이면 true로 반환
+        if(emailCheck.text() === 'ok'){ //ajax검사 후 일치 상태이면 true로 반환
             return true;
         }
     }//이메일 함수 끝
@@ -201,10 +201,10 @@ $(document).ready(function(){
                 dataType: "json"
             });
             request.success(function (result) {
-                if(result.msg == "overlap"){
+                if(result.msg === "overlap"){
                     nicknameCheck.show().text('중복').removeClass('green').addClass('red');
                     //console.log(result.msg);
-                }else if(result.msg == "ok"){
+                }else if(result.msg === "ok"){
                     nicknameError.hide();
                     nickname[0].parentNode.parentNode.parentNode.style.borderColor = "#fff";
                     nicknameCheck.show().text('ok').addClass('green');
@@ -212,7 +212,7 @@ $(document).ready(function(){
                 }
             });
         }
-        if(nicknameCheck.text() == 'ok'){ //ajax검사 후 일치 상태이면 true로 반환
+        if(nicknameCheck.text() === 'ok'){ //ajax검사 후 일치 상태이면 true로 반환
             return true;
         }
     }//닉네임 함수 끝
@@ -245,7 +245,7 @@ $(document).ready(function(){
 //대학교 및 전공 체크--------------------------------------------------------
     //대학교 및 전공 함수정의
     function validateUniversity(){
-        if(university.val() == ""){
+        if(university.val() === ""){
             univError.show().text("대학 선택해주세요.").addClass('red');
             university[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
         }else{//뭔가 선택되었다!
@@ -256,7 +256,7 @@ $(document).ready(function(){
     }
 
     function validateMajor(){
-        if(major.val() == ""){
+        if(major.val() === ""){
             majorError.show().text("전공 선택해주세요.").addClass('red');
             major[0].parentNode.style.borderColor = "#ff5a5f";
         }else{//뭔가 선택되었다!
@@ -299,4 +299,31 @@ $(document).ready(function(){
             return false;
         }
     }); //end submit form
+
+//대학 및 전공 Select관련 스크립트 coffee to js (http://js2.coffee)--------------------------------------------------------
+    var majors;
+    $('#user_major_name').autocomplete({
+        source: $('#user_major_name').data('autocomplete-source')
+    });
+
+    $('#user_university_name').autocomplete({
+        source: $('#user_university_name').data('autocomplete-source')
+    });
+
+    $('#user_major_id').parent().hide();
+    majors = $('#user_major_id').html();
+
+    $('#user_university_id').change(function() {
+        var options, university;
+        university = $('#user_university_id :selected').text();
+        options = $(majors).filter("optgroup[label='" + university + "']").html();
+        if (options) {
+            $('#user_major_id').html('<option value="" selected="selected">전공</option>' + options);
+            return $('#user_major_id').parent().show();
+        } else {
+            $('#user_major_id').empty();
+            $('#user_major_id').parent().hide();
+            return $('#major_error').hide();
+        }
+    });
 }); //end document ready

@@ -1,13 +1,3 @@
-<style>
-  select{
-     background-color: transparent;
-     width: 100%;
-     border-width: 1px;
-     border-color: transparent;
-     border-image: initial;
-   }
-</style>
-
 <div class="main_container">
   <div class="container">
     <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
@@ -70,23 +60,13 @@
 
                 <div class="input_group login_input">
                   <div class="full_input input_div">
-                    <%#= f.text_field :university_id, placeholder: '학교', data: {autocomplete_source: University.order(:local_name).map(&:local_name)} %>
                       <%= f.collection_select :university_id, University.all, :id, :local_name, {:prompt => '학교'} %><br>
                     </div>
-                  <!--<div class="check_div">-->
-                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
-                  <!--</div>-->
                 </div>
                 <p class="error" id="university_error"></p>
 
                 <div class="input_group login_input">
-                  <!--<div class="full_input input_div">-->
-                    <%#= f.text_field :major_name, placeholder: '전공', data: {autocomplete_source: Major.order(:name).map(&:name)}%>
                     <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name, {:prompt => '전공'} %><br>
-                  <!--</div>-->
-                  <!--<div class="check_div">-->
-                  <!--<button type="button" onclick="check(mail, this)">check</button>-->
-                  <!--</div>-->
                 </div>
                 <p class="error" id="major_error"></p>
 
