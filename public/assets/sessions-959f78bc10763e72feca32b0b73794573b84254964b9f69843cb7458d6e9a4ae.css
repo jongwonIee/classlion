@@ -1,0 +1,19 @@
+/* line 6, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/sessions.scss */
+.red {
+  color: #ff5a5f;
+}
+
+/* line 10, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/sessions.scss */
+.green {
+  color: #27b5af;
+}
+
+/* line 14, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/sessions.scss */
+.orange {
+  color: #fc642d;
+}
+
+/* line 19, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/sessions.scss */
+.focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}

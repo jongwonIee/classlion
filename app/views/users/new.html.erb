@@ -1,83 +1,82 @@
 <div class="main_container">
-  <div class="container">
-    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
-    <div class="set_full col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
+    <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+    <div class="set_full2 col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
       <div class="outer">
         <div class="inner">
-          <div class="centered">
+          <div class="centered main_center">
             <p class="logo">CLASSLION</p>
-            <%= form_for(@user, url: signup_path) do |f| %>
-                <%= render 'shared/error_messages' %>
-                <div class="input_group login_input email_input">
-                  <div class="join_gp">
-                    <div class="input_div">
-                      <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
-                    </div>
-                    <div class="check_div">
-                      <span class="error" id="email_check"></span>
-                    </div>
-                  </div>
-                </div>
-                <p class="error" id="email_error"></p>
+              <%= form_for(@user, url: signup_path) do |f| %>
+                  <%= render 'shared/error_messages' %>
 
-                <div class="input_group login_input email_input">
-                  <div class="full_input input_div">
-                    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
-                  </div>
-                </div>
-
-                <div class="input_group login_input">
-                  <div class="join_gp">
-                    <div class="input_div">
-                      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
-                    </div>
-                    <div class="check_div">
-                      <span class="error" id="password_confirmation_error"></span>
+                  <div class="input_group login_input email_input">
+                    <div class="join_gp">
+                      <div class="input_div">
+                        <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                      </div>
+                      <div class="check_div">
+                        <span class="error" id="email_check"></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p class="error" id="password_validate"></p>
+                  <p class="error" id="email_error"></p>
 
-                <div class="input_group login_input email_input">
-                  <div class="join_gp">
-                    <div class="input_div">
-                      <%= f.text_field :nickname, autofocus: false, placeholder: "닉네임(2~8자)", maxlength: 8%>
-                    </div>
-                    <div class="check_div">
-                      <span class="error" id="nickname_check"></span>
+                  <div class="input_group login_input email_input">
+                    <div class="full_input input_div">
+                      <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
                     </div>
                   </div>
-                </div>
-                <p class="error" id="nickname_error"></p>
 
-                <div class="gender_div">
-                  <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>
-                  <%= f.label :is_boy, "남자", class: "gender_input", for: "male" %>
-
-                  <%= f.radio_button :is_boy, "false", id: "female" %>
-                  <%= f.label :is_boy, "여자", class: "gender_input", for: "female" %>
-                </div>
-
-                <div class="input_group login_input">
-                  <div class="full_input input_div">
-                      <%= f.collection_select :university_id, University.all, :id, :local_name, {:prompt => '학교'} %><br>
+                  <div class="input_group login_input">
+                    <div class="join_gp">
+                      <div class="input_div">
+                        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
+                      </div>
+                      <div class="check_div">
+                        <span class="error" id="password_confirmation_error"></span>
+                      </div>
                     </div>
-                </div>
-                <p class="error" id="university_error"></p>
+                  </div>
+                  <p class="error" id="password_validate"></p>
 
-                <div class="input_group login_input">
-                    <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name, {:prompt => '전공'} %><br>
-                </div>
-                <p class="error" id="major_error"></p>
+                  <div class="input_group login_input email_input">
+                    <div class="join_gp">
+                      <div class="input_div">
+                        <%= f.text_field :nickname, autofocus: false, placeholder: "닉네임(2~8자)", maxlength: 8%>
+                      </div>
+                      <div class="check_div">
+                        <span class="error" id="nickname_check"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="error" id="nickname_error"></p>
 
-                <%= f.submit "가입하기", class: "login_btn"%><br>
-            <% end %>
-            <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
-            <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
+                  <div class="gender_div">
+                    <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>
+                    <%= f.label :is_boy, "남자", class: "gender_input", for: "male" %>
+
+                    <%= f.radio_button :is_boy, "false", id: "female" %>
+                    <%= f.label :is_boy, "여자", class: "gender_input", for: "female" %>
+                  </div>
+
+                  <div class="input_group login_input">
+                    <div class="full_input input_div">
+                        <%= f.collection_select :university_id, University.all, :id, :local_name, {:prompt => '학교'} %><br>
+                    </div>
+                  </div>
+                  <p class="error" id="university_error"></p>
+
+                  <div class="input_group login_input">
+                      <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name, {:prompt => '전공'} %><br>
+                  </div>
+                  <p class="error" id="major_error"></p>
+
+                  <%= f.submit "가입하기", class: "login_btn"%><br>
+              <% end %>
+              <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
+              <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+      <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
   </div>
-</div>
