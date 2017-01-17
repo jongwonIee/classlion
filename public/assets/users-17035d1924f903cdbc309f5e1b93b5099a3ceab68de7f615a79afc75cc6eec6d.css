@@ -1,0 +1,56 @@
+/* line 5, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 0.5px #999;
+  cursor: default;
+}
+/* line 13, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+ul.ui-autocomplete li {
+  background-color: #FFF;
+  border-top: solid 1px #DDD;
+  margin: 0;
+  padding: 0;
+}
+/* line 18, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+ul.ui-autocomplete li a {
+  color: #000;
+  display: block;
+  padding: 3px;
+}
+/* line 23, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+ul.ui-autocomplete li a.ui-state-hover, ul.ui-autocomplete li a.ui-state-active {
+  background-color: #FFFCB2;
+}
+
+/* line 30, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+select {
+  background-color: transparent;
+  width: 100%;
+  border-width: 1px;
+  border-color: transparent;
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+/* line 38, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+.red {
+  color: #ff5a5f;
+}
+
+/* line 42, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+.green {
+  color: #27b5af;
+}
+
+/* line 46, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+.orange {
+  color: #fc642d;
+}
+
+/* line 51, /Users/woori/RubymineProjects/classlion/app/assets/stylesheets/users.scss */
+.focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
