@@ -9,4 +9,4 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( nav/nav_main.js /nav/nav_jquery.menu-aim.js nav/nav_modernizr.js style.css)
+Rails.application.config.assets.precompile += %w( style.css nav/nav_main.js /nav/nav_jquery.menu-aim.js nav/nav_modernizr.js )
