@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'sprockets', '~> 3.0'
+
 # 권한부여
 gem 'rolify'
 gem 'cancancan'
@@ -9,7 +11,6 @@ gem 'sunspot_rails'
 gem 'progress_bar'
 
 #부트스트랩
-gem 'therubyracer'
 gem 'bootstrap', '~> 4.0.0.alpha5'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
