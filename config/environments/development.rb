@@ -31,7 +31,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.assets.precompile += %w[main_bg.png]
+  config.assets.precompile += %w(style.css)
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
