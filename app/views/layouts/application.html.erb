@@ -116,10 +116,10 @@
       </div>
 
       <div id="foot">
-          <a href="#">ClassLion</a>
           <%= button_to '권한삭제', roles_remove_path, method: :post %>
           <%= button_to '포인트초기화', roles_reset_path, method: :post %>
           <%= button_to '포인트충전', roles_charge_path, method: :post %>
+          <%= button_to '강평작성', new_evaluation_path, method: :get %>
       </div>
   <% else %>
       <%= yield %>

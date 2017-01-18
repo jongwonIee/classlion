@@ -7,5 +7,4 @@ class Favorite < ApplicationRecord
   # def as_json(option={})
   #   super.merge(course: self.course)
   # end
-
 end
