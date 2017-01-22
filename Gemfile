@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'sprockets', '~> 3.0'
+gem 'sprockets', '3.6.3'
 
 # 권한부여
 gem 'rolify'
@@ -8,6 +8,7 @@ gem 'cancancan'
 
 # 썬스팟
 gem 'sunspot_rails'
+gem 'sunspot_solr'
 gem 'progress_bar'
 
 #부트스트랩
@@ -59,7 +60,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'sunspot_solr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
