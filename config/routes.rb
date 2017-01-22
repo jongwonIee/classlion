@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get "destroy/:id" => "sessions#destroy"
+  get    '/destroy/:id',   to: 'sessions#destroy'
   resources :users
 
   #이메일, 닉네임 유무 체크 (jQuery)

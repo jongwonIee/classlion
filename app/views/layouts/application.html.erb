@@ -4,7 +4,7 @@
     <title>Classlion</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag    'application' %>
     <%= javascript_include_tag 'application' %>
 
     <%# 네브바가 없는 로그인과 회원가입페이지에서는 해당 js가 로드되지않도록 하는 코드 %>
@@ -42,7 +42,7 @@
 
             <li class="has-children point_info nvs">
               <a href="#0">
-                <img src="/assets/nav_point.svg" alt="point">
+                <%= image_tag "nav_point.svg" %>
                 <%= current_user.point %> 점
               </a>
 
