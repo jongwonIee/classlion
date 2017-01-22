@@ -53,7 +53,11 @@
 
             <li class="has-children lec_open nvs">
               <a href="#0" class="onoff_a">
-                <img src="/assets/nav_on.svg" class="onoff" alt="on">
+                <% if (current_user.has_role? 'evaluator') %>
+                  <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
+                <% else %>
+                  <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
+                <% end %>
                 <div class="open_on"></div>
                 강평열람
               </a>
@@ -71,7 +75,11 @@
 
             <li class="has-children wiki_open nvs">
               <a href="#0" class="onoff_a">
-                <img src="/assets/nav_off.svg" class="onoff" alt="off">
+                <% if (current_user.has_role? 'wikier') %>
+                    <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
+                <% else %>
+                    <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
+                <% end %>
                 위키열람
               </a>
 
