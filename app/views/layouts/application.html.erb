@@ -9,7 +9,7 @@
 
     <%# 네브바가 없는 로그인과 회원가입페이지에서는 해당 js가 로드되지않도록 하는 코드 %>
     <% unless current_user.nil? %>
-        <%= javascript_include_tag "/nav/nav_jquery.menu-aim", "nav/nav_modernizr", "nav/nav_main" %>
+        <%= javascript_include_tag "nav/nav_jquery.menu-aim", "nav/nav_modernizr", "nav/nav_main" %>
     <% end %>
 
     <!-- for encoding -->
