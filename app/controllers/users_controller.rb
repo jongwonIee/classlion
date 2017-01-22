@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      flash[:success] = "로그인 성공!"
+      UserMailer.registration_confirmation(user).deliver
+      flash[:success] = "등록완료! 이메일을 인증해주세요."
       log_in user #자동으로 로그인
       redirect_to "/main" #강평 목록이 있는 곳으로 리다이렉트
     else
@@ -24,6 +25,18 @@ class UsersController < ApplicationController
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def confirm_email
+    user = User.find_by_confirm_token(params[:id])
+    if user_params
+      user.email_activate
+      flash[:success] = "와우! 이메일이 확인되었습니다."
+      redirect_to '/main'
+    else
+      flash[:warning] = "이메일을 인증해주세요."
+      redirect_to root_url
     end
   end
 

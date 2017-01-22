@@ -9,10 +9,14 @@ class SessionsController < ApplicationController
     #로그인 process
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
+      if user.email_confirmed
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:notice] = '어서오세요!'
       redirect_to "/main"
+      else
+        redirect_to root_url, flash[:warning] = "이메일을 인증해주세요!"
+      end
     else
       @msg = 'email과 password를 다시 확인해주세요!'
       render 'new'

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   belongs_to :major
 
   attr_accessor :remember_token
-  before_create :increase_user_count
+  before_create :increase_user_count, :confirmation_token
   before_destroy :decrease_user_count
   before_save { self.email = email.downcase }#이메일 저장 전 소문화화
 
@@ -48,6 +48,13 @@ class User < ApplicationRecord
     maximum: PASSWORD_LENGTH_MAX, minimum: PASSWORD_LENGTH_MIN,
     too_long: "비밀번호는 최대 #{PASSWORD_LENGTH_MAX}자 까지 가능합니다.",
     too_short:  "비밀번호는 최소 #{PASSWORD_LENGTH_MIN}자 이상이어야 합니다."
+
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(validate: false)
+  end
+
 
   #주어진 문자열에 대해서 hash digest를 반환
   def self.digest(string)
@@ -104,6 +111,12 @@ class User < ApplicationRecord
 
   def words_in_nickname
     nickname.strip
+  end
+
+  def confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
   end
 end
 

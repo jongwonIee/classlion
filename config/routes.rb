@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get "destroy/:id" => "sessions#destroy"
-  resources :users
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
 
   #이메일, 닉네임 유무 체크 (jQuery)
   post '/check-nickname' => 'users#check_nickname'
