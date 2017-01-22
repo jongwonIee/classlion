@@ -81,3 +81,6 @@ fabric.properties
 # .idea/misc.xml
 # *.ipr
  No newline at end of file
+
+# sunspot
+solr
