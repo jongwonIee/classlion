@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 20170111071457) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "confirmation_is_needed", default: false, null: false
-    t.string   "confirmation_token"
+    t.boolean  "email_confirmed",        default: false
+    t.string   "confirm_token"
     t.datetime "confirmation_sent_at"
     t.datetime "confirmed_at"
     t.string   "reset_password_token"
