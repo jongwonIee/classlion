@@ -29,8 +29,9 @@ class UsersController < ApplicationController
   end
 
   def confirm_email
+    #인증메일 보내기
     user = User.find_by_confirm_token(params[:id])
-    if user_params
+    unless user.nil?
       user.email_activate
       flash[:success] = "와우! 이메일이 확인되었습니다."
       redirect_to '/main'
