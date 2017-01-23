@@ -3,9 +3,10 @@ class EvaluationsController < ApplicationController
 
   def main
     unless current_user
-      redirect_to '/home/index'
+      redirect_to '/'
+    else
+      @evaluations = all_evaluations.limit(10)
     end
-    @evaluations = all_evaluations.limit(10)
   end
 
   def info
@@ -16,12 +17,16 @@ class EvaluationsController < ApplicationController
   end
 
   def index
-    @search = Evaluation.search do
-      fulltext params[:search] do
-        fields(:professor, :lecture)
+    unless params[:search].blank?
+      @search = Evaluation.search do
+        fulltext params[:search] do
+          fields(:professor, :lecture)
+        end
       end
+      @evaluations = @search.results
+    else #/evaluations로 타고 들어왔을 때 어떻게???? 나중에 front붙으면서 달라질 부분일듯 -우리
+        @evaluations = all_evaluations
     end
-    @evaluations = @search.results
   end
 
   def show

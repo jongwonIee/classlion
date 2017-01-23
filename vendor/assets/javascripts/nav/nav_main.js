@@ -70,6 +70,7 @@ jQuery(document).ready(function(){
 	});
 
 	$(document).on('click', function(event){
+		var selectedItem = $(this);
 		if( !$(event.target).is('.has-children a') ) {
 			topNavigation.find('.has-children.selected').removeClass('selected');
 			selectedItem.parent('li').removeClass('selected');

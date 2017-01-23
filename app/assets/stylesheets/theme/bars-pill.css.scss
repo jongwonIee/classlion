@@ -11,7 +11,7 @@
   background-color: white;
   color: #50E3C2;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 10px;
   line-height: 2.5;
   text-align: center;
   font-weight: 400;
@@ -34,6 +34,7 @@
   -moz-border-radius-bottomright: 999px;
   border-top-right-radius: 999px;
   border-bottom-right-radius: 999px;
+  border-right: 1px solid #f7db46 !important;
 }
 .br-theme-bars-pill .br-widget a.br-active,
 .br-theme-bars-pill .br-widget a.br-selected {

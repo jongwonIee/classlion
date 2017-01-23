@@ -12,16 +12,11 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-<<<<<<< HEAD
-  resources :users
-=======
-  get "destroy/:id" => "sessions#destroy"
   resources :users do
     member do
       get :confirm_email
     end
   end
->>>>>>> parent of b39c9a9... route update
 
   #이메일, 닉네임 유무 체크 (jQuery)
   post '/check-nickname' => 'users#check_nickname'
