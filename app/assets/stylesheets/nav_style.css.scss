@@ -364,6 +364,16 @@ Top Navigation
   padding: 1em 5% !important;
 }
 
+.cd-top-nav > li a:hover {
+  color: #484848;
+  text-decoration: none;
+}
+
+.cd-top-nav > li a:active {
+  color: #484848;
+  text-decoration: none;
+}
+
 .cd-top-nav img{
   /* avatar image */
   position: absolute;

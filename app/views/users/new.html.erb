@@ -1,82 +1,138 @@
+<style>
+  select{
+    background-color: transparent;
+    width: 100%;
+    border-width: 1px;
+    border-color: transparent;
+    border-image: initial;
+  }
+</style>
+
 <div class="main_container">
-    <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
-    <div class="set_full2 col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
-      <div class="outer">
-        <div class="inner">
-          <div class="centered main_center">
-            <p class="logo">CLASSLION</p>
-              <%= form_for(@user, url: signup_path) do |f| %>
-                  <%= render 'shared/error_messages' %>
+  <!--<div class="main_container_in">-->
+  <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+  <div class="set_full2 col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
+    <div class="outer">
+      <div class="inner">
+        <div class="centered main_center">
+          <p class="logo">CLASSLION</p>
+          <%= form_for(@user, url: signup_path) do |f| %>
+              <%= render 'shared/error_messages' %>
 
-                  <div class="input_group login_input email_input">
-                    <div class="join_gp">
-                      <div class="input_div">
-                        <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
-                      </div>
-                      <div class="check_div">
-                        <span class="error" id="email_check"></span>
-                      </div>
-                    </div>
+              <div class="input_group login_input email_input">
+                <div class="join_gp">
+                  <div class="input_div">
+                    <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
                   </div>
-                  <p class="error" id="email_error"></p>
-
-                  <div class="input_group login_input email_input">
-                    <div class="full_input input_div">
-                      <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
-                    </div>
+                  <div class="check_div">
+                    <button type="button" onclick="check(user_email, this)">check</button>
                   </div>
+                </div>
+              </div>
 
-                  <div class="input_group login_input">
-                    <div class="join_gp">
-                      <div class="input_div">
-                        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
-                      </div>
-                      <div class="check_div">
-                        <span class="error" id="password_confirmation_error"></span>
-                      </div>
-                    </div>
+              <div class="input_group login_input">
+                <div class="full_input input_div">
+                  <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)"%><br>
+                </div>
+                <!--<div class="check_div">-->
+                <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                <!--</div>-->
+              </div>
+
+              <div class="input_group login_input">
+                <div class="full_input input_div">
+                  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)"%><br/><br>
+                </div>
+                <!--<div class="check_div">-->
+                <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                <!--</div>-->
+              </div>
+
+              <div class="input_group login_input">
+                <div class="join_gp">
+                  <div class="input_div">
+                    <%= f.text_field :nickname, autofocus: true, placeholder: "닉네임(2~8자)"%>
                   </div>
-                  <p class="error" id="password_validate"></p>
-
-                  <div class="input_group login_input email_input">
-                    <div class="join_gp">
-                      <div class="input_div">
-                        <%= f.text_field :nickname, autofocus: false, placeholder: "닉네임(2~8자)", maxlength: 8%>
-                      </div>
-                      <div class="check_div">
-                        <span class="error" id="nickname_check"></span>
-                      </div>
-                    </div>
+                  <div class="check_div">
+                    <button type="button" onclick="check(user_nickname, this)">check</button>
                   </div>
-                  <p class="error" id="nickname_error"></p>
+                </div>
+              </div>
 
-                  <div class="gender_div">
-                    <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>
-                    <%= f.label :is_boy, "남자", class: "gender_input", for: "male" %>
+              <div class="gender_div">
+                <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>
+                <%= f.label :is_boy, "남자", class: "gender_input", for: "male" %>
 
-                    <%= f.radio_button :is_boy, "false", id: "female" %>
-                    <%= f.label :is_boy, "여자", class: "gender_input", for: "female" %>
-                  </div>
+                <%= f.radio_button :is_boy, "false", id: "female" %>
+                <%= f.label :is_boy, "여자", class: "gender_input", for: "female" %>
+              </div>
 
-                  <div class="input_group login_input">
-                    <div class="full_input input_div">
-                        <%= f.collection_select :university_id, University.all, :id, :local_name, {:prompt => '학교'} %><br>
-                    </div>
-                  </div>
-                  <p class="error" id="university_error"></p>
+              <div class="input_group login_input">
+                <div class="full_input input_div">
+                  <%#= f.text_field :university_id, placeholder: '학교', data: {autocomplete_source: University.order(:local_name).map(&:local_name)} %>
+                  <%= f.collection_select :university_id, University.all, :id, :local_name, {:prompt => '학교'} %><br>
+                </div>
+                <!--<div class="check_div">-->
+                <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                <!--</div>-->
+              </div>
 
-                  <div class="input_group login_input">
-                      <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name, {:prompt => '전공'} %><br>
-                  </div>
-                  <p class="error" id="major_error"></p>
+              <div class="input_group login_input">
+                <!--<div class="full_input input_div">-->
+                <%#= f.text_field :major_name, placeholder: '전공', data: {autocomplete_source: Major.order(:name).map(&:name)}%>
+                <%= f.grouped_collection_select :major_id, University.order(:local_name), :majors, :local_name, :id, :name%><br>
+                <!--</div>-->
+                <!--<div class="check_div">-->
+                <!--<button type="button" onclick="check(mail, this)">check</button>-->
+                <!--</div>-->
+              </div>
 
-                  <%= f.submit "가입하기", class: "login_btn"%><br>
-              <% end %>
-              <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
-              <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
-            </div>
-          </div>
+              <%= f.submit "가입하기", class: "login_btn" %><br>
+          <% end %>
+          <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
+          <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
         </div>
       </div>
-      <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+    </div>
   </div>
+  <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
+  <!--</div>-->
+</div>
+
+<script> //우선 스크립트 분리하지 않았습니다. 추후 분리 예정
+function check(what, item) {
+  var s = ['master@co.kr', 'abc@naver.com']; //for test
+  var nick_l = document.getElementById("user_nickname").value.length;
+
+  if (what = 'user_email') {
+    for (i=0; i<s.length; i++) {
+      if (s[i] = document.getElementById("user_email").value) {
+        item.style.background = "#ff5a5f";
+        item.style.borderColor = "#ff5a5f";
+        item.innerHTML = "이미 사용중!";
+      }
+
+      else {
+        item.style.background = "#00c075";
+        item.style.borderColor = "#00c075";
+        item.innerHTML = "ok!";
+      }
+    }
+  }
+
+  if (what = 'user_nickname') {
+    if (nick_l < 2 || nick_l >8) {
+      item.style.background = "#ff5a5f";
+      item.style.borderColor = "#ff5a5f";
+      item.innerHTML = "이미 사용중!";
+    }
+
+    else {
+      item.style.background = "#00c075";
+      item.style.borderColor = "#00c075";
+      item.innerHTML = "ok!";
+    }
+  }
+}
+
+</script>
