@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   end
   get '/main' => 'evaluations#main'
   get '/info' => 'evaluations#info'
-
+  get 'evaluations/comment'
   resources :comments
 
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크

@@ -75,18 +75,22 @@ File.read("db/seed_data/courses.csv").split("\n").each do |line|
       id: data[0],
       professor_id: data[1],
       lecture_id: data[2],
-      university_id: data[3]
+      university_id: data[3],
+      is_major: data[4]
   )
 end
 
-# puts "Inserting evaluation data.."
-# File.read("db/seed_data/evaluations.csv").split("\n").each do |line|
-#   data = line.strip.split("\t")
-#   Evaluation.create(
-#       id: data[0],
-#       user_id: data[1],
-#       course_id: data[2],
-#       point_overall: data[3],
-#       body: data[4]
-#   )
-# end
+puts "Inserting evaluation data.."
+File.read("db/seed_data/evaluations.csv").split("\n").each do |line|
+  data = line.strip.split("\t")
+  Evaluation.create(
+      id: data[0],
+      user_id: data[1],
+      course_id: data[2],
+      point_overall: data[3],
+      point_easiness: data[4],
+      point_gpa_satisfaction: data[5],
+      point_clarity: data[6],
+      body: data[7]
+  )
+end

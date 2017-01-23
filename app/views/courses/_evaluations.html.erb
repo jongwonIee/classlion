@@ -3,7 +3,10 @@
     점수:<%= e.point_overall %><br>
     강평:<%= e.body.html_safe %><br>
     <br>
-    [댓글]<%= e.comments.count %><br>
+    <p class="feed_etc">
+      <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
+    </p>
+    <%= e.comments.count %><br>
     <% e.comments.order(created_at: :desc).each do |c| %>
         아이디:<%= c.user.nickname %><br>
         내용:<%= c.body %><br>

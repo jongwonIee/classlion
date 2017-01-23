@@ -1,0 +1,758 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+/*@import url(https://cdn.rawgit.com/singihae/Webfonts/master/style.css);*/
+/* line 6, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+#content::-webkit-scrollbar {
+  width: 0px;
+  /* remove scrollbar space */
+  background: transparent;
+  /* optional: just make scrollbar invisible */
+}
+
+/*all start*/
+/* line 12, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+}
+
+/* line 18, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+*:focus {
+  outline: none;
+}
+
+/* line 23, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+html {
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
+  /*display: table;*/
+}
+
+/* line 30, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+body {
+  display: table;
+  width: 100%;
+  /*height: 100vh;*/
+  /*height: 100% !important;*/
+  height: 100% !important;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* line 41, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.container {
+  height: 100%;
+  max-width: 100%;
+  /* This will remove the outer padding, and push content edge to edge */
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* line 51, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* line 56, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.main_container {
+  display: table;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  width: 100%;
+  height: 100vh;
+  min-height: 100% !important;
+  background-image: url(/assets/main_bg-951a4eddb8d165f74e00cc5f923a274ef45e0e80fdb62caa3319f9900200f249.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* line 73, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.main_container_in {
+  margin: 0 auto;
+  width: 100%;
+  /*height: 100%;*/
+  min-height: 100% !important;
+  /*height: 100vh;*/
+}
+
+/* line 81, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.index_before {
+  overflow: auto;
+}
+
+/* line 85, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.index_container {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 860px) {
+  /* line 92, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+  .index_container {
+    width: 80%;
+  }
+
+  /* line 96, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+/*grid로 나눠진 div 높이를 100%로 설정해줌*/
+/* line 105, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.set_full {
+  height: 100vh !important;
+}
+
+/* line 109, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.set_full2 {
+  height: 100% !important;
+}
+
+/*수직, 수평 중앙정렬을 위한 div start*/
+/* line 114, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.outer {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 120, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* line 126, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.centered {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+/* line 131, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.main_center {
+  color: white;
+}
+
+/* line 135, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.index_outer,
+.index_inner,
+.index_center {
+  width: 100%;
+}
+
+/* line 141, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.index_center {
+  margin: 25px 0px 20px 0px;
+}
+
+@media only screen and (min-width: 860px) {
+  /* line 146, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+  .index_center {
+    margin: 50px 0px 50px 0px;
+  }
+}
+/* line 151, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.index_feed {
+  text-align: left;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+}
+
+/*수직, 수평 중앙정렬을 위한 div end*/
+/*sticky footer*/
+/* line 160, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+#body {
+  min-height: 100%;
+  margin-top: 55px;
+  overflow: auto;
+  /*height:auto;*/
+}
+
+/* line 167, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+#content {
+  /*padding-bottom:1.9em;*/
+  width: 100%;
+  /*width: 80%;*/
+  /*margin: 0 auto;*/
+  display: inline-block;
+  overflow: auto;
+}
+
+/* line 176, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+#foot {
+  margin-top: -1.9em;
+  height: 1.9em;
+  width: 100%;
+  display: inline-block;
+  /*임시 css*/
+  background-color: black;
+  height: 100%;
+}
+
+/*all end*/
+/*home start*/
+/* line 190, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.logo {
+  font-family: 'Varela Round';
+  letter-spacing: 1px;
+  font-size: 50px;
+}
+
+/* line 196, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.main_msg {
+  margin-top: 7%;
+  margin-bottom: 7%;
+  font-size: 1.1em;
+}
+
+/* line 202, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.error_msg {
+  color: #ff5a5f;
+}
+
+/* line 206, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.login_btn {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #ff5a5f;
+  border-radius: 5px;
+  background-color: #ff5a5f;
+  color: white;
+  font-size: 1.1em;
+  padding: 3%;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+
+/* line 219, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.join_btn, .login_input {
+  width: 100%;
+  height: 45px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: transparent;
+  color: white;
+  font-size: 1.1em;
+  padding: 3%;
+  /*margin-top: 3%;*/
+  margin-bottom: 4%;
+}
+
+/* line 232, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_btn {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+}
+
+/* line 238, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_login_btn {
+  border: 1px solid #ff5a5f;
+  background-color: #ff5a5f;
+  color: white;
+}
+
+/* line 244, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.go_about {
+  color: white;
+  font-size: 1.1em;
+}
+
+/* line 249, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.go_about:hover, .go_about:link, .go_about:visited, .go_about:active {
+  text-decoration: none;
+  color: white;
+}
+
+/*home end*/
+/*login, signup start*/
+/* line 257, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.email_input {
+  margin-top: 4%;
+}
+
+/* line 261, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.login_input {
+  text-indent: 5%;
+}
+
+/* line 265, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.login_input::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: white;
+}
+
+/* line 269, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.login_input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: white;
+}
+
+/* line 273, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.login_input:-ms-input-placeholder {
+  /* IE 10+ */
+  color: white;
+}
+
+/* line 277, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.login_input:-moz-placeholder {
+  /* Firefox 18- */
+  color: white;
+}
+
+/*login, signup end*/
+/*기억해두기*/
+/* line 283, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.remember_div label {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+/* line 288, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.remember_me {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
+}
+
+/*login, signup end*/
+/*signup start*/
+/* line 296, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_group {
+  text-indent: 0;
+}
+
+/* line 300, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_div {
+  display: inline-block;
+  width: 63%;
+  /*text-indent: 5%;*/
+}
+
+/* line 306, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.full_input {
+  /*check btn 필요없는 경우*/
+  width: 100%;
+}
+
+/* line 310, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_div > input {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background: transparent;
+  /*text-indent: 5%; 임시로 안되게 처리. 나중에 바꿔야함*/
+  /*border: 1px solid white;*/
+  border: none;
+}
+
+/* line 320, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.join_gp {
+  /*check btn 필요한 그룹 묶어주기*/
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* line 326, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.join_gp > div > input {
+  padding: 0;
+}
+
+/* line 330, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_div > input::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: white;
+}
+
+/* line 334, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_div > input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: white;
+}
+
+/* line 338, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_div > input:-ms-input-placeholder {
+  /* IE 10+ */
+  color: white;
+}
+
+/* line 342, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.input_div > input:-moz-placeholder {
+  /* Firefox 18- */
+  color: white;
+}
+
+/* line 346, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.check_div {
+  display: inline-block;
+  width: 35%;
+  /*text-align: right;*/
+  /*text-indent: -5%;*/
+}
+
+/* line 353, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.check_div > button {
+  width: 100%;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 23px;
+}
+
+/* 우리 임의 추가 */
+/* line 361, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.check_div span {
+  width: 100%;
+  font-size: 14px;
+}
+
+/* line 365, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+#error_div {
+  /*session에서의 에러메세지*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 여기까지 우리 임의 추가 */
+/* line 371, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.gender_div > input {
+  display: none;
+}
+
+/* line 375, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.gender_div > label {
+  font-weight: 300;
+  width: 49.5%;
+  display: inline-block;
+  height: 45px;
+  border: 1px solid white;
+  border-radius: 3px;
+  font-size: 1.1em;
+  padding: 3%;
+  margin-bottom: 4%;
+}
+
+/* line 387, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.gender_div > label:hover {
+  cursor: pointer;
+}
+
+/* line 391, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.gender_div > input:checked + label {
+  background: white;
+  color: rgba(0, 0, 0, 0.58);
+  font-weight: 400;
+}
+
+/* line 397, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.go_pw {
+  display: block;
+  text-align: right;
+  margin-bottom: 10%;
+}
+
+/* line 403, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.go_join {
+  text-decoration: underline;
+}
+
+/* line 407, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.go_join:hover, .go_join:link, .go_join:visited, .go_join:active {
+  text-decoration: underline;
+  color: white;
+}
+
+/* line 412, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.rule_msg {
+  font-size: 0.9em;
+}
+
+/*signup end*/
+/*valid mail start*/
+/* line 418, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_div {
+  font-size: 1.1em;
+}
+
+/* line 422, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_icon {
+  width: 40%;
+}
+
+/* line 426, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_div p {
+  margin: 10% 0 10% 0;
+}
+
+/* line 430, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_to {
+  color: #ff5a5f;
+}
+
+/* line 434, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.mail_p1 {
+  font-size: 1.2em;
+}
+
+@media only screen and (max-width: 860px) {
+  /* line 439, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+  .mail_div {
+    margin: 0 10% 0 10%;
+    font-size: 1em;
+  }
+}
+/*valid mail end*/
+/*index feed start*/
+/* line 447, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_head {
+  color: #ff5a5f;
+  font-size: 2em;
+  margin: 0px 0px 20px 0px;
+}
+
+@media only screen and (min-width: 860px) {
+  /* line 454, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+  .feed_head {
+    font-size: 2.5em;
+    margin: 0px 0px 50px 0px;
+  }
+}
+/* line 460, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_each {
+  width: 100%;
+  display: inherit;
+  margin: 15px 0px 15px 0px;
+}
+
+/* line 466, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_each div div {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* line 471, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_writer {
+  text-align: center;
+}
+
+/* line 475, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_lion {
+  width: 65%;
+}
+
+@media only screen and (min-width: 860px) {
+  /* line 480, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+  .feed_lion {
+    width: 60%;
+  }
+}
+/* line 485, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_nickname {
+  font-size: 1.1em;
+}
+
+/* line 489, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.lion_bg {
+  background: red;
+  border-radius: 50%;
+  padding: 20px;
+}
+
+/* line 495, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_course {
+  color: #484848;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 4px;
+  display: inline-block;
+}
+
+/* line 503, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_course a {
+  color: #484848;
+}
+
+/* line 507, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_course a:hover {
+  color: #484848;
+  text-decoration: none;
+}
+
+/* line 512, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_prof_kyo {
+  color: #ff5a5f;
+  display: inline-block;
+}
+
+/* line 517, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_prof_major {
+  color: #27b5af;
+  display: inline-block;
+}
+
+/* line 522, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_content {
+  color: #484848;
+}
+
+/* line 526, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_etc {
+  color: #484848;
+  font-size: 0.9em;
+}
+
+/* line 531, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_etc img {
+  width: 20px;
+}
+
+/* line 535, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.rating-head, .rating {
+  display: inline-block;
+}
+
+/* line 539, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.rating-head {
+  width: 30%;
+  text-align: center;
+}
+
+/*.feed_star_m{*/
+/*    visibility: visible;   */
+/*}*/
+/*@media only screen and (min-width: 860px) {*/
+/*.feed_star_m{*/
+/*    visibility: hidden;*/
+/*    display: none;*/
+/*}*/
+/*}*/
+/* line 555, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.feed_hr {
+  border: solid #dce0e0;
+  border-width: 0.5px 0px 0px 0px;
+}
+
+/*index feed end*/
+/*search page start*/
+/* line 562, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_sen1 {
+  color: #484848;
+  font-size: 1.7em;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+}
+
+/* line 569, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_keyword {
+  font-size: 1.4em;
+  padding: 5px;
+  color: #ff5a5f;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+}
+
+/* line 577, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_sen2 {
+  color: #999999;
+  font-size: 1.4em;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  line-height: 2em;
+}
+
+/* line 585, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl {
+  border-collapse: collapse;
+  line-height: 1.5;
+  border-top: 1px solid #dce0e0;
+  margin: 20px 10px;
+  text-align: center;
+  color: #484848;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
+  width: 100%;
+  margin-top: 50px;
+}
+
+/* line 598, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl thead th {
+  /*width: 150px;*/
+  padding: 10px;
+  /*font-weight: bold;*/
+  text-align: center;
+  vertical-align: top;
+  background: #f2f2f2;
+  margin: 20px 10px;
+  border-bottom: 1px solid #dce0e0;
+}
+
+/* line 608, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl thead tr {
+  line-height: 1.5em;
+}
+
+/* line 611, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl tr {
+  border-bottom: 1px solid #dce0e0;
+  line-height: 4.5em;
+}
+
+/* line 616, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl td {
+  /*width: 350px;*/
+  padding: 10px;
+  vertical-align: top;
+}
+
+/* line 622, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl td:nth-child(1) {
+  width: 25%;
+}
+
+/* line 625, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl td:nth-child(2) {
+  width: 50%;
+}
+
+/* line 628, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.search_tbl td:nth-child(3) {
+  width: 25%;
+}
+
+/* line 632, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.lec_cate {
+  border-radius: 1em;
+  padding: 0px 6px 0px 6px;
+  margin-right: 5px;
+  font-size: 0.9em;
+  font-weight: 400;
+}
+
+/* line 640, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.lec_kyo {
+  color: #ff5a5f;
+  border: 1px solid #ff5a5f;
+}
+
+/* line 645, /Users/jongwon/RubymineProjects/classlion/app/assets/stylesheets/style.css.scss */
+.lec_major {
+  color: #27b5af;
+  border: 1px solid #27b5af;
+}
+
+/*search page end*/

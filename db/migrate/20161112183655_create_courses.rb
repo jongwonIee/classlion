@@ -4,13 +4,14 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.integer     :professor_id,  null: false
       t.integer     :lecture_id,    null: false
       t.integer     :university_id, null: false
-      t.integer :evaluation_count, default: 0
-      t.integer :point_overall, default: 0 #강의에 대한 전체적인 평가
+      t.integer     :evaluation_count, default: 0 , null: false
 
-      # t.integer :point_gpa_satisfaction, default: 0
-      # t.integer :point_easiness, default: 0
-      # t.integer :point_clarity, default: 0
+      t.integer   :point_overall_sum, default: 0 , null: false
+      t.integer   :point_easiness_sum, default: 0 , null: false
+      t.integer   :point_gpa_satisfaction_sum, default: 0 , null: false
+      t.integer   :point_clarity_sum, default: 0 , null: false
 
+      t.boolean     :is_major, default: true, null: false
       t.timestamps null: false
     end
   end

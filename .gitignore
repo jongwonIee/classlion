@@ -84,3 +84,6 @@ fabric.properties
 
 # sunspot
 solr
+
+# asset precompiling
+public/assets

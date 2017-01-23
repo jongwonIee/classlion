@@ -30,10 +30,10 @@ class Evaluation < ApplicationRecord
     course = self.course
     course.update_attributes(
         evaluation_count: course.evaluation_count + 1,
-        point_overall: course.point_overall + self.point_overall,
-        # point_gpa_satisfaction: course.point_gpa_satisfaction + self.point_gpa_satisfaction,
-        # point_easiness: course.point_easiness + self.point_easiness,
-        # point_clarity: course.point_clarity + self.point_clarity
+        point_overall_sum: course.point_overall_sum + self.point_overall,
+        point_gpa_satisfaction_sum: course.point_gpa_satisfaction_sum + self.point_gpa_satisfaction,
+        point_easiness_sum: course.point_easiness_sum + self.point_easiness,
+        point_clarity_sum: course.point_clarity_sum + self.point_clarity
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count + 1)
@@ -43,10 +43,10 @@ class Evaluation < ApplicationRecord
     course = self.course
     course.update_attributes(
         evaluation_count: course.evaluation_count - 1,
-        point_overall: course.point_overall - self.point_overall,
-        # point_gpa_satisfaction: course.point_gpa_satisfaction - self.point_gpa_satisfaction,
-        # point_easiness: course.point_easiness - self.point_easiness,
-        # point_clarity: course.point_clarity + self.point_clarity
+        point_overall_sum: course.point_overall_sum - self.point_overall,
+        point_gpa_satisfaction_sum: course.point_gpa_satisfaction_sum - self.point_gpa_satisfaction,
+        point_easiness_sum: course.point_easiness_sum - self.point_easiness,
+        point_clarity_sum: course.point_clarity_sum - self.point_clarity
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count - 1)

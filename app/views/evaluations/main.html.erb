@@ -17,15 +17,16 @@
                     <div class="row">
                       <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 feed_writer">
                         <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
-                        <!--<img src="/assets/lion_1.svg" class="feed_lion" alt="lion">-->
-                        <p class="feed_nickname">감자감자왕가암자</p>
+                        <p class="feed_nickname"><%= e.user.nickname %></p>
                       </div>
 
                       <div class="col-lg-7 col-md-8 col-sm-9 col-xs-9">
                         <p class="feed_course"><a href='/courses/show/<%= e.course.id %>'><%= e.course.lecture.name %></a></p>
-                        <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님</p>
-                        <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님</p>
-
+                        <% if e.course.is_major == true %>
+                          <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님</p>
+                        <% else %>
+                          <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님</p>
+                        <% end %>
                         <div class="col-sm-12 col-xs-12 visible-sm-block visible-xs-block" style="border:1px solid black;">
                           <div class="rating-head">총점</div>
                           <div class="rating">
@@ -44,17 +45,20 @@
                         <p class="feed_content">
                           <%= e.body.html_safe %></p>
                         <p class="feed_etc">
-                          <!--<img src="/assets/reply.svg" alt="lion"> · -->
                           5시간 전 · <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
-                          <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
                         </p>
                       </div>
-
                       <div class="col-lg-3 col-md-2 visible-lg-block visible-md-block">
                         <div class="rating_div">
                           <div class="rating-head">총점</div>
                           <div class="rating">
-                            <select id="pillbar2" class="p" name="rating" autocomplete="off">
+                            <% if e.point_overall == 1 %><% p = "p1" %>
+                                <% elsif e.point_overall == 2 %><% p = "p2" %>
+                                <% elsif e.point_overall == 3 %><% p = "p3" %>
+                                <% elsif e.point_overall == 4 %><% p = "p4" %>
+                                <% elsif e.point_overall == 5 %><% p = "p5" %>
+                            <% end %>
+                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
                               <option value="A"></option>
                               <option value="B"></option>
                               <option value="C"></option>
@@ -67,7 +71,13 @@
                         <div class="rating_div">
                           <div class="rating-head">널널함</div>
                           <div class="rating">
-                            <select id="pillbar2" class="p" name="rating" autocomplete="off">
+                            <% if e.point_easiness == 1 %><% p = "p1" %>
+                            <% elsif e.point_easiness == 2 %><% p = "p2" %>
+                            <% elsif e.point_easiness == 3 %><% p = "p3" %>
+                            <% elsif e.point_easiness == 4 %><% p = "p4" %>
+                            <% elsif e.point_easiness == 5 %><% p = "p5" %>
+                            <% end %>
+                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
                               <option value="A"></option>
                               <option value="B"></option>
                               <option value="C"></option>
@@ -80,7 +90,13 @@
                         <div class="rating_div">
                           <div class="rating-head">강의만족도</div>
                           <div class="rating">
-                            <select id="pillbar2" class="p" name="rating" autocomplete="off">
+                            <% if e.point_gpa_satisfaction == 1 %><% p = "p1" %>
+                            <% elsif e.point_gpa_satisfaction == 2 %><% p = "p2" %>
+                            <% elsif e.point_gpa_satisfaction == 3 %><% p = "p3" %>
+                            <% elsif e.point_gpa_satisfaction == 4 %><% p = "p4" %>
+                            <% elsif e.point_gpa_satisfaction == 5 %><% p = "p5" %>
+                            <% end %>
+                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
                               <option value="A"></option>
                               <option value="B"></option>
                               <option value="C"></option>
@@ -93,7 +109,13 @@
                         <div class="rating_div">
                           <div class="rating-head">학점만족도</div>
                           <div class="rating">
-                            <select id="pillbar2" class="p" name="rating" autocomplete="off">
+                            <% if e.point_clarity == 1 %><% p = "p1" %>
+                            <% elsif e.point_clarity == 2 %><% p = "p2" %>
+                            <% elsif e.point_clarity == 3 %><% p = "p3" %>
+                            <% elsif e.point_clarity == 4 %><% p = "p4" %>
+                            <% elsif e.point_clarity == 5 %><% p = "p5" %>
+                            <% end %>
+                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
                               <option value="A"></option>
                               <option value="B"></option>
                               <option value="C"></option>
@@ -117,27 +139,66 @@
   </div>
 </div>
 
-
-
 <script>
-  $('#pillbar').barrating('show', {
+  $('.p1').barrating('show', {
     theme: 'bars-pill',
     initialRating: 'A',
     showValues: true,
     showSelectedRating: false,
-    allowEmpty: true
+    allowEmpty: true,
+    readonly: true
     // emptyValue: '-- no rating selected --'
     // onSelect: function(value, text) {
     // alert('Selected rating: ' + value);
     // }
   });
 
-  $('.p').barrating('show', {
+  $('.p2').barrating('show', {
+    theme: 'bars-pill',
+    initialRating: 'B',
+    showValues: true,
+    showSelectedRating: false,
+    allowEmpty: true,
+    readonly: true
+    // emptyValue: '-- no rating selected --'
+    // onSelect: function(value, text) {
+    // alert('Selected rating: ' + value);
+    // }
+  });
+
+  $('.p3').barrating('show', {
     theme: 'bars-pill',
     initialRating: 'C',
     showValues: true,
     showSelectedRating: false,
-    allowEmpty: true
+    allowEmpty: true,
+    readonly: true
+    // emptyValue: '-- no rating selected --'
+    // onSelect: function(value, text) {
+    // alert('Selected rating: ' + value);
+    // }
+  });
+
+  $('.p4').barrating('show', {
+    theme: 'bars-pill',
+    initialRating: 'D',
+    showValues: true,
+    showSelectedRating: false,
+    allowEmpty: true,
+    readonly: true
+    // emptyValue: '-- no rating selected --'
+    // onSelect: function(value, text) {
+    // alert('Selected rating: ' + value);
+    // }
+  });
+
+  $('.p5').barrating('show', {
+    theme: 'bars-pill',
+    initialRating: 'E',
+    showValues: true,
+    showSelectedRating: false,
+    allowEmpty: true,
+    readonly: true
     // emptyValue: '-- no rating selected --'
     // onSelect: function(value, text) {
     // alert('Selected rating: ' + value);
