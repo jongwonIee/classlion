@@ -10,9 +10,8 @@
           <div class="inner index_inner">
             <div class="centered index_center index_feed">
 
-              <% if @evaluations.empty? %>
               <p class="feed_head">검색결과</p>
-
+              <% if @evaluations.empty? %>
                   <h3>검색결과 없음!</h3>
               <% else %>
                 <% @evaluations.each do |e| %>
