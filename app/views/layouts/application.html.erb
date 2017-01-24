@@ -29,7 +29,7 @@
           <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
   
           <div class="cd-search is-hidden">
-            <%= form_tag evaluations_path, :method => :get do %>
+            <%= form_tag courses_path, :method => :get do %>
                 <%= text_field_tag :search, params[:search], placeholder: "강의명, 교수명, 전공명으로 검색해보세요!" %>
                 <%#= submit_tag "Search", :name => nil %>
             <% end %>
