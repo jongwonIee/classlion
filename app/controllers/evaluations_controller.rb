@@ -17,15 +17,22 @@ class EvaluationsController < ApplicationController
   end
 
   def index
-    unless params[:search].blank?
+    if params[:search].nil? or (params[:search].length < 2)
+      flash[:notice] = "2글자 이상 입력해주세요"
+      # /evaluations로 접근하는거 막기
+      if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
+        redirect_to :back
+      else
+        redirect_to '/'
+      end
+
+    elsif params[:search].length >= 2
       @search = Evaluation.search do
-        fulltext params[:search] do
+        fulltext '*' + params[:search] + '*' do
           fields(:professor, :lecture)
         end
       end
       @evaluations = @search.results
-    else #/evaluations로 타고 들어왔을 때 어떻게???? 나중에 front붙으면서 달라질 부분일듯 -우리
-        @evaluations = all_evaluations
     end
   end
 
