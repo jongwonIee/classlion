@@ -18,9 +18,11 @@
                 <% @courses.each do |c| %>
                     <tr>                          
                       <td><%= c.lecture.code %></td>
-                      <td><span class="lec_cate lec_major">전공</span>
-                      <span class="lec_cate lec_kyo">교양</span>
-                      <%= c.lecture.name %></td>
+                      <td>
+                        <span class="lec_cate lec_major">전공</span>
+                        <span class="lec_cate lec_kyo">교양</span>
+                        <%= c.lecture.name %>
+                      </td>
                       <td><%= c.professor.name %></td>
                     </tr>
                 <% end %>
