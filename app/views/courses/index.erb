@@ -3,7 +3,7 @@
   <div class="container">
     <div>
       
-        <p class="search_sen1"><span class="search_keyword">개론</span>에 대한 검색 결과</p>
+        <p class="search_sen1"><span class="search_keyword"><%= @search_param %></span>에 대한 검색 결과</p>
         <p class="search_sen2">5개의 수업, 1개의 교수님을 찾았습니다</p>
         
         <table class="search_tbl">
@@ -19,8 +19,11 @@
                     <tr>                          
                       <td><%= c.lecture.code %></td>
                       <td>
-                        <span class="lec_cate lec_major">전공</span>
-                        <span class="lec_cate lec_kyo">교양</span>
+                        <% if c.is_major %>
+                          <span class="lec_cate lec_major">전공</span>
+                        <% else %>
+                          <span class="lec_cate lec_kyo">교양</span>
+                        <% end %>
                         <%= c.lecture.name %>
                       </td>
                       <td><%= c.professor.name %></td>

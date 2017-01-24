@@ -1,7 +1,7 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
-  def main
+  def main #최신강평 10개를 보여줌
     unless current_user
       redirect_to '/'
     else
@@ -9,30 +9,20 @@ class EvaluationsController < ApplicationController
     end
   end
 
+  def index #권한이 있으면, 모든 강평보여줌
+    user = User.find(current_user.id)
+    unless user.has_role? :evaluator
+      redirect_to '/main'
+      flash[:notice] = "권한이 없습니다!"
+    else
+      @evaluations = all_evaluations
+    end
+  end
+
   def info
     user = User.find(current_user.id)
     if user.has_role? :evaluator
       redirect_to '/main'
-    end
-  end
-
-  def index
-    if params[:search].nil? or (params[:search].length < 2)
-      flash[:notice] = "2글자 이상 입력해주세요"
-      # /evaluations로 접근하는거 막기
-      if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
-        redirect_to :back
-      else
-        redirect_to '/'
-      end
-
-    elsif params[:search].length >= 2
-      @search = Evaluation.search do
-        fulltext '*' + params[:search] + '*' do
-          fields(:professor, :lecture)
-        end
-      end
-      @evaluations = @search.results
     end
   end
 
