@@ -1,18 +1,50 @@
-<h1>강의 목록</h1>
-<table>
-  <tr>
-    <th>강의명</th>
-    <th>교수명</th>
-    <th>평점</th>
-    <th>학교</th>
-  </tr>
+<!--강의 검색결과 -->
+<div class="index_container">
+  <div class="container">
+    <div class="row">
+      <!--<div class="set_full col-lg-1 col-md-1 visible-lg-block visible-md-block"></div>-->
+      <div class="set_full col-lg-12 col-md-12 col-sm-12 col-xs-12 center_box">
+        <div class="outer index_outer">
+          <div class="inner index_inner">
+            <div class="centered index_center">
+              
+              <p class="search_sen1"><span class="search_keyword">개론</span>에 대한 검색 결과</p>
+              <p class="search_sen2">5개의 수업, 1개의 교수님을 찾았습니다</p>
+              
+              <table class="search_tbl">
+                  <thead>
+                      <tr>
+                          <th>학수번호</th>
+                          <th>과목명</th>
+                          <th>교수명</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% @courses.each do |c| %>
+                          <tr>                          
+                            <td><%= c.lecture.code %></td>
+                            <td><span class="lec_cate lec_major">전공</span>
+                            <span class="lec_cate lec_kyo">교양</span>
+                            <%= c.lecture.name %></td>
+                            <td><%= c.professor.name %></td>
+                          </tr>
+                      <% end %>
+                  </tbody>
+              </table>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="set_full col-lg-1 col-md-1 visible-lg-block visible-md-block"></div>-->
+    </div>
+  </div>
+</div>
 
-  <% @courses.each do |c| %>
-      <tr>
-        <td><%= c.lecture.name %></td>
-        <td><%= c.professor.name %></td>
-        <td>평점입니다.</td>
-        <td><%= c.university.local_name %></td>
-      </tr>
-  <% end %>
-</table>
+
+
+
+
+
+
+
