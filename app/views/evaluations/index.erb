@@ -1,6 +1,3 @@
-<!-- 10개짤라서 -->
-
-<!--강의 검색결과 -->
 <div class="index_container">
   <div class="container">
     <div class="row">
@@ -61,11 +58,11 @@
                                   <% elsif e.point_overall == 5 %><% p = "p5" %>
                               <% end %>
                               <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                                <option value="A"></option>
-                                <option value="B"></option>
-                                <option value="C"></option>
-                                <option value="D"></option>
-                                <option value="E"></option>
+                                <option value='1'></option>
+                                <option value='2'></option>
+                                <option value='3'></option>
+                                <option value='4'></option>
+                                <option value='5'></option>
                               </select>
                             </div>
                           </div>
@@ -80,11 +77,11 @@
                                   <% elsif e.point_easiness == 5 %><% p = "p5" %>
                               <% end %>
                               <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                                <option value="A"></option>
-                                <option value="B"></option>
-                                <option value="C"></option>
-                                <option value="D"></option>
-                                <option value="E"></option>
+                                <option value='1'></option>
+                                <option value='2'></option>
+                                <option value='3'></option>
+                                <option value='4'></option>
+                                <option value='5'></option>
                               </select>
                             </div>
                           </div>
@@ -99,11 +96,11 @@
                                   <% elsif e.point_gpa_satisfaction == 5 %><% p = "p5" %>
                               <% end %>
                               <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                                <option value="A"></option>
-                                <option value="B"></option>
-                                <option value="C"></option>
-                                <option value="D"></option>
-                                <option value="E"></option>
+                                <option value='1'></option>
+                                <option value='2'></option>
+                                <option value='3'></option>
+                                <option value='4'></option>
+                                <option value='5'></option>
                               </select>
                             </div>
                           </div>
@@ -118,11 +115,11 @@
                                   <% elsif e.point_clarity == 5 %><% p = "p5" %>
                               <% end %>
                               <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                                <option value="A"></option>
-                                <option value="B"></option>
-                                <option value="C"></option>
-                                <option value="D"></option>
-                                <option value="E"></option>
+                                <option value='1'></option>
+                                <option value='2'></option>
+                                <option value='3'></option>
+                                <option value='4'></option>
+                                <option value='5'></option>
                               </select>
                             </div>
                           </div>
@@ -144,7 +141,7 @@
 <script>
   $('.p1').barrating('show', {
     theme: 'bars-pill',
-    initialRating: 'A',
+    initialRating: '1',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
@@ -157,7 +154,7 @@
 
   $('.p2').barrating('show', {
     theme: 'bars-pill',
-    initialRating: 'B',
+    initialRating: '2',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
@@ -170,7 +167,7 @@
 
   $('.p3').barrating('show', {
     theme: 'bars-pill',
-    initialRating: 'C',
+    initialRating: '3',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
@@ -183,7 +180,7 @@
 
   $('.p4').barrating('show', {
     theme: 'bars-pill',
-    initialRating: 'D',
+    initialRating: '4',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
@@ -196,7 +193,7 @@
 
   $('.p5').barrating('show', {
     theme: 'bars-pill',
-    initialRating: 'E',
+    initialRating: '5',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
