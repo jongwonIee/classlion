@@ -5,10 +5,17 @@
 <% else %>
     <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님</p>
 <% end %>
-총점 <%= @course.point_overall_sum / @course.evaluation_count %>
-널널함 <%= @course.point_easiness_sum / @course.evaluation_count %>
-강의만족도 <%= @course.point_gpa_satisfaction_sum / @course.evaluation_count %>
-학점만족도 <%= @course.point_clarity_sum / @course.evaluation_count %>
+<% if @course.evaluation_count > 0 %>
+  총점 <%= @course.point_overall_sum / @course.evaluation_count %>
+  널널함 <%= @course.point_easiness_sum / @course.evaluation_count %>
+  강의만족도 <%= @course.point_gpa_satisfaction_sum / @course.evaluation_count %>
+  학점만족도 <%= @course.point_clarity_sum / @course.evaluation_count %>
+<% else %>
+  강의평가가 없습니다..
+  <%= button_to '강평작성하러가기', new_evaluation_path, method: :get %>
+<% end %>
 <hr>
 <p>학생들의 강의평가<%= @course.evaluation_count %> | 강의의 모든것, WIKI</p>
+<% if @course.evaluation_count > 0 %>
 <%= render "evaluations" %>
+<% end %>
