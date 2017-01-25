@@ -1,50 +1,46 @@
 <div class="main_container">
-  <div class="main_container_in">
-    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
-    <div class="set_full col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
-      <div class="outer">
-        <div class="inner">
-          <div class="centered main_center">
-            <p class="logo">CLASSLION</p>
-            <p class="main_msg"><%= University.ids.count %>개의 학교, <%=User.ids.count%>명의 대학생,<br><%=Evaluation.ids.count%>개의 강의평가</p>
+  <div class="outer">
+    <div class="inner">
+      <div class="centered main_center">
+        
+        <p class="logo">CLASSLION</p>
+        <p class="main_msg"><%= University.ids.count %>개의 학교, <%=User.ids.count%>명의 대학생,<br><%=Evaluation.ids.count%>개의 강의평가</p>
 
-            <%= form_for(:session, url: login_path, :html => { :id => "session_user" }) do |f| %>
-            <div class="input_group login_input email_input">
-              <div class="full_input input_div">
-                <%= f.email_field :email, placeholder: "이메일", autofocus: true %><br>
-              </div>
-            </div>
-
-            <div class="input_group login_input">
-              <div class="full_input input_div">
-                <%= f.password_field :password, placeholder: "비밀번호" %><br/>
-              </div>
-            </div>
-
-            <div class="remember_div">
-              <%= f.label :remember_me, class: "checkbox inline" do %>
-                  <%= f.check_box :remember_me %>
-                  <span class="remember_me">로그인 상태 유지</span>
-              <% end %>
-            </div>
-
-             <% unless @msg.nil? %>
-                <div id="error_div">
-                  <span style="color: #ff5a5f"><%= @msg %></span>
-                </div>
-             <% end %>
-
-              <%= f.submit "로그인", class: "login_btn", id: "login_btn"%><br>
-            <% end %>
-
-            <div id="more_div">
-              <a href="#" class="go_about go_pw">비밀번호를 잊어버리셨나요?</a>
-              <p class="main_msg">회원이 아니신가요? <%= link_to "가입하기", signup_path, class: "go_join" %></p>
-            </div>
+        <%= form_for(:session, url: login_path, :html => { :id => "session_user" }) do |f| %>
+        <div class="input_group login_input email_input">
+          <div class="full_input input_div"> 
+            <%= f.email_field :email, placeholder: "이메일", autofocus: true %><br>
           </div>
         </div>
+
+        <div class="input_group login_input">
+          <div class="full_input input_div">
+            <%= f.password_field :password, placeholder: "비밀번호" %><br/>
+          </div>
+        </div>
+
+        <div class="remember_div">
+          <%= f.label :remember_me, class: "checkbox inline" do %>
+              <%= f.check_box :remember_me %>
+              <span class="remember_me">로그인 상태 유지</span>
+          <% end %>
+        </div>
+
+         <% unless @msg.nil? %>
+            <div id="error_div">
+              <span style="color: #ff5a5f"><%= @msg %></span>
+            </div>
+         <% end %>
+
+          <%= f.submit "로그인", class: "login_btn", id: "login_btn"%><br>
+        <% end %>
+
+        <div id="more_div">
+          <a href="#" class="go_about go_pw">비밀번호를 잊어버리셨나요?</a>
+          <p class="main_msg">회원이 아니신가요? <%= link_to "가입하기", signup_path, class: "go_join" %></p>
+        </div>
+        
       </div>
     </div>
-    <div class="set_full col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
   </div>
 </div>

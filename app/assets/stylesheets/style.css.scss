@@ -1,12 +1,5 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(https://fonts.googleapis.com/css?family=Varela+Round);
-/*@import url(https://cdn.rawgit.com/singihae/Webfonts/master/style.css);*/
-
-
-#content::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
 
 /*all start*/
 * {
@@ -24,18 +17,16 @@ html {
     height: 100% !important;
     margin: 0;
     padding: 0;
-    /*display: table;*/
 }
 
 body {
     display: table;
     width: 100%;
-    /*height: 100vh;*/
-    /*height: 100% !important;*/
-    height: 100% !important;
+    min-height: 100% !important;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
     margin: 0;
+    position: relative;
 }
 
 .container {
@@ -70,51 +61,15 @@ body {
     background-position:center;
 }
 
-.main_container_in {
-    margin: 0 auto;
-    width: 100%;
-    /*height: 100%;*/
-    min-height: 100% !important;
-    /*height: 100vh;*/
-}
+// .index_before {
+//     overflow: auto;
+// }
 
-.index_before {
-    overflow: auto;
-}
-
-.index_container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-}
-
-@media only screen and (min-width: 860px) {
-    .index_container {
-        width: 80%;
-    }
-
-    .container {
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-}
-
-/*grid로 나눠진 div 높이를 100%로 설정해줌*/
-.set_full {
-    height: 100vh !important;
-}
-
-.set_full2{
-    height: 100% !important;
-}
-
-/*수직, 수평 중앙정렬을 위한 div start*/
+/*main페이지에서 수직, 수평 중앙정렬을 위한 div start*/
 .outer {
     display: table;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 .inner {
@@ -131,57 +86,25 @@ body {
 .main_center {
     color: white;
 }
-
-.index_outer,
-.index_inner,
-.index_center {
-    width: 100%;
-}
-
-.index_center {
-    margin: 25px 0px 20px 0px;
-}
-
-@media only screen and (min-width: 860px) {
-    .index_center {
-        margin: 50px 0px 50px 0px;
-    }
-}
-
-.index_feed {
-    text-align: left;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    font-size: 1em;
-}
 /*수직, 수평 중앙정렬을 위한 div end*/
 
-/*sticky footer*/
-#body {
-    min-height:100%;
-    margin-top: 55px;
-    overflow:auto;
-    /*height:auto;*/
-}
 
 #content {
-    /*padding-bottom:1.9em;*/
-    width: 100%;
-    /*width: 80%;*/
-    /*margin: 0 auto;*/
-    display: inline-block;
-    overflow: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0 20px;
 }
 
 #foot{
-    margin-top:-1.9em;
-    height:1.9em;
+    margin-top: 50px;
+    height: 100px;
     width: 100%;
     display: inline-block;
 
     /*임시 css*/
     background-color: black;
-    height: 100%;
 }
 /*all end*/
 
@@ -443,7 +366,43 @@ body {
 }
 /*valid mail end*/
 
-/*index feed start*/
+
+/*index page start*/
+.index_container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.index_container > div > div {
+    width: 100%;
+    text-align: left;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    font-size: 1em;
+}
+
+@media only screen and (min-width: 860px) {
+    .index_container {
+        width: 80%;
+    }
+
+    .container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+// .index_feed {
+//     text-align: left;
+//     font-family: 'Noto Sans KR', sans-serif;
+//     font-weight: 300;
+//     font-size: 1em;
+// }
+
 .feed_head {
     color: #ff5a5f;
     font-size: 2em;
@@ -541,22 +500,11 @@ body {
     text-align: center;
 }
 
-/*.feed_star_m{*/
-/*    visibility: visible;   */
-/*}*/
-
-/*@media only screen and (min-width: 860px) {*/
-/*.feed_star_m{*/
-/*    visibility: hidden;*/
-/*    display: none;*/
-/*}*/
-/*}*/
-
 .feed_hr {
     border: solid #dce0e0;
     border-width: 0.5px 0px 0px 0px;
 }
-/*index feed end*/
+/*index page end*/
 
 /*search page start*/
 .search_sen1{
@@ -564,6 +512,7 @@ body {
     font-size: 1.7em;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
+    text-align: center;
 }
 
 .search_keyword {
@@ -580,6 +529,7 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
     line-height: 2em;
+    text-align: center;
 }
 
 .search_tbl {

@@ -1,10 +1,9 @@
 <div class="main_container">
-  <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
-  <div class="set_full2 col-lg-4 col-md-4 col-sm-12 col-xs-12 center_box">
-    <div class="outer">
-      <div class="inner">
-        <div class="centered main_center">
-          <p class="logo">CLASSLION</p>
+  <div class="outer">
+    <div class="inner">
+      <div class="centered main_center">
+        
+        <p class="logo">CLASSLION</p>
           <%= form_for(@user, url: signup_path) do |f| %>
               <%= render 'shared/error_messages' %>
 
@@ -74,11 +73,10 @@
           <% end %>
           <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
           <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
-        </div>
+        
       </div>
     </div>
   </div>
-  <div class="set_full2 col-lg-4 col-md-4 visible-lg-block visible-md-block"></div>
 </div>
 
 
