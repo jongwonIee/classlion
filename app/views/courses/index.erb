@@ -5,37 +5,37 @@
       <table class="search_tbl">
         <% @professor_count = 0 %>
         <% @courses.each do |c| %>
-            <% if c.professor.name.nil? or c.professor.name != @professor_name %>
-                <% @professor_count += 1 %>
-                <% @professor_name = c.professor.name %>
-            <% end %>
+          <% if c.professor.name.nil? or c.professor.name != @professor_name %>
+            <% @professor_count += 1 %>
+            <% @professor_name = c.professor.name %>
+          <% end %>
         <% end %>
       <p class="search_sen1"><span class="search_keyword"><%= @search_param %></span>에 대한 검색 결과</p>
       <p class="search_sen2"><%= @courses.count %>개의 수업, <%= @professor_count %>명의 교수님을 찾았습니다</p>
         <thead>
-        <tr>
-          <th>학수번호</th>
-          <th>과목명</th>
-          <th>교수명</th>
-        </tr>
+          <tr>
+            <th>학수번호</th>
+            <th>과목명</th>
+            <th>교수명</th>
+          </tr>
         </thead>
       <% @courses.each do |c| %>
-            <tbody>
-                    <tr>                          
-                      <td><%= c.lecture.code %></td>
-                      <td>
-                        <% if c.is_major %>
-                          <span class="lec_cate lec_major">전공</span>
-                        <% else %>
-                          <span class="lec_cate lec_kyo">교양</span>
-                        <% end %>
-                        <%= c.lecture.name %>
-                      </td>
-                      <td><%= c.professor.name %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
+        <tbody>
+                <tr>
+                  <td><%= c.lecture.code %></td>
+                  <td>
+                    <% if c.is_major %>
+                      <span class="lec_cate lec_major">전공</span>
+                    <% else %>
+                      <span class="lec_cate lec_kyo">교양</span>
+                    <% end %>
+                    <%= c.lecture.name %>
+                  </td>
+                  <td><%= c.professor.name %></td>
+                </tr>
+            <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
