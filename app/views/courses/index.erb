@@ -19,23 +19,29 @@
             <th>교수명</th>
           </tr>
         </thead>
-      <% @courses.each do |c| %>
+        <% @courses.each do |c| %>
         <tbody>
-                <tr>
-                  <td><%= c.lecture.code %></td>
-                  <td>
-                    <% if c.is_major %>
-                      <span class="lec_cate lec_major">전공</span>
-                    <% else %>
-                      <span class="lec_cate lec_kyo">교양</span>
-                    <% end %>
-                    <%= c.lecture.name %>
-                  </td>
-                  <td><%= c.professor.name %></td>
-                </tr>
-            <% end %>
+            <tr data-href='/courses/show/<%= c.id %>' style="cursor: pointer;">
+              <td><%= c.lecture.code %></td>
+              <td>
+                <% if c.is_major %>
+                  <span class="lec_cate lec_major">전공</span>
+                <% else %>
+                  <span class="lec_cate lec_kyo">교양</span>
+                <% end %>
+                <%= c.lecture.name %>
+              </td>
+              <td><%= c.professor.name %></td>
+            </tr>
         </tbody>
+        <% end %>
       </table>
     </div>
   </div>
 </div>
+
+<script>
+  $('tr[data-href]').on("click", function() {
+  document.location = $(this).data('href');
+  });
+</script>
