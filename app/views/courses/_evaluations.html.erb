@@ -38,7 +38,15 @@
                         <p class="feed_content">
                           <%= e.body.html_safe %></p>
                         <p class="feed_etc">
-                          5시간 전 · <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
+                          <%#= @time %>
+                          <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
+                              1분
+                          <% else %>
+                              <%= time_ago_in_words(e.created_at) %>
+                          <% end %>
+                          전 ·
+                          <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
+                          <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
                         </p>
                       </div>
                       <div class="col-lg-3 col-md-2 visible-lg-block visible-md-block">
@@ -120,9 +128,8 @@
                       </div>
                     </div>
                   </div>
-                  <hr class="feed_hr">
                   <p class="feed_etc">
-                    <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
+
                   </p>
                   <%= e.comments.count %><br>
                   <% e.comments.order(created_at: :desc).each do |c| %>

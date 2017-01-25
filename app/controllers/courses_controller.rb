@@ -28,5 +28,6 @@ class CoursesController < ApplicationController
     #링크를 누르면, 애초에 그 강의의 아이디를 넘겨주는 게 나을 것 같은데
     @course = Course.find(params[:id]) #강의를 찾는다
     @evaluations = @course.evaluations.order(created_at: :desc) #강의의 평가 가지고 오기
+    # @time = time_diff(Time.now, Time.now-2.days-3.hours-4.minutes-5.seconds)
   end
 end
