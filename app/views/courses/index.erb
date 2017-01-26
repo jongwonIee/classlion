@@ -3,15 +3,22 @@
   <div class="container">
     <div>
       <table class="search_tbl">
+        <% @lecture_count = 0 %>
         <% @professor_count = 0 %>
         <% @courses.each do |c| %>
+          <% if c.lecture.name.nil? or c.lecture.name != @lecture_name %>
+              <% @lecture_count += 1 %>
+              <% @lecture_name = c.lecture.name %>
+          <% end %>
           <% if c.professor.name.nil? or c.professor.name != @professor_name %>
             <% @professor_count += 1 %>
             <% @professor_name = c.professor.name %>
           <% end %>
         <% end %>
+
+
       <p class="search_sen1"><span class="search_keyword"><%= @search_param %></span>에 대한 검색 결과</p>
-      <p class="search_sen2"><%= @courses.count %>개의 수업, <%= @professor_count %>명의 교수님을 찾았습니다</p>
+      <p class="search_sen2"><%= @lecture_count %>개의 수업, <%= @professor_count %>명의 교수님을 찾았습니다</p>
         <thead>
           <tr>
             <th>학수번호</th>
