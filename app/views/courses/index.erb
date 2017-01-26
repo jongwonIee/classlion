@@ -1,48 +1,37 @@
-<!--강의 검색결과 -->
 <div class="index_container">
   <div class="container">
     <div>
-      <table class="search_tbl">
-        <% @lecture_count = 0 %>
-        <% @professor_count = 0 %>
-        <% @courses.each do |c| %>
-          <% if c.lecture.name.nil? or c.lecture.name != @lecture_name %>
-              <% @lecture_count += 1 %>
-              <% @lecture_name = c.lecture.name %>
-          <% end %>
-          <% if c.professor.name.nil? or c.professor.name != @professor_name %>
-            <% @professor_count += 1 %>
-            <% @professor_name = c.professor.name %>
-          <% end %>
-        <% end %>
-
-
-      <p class="search_sen1"><span class="search_keyword"><%= @search_param %></span>에 대한 검색 결과</p>
-      <p class="search_sen2"><%= @lecture_count %>개의 수업, <%= @professor_count %>명의 교수님을 찾았습니다</p>
-        <thead>
-          <tr>
-            <th>학수번호</th>
-            <th>과목명</th>
-            <th>교수명</th>
-          </tr>
-        </thead>
-        <% @courses.each do |c| %>
-        <tbody>
-            <tr data-href='/courses/show/<%= c.id %>' style="cursor: pointer;">
-              <td><%= c.lecture.code %></td>
-              <td>
-                <% if c.is_major %>
-                  <span class="lec_cate lec_major">전공</span>
-                <% else %>
-                  <span class="lec_cate lec_kyo">교양</span>
-                <% end %>
-                <%= c.lecture.name %>
-              </td>
-              <td><%= c.professor.name %></td>
+      <% if @courses.empty? %>
+          검색결과가 없습니다.
+      <% else %>
+        <table class="search_tbl">
+        <p class="search_sen1"><span class="search_keyword"><%= @search_param %></span>에 대한 검색 결과</p>
+        <p class="search_sen2"><%= @lecture_count %>개의 수업, <%= @professor_count %>명의 교수님을 찾았습니다</p>
+          <thead>
+            <tr>
+              <th>학수번호</th>
+              <th>과목명</th>
+              <th>교수명</th>
             </tr>
-        </tbody>
-        <% end %>
-      </table>
+          </thead>
+          <% @courses.each do |c| %>
+          <tbody>
+              <tr data-href='/courses/show/<%= c.id %>' style="cursor: pointer;">
+                <td><%= c.lecture.code %></td>
+                <td>
+                  <% if c.is_major %>
+                    <span class="lec_cate lec_major">전공</span>
+                  <% else %>
+                    <span class="lec_cate lec_kyo">교양</span>
+                  <% end %>
+                  <%= c.lecture.name %>
+                </td>
+                <td><%= c.professor.name %></td>
+              </tr>
+          </tbody>
+          <% end %>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>

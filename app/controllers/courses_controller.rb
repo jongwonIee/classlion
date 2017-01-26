@@ -21,6 +21,19 @@ class CoursesController < ApplicationController
       @search_param = params[:search]
       @courses = @search.results
     end
+
+    @lecture_count = 0
+    @professor_count = 0
+    @courses.each do |c|
+      if c.lecture.name.nil? or c.lecture.name != @lecture_name
+        @lecture_count += 1
+        @lecture_name = c.lecture.name
+      end
+      if c.professor.name.nil? or c.professor.name != @professor_name
+        @professor_count += 1
+        @professor_name = c.professor.name
+      end
+    end
   end
 
   def show
