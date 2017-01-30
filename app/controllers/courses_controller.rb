@@ -32,11 +32,13 @@ class CoursesController < ApplicationController
       if c.lecture.name.nil? or c.lecture.name != @lecture_name
         @lecture_count += 1
         @lecture_name = c.lecture.name
+        #이름이 같으면서 is_major여부가 다른경우 체크
         @previous_course = c
       elsif c.lecture.name == @lecture_name and c.is_major != @previous_course.is_major
         @lecture_count += 1
         @lecture_name = c.lecture.name
         @previous_course = c
+        #이름이 같으면서 is_major여부가 다른경우 체크
       end
       if c.professor.name.nil? or c.professor.name != @professor_name
         @professor_count += 1

@@ -1,5 +1,0 @@
-<[댓글]<%= e.comments.count %><br>
-<% e.comments.order(created_at: :desc).each do |c| %>
-  아이디:<%= c.user.nickname %><br>
-  내용:<%= c.body %><br>
-<% end %>
