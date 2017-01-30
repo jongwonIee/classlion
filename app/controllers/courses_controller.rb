@@ -22,12 +22,18 @@ class CoursesController < ApplicationController
       @courses = @search.results
     end
 
+    #count logic
     @lecture_count = 0
     @professor_count = 0
     @courses.each do |c|
       if c.lecture.name.nil? or c.lecture.name != @lecture_name
         @lecture_count += 1
         @lecture_name = c.lecture.name
+        @previous_course = c
+      elsif c.lecture.name == @lecture_name and c.is_major != @previous_course.is_major
+        @lecture_count += 1
+        @lecture_name = c.lecture.name
+        @previous_course = c
       end
       if c.professor.name.nil? or c.professor.name != @professor_name
         @professor_count += 1
