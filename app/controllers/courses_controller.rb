@@ -17,11 +17,14 @@ class CoursesController < ApplicationController
           fields(:professor, :lecture)
         end
       end
-
       @search_param = params[:search]
       @courses = @search.results
+      #count logic
+      count
     end
+  end
 
+  def count
     #count logic
     @lecture_count = 0
     @professor_count = 0
