@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails-i18n'
 
-# checks time ago for evaluations
-gem 'rails-timeago', '~> 2.0'
-
 gem 'sprockets', '3.6.3'
 
 # 권한부여

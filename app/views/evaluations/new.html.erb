@@ -1,0 +1,12 @@
+<br><br><br>
+<h1>강평작성</h1> 
+<%= form_for @evaluation do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>  
+  <%= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%> <hr>
+  <%= f.number_field :point_overall, autocomplete: "on", placeholder: "총점수"%> <hr>
+  <%= f.number_field :point_easiness, autocomplete: "on", placeholder: "널널함"%> <hr>
+  <%= f.number_field :point_gpa_satisfaction, autocomplete: "on", placeholder: "강의만족도"%> <hr>
+  <%= f.number_field :point_clarity, autocomplete: "on", placeholder: "학점만족도"%> <hr>
+  <%= f.text_field :body, autofocus: true, placeholder: "한줄평"%> <hr>
+  <%= f.submit "작성하기" %> 
+<% end %>

@@ -38,15 +38,33 @@
                         <p class="feed_content">
                           <%= e.body.html_safe %></p>
                         <p class="feed_etc">
-                          <%#= @time %>
                           <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
-                              1분
+                              "방금 전"
+                          <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
+                              <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
                           <% else %>
-                              <%= time_ago_in_words(e.created_at) %>
+                              <%= time_ago_in_words(e.created_at) + " 전" %>
                           <% end %>
-                          전 ·
-                          <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
+                          ·
                           <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
+                          <br>
+                          <%= e.comments.count %> <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
+                          <p class="feed_etc">
+                            <% e.comments.order(created_at: :desc).each do |c| %>
+                                아이디:<%= c.user.nickname %><br>
+                                내용:<%= c.body %><br>
+                            <% end %>
+
+                            <%= form_for Comment.new do |f| %>
+                                <%= f.hidden_field :user_id, value: current_user.id %>
+
+                                <%= f.hidden_field :evaluation_id, value: e.id %>
+
+                                <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
+
+                                <%= f.submit "작성하기" %>
+                            <% end %>
+                          </p>
                         </p>
                       </div>
                       <div class="col-lg-3 col-md-2 visible-lg-block visible-md-block">
@@ -128,24 +146,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="feed_etc">
-
-                  </p>
-                  <%= e.comments.count %><br>
-                  <% e.comments.order(created_at: :desc).each do |c| %>
-                      아이디:<%= c.user.nickname %><br>
-                      내용:<%= c.body %><br>
-                  <% end %>
-
-                  <%= form_for Comment.new do |f| %>
-                      <%= f.hidden_field :user_id, value: current_user.id %>
-
-                      <%= f.hidden_field :evaluation_id, value: e.id %>
-
-                      <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
-
-                      <%= f.submit "작성하기" %>
-                  <% end %>
                   <hr>
               <% end %>
             </div>
