@@ -3,10 +3,27 @@
 <%= form_for @evaluation do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>  
   <%= f.number_field :course_id, autocomplete: "on", placeholder: "수업아이디"%> <hr>
-  <%= f.number_field :point_overall, autocomplete: "on", placeholder: "총점수"%> <hr>
-  <%= f.number_field :point_easiness, autocomplete: "on", placeholder: "널널함"%> <hr>
-  <%= f.number_field :point_gpa_satisfaction, autocomplete: "on", placeholder: "강의만족도"%> <hr>
-  <%= f.number_field :point_clarity, autocomplete: "on", placeholder: "학점만족도"%> <hr>
+  총점<br> <%= f.select :point_overall, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
+  널널함<br> <%= f.select :point_easiness, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
+  강의만족도<br> <%= f.select :point_gpa_satisfaction, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
+  학점만족도<br> <%= f.select :point_clarity, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
   <%= f.text_field :body, autofocus: true, placeholder: "한줄평"%> <hr>
   <%= f.submit "작성하기" %> 
 <% end %>
+
+
+
+<script>
+$('.p').barrating('show', {
+  theme: 'bars-pill',
+  initialRating: '3',
+  showValues: false,
+  showSelectedRating: false,
+  allowEmpty: false,
+  readonly: false
+  // emptyValue: '-- no rating selected --'
+  // onSelect: function(value, text) {
+  // alert('Selected rating: ' + value);
+  // }
+  });
+</script>

@@ -116,7 +116,7 @@
                     <%= e.body.html_safe %></p>
                   <p class="feed_etc">
                     <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
-                        "방금 전"
+                        방금 전
                     <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
                         <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
                     <% else %>
@@ -286,7 +286,7 @@
 
   $('.p5').barrating('show', {
     theme: 'bars-pill',
-    initialRating: '',
+    initialRating: '5',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
