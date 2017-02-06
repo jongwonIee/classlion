@@ -17,8 +17,7 @@ class UsersController < ApplicationController
 
     if user.save
       user.send_activation_email
-      flash[:warning] = "이메일을 인증하고, 계정을 활성화해주세요."
-      redirect_to "/users/mail/#{user.email}" #이메일 인증 안내 페이지로
+      redirect_to "/mail/#{user.email}" #이메일 인증 안내 페이지로
     else
       respond_to do |format|
         format.html { render action: "new" }
@@ -28,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def mail
+    #이메일 인증 안내 페이지용
     @email = params[:e]
   end
 

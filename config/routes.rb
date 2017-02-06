@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
 
   #이메일 인증 안내 페이지}
-  get '/users/mail/:e' => 'users#mail', :constraints => { :e => /.+@.+\..*/ }
+  get '/mail/:e' => 'users#mail', :constraints => { :e => /.+@.+\..*/ }
 
   #이메일, 닉네임 유무 체크 (jQuery)
   post '/check-nickname' => 'users#check_nickname'

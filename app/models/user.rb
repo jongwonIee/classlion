@@ -76,12 +76,16 @@ class User < ApplicationRecord
     #이메일 인증 후 계정 활성화
     # update_attribute(:activated, true)
     # update_attribute(:activated_at, Time.zone.now)
-    update_columns(activated: true, activated_at: Time.zone.now)
+    if (Time.zone.now - self.activation_sent_at)/3600 <= 3.0 #인증하려고 하는 시점의 시간에서, 이메일을 보낸 시간을 뺀 결과가 3이하이면 3시간 이내로 본다
+      update_columns(activated: true, activated_at: Time.zone.now) #활성화
+    end
   end
 
   def send_activation_email
     #인증 이메일 전송
-   UserMailer.account_activation(self).deliver_now
+    if UserMailer.account_activation(self).deliver_now
+      update_attribute(:activation_sent_at, Time.zone.now)# 전송이 잘 되면 현재 시간 저장
+    end
   end
 
   def forget
