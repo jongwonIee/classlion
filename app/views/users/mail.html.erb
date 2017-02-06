@@ -1,0 +1,38 @@
+<div class="main_container">
+  <div class="outer">
+    <div class="inner">
+      <div class="centered main_center">
+        <img src="/assets/mail_icon.svg" class="mail_icon" alt="mail">
+
+        <div class="mail_div">
+          <p class="mail_p1"><span class="mail_to"><%= @email %></span>으로 인증메일이 발송되었습니다!</p>
+
+          <p class="mail_p2">3시간 이내에 이메일의 인증 링크를 클릭하시면<br> 회원 가입이 완료됩니다.
+            <br>이메일이 인증되지 않았을 경우, 로그인을 할 수 없습니다</p>
+
+          <p class="mail_p3">이메일을 받지 못하셨다면,<br>인증메일을 재발송하여 다시 메일을 확인해주세요.</p>
+        </div>
+      </div><br>
+
+      <div class="centered main_center fit_div">
+        <p class="logo fit_logo">CLASSLION</p>
+        <a href="#"><button type="button" class="login_btn mail_btn">인증메일 재발송</button></a><br>
+        <a href="<%= login_path %>"><button type="button" class="join_btn mail_login_btn">로그인</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 로고 숨기고 로고만큼 넓이 맞추기 위한 jquery
+  function setWidth() {
+    var fit_logo = $(".fit_logo");
+    var fit_div = $(".fit_div");
+    var fitWidth = fit_div.outerWidth();
+    fit_div.css({ width: fitWidth });
+    fit_logo.css({ display: "none" });
+  }
+
+  setWidth();
+
+</script>

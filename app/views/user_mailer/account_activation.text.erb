@@ -1,0 +1,4 @@
+반갑습니다, <%= @user.nickname %>님!
+클래스 라이언에 가입해주셔서 감사합니다.
+링크를 눌러, 이메일 인증을 완료해주시길 바랍니다.
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

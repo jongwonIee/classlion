@@ -3,10 +3,10 @@ class User < ApplicationRecord
   belongs_to :university
   belongs_to :major
 
-  attr_accessor :remember_token
-  before_create :increase_user_count
+  attr_accessor :remember_token, :activation_token
+  before_create :increase_user_count, :create_activation_digest
   before_destroy :decrease_user_count
-  before_save { self.email = email.downcase }#이메일 저장 전 소문화화
+  before_save :downcase_email #이메일 저장 전 소문화화
 
   #상수들
   #비밀번호 관련
@@ -65,18 +65,28 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  def authenticated?(remember_token)
-    if remember_digest.nil?
-      false
-    else
-      BCrypt::Password.new(remember_digest).is_password?(remember_token)
-    end
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+
+  end
+
+  def activate
+    #이메일 인증 후 계정 활성화
+    # update_attribute(:activated, true)
+    # update_attribute(:activated_at, Time.zone.now)
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def send_activation_email
+    #인증 이메일 전송
+   UserMailer.account_activation(self).deliver_now
   end
 
   def forget
     update_attribute(:remember_digest, nil)
   end
-
 
   # def major_name
   #   major.try(:name)
@@ -92,6 +102,11 @@ class User < ApplicationRecord
 
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
+
+  def downcase_email
+    self.email = email.downcase
+  end
+
   def increase_user_count
     university = self.university
     university.update_attributes(user_count: university.user_count + 1)
@@ -104,6 +119,12 @@ class User < ApplicationRecord
 
   def words_in_nickname
     nickname.strip
+  end
+
+  def create_activation_digest
+    #token & digest 생성
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 end
 

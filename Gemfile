@@ -16,6 +16,12 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'progress_bar'
 
+#메일보내기
+gem 'mailgun-ruby'
+
+#환경변수
+gem 'figaro'
+
 #부트스트랩
 gem 'bootstrap', '~> 4.0.0.alpha5'
 source 'https://rails-assets.org' do

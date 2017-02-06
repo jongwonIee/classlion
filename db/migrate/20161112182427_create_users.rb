@@ -25,11 +25,11 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string   :last_sign_in_ip
 
       ## Confirmable
-      t.boolean  :email_confirmed,  default: false
-      t.string   :confirm_token
+      t.boolean  :activated,  default: false
+      t.string   :activation_digest
 
-      t.datetime :confirmation_sent_at
-      t.datetime :confirmed_at
+      t.datetime :activated_at
+      t.datetime :activation_sent_at
 
       ## Recoverable
       t.string   :reset_password_token

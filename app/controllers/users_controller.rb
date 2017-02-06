@@ -16,15 +16,19 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      flash[:success] = "로그인 성공!"
-      log_in user #자동으로 로그인
-      redirect_to "/main" #강평 목록이 있는 곳으로 리다이렉트
+      user.send_activation_email
+      flash[:warning] = "이메일을 인증하고, 계정을 활성화해주세요."
+      redirect_to "/users/mail/#{user.email}" #이메일 인증 안내 페이지로
     else
       respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def mail
+    @email = params[:e]
   end
 
   def edit
