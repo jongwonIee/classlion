@@ -1,21 +1,61 @@
 <br><br><br><br><br>
 <p><%= @course.lecture.name %></p>
+
 <% if @course.is_major == true %>
     <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= @course.professor.name %> 교수님</p>
 <% else %>
     <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님</p>
 <% end %>
+
 <% if @course.evaluation_count > 0 %>
-  총점 <%= @course.point_overall_sum / @course.evaluation_count %>
+  총점 <%= @course.point_overall_sum.to_f / @course.evaluation_count %>
   널널함 <%= @course.point_easiness_sum / @course.evaluation_count %>
   강의만족도 <%= @course.point_gpa_satisfaction_sum / @course.evaluation_count %>
   학점만족도 <%= @course.point_clarity_sum / @course.evaluation_count %>
+
 <% else %>
   강의평가가 없습니다..
   <%= button_to '강평작성하러가기', new_evaluation_path, method: :get %>
 <% end %>
+<br>
+같은강의
+<br>
+<% @identical_courses.each do |id| %>
+    <% @other_course = Course.find(id) %>
+    <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+<% end%>
+<br>
+연관강의
+<br>
+<% @related_courses.each do |id| %>
+  <% @other_course = Course.find(id) %>
+  <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+<% end%>
+
 <hr>
-<p>학생들의 강의평가<%= @course.evaluation_count %> | 강의의 모든것, WIKI</p>
-<% if @course.evaluation_count > 0 %>
-<%= render "evaluations" %>
-<% end %>
+
+<ul class="w3-navbar w3-black">
+  <li><a href="javascript:void(0)" onclick="openCity('London')">학생들의 강의평가[<%= @course.evaluation_count %>]</a></li>
+  <li><a href="javascript:void(0)" onclick="openCity('Paris')">강의의 모든 것, WIKI</a></li>
+</ul>
+
+<div id="London" class="w3-container city">
+  <% if @course.evaluation_count > 0 %>
+      <%= render "evaluations" %>
+  <% end %>
+</div>
+
+<div id="Paris" class="w3-container city" style="display:none">
+  wiki
+</div>
+
+<script>
+  function openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(cityName).style.display = "block";
+  }
+</script>

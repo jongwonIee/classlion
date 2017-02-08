@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   belongs_to :professor
   belongs_to :university
 
+  #solr
   searchable do
     text :professor do
       self.professor.name
@@ -12,4 +13,5 @@ class Course < ApplicationRecord
       self.lecture.name
     end
   end
+
 end

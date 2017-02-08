@@ -8,7 +8,7 @@ class RolesController < ApplicationController
     redirect_to :back
   end
 
-  def reset
+  def resert
     user = User.find(current_user.id)
     point = 0
     user.update_attribute(:point, point)
