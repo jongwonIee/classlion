@@ -2,10 +2,8 @@ class CoursesController < ApplicationController
   include CoursesHelper
 
   def index
-    # @courses = all_courses
     if params[:search].nil? or (params[:search].length < 2)
       flash[:notice] = "2글자 이상 입력해주세요"
-      # /evaluations로 접근하는거 막기 -> course index로 바꾸면서 의미가 없는 것 같은데 체크 바람!!!
       if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
         redirect_to :back
       else
@@ -19,31 +17,6 @@ class CoursesController < ApplicationController
       end
       @search_param = params[:search]
       @courses = @search.results
-      #count logic
-      count
-    end
-  end
-
-  def count
-    #count logic
-    @lecture_count = 0
-    @professor_count = 0
-    @courses.each do |c|
-      if c.lecture.name.nil? or c.lecture.name != @lecture_name
-        @lecture_count += 1
-        @lecture_name = c.lecture.name
-        #이름이 같으면서 is_major여부가 다른경우 체크 시작
-        @previous_course = c
-      elsif c.lecture.name == @lecture_name and c.is_major != @previous_course.is_major
-        @lecture_count += 1
-        @lecture_name = c.lecture.name
-        @previous_course = c
-        #이름이 같으면서 is_major여부가 다른경우 체크 끝
-      end
-      if c.professor.name.nil? or c.professor.name != @professor_name
-        @professor_count += 1
-        @professor_name = c.professor.name
-      end
     end
   end
 
@@ -67,5 +40,8 @@ class CoursesController < ApplicationController
       @related_courses << lecture.id
       @identical_courses << lecture.id
     end
+
+    @related_courses.delete(params[:id].to_i)
+    @identical_courses.delete(params[:id].to_i)
   end
 end

@@ -8,7 +8,7 @@
 <% end %>
 
 <% if @course.evaluation_count > 0 %>
-  총점 <%= @course.point_overall_sum.to_f / @course.evaluation_count %>
+  총점 <%= (@course.point_overall_sum.to_f / @course.evaluation_count).round(1) %>
   널널함 <%= @course.point_easiness_sum / @course.evaluation_count %>
   강의만족도 <%= @course.point_gpa_satisfaction_sum / @course.evaluation_count %>
   학점만족도 <%= @course.point_clarity_sum / @course.evaluation_count %>

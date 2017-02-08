@@ -49,22 +49,29 @@
                           <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
                           <br>
                           <%= e.comments.count %> <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
-                          <p class="feed_etc">
-                            <% e.comments.order(created_at: :desc).each do |c| %>
-                                아이디:<%= c.user.nickname %><br>
-                                내용:<%= c.body %><br>
-                            <% end %>
 
-                            <%= form_for Comment.new do |f| %>
-                                <%= f.hidden_field :user_id, value: current_user.id %>
+                            <p class="feed_etc">
 
-                                <%= f.hidden_field :evaluation_id, value: e.id %>
 
-                                <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
+                              <%= form_for Comment.new, :id => 'comment', :remote => true do |f| %>
+                                  <%= f.hidden_field :user_id, value: current_user.id %>
 
-                                <%= f.submit "작성하기" %>
-                            <% end %>
-                          </p>
+                                  <%= f.hidden_field :evaluation_id, value: e.id %>
+
+                                  <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
+
+                                  <%= f.submit "작성하기" %>
+                              <% end %>
+
+                              <% e.comments.order(created_at: :desc).each do |c| %>
+                                <div id="comment_div">
+                                  아이디:<%= c.user.nickname %><br>
+                                  내용:<%= c.body %><br>
+                                </div>
+                              <% end %>
+
+                            </p>
+
                         </p>
                       </div>
                       <div class="col-lg-3 col-md-2 visible-lg-block visible-md-block">
@@ -221,4 +228,6 @@
     // alert('Selected rating: ' + value);
     // }
   });
+
+  $('#comment').trigger('submit.rails');
 </script>

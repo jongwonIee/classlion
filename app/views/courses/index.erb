@@ -6,7 +6,7 @@
       <% else %>
         <table class="search_tbl">
         <p class="search_sen1"><span class="search_keyword"><%= @search_param %></span>에 대한 검색 결과</p>
-        <p class="search_sen2"><%= @lecture_count %>개의 수업, <%= @professor_count %>명의 교수님을 찾았습니다</p>
+        <p class="search_sen2"><%= @courses.count %>개의 수업을 찾았습니다</p>
           <thead>
             <tr>
               <th>학수번호</th>

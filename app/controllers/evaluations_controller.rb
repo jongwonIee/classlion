@@ -33,6 +33,8 @@ class EvaluationsController < ApplicationController
   def new #글작성 폼을 준다
     #자동완성에 관련된 코드
     @evaluation = Evaluation.new
+
+    @courses = Course.all
   end
 
   def create #디비에 넣는다
