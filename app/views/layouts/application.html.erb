@@ -48,6 +48,7 @@
   
                 <ul>
                   <li><a href="#0">강의평 하나당 300 점이<br>적립됩니다!</a></li>
+                  <li><a href="evaluations/new">평가하러가기!</a></li>
                 </ul>
               </li>
   
@@ -125,7 +126,6 @@
           <%= button_to '권한삭제', roles_remove_path, method: :post %>
           <%= button_to '포인트초기화', roles_reset_path, method: :post %>
           <%= button_to '포인트충전', roles_charge_path, method: :post %>
-          <%= button_to '강평작성', new_evaluation_path, method: :get %>
         </div>
         
     <% else %>

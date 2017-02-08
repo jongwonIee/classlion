@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   post 'roles/evaluator'
   post 'roles/wikier'
   post 'roles/lack'
+
   #테스트용
   post 'roles/remove'
   post 'roles/reset'
