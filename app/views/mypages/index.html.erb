@@ -1,26 +1,57 @@
-<p>내가 쓴 강의평</p>
-<table>
-  <tr>
-    <th>강의명</th>
-    <th>교수명</th>
-    <th>학교</th>
-    <th>평점</th>
-    <th>내용</th>
-  </tr>
+<br><br><br><br>
+<ul class="w3-navbar w3-black">
+  <li><a href="javascript:void(0)" onclick="openCity('London')">회원정보</a></li>
+  <li><a href="javascript:void(0)" onclick="openCity('Paris')">내가 쓴 강의평가</a></li>
+  <li><a href="javascript:void(0)" onclick="openCity('Seoul')">내가 쓴 댓글</a></li>
+  <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">관심강의</a></li>
+</ul>
+<div id="London" class="w3-container city">
+  <p>버튼 대신 렌더하기로 바꿔야할듯</p>
+  <p><%= link_to "버튼", edit_user_path(current_user) %></p>
+</div>
+<div id="Paris" class="w3-container city" style="display:none">
+  <table>
+    <tr>
+      <th>강의명</th>
+      <th>교수명</th>
+      <th>학교</th>
+      <th>평점</th>
+      <th>내용</th>
+    </tr>
 
+    <% @evaluations.each do |e| %>
+        <tr>
+          <td><%= e.course.lecture.name %></td>
+          <td><%= e.course.professor.name %></td>
+          <td><%= e.course.university.local_name %></td>
+          <td><%= e.point_overall %></td>
+          <td><%= e.body.html_safe %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+<div id="Seoul" class="w3-container city" style="display:none">
+  <p>내가 쓴 댓글</p>
   <% @evaluations.each do |e| %>
-      <tr>
-        <td><%= e.course.lecture.name %></td>
-        <td><%= e.course.professor.name %></td>
-        <td><%= e.course.university.local_name %></td>
-        <td><%= e.point_overall %></td>
-        <td><%= e.body.html_safe %></td>
-      </tr>
+    <% e.comments.each do |c| %>
+      <%= e.course.lecture.name %>
+      <%= c.body %><br>
+    <% end %>
   <% end %>
-</table>
-<br>
-<p>내가 쓴 댓글</p>
+</div>
+<div id="Tokyo" class="w3-container city" style="display:none">
+  <p>관심강의</p>
+</div>
 
-<p>관심강의</p>
 
-<p><%= link_to "회원정보 수정하기", edit_user_path(current_user) %></p>
+
+<script>
+  function openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(cityName).style.display = "block";
+  }
+</script>

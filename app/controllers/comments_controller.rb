@@ -1,9 +1,5 @@
 class CommentsController < ApplicationController
 
-  def new
-    @comment = Comment.new
-  end
-
   def create #디비에 넣는다
     comment = Comment.new(comment_params)
     if comment.save

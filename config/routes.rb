@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'edit', to: 'users#edit'
+
   #이메일, 닉네임 유무 체크 (jQuery)
   post '/check-nickname' => 'users#check_nickname'
   post '/check-email' => 'users#check_email'
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
   get '/courses' => 'courses#index'
   #강의 세부정보 - 강의평가 모음
   get 'courses/show'
-  get 'courses/show/:id' => 'courses#show'
+  get 'courses/:id' => 'courses#show'
 
   resources :evaluations do
     resources :comments

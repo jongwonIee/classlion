@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-xs-9 col-sm-7 feed_each_div">
-                  <p class="feed_course"><a href='/courses/show/<%= e.course.id %>'><%= e.course.lecture.name %></a></p><br>
+                  <p class="feed_course"><a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a></p><br>
                   <% if e.course.is_major == true %>
                     <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님</p>
                   <% else %>

@@ -52,7 +52,6 @@
 
                             <p class="feed_etc">
 
-
                               <%= form_for Comment.new, :id => 'comment', :remote => true do |f| %>
                                   <%= f.hidden_field :user_id, value: current_user.id %>
 
@@ -229,5 +228,23 @@
     // }
   });
 
-  $('#comment').trigger('submit.rails');
+  $(function(){
+    $(".comment").click(function(){
+      post_id=this.value;
+      post_content = $("#content_"+post_id).val();
+      $.ajax({
+        method: "POST",
+        url: "/home/reply_write",
+        data: { content: post_content, id_of_post:post_id },
+        success: function(){
+          alert("리플이 작성되었습니다.");
+          $("#reply_"+post_id).append("<p>"+post_content+"</p>")
+          $("#content_"+post_id).val('');
+        },
+        error: function(){
+          alert("리플이 작성되지 않았습니다.");
+        }
+      })
+    });
+  });
 </script>
