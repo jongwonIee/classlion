@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
 
-  #이메일 인증 안내 페이지}
-  get '/mail/:e' => 'users#mail', :constraints => { :e => /.+@.+\..*/ }
+  #인증 이메일 안내
+  get '/signup/send_authMail/:e' => 'account_activations#authMail', :constraints => { :e => /.+@.+\..*/ }
+  #인증 이메일 재전송
+  get '/signup/resend_authMail' => 'account_activations#re_authMail' #안내 폼
+  post '/signup/resend_authMail' => 'account_activations#resend_authMail' #실제 전송 프로세스
 
   #이메일, 닉네임 유무 체크 (jQuery)
   post '/check-nickname' => 'users#check_nickname'

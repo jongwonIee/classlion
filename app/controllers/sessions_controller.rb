@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         message = "계정이 활성화되지 않았습니다."
         message += "이메일을 인증해주세요"
         flash[:warning] = message
-        redirect_to root_url
+        redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
       end
     else
       @msg = 'email과 password를 다시 확인해주세요!'

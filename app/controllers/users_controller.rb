@@ -17,18 +17,13 @@ class UsersController < ApplicationController
 
     if user.save
       user.send_activation_email
-      redirect_to "/mail/#{user.email}" #이메일 인증 안내 페이지로
+      redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
     else
       respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def mail
-    #이메일 인증 안내 페이지용
-    @email = params[:e]
   end
 
   def edit
