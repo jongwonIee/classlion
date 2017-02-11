@@ -41,6 +41,7 @@ class CoursesController < ApplicationController
       @identical_courses << lecture.id
     end
 
+    #자기 자신 제외
     @related_courses.delete(params[:id].to_i)
     @identical_courses.delete(params[:id].to_i)
   end
