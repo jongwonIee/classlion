@@ -11,79 +11,76 @@
 <div class="index_container">
   <div class="container-fluid">
     <div>
-
-        <p class="feed_head">최신 강의평</p>
+      <p class="feed_head">최신 강의평</p>
         <!--<object type="image/svg+xml" data="/assets/lion_1.svg" id="lion"></object>-->
-
         <% @evaluations.each do |e| %>
-            <div class="feed_each">
-              <div class="row">
-                <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
-                  <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
-                  <p class="feed_nickname"><%= e.user.nickname %></p>
-                </div>
+          <div class="feed_each">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
+                <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
+                <p class="feed_nickname"><%= e.user.nickname %></p>
+              </div>
 
-                <div class="col-xs-9 col-sm-7 feed_each_div">
-                  <p class="feed_course"><a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a></p><br>
-                  <% if e.course.is_major == true %>
-                    <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님</p>
-                  <% else %>
-                    <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님</p>
-                  <% end %>
-                  <div class="row">
-                    <div class="m_indi col-xs-12 visible-xs-block">
-                      
-                      <div class="rating_div">
-                        <div class="rating-head">총점</div>
-                        <div class="rating">
-                          <select id="pillbar" class=<%= "p#{e.point_overall} %> name="rating" autocomplete="off">
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="4"></option>
-                            <option value="5"></option>
-                          </select>
-                        </div>
+              <div class="col-xs-9 col-sm-7 feed_each_div">
+                <p class="feed_course">
+                  <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
+                </p><br>
+                <% if e.course.is_major %>
+                  <p class="feed_prof_major">
+                    <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
+                  </p>
+                <% else %>
+                  <p class="feed_prof_kyo">
+                    <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
+                  </p>
+                <% end %>
+                <div class="row">
+                  <div class="m_indi col-xs-12 visible-xs-block">
+                    <div class="rating_div">
+                      <div class="rating-head">총점</div>
+                      <div class="rating">
+                        <select id="pillbar" class=<%= "p#{e.point_overall} %> name="rating" autocomplete="off">
+                          <% 1.upto(5) do |i| %>
+                          <option value="<%= i %>"></option>
+                          <% end %>
+                        </select>
                       </div>
-                      
-                      <div class="rating_div">
-                        <div class="rating-head">널널함</div>
-                        <div class="rating">
-                          <select id="pillbar" class=<%= "p#{e.point_easiness} %> name="rating" autocomplete="off">
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="4"></option>
-                            <option value="5"></option>
-                          </select>
-                        </div>
+                    </div>
+                    
+                    <div class="rating_div">
+                      <div class="rating-head">널널함</div>
+                      <div class="rating">
+                        <select id="pillbar" class=<%= "p#{e.point_easiness} %> name="rating" autocomplete="off">
+                          <% 1.upto(5) do |i| %>
+                          <option value="<%= i %>"></option>
+                          <% end %>
+                        </select>
                       </div>
+                    </div>
     
-                      <div class="rating_div">
-                        <div class="rating-head">강의만족도</div>
-                        <div class="rating">
-                          <select id="pillbar" class=<%= "p#{e.point_gpa_satisfaction} %> name="rating" autocomplete="off">
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="4"></option>
-                            <option value="5"></option>
-                          </select>
-                        </div>
+                    <div class="rating_div">
+                      <div class="rating-head">강의만족도</div>
+                      <div class="rating">
+                        <select id="pillbar" class=<%= "p#{e.point_gpa_satisfaction} %> name="rating" autocomplete="off">
+                        <% 1.upto(5) do |i| %>
+                        <option value="<%= i %>"></option>
+                        <% end %>
+                        </select>
                       </div>
-    
-                      <div class="rating_div">
-                        <div class="rating-head">학점만족도</div>
-                        <div class="rating">
-                          <select id="pillbar" class=<%= "p#{e.point_clarity}" %> name="rating" autocomplete="off">
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="4"></option>
-                            <option value="5"></option>
-                          </select>
-                        </div>
+                    </div>
+  
+                    <div class="rating_div">
+                      <div class="rating-head">학점만족도</div>
+                      <div class="rating">
+                        <select id="pillbar" class=<%= "p#{e.point_clarity}" %> name="rating" autocomplete="off">
+                          <option value="1"></option>
+                          <option value="2"></option>
+                          <option value="3"></option>
+                          <option value="4"></option>
+                          <option value="5"></option>
+                        </select>
                       </div>
+                    </div>
                       
                     </div>
                   </div>
