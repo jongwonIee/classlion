@@ -20,21 +20,18 @@ class UsersController < ApplicationController
       log_in user #자동으로 로그인
       redirect_to "/main" #강평 목록이 있는 곳으로 리다이렉트
     else
-      respond_to do |format|
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+      render action: "new"
     end
   end
 
   def edit
     #회원정보 수정 form
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
     #회원정보 수정 process
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update_attributes(user_params)
     #업데이트 성공시
       flash[:success] = "변경 완료!"
@@ -46,52 +43,24 @@ class UsersController < ApplicationController
 
   #닉네임 중복검사
   def check_nickname
-    puts('check_user 실행') #실행 확인용
     nickname = params[:nickname]
     user = User.where('nickname = ?', nickname).first
     if user.present? #있으면
-      puts(user.nickname) #사용자 유무 확인용
-      respond_to do |format|
-        format.json do
-          render json: {
-              msg: "overlap"
-          }
-        end
-      end
+      render json: { msg: "overlap" }
     else #없으면
-      respond_to do |format|
-        format.json do
-          render json: {
-              msg: "ok"
-          }
-        end
-      end
-    end #if문 끝
+      render json: { msg: "ok" }
+    end
   end
 
   #이메일 중복검사
   def check_email
-    puts('check_email 실행') #실행 확인용
     email = params[:email]
     user = User.where('email = ?', email).first
     if user.present? #있으면
-      puts(user.email) #사용자 유무 확인용
-      respond_to do |format|
-        format.json do
-          render json: {
-              msg: "overlap"
-          }
-        end
-      end
+      render json: { msg: "overlap" }
     else #없으면
-      respond_to do |format|
-        format.json do
-          render json: {
-              msg: "ok"
-          }
-        end
-      end
-    end #if문 끝
+      render json: { msg: "ok" }
+    end 
   end
 
   private

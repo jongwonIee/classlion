@@ -2,26 +2,20 @@ class EvaluationsController < ApplicationController
   include EvaluationsHelper
 
   def main #최신강평 10개를 보여줌
-    unless current_user
-      redirect_to '/'
-    else
-      @evaluations = all_evaluations.limit(10)
-    end
+    @evaluations = all_evaluations.limit(10)
   end
 
   def index #권한이 있으면, 모든 강평보여줌
-    user = User.find(current_user.id)
-    unless user.has_role? :evaluator
-      redirect_to '/main'
+    unless current_user.has_role? :evaluator
       flash[:notice] = "권한이 없습니다!"
+      redirect_to '/main'
     else
       @evaluations = all_evaluations
     end
   end
 
   def info
-    user = User.find(current_user.id)
-    if user.has_role? :evaluator
+    if current_user.has_role? :evaluator
       redirect_to '/main'
     end
   end

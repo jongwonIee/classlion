@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  #layout :false
+
+  skip_before_action :session_check, :only => ["new", "create"]
 
   def new
     #로그인 form

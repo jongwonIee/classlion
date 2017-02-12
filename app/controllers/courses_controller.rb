@@ -2,14 +2,14 @@ class CoursesController < ApplicationController
   include CoursesHelper
 
   def index
-    if params[:search].nil? or (params[:search].length < 2)
+    if params[:search].nil? or (params[:search].split(" ").join.length < 2)
       flash[:notice] = t(:more_search_keyword)
       if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
         redirect_to :back
       else
         redirect_to '/'
       end
-    elsif params[:search].length >= 2
+    else
       @search = Course.search do
         fulltext '*' + params[:search] + '*' do
           fields(:professor, :lecture)

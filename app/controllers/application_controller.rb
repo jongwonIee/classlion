@@ -1,18 +1,16 @@
 class ApplicationController < ActionController::Base
 
-  protect_from_forgery with: :exception
   include SessionsHelper
 
+  protect_from_forgery with: :exception
+  before_action :session_check
+
   rescue_from CanCan::AccessDenied do
-    respond_to do |format|
-      format.json { head :forbidden }
-      format.html { redirect_to info_path, alert: t(:evaluation_lack) }
-    end
+    redirect_to info_path, alert: t(:evaluation_lack) 
   end
 
-  def current_user
-    return unless session[:user_id]
-    @current_user ||= User.find(session[:user_id])
-  end
+	def session_check
+    redirect_to "/" unless logged_in?
+	end
 
 end

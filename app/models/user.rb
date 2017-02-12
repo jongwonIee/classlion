@@ -2,6 +2,7 @@ class User < ApplicationRecord
   rolify
   belongs_to :university
   belongs_to :major
+  has_many :evaluations
 
   attr_accessor :remember_token
   before_create :increase_user_count
