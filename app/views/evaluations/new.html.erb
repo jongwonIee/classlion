@@ -1,6 +1,5 @@
 <br><br><br><br>
 <%= form_for @evaluation do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.text_field :course_id, id: "tags", placeholder: "강의명", data: {autocomplete_source: Course.all.map { |t| { :label => t.lecture.name + "(" + t.professor.name + ")", :value => t.id }}} %> <hr>
   <%= f.hidden_field :course_id, id: "course_id" %>
   총점<br> <%= f.select :point_overall, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>

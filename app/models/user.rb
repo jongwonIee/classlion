@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :university
   belongs_to :major
   has_many :evaluations
+  has_many :comments
 
   attr_accessor :remember_token
   before_create :increase_user_count

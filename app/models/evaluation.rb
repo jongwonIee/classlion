@@ -1,8 +1,8 @@
 class Evaluation < ApplicationRecord
 
+  resourcify
   belongs_to :course
   belongs_to :user
-  resourcify
   has_many :comments
 
   before_create :increase_evaluation_count, :increase_user_point

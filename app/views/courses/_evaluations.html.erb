@@ -53,12 +53,8 @@
                             <p class="feed_etc">
 
                               <%= form_for Comment.new, :id => 'comment', :remote => true do |f| %>
-                                  <%= f.hidden_field :user_id, value: current_user.id %>
-
                                   <%= f.hidden_field :evaluation_id, value: e.id %>
-
                                   <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
-
                                   <%= f.submit "작성하기" %>
                               <% end %>
 

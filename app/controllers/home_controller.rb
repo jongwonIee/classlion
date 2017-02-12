@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 
   #가장 처음 마주하는 페이지
   def index
-    redirect_to "/main" if logged_in?
+    redirect_to "/main" if !@current_user.nil?
   end
 
   #클래스라이언 소개페이지

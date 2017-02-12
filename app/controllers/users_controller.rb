@@ -27,12 +27,12 @@ class UsersController < ApplicationController
 
   def edit
     #회원정보 수정 form
-    @user = current_user
+    @user = @current_user
   end
 
   def update
     #회원정보 수정 process
-    @user = current_user
+    @user = @current_user
     if @user.update_attributes(user_params)
     #업데이트 성공시
       flash[:success] = "변경 완료!"

@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application' %>
 
     <%# 네브바가 없는 로그인과 회원가입페이지에서는 해당 js가 로드되지않도록 하는 코드 %>
-    <% unless current_user.nil? %>
+    <% unless @current_user.nil? %>
         <%= javascript_include_tag "nav/nav_jquery.menu-aim", "nav/nav_modernizr", "nav/nav_main" %>
     <% end %>
 
@@ -24,7 +24,7 @@
         <%= render 'flash', name: name, msg: msg %>
     <% end %>
   
-    <% unless current_user.nil? %>
+    <% unless @current_user.nil? %>
         <header class="cd-main-header">
           <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
   
@@ -43,7 +43,7 @@
               <li class="has-children point_info nvs">
                 <a href="#0">
                   <%= image_tag "nav_point.svg" %>
-                  <%= current_user.point %> 점
+                  <%= @current_user.point %> 점
                 </a>
   
                 <ul>
@@ -54,7 +54,7 @@
   
               <li class="has-children lec_open nvs">
                 <a href="#0" class="onoff_a">
-                  <% if (current_user.has_role? 'evaluator') %>
+                  <% if (@current_user.has_role? 'evaluator') %>
                     <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
                   <% else %>
                     <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
@@ -64,10 +64,10 @@
                 </a>
   
                 <ul>
-                  <% if !(current_user.has_role? 'evaluator') && current_user.point >= 1000 %>
-                      <li><br><%= current_user.point %> 점<br><%= button_to '오픈하기', roles_evaluator_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br></li>
-                  <% elsif !(current_user.has_role? 'evaluator') && current_user.point < 1000 %>
-                      <li><br><%= current_user.point %> 점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
+                  <% if !(@current_user.has_role? 'evaluator') && @current_user.point >= 1000 %>
+                      <li><br><%= @current_user.point %> 점<br><%= button_to '오픈하기', roles_evaluator_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br></li>
+                  <% elsif !(@current_user.has_role? 'evaluator') && @current_user.point < 1000 %>
+                      <li><br><%= @current_user.point %> 점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
                   <% else %>
                       <li>강의평가를 열람해보세요!</li>
                   <% end %>
@@ -76,7 +76,7 @@
   
               <li class="has-children wiki_open nvs">
                 <a href="#0" class="onoff_a">
-                  <% if (current_user.has_role? 'wikier') %>
+                  <% if (@current_user.has_role? 'wikier') %>
                       <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
                   <% else %>
                       <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
@@ -85,10 +85,10 @@
                 </a>
   
                 <ul>
-                  <% if !(current_user.has_role? 'wikier') && current_user.point >= 1000 %>
-                      <li><br><%= current_user.point %> 점<br><%= button_to '오픈하기', roles_wikier_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")' %><br></li>
-                  <% elsif !(current_user.has_role? 'wikier') && current_user.point < 1000 %>
-                      <li><br><%= current_user.point %> 점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
+                  <% if !(@current_user.has_role? 'wikier') && @current_user.point >= 1000 %>
+                      <li><br><%= @current_user.point %> 점<br><%= button_to '오픈하기', roles_wikier_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")' %><br></li>
+                  <% elsif !(@current_user.has_role? 'wikier') && @current_user.point < 1000 %>
+                      <li><br><%= @current_user.point %> 점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
                   <% else %>
                       <li>위키를 열람해보세요!</li>
                   <% end %>
@@ -100,7 +100,7 @@
               <li class="has-children account nvs">
                 <a href="#0">
                   <img src="/assets/nav_user.svg" alt="user">
-                  <%= current_user.nickname %>
+                  <%= @current_user.nickname %>
                 </a>
   
                 <ul>
