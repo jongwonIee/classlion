@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do
     respond_to do |format|
       format.json { head :forbidden }
-      format.html { redirect_to info_path, alert: "강평열람 권한을 오픈하기 위해 강평을 해주세요!" }
+      format.html { redirect_to info_path, alert: t(:evaluation_lack) }
     end
   end
 
