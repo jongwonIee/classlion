@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   def index
     if params[:search].nil? or (params[:search].length < 2)
-      flash[:notice] = "2글자 이상 입력해주세요"
+      flash[:notice] = t(:more_search_keyword)
       if request.env["HTTP_REFERER"].present? and request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
         redirect_to :back
       else
