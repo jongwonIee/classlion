@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  #layout :false
+
+  skip_before_action :session_check, :only => ["new", "create", "check_nickname", "check_email"]
 
   def show
     #마이페이지로 대처? 고민해볼 것
