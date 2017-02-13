@@ -16,7 +16,7 @@
           </thead>
           <% @courses.each do |c| %>
           <tbody>
-              <tr data-href='/courses/show/<%= c.id %>' style="cursor: pointer;">
+              <tr data-href='/courses/<%= c.id %>' style="cursor: pointer;">
                 <td><%= c.lecture.code %></td>
                 <td>
                   <% if c.is_major %>

@@ -41,11 +41,16 @@ Rails.application.routes.draw do
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크
   get 'mypage' => 'mypages#index'
 
+  #cancancan
   post 'roles/evaluator'
   post 'roles/wikier'
   post 'roles/lack'
 
-  #테스트용
+  #favoites
+  post 'courses/favorites_add'
+  post 'courses/favorites_delete'
+
+  #cancancan 테스트용
   post 'roles/remove'
   post 'roles/reset'
   post 'roles/charge'

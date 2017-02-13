@@ -17,9 +17,12 @@ class CoursesController < ApplicationController
   end
 
   def show
+    #cancancan
     authorize! :show, Course
-    #링크를 누르면, 애초에 그 강의의 아이디를 넘겨주는 게 나을 것 같은데
+
     @course = Course.find(params[:id]) #강의를 찾는다
+
+    $course = Course.find(params[:id])
 
     @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     @evaluations_by_point = @course.evaluations.order(point_overall: :desc) #총점순
@@ -40,5 +43,16 @@ class CoursesController < ApplicationController
     #자기 자신 제외
     @related_courses.delete(params[:id].to_i)
     @identical_courses.delete(params[:id].to_i)
+  end
+
+  def favorites_add
+    Favorite.create(user_id: @current_user.id, course_id: $course.id)
+    redirect_to :back
+  end
+
+  def favorites_delete
+    favorite = Favorite.where("user_id = ? AND course_id = ?", @current_user.id, $course.id)
+    Favorite.destroy(favorite.first.id)
+    redirect_to :back
   end
 end

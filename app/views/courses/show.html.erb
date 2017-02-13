@@ -17,6 +17,15 @@
   강의평가가 없습니다..
   <%= button_to '강평작성하러가기', new_evaluation_path, method: :get %>
 <% end %>
+
+<br>
+<%# 관심강의  %>
+<% if Favorite.exists?(course_id: @course.id) %>
+  <%= button_to '관심강의에서제거', courses_favorites_delete_path, method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
+<% else %>
+  <%= button_to '관심강의에다추가', courses_favorites_add_path, method: :post, :onClick => 'alert("관심강의에 추가되었습니다!")' %>
+<% end %>
+
 <br>
 같은강의
 <br>
@@ -25,7 +34,7 @@
 <% else %>
   <% @identical_courses.each do |id| %>
     <% @other_course = Course.find(id) %>
-    <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+    <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
   <% end %>
 <% end %>
 

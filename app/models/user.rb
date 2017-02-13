@@ -4,6 +4,8 @@ class User < ApplicationRecord
   belongs_to :major
   has_many :evaluations
   has_many :comments
+  has_many :favorites
+  has_many :courses, through: :favorites
 
   attr_accessor :remember_token
   before_create :increase_user_count
