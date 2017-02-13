@@ -6,12 +6,13 @@
   <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">관심강의</a></li>
 </ul>
 <div id="London" class="w3-container city">
-  <p>버튼 대신 렌더하기로 바꿔야할듯</p>
+  <%# 버튼 대신 렌더하기로 바꿔야할듯 %>
   <p><%= link_to "버튼", edit_user_path(@current_user) %></p>
 </div>
 <div id="Paris" class="w3-container city" style="display:none">
   <table>
     <tr>
+      <th>링크</th>
       <th>강의명</th>
       <th>교수명</th>
       <th>학교</th>
@@ -21,6 +22,7 @@
 
     <% @evaluations.each do |e| %>
         <tr>
+          <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
           <td><%= e.course.lecture.name %></td>
           <td><%= e.course.professor.name %></td>
           <td><%= e.course.university.local_name %></td>
@@ -31,18 +33,47 @@
   </table>
 </div>
 <div id="Seoul" class="w3-container city" style="display:none">
-  <p>내가 쓴 댓글</p>
-  <% @evaluations.each do |e| %>
-    <% e.comments.each do |c| %>
-      <%= e.course.lecture.name %>
-      <%= c.body %><br>
+  <table>
+    <thead>
+      <tr>
+        <th>링크</th>
+        <th>강의명</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <% @evaluations.each do |e| %>
+      <tbody>
+        <tr>
+          <% e.comments.each do |c| %>
+              <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
+              <td><%= e.course.lecture.name %></td>
+              <td><%= c.body %></td>
+          <% end %>
+        </tr>
+      </tbody>
     <% end %>
-  <% end %>
+  </table>
 </div>
 <div id="Tokyo" class="w3-container city" style="display:none">
-  <p>관심강의</p>
+  <table>
+    <thead>
+    <tr>
+      <th>링크</th>
+      <th>강의명</th>
+      <th>교수명</th>
+    </tr>
+    </thead>
+    <% @favorite_courses.each do |f| %>
+      <tbody>
+        <tr>
+          <td><a href="/courses/<%=f.id%>">링크</a></td>
+          <td><%= f.lecture.name %></td>
+          <td><%= f.professor.name %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
 </div>
-
 
 
 <script>
