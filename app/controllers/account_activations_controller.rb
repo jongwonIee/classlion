@@ -24,18 +24,30 @@ class AccountActivationsController < ApplicationController
 
   def re_authMail
     #인증 이메일 재전송 view
-    @user = User.new
+
   end
 
   def resend_authMail
     #인증 이메일 재전송 process
-    @user = User.find_by_email(params[:user][:email])
-    unless @user.nil?
-      flash[:notice] = @user.email
-      redirect_to root_url
-    else
+    user = User.find_by_email(params[:re_authMail][:email])
+
+    if !user #이메일 주소 없으면
       @msg = "등록되지 않은 이메일 주소입니다."
-      redirect_to '/signup/resend_authMail'
+      render 're_authMail'
+
+    elsif user.activated?
+      @msg = "이미 인증된 이메일 입니다!"
+      render 're_authMail' #로그인하라고 로그인페이지로 리다이렉트
+
+    elsif user && !user.activated? #사용자가 있으면서 아직 활성화가 되지 않았다면
+      if user.resend_activation_email #이메일 재전송
+        user.send_activation_email
+        redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
+      else
+        flash[:warning] = "어머나, 문제가 생겼어요!"
+        redirect_to '/signup/resend_authMail'
+      end
     end
+
   end
 end

@@ -88,6 +88,10 @@ class User < ApplicationRecord
     end
   end
 
+  def resend_activation_email
+    self.send :recreate_activation_digest
+  end
+
   def forget
     update_attribute(:remember_digest, nil)
   end
@@ -129,6 +133,12 @@ class User < ApplicationRecord
     #token & digest 생성
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  def recreate_activation_digest
+    #token & digest 재생성
+    self.activation_token = User.new_token
+    update_columns(activation_digest: User.digest(activation_token))
   end
 end
 

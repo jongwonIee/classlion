@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def new
     #회원가입 form
+    redirect_to '/main' if logged_in? #이미 로그인된 상태라면 main페이지로 리다이렉트
     @user = User.new
   end
 

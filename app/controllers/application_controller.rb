@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  # before_filter :require_login
   protect_from_forgery with: :exception
   include SessionsHelper
 
@@ -14,6 +14,14 @@ class ApplicationController < ActionController::Base
     return unless session[:user_id]
     @current_user ||= User.find(session[:user_id])
   end
+
+  #로그인이 되어있으면, main으로 리다이렉트 시키기
+  # private
+  # def require_login
+  #   if logged_in?
+  #     redirect_to '/main'# halts request cycle
+  #   end
+  # end
 
   # def time_diff(start_time, end_time)
   #   seconds_diff = (start_time - end_time).to_i.abs
