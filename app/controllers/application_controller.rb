@@ -21,6 +21,12 @@ class ApplicationController < ActionController::Base
     else
       redirect_to "/" 
     end
-	end
+  end
+
+  #for cancancan
+  def current_user
+    return unless session[:user_id]
+    @current_user ||= User.find(session[:user_id])
+  end
 
 end
