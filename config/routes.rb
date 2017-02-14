@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   #비로그인 시 root
   root 'home#index'
 
@@ -14,6 +18,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   resources :users
   resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   #인증 이메일 안내
   get '/signup/send_authMail/:e' => 'account_activations#authMail', :constraints => { :e => /.+@.+\..*/ }

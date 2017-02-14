@@ -1,0 +1,28 @@
+<%# 비밀번호 재설정 - 이메일 입력 %>
+<div class="main_container">
+  <div class="outer">
+    <div class="inner">
+      <div class="centered main_center">
+
+        <p class="logo">비밀번호 재설정</p>
+        <p class="main_msg">회원가입 시 이용한 이메일 주소를 입력해주세요.</p>
+
+        <%= form_for(:password_reset, url: password_resets_path, method: "post") do |f|%>
+            <div class="input_group login_input email_input">
+              <div class="full_input input_div">
+                <%= f.email_field :email, placeholder: "이메일" %><br/>
+              </div>
+            </div>
+
+            <% unless @msg.nil? %>
+                <div>
+                  <span style="color: #ff5a5f" id="re_authMail_error"><%= @msg %></span>
+                </div>
+            <% end %>
+
+            <%= f.submit "메일 보내기", class: "login_btn", id: "login_btn"%><br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

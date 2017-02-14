@@ -32,8 +32,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.datetime :activation_sent_at
 
       ## Recoverable
-      t.string   :reset_password_token
-      t.datetime :reset_password_sent_at
+      t.string   :reset_digest
+      t.datetime :reset_sent_at
 
       # t.integer  :mandatory_evaluation_count, null: false, default: 3 #필수로 써야하는 강평 수
 

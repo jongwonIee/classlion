@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     if current_user
       redirect_to "/main" if logged_in?
     end
+
   end
 
   def about

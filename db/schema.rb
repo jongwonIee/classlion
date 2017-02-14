@@ -100,31 +100,31 @@ ActiveRecord::Schema.define(version: 20170111071457) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "nickname",                               null: false
-    t.string   "email",                                  null: false
-    t.integer  "university_id",                          null: false
-    t.integer  "major_id",                               null: false
-    t.string   "password_digest",                        null: false
+    t.string   "nickname",                           null: false
+    t.string   "email",                              null: false
+    t.integer  "university_id",                      null: false
+    t.integer  "major_id",                           null: false
+    t.string   "password_digest",                    null: false
     t.string   "remember_digest"
-    t.boolean  "is_boy",                                 null: false
-    t.boolean  "confirmed",              default: false, null: false
-    t.boolean  "dropped_out",            default: false, null: false
+    t.boolean  "is_boy",                             null: false
+    t.boolean  "confirmed",          default: false, null: false
+    t.boolean  "dropped_out",        default: false, null: false
     t.datetime "dropped_out_at"
-    t.boolean  "allowed",                default: false, null: false
-    t.integer  "point",                  default: 0,     null: false
-    t.integer  "sign_in_count",          default: 1,     null: false
+    t.boolean  "allowed",            default: false, null: false
+    t.integer  "point",              default: 0,     null: false
+    t.integer  "sign_in_count",      default: 1,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "activated",              default: false
+    t.boolean  "activated",          default: false
     t.string   "activation_digest"
     t.datetime "activated_at"
     t.datetime "activation_sent_at"
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
