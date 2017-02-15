@@ -35,15 +35,16 @@ end
 #사용자
 puts "Inserting user data.."
 [
-   [1, true, "이브이", "admin@snu.ac.kr", 1, 'password', 'password', 1],
-   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', 1],
-   [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', 2],
-   [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', 3],
-   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', 4],
-   [6, false, "앙우리", "a@a.com", 1, '11111111', '11111111', 1]
+   [1, true, "이브이", "admin@snu.ac.kr", 1, 'password', 'password', 1, true, Time.zone.now],
+   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', 1, true, Time.zone.now],
+   [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', 2, true, Time.zone.now],
+   [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', 3, true, Time.zone.now],
+   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', 4, true, Time.zone.now],
+   [6, false, "앙우리", "a@a.com", 1, '11111111', '11111111', 1, true, Time.zone.now]
 
 ].each do |x|
-  User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4], password: x[5], password_confirmation: x[6], major_id: x[7])
+  User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4],
+              password: x[5], password_confirmation: x[6], major_id: x[7], activated: x[8], activated_at: x[9])
 end
 
 puts "Inserting lecture data.."
