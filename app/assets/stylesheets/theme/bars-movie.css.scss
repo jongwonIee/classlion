@@ -4,11 +4,11 @@
 }
 .br-theme-bars-movie .br-widget a {
   display: block;
-  width: 60px;
+  width: 18%;
   height: 8px;
   float: left;
-  background-color: #bbcefb;
-  margin: 1px;
+  background-color: #fff3d6;
+  margin: 0.5px;
 }
 .br-theme-bars-movie .br-widget a.br-active,
 .br-theme-bars-movie .br-widget a.br-selected {
@@ -29,10 +29,10 @@
 }
 .br-theme-bars-movie .br-readonly a.br-active,
 .br-theme-bars-movie .br-readonly a.br-selected {
-  background-color: #729bf8;
+  background-color: #ffc333;
 }
 .br-theme-bars-movie .br-readonly .br-current-rating {
-  color: #729bf8;
+  color: #ffc333;
 }
 @media print {
   .br-theme-bars-movie .br-widget a {

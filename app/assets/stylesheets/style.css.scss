@@ -1,64 +1,69 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(https://fonts.googleapis.com/css?family=Varela+Round);
 
+
+@import url('https://fonts.googleapis.com/css?family=Arvo|Lato|Open+Sans+Condensed:300|Rubik|Sansita');
+
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
+
 /*all start*/
 * {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
 }
 
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 
 html {
-    height: 100% !important;
-    margin: 0;
-    padding: 0;
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: table;
-    width: 100%;
-    min-height: 100% !important;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    margin: 0;
-    position: relative;
+  display: table;
+  width: 100%;
+  min-height: 100% !important;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  position: relative;
 }
 
 .container {
-    height: 100%;
-    max-width: 100%;
-    /* This will remove the outer padding, and push content edge to edge */
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+  height: 100%;
+  max-width: 100%;
+  /* This will remove the outer padding, and push content edge to edge */
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
 
 .row {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
 .main_container {
-    display: table;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    width: 100%;
-    height: 100vh;
-    min-height: 100% !important;
-    background-image: image-url('main_bg.png');
-    //background: url('main_bg.png');
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
-    background-position:center;
+  display: table;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  width: 100%;
+  height: 100vh;
+  min-height: 100% !important;
+  background-image: image-url('main_bg.png');
+  //background: url('main_bg.png');
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
 }
 
 // .index_before {
@@ -67,533 +72,773 @@ body {
 
 /*main페이지에서 수직, 수평 중앙정렬을 위한 div start*/
 .outer {
-    display: table;
-    width: 100%;
-    min-height: 100%;
+  display: table;
+  width: 100%;
+  min-height: 100%;
 }
 
 .inner {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .centered {
-    position: relative;
-    display: inline-block;
-    text-align: center;
+  position: relative;
+  display: inline-block;
+  text-align: center;
 }
 .main_center {
-    color: white;
+  color: white;
 }
 /*수직, 수평 중앙정렬을 위한 div end*/
 
 
 #content {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    height: 100%;
-    padding: 0 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 20px;
 }
 
 #foot{
-    margin-top: 50px;
-    height: 100px;
-    width: 100%;
-    display: inline-block;
+  margin-top: 50px;
+  height: 100px;
+  width: 100%;
+  display: inline-block;
 
-    /*임시 css*/
-    background-color: black;
+  /*임시 css*/
+  background-color: black;
 }
 /*all end*/
 
 
 /*home start*/
 .logo {
-    font-family: 'Varela Round';
-    letter-spacing: 1px;
-    font-size : 50px;
+  font-family: 'Varela Round';
+  letter-spacing: 1px;
+  font-size : 50px;
 }
 
 .main_msg {
-    margin-top: 7%;
-    margin-bottom: 7%;
-    font-size: 1.1em;
+  margin-top: 7%;
+  margin-bottom: 7%;
+  font-size: 1.1em;
 }
 
 .error_msg {
-    color: #ff5a5f;
+  color: #ff5a5f;
 }
 
 .login_btn {
-    width: 100%;
-    height: 45px;
-    border: 1px solid #ff5a5f;
-    border-radius: 5px;
-    background-color: #ff5a5f;
-    color: white;
-    font-size: 1.1em;
-    padding: 3%;
-    margin-top: 4%;
-    margin-bottom: 4%;
+  width: 100%;
+  height: 45px;
+  border: 1px solid #ff5a5f;
+  border-radius: 5px;
+  background-color: #ff5a5f;
+  color: white;
+  font-size: 1.1em;
+  padding: 3%;
+  margin-top: 4%;
+  margin-bottom: 4%;
 }
 
 .join_btn, .login_input {
-    width: 100%;
-    height: 45px;
-    border: 1px solid white;
-    border-radius: 3px;
-    background-color: transparent;
-    color: white;
-    font-size: 1.1em;
-    padding: 3%;
-    /*margin-top: 3%;*/
-    margin-bottom: 4%;
+  width: 100%;
+  height: 45px;
+  border: 1px solid white;
+  border-radius: 3px;
+  background-color: transparent;
+  color: white;
+  font-size: 1.1em;
+  padding: 3%;
+  /*margin-top: 3%;*/
+  margin-bottom: 4%;
 }
 
 .mail_btn {
-    border: 1px solid white;
-    background-color: transparent;
-    color: white;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
 }
 
 .mail_login_btn {
-    border: 1px solid #ff5a5f;
-    background-color: #ff5a5f;
-    color: white;
+  border: 1px solid #ff5a5f;
+  background-color: #ff5a5f;
+  color: white;
 }
 
 .go_about {
-    color: white;
-    font-size: 1.1em;
+  color: white;
+  font-size: 1.1em;
 }
 
 .go_about:hover, .go_about:link, .go_about:visited, .go_about:active {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 /*home end*/
 
 
 /*login, signup start*/
 .email_input {
-    margin-top: 4%;
+  margin-top: 4%;
 }
 
 .login_input {
-    text-indent: 5%;
+  text-indent: 5%;
 }
 
 .login_input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: white;
+  color: white;
 }
 
 .login_input::-moz-placeholder { /* Firefox 19+ */
-    color: white;
+  color: white;
 }
 
 .login_input:-ms-input-placeholder { /* IE 10+ */
-    color: white;
+  color: white;
 }
 
 .login_input:-moz-placeholder { /* Firefox 18- */
-    color: white;
+  color: white;
 }
 /*login, signup end*/
 
 /*기억해두기*/
 .remember_div label {
-    margin-top: 5px;
-    margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 .remember_me {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    font-size: 1.1em;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
 }
 /*login, signup end*/
 
 /*signup start*/
 .input_group {
-    text-indent: 0;
+  text-indent: 0;
 }
 
 .input_div {
-    display: inline-block;
-    width: 63%;
-    /*text-indent: 5%;*/
+  display: inline-block;
+  width: 63%;
+  /*text-indent: 5%;*/
 }
 
 .full_input { /*check btn 필요없는 경우*/
-    width: 100%;
+  width: 100%;
 }
 
 .input_div > input {
-    width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
-    background: transparent;
-    /*text-indent: 5%; 임시로 안되게 처리. 나중에 바꿔야함*/
-    /*border: 1px solid white;*/
-    border: none;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background: transparent;
+  /*text-indent: 5%; 임시로 안되게 처리. 나중에 바꿔야함*/
+  /*border: 1px solid white;*/
+  border: none;
 }
 
 .join_gp { /*check btn 필요한 그룹 묶어주기*/
-    width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .join_gp > div > input {
-    padding: 0;
+  padding: 0;
 }
 
 .input_div > input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: white;
+  color: white;
 }
 
 .input_div > input::-moz-placeholder { /* Firefox 19+ */
-    color: white;
+  color: white;
 }
 
 .input_div > input:-ms-input-placeholder { /* IE 10+ */
-    color: white;
+  color: white;
 }
 
 .input_div > input:-moz-placeholder { /* Firefox 18- */
-    color: white;
+  color: white;
 }
 
 .check_div {
-    display: inline-block;
-    width: 35%;
-    /*text-align: right;*/
-    /*text-indent: -5%;*/
+  display: inline-block;
+  width: 35%;
+  /*text-align: right;*/
+  /*text-indent: -5%;*/
 }
 
 .check_div > button {
-    width: 100%;
-    background: transparent;
-    border: 1px solid white;
-    border-radius: 23px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 23px;
 }
 
 /* 우리 임의 추가 */
 .check_div span{
-    width: 100%;
-    font-size: 14px;
+  width: 100%;
+  font-size: 14px;
 }
 #error_div{ /*session에서의 에러메세지*/
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 /* 여기까지 우리 임의 추가 */
 
 .gender_div > input {
-    display: none;
+  display: none;
 }
 
 .gender_div > label {
-    font-weight: 300;
-    width: 49.5%;
-    display: inline-block;
-    height: 45px;
-    border: 1px solid white;
-    border-radius: 3px;
-    font-size: 1.1em;
-    padding: 3%;
-    margin-bottom: 4%;
+  font-weight: 300;
+  width: 49.5%;
+  display: inline-block;
+  height: 45px;
+  border: 1px solid white;
+  border-radius: 3px;
+  font-size: 1.1em;
+  padding: 3%;
+  margin-bottom: 4%;
 }
 
 .gender_div > label:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .gender_div > input:checked + label {
-    background: white;
-    color: rgba(0, 0, 0, 0.58);
-    font-weight: 400;
+  background: white;
+  color: rgba(0, 0, 0, 0.58);
+  font-weight: 400;
 }
 
 .go_pw {
-    display: block;
-    text-align: right;
-    margin-bottom: 10%;
+  display: block;
+  text-align: right;
+  margin-bottom: 10%;
 }
 
 .go_join {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .go_join:hover, .go_join:link, .go_join:visited, .go_join:active {
-    text-decoration: underline;
-    color: white;
+  text-decoration: underline;
+  color: white;
 }
 
 .rule_msg {
-    font-size: 0.9em;
+  font-size: 0.9em;
 }
 /*signup end*/
 
 /*valid mail start*/
 .mail_div {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 .mail_icon {
-    width: 40%;
+  width: 40%;
 }
 
 .mail_div p {
-    margin: 10% 0 10% 0;
+  margin: 10% 0 10% 0;
 }
 
 .mail_to {
-    color: #ff5a5f;
+  color: #ff5a5f;
 }
 
 .mail_p1 {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 @media only screen and (max-width: 860px) {
-    .mail_div {
-        margin: 0 10% 0 10%;
-        font-size: 1em;
-    }
+  .mail_div {
+    margin: 0 10% 0 10%;
+    font-size: 1em;
+  }
 }
 /*valid mail end*/
 
 
 /*index page start*/
 .index_container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    margin-top: 100px;
+  max-width: 960px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  margin-top: 100px;
 }
 
 .index_container > div > div {
-    width: 100%;
-    text-align: left;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    font-size: 1em;
+  width: 100%;
+  text-align: left;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1em;
 }
 
 @media only screen and (min-width: 860px) {
-    .index_container {
-        width: 80%;
-    }
+  .index_container {
+    width: 80%;
+  }
 
-    .container {
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-    }
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 // .index_feed {
 //     text-align: left;
-//     font-family: 'Noto Sans KR', sans-serif;
+//         font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
 //     font-weight: 300;
 //     font-size: 1em;
 // }
 
 .feed_head {
-    color: #ff5a5f;
-    font-size: 2em;
-    margin: 0px 0px 20px 0px;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  color: #ff5a5f;
+  font-size: 2em;
+  margin: 0px 0px 20px 0px;
 }
 
 @media only screen and (min-width: 860px) {
-    .feed_head {
-        font-size: 2.5em;
-        margin: 0px 0px 50px 0px;
-    }
+  .feed_head {
+    font-size: 30px;
+    margin: 0px 0px 5px 0px;
+  }
+}
+
+.feed_head2{
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  color: #484848;
+  font-size: 18px;
+  margin: 0px 0px 70px 0px;
 }
 
 .feed_each {
-    width: 100%;
-    display: inherit;
-    margin: 15px 0px 15px 0px;
+  width: 100%;
+  display: inherit;
+  margin: 15px 0px 15px 0px;
 }
 
 .feed_each_div {
-    padding-left: 5px;
-    padding-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .feed_writer {
-    text-align: center;
+  text-align: center;
 }
 
 .feed_lion {
-    width: 65%;
+  width: 65%;
 }
 
 @media only screen and (min-width: 860px) {
-    .feed_lion {
-        width: 60%;
-    }
+  .feed_lion {
+    width: 60%;
+  }
 }
 
 .feed_nickname {
-    font-size: 1.1em;
+  font-size: 12px;
 }
 
 .lion_bg {
-    background: red;
-    border-radius: 50%;
-    padding: 20px;
+  background: red;
+  border-radius: 50%;
+  padding: 20px;
 }
 
 .feed_course{
-    color: #484848;
-    font-size: 1.2em;
-    font-weight: 400;
-    margin-bottom: 4px;
-    display: inline-block;
+  color: #484848;
+  font-weight: 400;
+  margin-bottom: 8px;
+  display: inline-block;
 }
 
 .feed_course a {
-    color: #484848;
+  color: #484848;
+  font-size: 16px;
 }
 
 .feed_course a:hover {
-    color: #484848;
-    text-decoration: none;
+  color: #484848;
+  text-decoration: none;
 }
 
 .feed_prof_kyo {
-    color: #ff5a5f;
-    display: inline-block;
+  color: #ff5a5f;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 7px;
+  font-weight: 400;
 }
 
 .feed_prof_major {
-    color: #27b5af;
-    display: inline-block;
+  color: #27b5af;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 7px;
+  font-weight: 400;
 }
 
 .feed_content {
-    color: #484848;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  color: #484848;
+  font-size: 14px;
+  margin-top: 13px;
+  margin-bottom: 25px;
+  // font-family: 'RixSGo EB';
 }
 
 .feed_etc {
-    color: #484848;
-    font-size: 0.9em;
+  color: #484848;
+  font-size: 12px;
 }
 
 .feed_etc img {
-    width: 20px;
+  width: 15px;
 }
 
 .rating-head, .rating {
-    // display: inline-block;
+  display: inline-block;
 }
 
 .rating-head {
-    width: 100%;
-    // text-align: center;
+  font-size: 12px;
+  width: 40%;
+  // text-align: center;
+}
+
+.rating {
+  width: 40%;
+  display: inline-block;
 }
 
 .feed_hr {
-    border: solid #dce0e0;
-    border-width: 0.5px 0px 0px 0px;
+  border: solid #dce0e0;
+  border-width: 0.5px 0px 0px 0px;
 }
 /*index page end*/
 
 /*search page start*/
 .search_sen1{
-    color: #484848;
-    font-size: 1.7em;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    text-align: center;
+  color: #484848;
+  font-size: 1.7em;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  text-align: center;
 }
 
 .search_keyword {
-    font-size: 1.4em;
-    padding: 5px;
-    color: #ff5a5f;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
+  font-size: 1.4em;
+  padding: 5px;
+  color: #ff5a5f;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
 }
 
 .search_sen2{
-    color: #999999;
-    font-size: 1.4em;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    line-height: 2em;
-    text-align: center;
+  color: #999999;
+  font-size: 1.4em;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  line-height: 2em;
+  text-align: center;
 }
 
 .search_tbl {
-    border-collapse: collapse;
-    line-height: 1.5;
-    border-top: 1px solid #dce0e0;
-    margin: 20px 10px;
-    text-align: center;
-    color: #484848;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    font-size: 1.1em;
-    width: 100%;
-    margin-top: 50px;
+  border-collapse: collapse;
+  line-height: 1.5;
+  border-top: 1px solid #dce0e0;
+  margin: 20px 10px;
+  text-align: center;
+  color: #484848;
+  font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
+  width: 100%;
+  margin-top: 50px;
 }
 .search_tbl thead th {
-    /*width: 150px;*/
-    padding: 10px;
-    /*font-weight: bold;*/
-    text-align: center;
-    vertical-align: top;
-    background: #f2f2f2;
-    margin: 20px 10px;
-    border-bottom: 1px solid #dce0e0;
+  /*width: 150px;*/
+  padding: 10px;
+  /*font-weight: bold;*/
+  text-align: center;
+  vertical-align: top;
+  background: #f2f2f2;
+  margin: 20px 10px;
+  border-bottom: 1px solid #dce0e0;
 }
 .search_tbl thead tr {
-    line-height: 1.5em;
+  line-height: 1.5em;
 }
 .search_tbl tr {
-    border-bottom: 1px solid #dce0e0;
-    line-height: 4.5em;
+  border-bottom: 1px solid #dce0e0;
+  line-height: 4.5em;
 }
 
 .search_tbl td {
-    /*width: 350px;*/
-    padding: 10px;
-    vertical-align: top;
+  /*width: 350px;*/
+  padding: 10px;
+  vertical-align: top;
 }
 
 .search_tbl td:nth-child(1){
-    width: 25%;
+  width: 25%;
 }
 .search_tbl td:nth-child(2){
-    width: 50%;
+  width: 50%;
 }
 .search_tbl td:nth-child(3){
-    width: 25%;
+  width: 25%;
 }
 
 .lec_cate {
-    border-radius: 1em;
-    padding: 0px 6px 0px 6px;
-    margin-right: 5px;
-    font-size: 0.9em;
-    font-weight: 400;
+  border-radius: 1em;
+  padding: 0px 6px 0px 6px;
+  margin-right: 5px;
+  font-size: 0.9em;
+  font-weight: 400;
 }
 
 .lec_kyo {
-    color: #ff5a5f;
-    border: 1px solid #ff5a5f;
+  color: #ff5a5f;
+  border: 1px solid #ff5a5f;
 }
 
 .lec_major {
-    color: #27b5af;
-    border: 1px solid #27b5af;
+  color: #27b5af;
+  border: 1px solid #27b5af;
 }
 /*search page end*/
+
+
+/*강의 정보 show page start*/
+.feed_writer, .course_top, .course_info_div, .info_left, .info_right {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.course_top {
+  // height: 150px;
+  padding: 20px 0px 20px 0px;
+  overflow: hidden;
+}
+
+.course_info_div, .info_left, .info_right, .info_score {
+  height: auto;
+  overflow: hidden;
+}
+
+.course_info_div {
+  margin-bottom: 25px;
+}
+
+.bottom_hr {
+  width: 100%;
+  border: solid #dce0e0;
+  border-width: 0.5px 0px 0px 0px;
+}
+
+// .course_info_div {
+//     height: auto;
+// }
+
+// .info_left {
+//     display: table;
+//     div {
+//         display: table-cell;
+//         vertical-align: middle;
+//         text-align: center;
+//         img {
+//             height: 70%;
+//             width: auto;
+//         }
+//     }
+// }
+
+.info_left {
+  position: relative !important;
+  width: 25% !important;
+  padding-bottom: 25%;
+  // background:green;
+  float: left !important;
+}
+
+.info_left > div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  // background:red;
+  text-align: center;
+}
+.course_prof_img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  padding: 10%;
+}
+
+.info_right {
+  width: 75% !important;
+  height: 100%;
+  float: right !important;
+}
+
+.info_course {
+  margin-top: 25px;
+  font-size: 25px;
+  font-weight: 400;
+  i {
+    font-size: 21px;
+    position: relative;
+    margin-left: -3px;
+    // top: -2px;
+  }
+  form {
+    display: inline-block;
+  }
+}
+
+.favorite_btn {
+  background: transparent;
+  border: none;
+}
+
+.favorite {
+  color: #e64c3c;
+}
+
+.not_favorite {
+  color: #f2f2f2;
+}
+
+.info_prof_kyo {
+  color: #ff5a5f;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.info_prof_major {
+  color: #27b5af;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.info_hr {
+  width: 50px;
+  text-align: left;
+  margin-left: 0;
+  border: solid #dce0e0;
+  border-width: 0.5px 0px 0px 0px;
+}
+
+.info_1, .info_2, .info_3, .info_4 {
+  font-size: 14px;
+  margin-bottom: 6px !important;
+}
+
+.info_1, .info_2 {
+  display: inline-block;
+}
+
+.info_1 {
+  margin-right: 25px;
+}
+
+.info_title {
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .info_course {
+    font-size: 1.5em;
+  }
+  .info_prof_kyo, .info_prof_major {
+    font-size: 1em;
+  }
+}
+// @media (max-width: 992px) {
+// }
+
+// .info_score > div {
+//     display: table;
+// }
+
+// .score_div {
+//     display: table-cell;
+//     vertical-align: middle;
+//     text-align: center;
+// }
+
+.info_score {
+  margin-top: 25px;
+}
+.score_head {
+  display: table;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.score_head > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 18px;
+  // letter-spacing: -1px;
+  font-weight: 400;
+}
+
+.score {
+  display: table;
+  width: 100%;
+  // height: 80%;
+}
+
+.score > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.star_num {
+  font-size: 3em;
+  font-weight: 400;
+}
+
+.score > div > canvas {
+  width: 80% !important;
+  height: 80% !important;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/*강의 정보 show page end*/

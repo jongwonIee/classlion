@@ -1,19 +1,10 @@
-<!-- 10개짤라서 -->
-<head>
-  <style>
-    /*.st6 {*/
-    /*  color-fill: #e9b25b;*/
-    /*}*/
-  </style>
-</head>
-
-<!--강의 검색결과 -->
 <div class="index_container">
   <div class="container-fluid">
     <div>
       <p class="feed_head">최신 강의평</p>
-        <!--<object type="image/svg+xml" data="/assets/lion_1.svg" id="lion"></object>-->
-        <% @evaluations.each do |e| %>
+      <p class="feed_head2">방금 올라온 따끈따끈한 강의평들을 만나보세요!</p>
+      <!--<object type="image/svg+xml" data="/assets/lion_1.svg" id="lion"></object>-->
+      <% @evaluations.each do |e| %>
           <div class="feed_each">
             <div class="row">
               <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
@@ -21,85 +12,23 @@
                 <p class="feed_nickname"><%= e.user.nickname %></p>
               </div>
 
-              <div class="col-xs-9 col-sm-7 feed_each_div">
-                <p class="feed_course">
-                  <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
-                </p><br>
-                <% if e.course.is_major %>
-                  <p class="feed_prof_major">
-                    <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
+              <div class="col-xs-9 col-sm-10 feed_each_div">
+                <div class="col-xs-12">
+                  <p class="feed_course">
+                    <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
                   </p>
-                <% else %>
-                  <p class="feed_prof_kyo">
-                    <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
-                  </p>
-                <% end %>
-                <div class="row">
-                  <div class="m_indi col-xs-12 visible-xs-block">
-                    <div class="rating_div">
-                      <div class="rating-head">총점</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_overall}" %> name="rating" autocomplete="off">
-                          <% 1.upto(5) do |i| %>
-                          <option value="<%= i %>"></option>
-                          <% end %>
-                        </select>
-                      </div>
-                    </div>
-                    
-                    <div class="rating_div">
-                      <div class="rating-head">널널함</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_easiness}" %> name="rating" autocomplete="off">
-                          <% 1.upto(5) do |i| %>
-                          <option value="<%= i %>"></option>
-                          <% end %>
-                        </select>
-                      </div>
-                    </div>
-    
-                    <div class="rating_div">
-                      <div class="rating-head">강의만족도</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_gpa_satisfaction}" %> name="rating" autocomplete="off">
-                        <% 1.upto(5) do |i| %>
-                        <option value="<%= i %>"></option>
-                        <% end %>
-                        </select>
-                      </div>
-                    </div>
-  
-                    <div class="rating_div">
-                      <div class="rating-head">학점만족도</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_clarity}" %> name="rating" autocomplete="off">
-                          <option value="1"></option>
-                          <option value="2"></option>
-                          <option value="3"></option>
-                          <option value="4"></option>
-                          <option value="5"></option>
-                        </select>
-                      </div>
-                    </div>
-                      
-                    </div>
-                  </div>
-                  
-                  <p class="feed_content">
-                    <%= e.body.html_safe %></p>
-                  <p class="feed_etc">
-                    <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
-                        방금 전
-                    <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
-                        <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
-                    <% else %>
-                        <%= time_ago_in_words(e.created_at) + " 전" %>
-                    <% end %>
-                    ·
-                    <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
-                  </p>
+                  <% if e.course.is_major %>
+                      <p class="feed_prof_major">
+                        <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
+                      </p>
+                  <% else %>
+                      <p class="feed_prof_kyo">
+                        <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
+                      </p>
+                  <% end %>
                 </div>
-                <div class="hidden-xs col-sm-3">
+
+                <div class="col-xs-12 col-sm-5">
                   <div class="rating_div">
                     <div class="rating-head">총점</div>
                     <div class="rating">
@@ -112,7 +41,6 @@
                       </select>
                     </div>
                   </div>
-
                   <div class="rating_div">
                     <div class="rating-head">널널함</div>
                     <div class="rating">
@@ -125,7 +53,9 @@
                       </select>
                     </div>
                   </div>
+                </div>
 
+                <div class="col-xs-12 col-sm-5">
                   <div class="rating_div">
                     <div class="rating-head">강의만족도</div>
                     <div class="rating">
@@ -138,7 +68,6 @@
                       </select>
                     </div>
                   </div>
-
                   <div class="rating_div">
                     <div class="rating-head">학점만족도</div>
                     <div class="rating">
@@ -152,10 +81,25 @@
                     </div>
                   </div>
                 </div>
+
+                <p class="feed_content col-xs-12">
+                  <%= e.body.html_safe %></p>
+                <p class="feed_etc col-xs-12">
+                  <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
+                      방금 전
+                  <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
+                      <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
+                  <% else %>
+                      <%= time_ago_in_words(e.created_at) + " 전" %>
+                  <% end %>
+                  ·
+                  <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
+                </p>
               </div>
             </div>
-            <hr class="feed_hr">
-        <% end %>
+          </div>
+          <hr class="feed_hr">
+      <% end %>
 
     </div>
   </div>
@@ -165,98 +109,78 @@
 
   //xs가 아닐 경우, pill-bar 100% 꽉 차도록 padding 조절
   $(document).ready(function(){
-      if (window.innerWidth >= 768){
-        var targetBar = $('.br-theme-bars-pill .br-widget a');
-        
-        var targetWidth = $('.rating-head').outerWidth()/5;
-        targetBar.css('padding', '0 ' + targetWidth +'px')
-       }
+    if (window.innerWidth >= 768){
+      var targetBar = $('.br-theme-bars-pill .br-widget a');
+
+      var targetWidth = $('.rating-head').outerWidth()/5;
+      targetBar.css('padding', '0 ' + targetWidth +'px')
+    }
   });
-  
-  // $(window).resize(function(){     
+
+  // $(window).resize(function(){
 
   //     if ($('header').width() >= 768 ){
 
   //             // is mobile device
   //     }
   // });
-  
+
   $('.p1').barrating('show', {
-    theme: 'bars-pill',
+    theme: 'bars-movie',
     initialRating: '1',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
     readonly: true
-    // emptyValue: '-- no rating selected --'
-    // onSelect: function(value, text) {
-    // alert('Selected rating: ' + value);
-    // }
   });
 
   $('.p2').barrating('show', {
-    theme: 'bars-pill',
+    theme: 'bars-movie',
     initialRating: '2',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
     readonly: true
-    // emptyValue: '-- no rating selected --'
-    // onSelect: function(value, text) {
-    // alert('Selected rating: ' + value);
-    // }
   });
 
   $('.p3').barrating('show', {
-    theme: 'bars-pill',
+    theme: 'bars-movie',
     initialRating: '3',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
     readonly: true
-    // emptyValue: '-- no rating selected --'
-    // onSelect: function(value, text) {
-    // alert('Selected rating: ' + value);
-    // }
   });
 
   $('.p4').barrating('show', {
-    theme: 'bars-pill',
+    theme: 'bars-movie',
     initialRating: '4',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
     readonly: true
-    // emptyValue: '-- no rating selected --'
-    // onSelect: function(value, text) {
-    // alert('Selected rating: ' + value);
-    // }
   });
 
   $('.p5').barrating('show', {
-    theme: 'bars-pill',
+    theme: 'bars-movie',
     initialRating: '5',
     showValues: true,
     showSelectedRating: false,
     allowEmpty: true,
     readonly: true
-    // emptyValue: '-- no rating selected --'
-    // onSelect: function(value, text) {
-    // alert('Selected rating: ' + value);
-    // }
   });
-  
+
   // $(window).load(function(){
   //   alert($('.st6').innerHTML);
   // });
 
-  
-//   function prepare(){
-//   var S=document.getElementById("sv")
-//   var SD=S.getSVGDocument();
-//   E=SD.getElementById('E');
-//     }
-// function change(v){
-//   E.setAttribute("fill", v);
-// }
+
+  //   function prepare(){
+  //   var S=document.getElementById("sv")
+  //   var SD=S.getSVGDocument();
+  //   E=SD.getElementById('E');
+  //     }
+  // function change(v){
+  //   E.setAttribute("fill", v);
+  // }
 </script>
