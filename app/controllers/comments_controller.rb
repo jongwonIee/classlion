@@ -3,8 +3,13 @@ class CommentsController < ApplicationController
   def create #디비에 넣는다
     comment = Comment.new(comment_params)
     comment.user = @current_user
-    if comment.save
-      redirect_to :back
+    comment.save
+    # if comment.save
+    #   redirect_to :back
+    # end
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 
