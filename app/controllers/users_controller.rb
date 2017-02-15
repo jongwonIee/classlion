@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def new
     #회원가입 form
+    redirect_to '/main' if logged_in? #이미 로그인된 상태라면 main페이지로 리다이렉트
     @user = User.new
   end
 
@@ -17,9 +18,8 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      flash[:success] = "로그인 성공!"
-      log_in user #자동으로 로그인
-      redirect_to "/main" #강평 목록이 있는 곳으로 리다이렉트
+      user.send_activation_email
+      redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
     else
       render action: "new"
     end

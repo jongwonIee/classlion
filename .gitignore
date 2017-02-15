@@ -87,3 +87,5 @@ solr
 
 # asset precompiling
 public/assets
+# Ignore application configuration
+/config/application.yml

@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :session_check
 
   rescue_from CanCan::AccessDenied do
-    redirect_to info_path, alert: t(:evaluation_lack) 
+    redirect_to info_path, alert: t(:evaluation_lack)
   end
 
-	def session_check
+  def session_check
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id == cookies.signed[:user_id])
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
         @current_user = user
       end
     else
-      redirect_to "/" 
+      redirect_to "/"
     end
   end
 

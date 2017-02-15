@@ -36,7 +36,7 @@
         <% end %>
 
         <div id="more_div">
-          <a href="#" class="go_about go_pw">비밀번호를 잊어버리셨나요?</a>
+          <%= link_to "비밀번호를 잊어버리셨나요?", new_password_reset_path, class: "go_about go_pw" %>
           <p class="main_msg">회원이 아니신가요? <%= link_to "가입하기", signup_path, class: "go_join" %></p>
         </div>
         
