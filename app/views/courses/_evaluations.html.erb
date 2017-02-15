@@ -1,164 +1,154 @@
 <div class="index_container">
-  <div class="container">
-    <div class="row">
-      <div class="set_full col-lg-12 col-md-12 col-sm-12 col-xs-12 center_box">
-        <div class="outer index_outer">
-          <div class="inner index_inner">
-            <div class="centered index_center index_feed">
-              <% @evaluations.each do |e| %>
-                  <div class="feed_each">
-                    <div class="row">
-                      <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 feed_writer">
-                        <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
-                        <p class="feed_nickname"><%= e.user.nickname %></p>
-                      </div>
+  <div class="container-fluid">
+    <div>
+      <% @evaluations.each do |e| %>
+          <div class="feed_each">
+            <div class="row">
+              <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
+                <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
+                <p class="feed_nickname"><%= e.user.nickname %></p>
+              </div>
 
-                      <div class="col-lg-7 col-md-8 col-sm-9 col-xs-9">
-                        <p class="feed_course"><a href='/courses/show/<%= e.course.id %>'><%= e.course.lecture.name %></a></p>
-                        <% if e.course.is_major == true %>
-                            <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님</p>
-                        <% else %>
-                            <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님</p>
-                        <% end %>
-                        <div class="col-sm-12 col-xs-12 visible-sm-block visible-xs-block" style="border:1px solid black;">
-                          <div class="rating-head">총점</div>
-                          <div class="rating">
-                            <select id="pillbar" name="rating" autocomplete="off">
-                              <option value="1"></option>
-                              <option value="2"></option>
-                              <option value="3"></option>
-                              <option value="4"></option>
-                              <option value="5"></option>
-                            </select>
-                          </div>
-                          널널함<br>
-                          강의만족도 학점만족도<br>
-                        </div>
+              <div class="col-xs-9 col-sm-10 feed_each_div">
+                <div class="col-xs-12">
+                  <p class="feed_course">
+                    <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
+                  </p>
+                  <% if e.course.is_major %>
+                      <p class="feed_prof_major">
+                        <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
+                      </p>
+                  <% else %>
+                      <p class="feed_prof_kyo">
+                        <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
+                      </p>
+                  <% end %>
+                </div>
 
-                        <p class="feed_content">
-                          <%= e.body.html_safe %></p>
-                        <p class="feed_etc">
-                          <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
-                              방금 전
-                          <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
-                              <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
-                          <% else %>
-                              <%= time_ago_in_words(e.created_at) + " 전" %>
-                          <% end %>
-                          ·
-                          <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
-                          <br>
-                          <%= e.comments.count %> <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a>
-
-                            <p class="feed_etc">
-
-                              <%= form_for Comment.new, id: 'comment',  remote: true do |f| %>
-                                  <%= f.hidden_field :evaluation_id, value: e.id %>
-                                  <%= f.text_field :body, autofocus: true, placeholder: "댓글"%>
-                                  <%= f.submit "작성하기" %>
-                              <% end %>
-
-                              <% e.comments.order(created_at: :desc).each do |c| %>
-                                <div id="comment_div">
-                                  아이디:<%= c.user.nickname %><br>
-                                  내용:<%= c.body %><br>
-                                </div>
-                              <% end %>
-
-                            </p>
-
-                        </p>
-                      </div>
-                      <div class="col-lg-3 col-md-2 visible-lg-block visible-md-block">
-                        <div class="rating_div">
-                          <div class="rating-head">총점</div>
-                          <div class="rating">
-                            <% if e.point_overall == 1 %><% p = "p1" %>
-                                <% elsif e.point_overall == 2 %><% p = "p2" %>
-                                <% elsif e.point_overall == 3 %><% p = "p3" %>
-                                <% elsif e.point_overall == 4 %><% p = "p4" %>
-                                <% elsif e.point_overall == 5 %><% p = "p5" %>
-                            <% end %>
-                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                              <option value="1"></option>
-                              <option value="2"></option>
-                              <option value="3"></option>
-                              <option value="4"></option>
-                              <option value="5"></option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="rating_div">
-                          <div class="rating-head">널널함</div>
-                          <div class="rating">
-                            <% if e.point_easiness == 1 %><% p = "p1" %>
-                                <% elsif e.point_easiness == 2 %><% p = "p2" %>
-                                <% elsif e.point_easiness == 3 %><% p = "p3" %>
-                                <% elsif e.point_easiness == 4 %><% p = "p4" %>
-                                <% elsif e.point_easiness == 5 %><% p = "p5" %>
-                            <% end %>
-                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                              <option value="1"></option>
-                              <option value="2"></option>
-                              <option value="3"></option>
-                              <option value="4"></option>
-                              <option value="5"></option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="rating_div">
-                          <div class="rating-head">강의만족도</div>
-                          <div class="rating">
-                            <% if e.point_gpa_satisfaction == 1 %><% p = "p1" %>
-                                <% elsif e.point_gpa_satisfaction == 2 %><% p = "p2" %>
-                                <% elsif e.point_gpa_satisfaction == 3 %><% p = "p3" %>
-                                <% elsif e.point_gpa_satisfaction == 4 %><% p = "p4" %>
-                                <% elsif e.point_gpa_satisfaction == 5 %><% p = "p5" %>
-                            <% end %>
-                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                              <option value="1"></option>
-                              <option value="2"></option>
-                              <option value="3"></option>
-                              <option value="4"></option>
-                              <option value="5"></option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="rating_div">
-                          <div class="rating-head">학점만족도</div>
-                          <div class="rating">
-                            <% if e.point_clarity == 1 %><% p = "p1" %>
-                                <% elsif e.point_clarity == 2 %><% p = "p2" %>
-                                <% elsif e.point_clarity == 3 %><% p = "p3" %>
-                                <% elsif e.point_clarity == 4 %><% p = "p4" %>
-                                <% elsif e.point_clarity == 5 %><% p = "p5" %>
-                            <% end %>
-                            <select id="pillbar" class=<%= p %> name="rating" autocomplete="off">
-                              <option value="1"></option>
-                              <option value="2"></option>
-                              <option value="3"></option>
-                              <option value="4"></option>
-                              <option value="5"></option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                <div class="col-xs-12 col-sm-5">
+                  <div class="rating_div">
+                    <div class="rating-head">총점</div>
+                    <div class="rating">
+                      <select id="pillbar" class=<%= "p#{e.point_overall}" %> name="rating" autocomplete="off">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                      </select>
                     </div>
                   </div>
-                  <hr>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
+                  <div class="rating_div">
+                    <div class="rating-head">널널함</div>
+                    <div class="rating">
+                      <select id="pillbar" class=<%= "p#{e.point_easiness}" %> name="rating" autocomplete="off">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-5">
+                  <div class="rating_div">
+                    <div class="rating-head">강의만족도</div>
+                    <div class="rating">
+                      <select id="pillbar" class=<%= "p#{e.point_gpa_satisfaction}" %> name="rating" autocomplete="off">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="rating_div">
+                    <div class="rating-head">학점만족도</div>
+                    <div class="rating">
+                      <select id="pillbar" class=<%= "p#{e.point_clarity}" %> name="rating" autocomplete="off">
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <p class="feed_content col-xs-12">
+                  <%= e.body.html_safe %>
+                </p>
+                <p class="feed_etc col-xs-12">
+                  <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
+                      방금 전
+                  <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
+                      <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
+                  <% else %>
+                      <%= time_ago_in_words(e.created_at) + " 전" %>
+                  <% end %>
+                  ·
+                  <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a><%#댓글버튼, 얘를 누르면 밑에가 확장됨 %>
+                  <span id="comment_count<%=e.id%>"><%= e.comments.count %></span><%# 댓글 수 %>
+                  ·
+                  <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a><%#신고버튼 %>
+                </p><%# ////feed_etc %>
+              </div><%# ////col-xs-9 col-sm-10 feed_each_div %>
+            </div><%# ////row %>
+
+            <%# 우리가 만든 댓글 코드 %>
+            <div class="row">
+              <div class="col-xs-3 col-sm-2">
+              </div>
+              <%# 댓글리스트 %>
+              <div class="col-xs-9 col-sm-10 feed_each_div">
+                <div class="comment_list" id="comment_list<%=e.id%>">
+                  <% e.comments.each do |c| %>
+                      <div>
+                        <%= c.user.nickname %><br/>
+                        <%= c.body %><br/>
+                      </div>
+                      <br/>
+                  <% end %>
+                </div>
+                <%# 댓글작성 부분 -> 보안과 관련해서 코드 리팩토링 진행할 것 %>
+                <div>
+                  <input class="comment_body" id="comment_body<%=e.id%>" type="text" placeholder="자유롭게 댓글을 입력해주세요." >
+                  <button type="submit" class="submit_comment" id="submit_comment<%=e.id%>" value="<%=e.id%>">전송</button>
+                </div>
+              </div>
+            </div><%# ////우리가 만든 댓글 코드 %>
+
+          </div><%# ////feed_each %>
+          <hr class="feed_hr">
+      <% end %><%# ////evaluation each %>
     </div>
-  </div>
-</div>
+  </div><%# ////container-fluid %>
+</div><%# ////index_container %>
 
 <script>
+  <%# 댓글달기 -> 보안과 관련해서 코드 리팩토링 진행할 것 %>
+  $(document).on("click",".submit_comment",function(){
+    var eval_id = this.value; <%# 강의 아이디 겟 %>
+    var user = "<%= @current_user.nickname %>";
+    var comment_body = $("#comment_body" + eval_id).val(); <%# 댓글 내용 겟 %>
+    //여기서부터
+    $.ajax({
+      method: "POST",
+      url: "/evaluations/"+eval_id+"/comments",
+      data: {'comment[body]': comment_body, 'comment[evaluation_id]': eval_id},
+      success: function(){
+        <%# 프론트 바뀌면 append되는 html코드 수정할 것 %>
+        $("#comment_list"+eval_id).append("<div>" + user + "<br/>" + comment_body +"<br/></div><br/>"); <%# 댓글 리스트에 추가 %>
+        $("#comment_count"+eval_id).html(parseInt($("#comment_count"+eval_id).html(), 10)+1); <%# 댓글 수 +1 %>
+        $("#comment_body"+eval_id).val(' ');<%# 전송 완료시 공백 %>
+      }
+    })
+    //여기까지
+  });
+
+  <%# 평점별점바 %>
   $('.p1').barrating('show', {
     theme: 'bars-pill',
     initialRating: '1',
@@ -223,4 +213,5 @@
     // alert('Selected rating: ' + value);
     // }
   });
+
 </script>
