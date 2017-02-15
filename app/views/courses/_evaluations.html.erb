@@ -81,13 +81,7 @@
                   <%= e.body.html_safe %>
                 </p>
                 <p class="feed_etc col-xs-12">
-                  <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
-                      방금 전
-                  <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
-                      <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
-                  <% else %>
-                      <%= time_ago_in_words(e.created_at) + " 전" %>
-                  <% end %>
+                  <%= e.time_ago %>
                   ·
                   <a href="#"><%= image_tag "reply.svg", alt: "reply" %></a><%#댓글버튼, 얘를 누르면 밑에가 확장됨 %>
                   <span id="comment_count<%=e.id%>"><%= e.comments.count %></span><%# 댓글 수 %>
@@ -106,7 +100,7 @@
                 <div class="comment_list" id="comment_list<%=e.id%>">
                   <% e.comments.each do |c| %>
                       <div>
-                        <%= c.user.nickname %><br/>
+                        <%= c.user.nickname %> &nbsp; <%= c.time_ago %><br/>
                         <%= c.body %><br/>
                       </div>
                       <br/>
@@ -140,7 +134,7 @@
       data: {'comment[body]': comment_body, 'comment[evaluation_id]': eval_id},
       success: function(){
         <%# 프론트 바뀌면 append되는 html코드 수정할 것 %>
-        $("#comment_list"+eval_id).append("<div>" + user + "<br/>" + comment_body +"<br/></div><br/>"); <%# 댓글 리스트에 추가 %>
+        $("#comment_list"+eval_id).append("<div>" + user +" &nbsp; 방금 전" +"<br/>" + comment_body +"<br/></div><br/>"); <%# 댓글 리스트에 추가 %>
         $("#comment_count"+eval_id).html(parseInt($("#comment_count"+eval_id).html(), 10)+1); <%# 댓글 수 +1 %>
         $("#comment_body"+eval_id).val(' ');<%# 전송 완료시 공백 %>
       }
