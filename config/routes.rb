@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
   #비로그인 시 root
   root 'home#index'
 
-  #메인
-  get 'home/index'
+  #로그인 시 메인
+  get '/main' => 'evaluations#main'
+  get '/info' => 'evaluations#info'
 
   #회원가입, 로그인
   get  '/signup',  to: 'users#new'
@@ -44,8 +41,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
-  get '/main' => 'evaluations#main'
-  get '/info' => 'evaluations#info'
+  #댓글 수정 및 삭제
+  resources :comments, only: [:destroy]
+
 
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크
   get 'mypage' => 'mypages#index'

@@ -3,6 +3,8 @@ class Comment < ApplicationRecord
   belongs_to :evaluation
   belongs_to :user
 
+  validates :body, presence: true #값이 비어있으면 안됨
+
   def time_ago
     #강평의 댓글 작성 시간
     if (time_ago_in_words(self.created_at)) == "1분 이하"

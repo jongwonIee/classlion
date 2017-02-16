@@ -93,24 +93,34 @@
 
             <%# 우리가 만든 댓글 코드 %>
             <div class="row">
-              <div class="col-xs-3 col-sm-2">
-              </div>
+              <div class="col-xs-3 col-sm-2"></div>
               <%# 댓글리스트 %>
               <div class="col-xs-9 col-sm-10 feed_each_div">
                 <div class="comment_list" id="comment_list<%=e.id%>">
                   <% e.comments.each do |c| %>
-                      <div>
-                        <%= c.user.nickname %> &nbsp; <%= c.time_ago %><br/>
-                        <%= c.body %><br/>
+                      <%# 여기서부터 %>
+                      <div id="comment_list_child<%=c.id%>">
+                          <%= c.user.nickname %> &nbsp; <%= c.time_ago %>
+                          <% if c.user == @current_user %>
+                              ·
+                              <a href="#">수정</a>
+                              ·
+                              <%= link_to '삭제', comment_path(c), remote: true, method: :delete %>
+                          <% end %>
+                          <br/>
+                        <div id="comment_list_body<%=c.id%>"><%= c.body %></div>
+                        <br/>
                       </div>
-                      <br/>
+                      <%# 여기까지 /comments/_comment.html.erb에도 partial로 존재 %>
                   <% end %>
-                </div>
-                <%# 댓글작성 부분 -> 보안과 관련해서 코드 리팩토링 진행할 것 %>
-                <div>
-                  <input class="comment_body" id="comment_body<%=e.id%>" type="text" placeholder="자유롭게 댓글을 입력해주세요." >
-                  <button type="submit" class="submit_comment" id="submit_comment<%=e.id%>" value="<%=e.id%>">전송</button>
-                </div>
+                 </div><%# ////댓글리스트 %>
+                <%# 댓글작성 %>
+                <div id="comment_form<%=e.id%>">
+                  <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
+                    <%= f.text_field :body, id: "comment_body#{e.id}", placeholder: "자유롭게 댓글을 입력해주세요.", autocomplete: "off"%>
+                    <%= f.submit "댓글 쓰기"%>
+                  <% end %>
+                </div><%# ////댓글작성 %>
               </div>
             </div><%# ////우리가 만든 댓글 코드 %>
 
@@ -122,26 +132,6 @@
 </div><%# ////index_container %>
 
 <script>
-  <%# 댓글달기 -> 보안과 관련해서 코드 리팩토링 진행할 것 %>
-  $(document).on("click",".submit_comment",function(){
-    var eval_id = this.value; <%# 강의 아이디 겟 %>
-    var user = "<%= @current_user.nickname %>";
-    var comment_body = $("#comment_body" + eval_id).val(); <%# 댓글 내용 겟 %>
-    //여기서부터
-    $.ajax({
-      method: "POST",
-      url: "/evaluations/"+eval_id+"/comments",
-      data: {'comment[body]': comment_body, 'comment[evaluation_id]': eval_id},
-      success: function(){
-        <%# 프론트 바뀌면 append되는 html코드 수정할 것 %>
-        $("#comment_list"+eval_id).append("<div>" + user +" &nbsp; 방금 전" +"<br/>" + comment_body +"<br/></div><br/>"); <%# 댓글 리스트에 추가 %>
-        $("#comment_count"+eval_id).html(parseInt($("#comment_count"+eval_id).html(), 10)+1); <%# 댓글 수 +1 %>
-        $("#comment_body"+eval_id).val(' ');<%# 전송 완료시 공백 %>
-      }
-    })
-    //여기까지
-  });
-
   <%# 평점별점바 %>
   $('.p1').barrating('show', {
     theme: 'bars-pill',
