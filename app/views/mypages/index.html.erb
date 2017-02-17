@@ -66,6 +66,12 @@
     <% @favorite_courses.each do |f| %>
       <tbody>
         <tr>
+          <% if @current_user %>
+              <% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>
+                  <%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: f.id),
+                                method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
+              <% end %>
+          <% end %>
           <td><a href="/courses/<%=f.id%>">링크</a></td>
           <td><%= f.lecture.name %></td>
           <td><%= f.professor.name %></td>
