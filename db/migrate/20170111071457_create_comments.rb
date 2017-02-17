@@ -7,8 +7,6 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.text :body, null: false
 
       t.timestamps null: false
-
-      t.timestamps
     end
   end
 end

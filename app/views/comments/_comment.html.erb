@@ -1,0 +1,13 @@
+<%# 댓글작성시 list에 append될 부분만 partial로 만들기%>
+<div id="comment_list_child<%=@comment.id%>">
+  <%= @comment.user.nickname %> &nbsp; <%= @comment.time_ago %>
+  <% if @comment.user == @current_user %>
+      ·
+      <a href="#">수정</a>
+      ·
+      <%= link_to '삭제', comment_path(@comment), remote: true, method: :delete %>
+  <% end %>
+  <br/>
+  <div id="comment_list_body<%=@comment.id%>"><%= @comment.body %></div>
+  <br/>
+</div>

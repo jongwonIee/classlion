@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
   #비로그인 시 root
   root 'home#index'
 
-  #메인
-  get 'home/index'
+  #로그인 시 메인
+  get '/main' => 'evaluations#main'
+  get '/info' => 'evaluations#info'
 
   #회원가입, 로그인
   get  '/signup',  to: 'users#new'
@@ -26,6 +23,7 @@ Rails.application.routes.draw do
   get '/signup/resend_authMail' => 'account_activations#re_authMail' #안내 폼
   post '/signup/resend_authMail' => 'account_activations#resend_authMail' #실제 전송 프로세스
 
+  #사용자 정보 수정
   get 'edit', to: 'users#edit'
 
   #이메일, 닉네임 유무 체크 (jQuery)
@@ -38,13 +36,14 @@ Rails.application.routes.draw do
   get 'courses/show'
   get 'courses/:id' => 'courses#show'
 
+  #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do
-    resources :comments
+    resources :comments, only: [:create]
   end
-  get '/main' => 'evaluations#main'
-  get '/info' => 'evaluations#info'
-  get 'evaluations/comment'
-  resources :comments
+
+  #댓글 수정 및 삭제
+  resources :comments, only: [:destroy]
+
 
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크
   get 'mypage' => 'mypages#index'
