@@ -63,6 +63,22 @@ class UsersController < ApplicationController
     end 
   end
 
+  def favorites_add
+    user = User.find(params[:u_id])
+    course = Course.find(params[:c_id])
+    if user.favorites_addition(user.id, course.id)
+      redirect_to :back
+    end
+  end
+
+  def favorites_delete
+    user = User.find(params[:u_id])
+    course = Course.find(params[:c_id])
+    if user.favorites_deletion(user.id, course.id)
+      redirect_to :back
+    end
+  end
+
   private
 
   def user_params

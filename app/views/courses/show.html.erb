@@ -20,10 +20,14 @@
 
 <br>
 <%# 관심강의  %>
-<% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
-    <%= button_to '관심강의에서제거', courses_favorites_delete_path, method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
-<% else %>
-    <%= button_to '관심강의에다추가', courses_favorites_add_path, method: :post, :onClick => 'alert("관심강의에 추가되었습니다!")' %>
+<% if @current_user %>
+    <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
+        <%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: @course.id),
+                      method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
+    <% else %>
+        <%= button_to '관심강의에다추가',  users_favorites_add_path(u_id: @current_user.id, c_id: @course.id),
+                      method: :post, :onClick => 'alert("관심강의에 추가되었습니다!")' %>
+    <% end %>
 <% end %>
 
 <br>

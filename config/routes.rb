@@ -54,8 +54,8 @@ Rails.application.routes.draw do
   post 'roles/lack'
 
   #favoites
-  post 'courses/favorites_add'
-  post 'courses/favorites_delete'
+  post 'users/favorites_add'
+  post 'users/favorites_delete'
 
   #cancancan 테스트용
   post 'roles/remove'

@@ -132,6 +132,16 @@ class User < ApplicationRecord
   #   university.try(:name)
   # end
 
+  #즐찾
+  def favorites_addition(user_id, course_id)
+    Favorite.create(user_id: user_id, course_id: course_id)
+  end
+
+  def favorites_deletion(user_id, course_id)
+    favorite = Favorite.where("user_id = ? AND course_id = ?", user_id, course_id)
+    Favorite.destroy(favorite.first.id)
+  end
+
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
 
