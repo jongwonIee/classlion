@@ -9,6 +9,7 @@ class Evaluation < ApplicationRecord
   before_create :increase_evaluation_count, :increase_user_point
   before_destroy :decrease_evaluation_count
 
+  validates :body, presence: true
 
   def time_ago
     #강평 작성 시간

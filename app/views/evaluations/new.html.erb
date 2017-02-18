@@ -6,11 +6,13 @@
   널널함<br> <%= f.select :point_easiness, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
   강의만족도<br> <%= f.select :point_gpa_satisfaction, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
   학점만족도<br> <%= f.select :point_clarity, options_for_select([1,2,3,4,5]), {}, class: "p" %> <hr>
-  <%= f.text_field :body, autofocus: true, placeholder: "한줄평"%> <hr>
+  <%#= f.text_field :body, autofocus: true, placeholder: "한줄평"%> <hr>
+  <%= f.text_area :body, :class => "tinymce", :rows => 30, :cols => 30 %>
   <%= f.submit "작성하기" %>
 <% end %>
 
 <script>
+
   $( function() {
     $( "#tags" ).autocomplete({
       source: $('#tags').data('autocomplete-source'),
