@@ -83,7 +83,8 @@
                 </div>
 
                 <p class="feed_content col-xs-12">
-                  <%= e.body.html_safe %></p>
+                  <%= e.body.html_safe %>
+                </p>
                 <p class="feed_etc col-xs-12">
                   <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
                       방금 전
