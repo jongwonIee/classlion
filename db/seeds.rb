@@ -9,42 +9,19 @@ puts "Inserting university data.."
   University.create(local_name: x[0], english_name: x[1], need_activation: x[2], email_domain: x[3])
 end
 
-#전공
-puts "Inserting major data.."
-[
-    [1, "서울 경영", 1],
-    [2, "서울 IT", 1],
-    [3, "서울 통계", 1],
-
-    [4, "성균 미디어커뮤니케이션", 2],
-    [5, "성균 국제통상", 2],
-    [6, "성균 경영", 2],
-
-    [7, "숭실 IT", 3],
-    [8, "숭실 통계", 3],
-    [9, "숭실 미디어커뮤니케이션", 3],
-
-    [10, "성신 국제통상", 4],
-    [11, "성신 미디어커뮤니케이션", 4],
-    [12, "성신 IT", 4]
-
-].each do |x|
-  Major.create(id: x[0], name: x[1], university_id: x[2])
-end
-
 #사용자
 puts "Inserting user data.."
 [
-   [1, true, "이브이", "admin@snu.ac.kr", 1, 'password', 'password', 1, true, Time.zone.now],
-   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', 1, true, Time.zone.now],
-   [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', 2, true, Time.zone.now],
-   [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', 3, true, Time.zone.now],
-   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', 4, true, Time.zone.now],
-   [6, false, "앙우리", "a@a.com", 1, '11111111', '11111111', 1, true, Time.zone.now]
+   [1, true, "이브이", "admin@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
+   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', true, Time.zone.now],
+   [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
+   [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
+   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
+   [6, false, "앙우리", "a@a.com", 1, '11111111', '11111111', true, Time.zone.now]
 
 ].each do |x|
   User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4],
-              password: x[5], password_confirmation: x[6], major_id: x[7], activated: x[8], activated_at: x[9])
+              password: x[5], password_confirmation: x[6], activated: x[7], activated_at: x[8])
 end
 
 puts "Inserting lecture data.."

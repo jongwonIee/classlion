@@ -41,7 +41,6 @@ class User < ApplicationRecord
 
   #학교 및 전공 유효성 체크
   validates_presence_of :university_id, message: "학교를 선택해주세요!"
-  validates_presence_of :major_id, message: "전공을 선택해주세요!"
 
   has_secure_password
   validates :password,

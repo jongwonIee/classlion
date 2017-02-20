@@ -292,7 +292,7 @@ $(document).ready(function(){
 
 //빈칸없이, 모든 유효조건이 맞는지 체크--------------------------------------------------------
     newUserForm.submit(function(){
-        if(validateEmail() & validatePasswordAndPasswordConf() & validateNickname() & validateUniversity() & validateMajor()) {
+        if(validateEmail() & validatePasswordAndPasswordConf() & validateNickname() & validateUniversity()) {
             return true;
         }
         else {
@@ -300,30 +300,4 @@ $(document).ready(function(){
         }
     }); //end submit form
 
-//대학 및 전공 Select관련 스크립트 coffee to js (http://js2.coffee)--------------------------------------------------------
-    var majors;
-    $('#user_major_name').autocomplete({
-        source: $('#user_major_name').data('autocomplete-source')
-    });
-
-    $('#user_university_name').autocomplete({
-        source: $('#user_university_name').data('autocomplete-source')
-    });
-
-    $('#user_major_id').parent().hide();
-    majors = $('#user_major_id').html();
-
-    $('#user_university_id').change(function() {
-        var options, university;
-        university = $('#user_university_id :selected').text();
-        options = $(majors).filter("optgroup[label='" + university + "']").html();
-        if (options) {
-            $('#user_major_id').html('<option value="" selected="selected">전공</option>' + options);
-            return $('#user_major_id').parent().show();
-        } else {
-            $('#user_major_id').empty();
-            $('#user_major_id').parent().hide();
-            return $('#major_error').hide();
-        }
-    });
 }); //end document ready
