@@ -31,10 +31,7 @@ Rails.application.routes.draw do
   post '/check-email' => 'users#check_email'
 
   #강의 리스트(검색결과)
-  get '/courses' => 'courses#index'
-  #강의 세부정보 - 강의평가 모음
-  get 'courses/show'
-  get 'courses/:id' => 'courses#show'
+  resources :courses
 
   #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do
