@@ -27,7 +27,7 @@ class EvaluationsController < ApplicationController
   def new #글작성 폼을 준다
     #자동완성에 관련된 코드
     @evaluation = Evaluation.new
-    @courses = Course.all
+    @courses = Course.all.order(:updated_at).map { |t| { :label => t.lecture.name + "(" + t.professor.name + ")", :value => t.id }}
   end
 
   def create #디비에 넣는다
