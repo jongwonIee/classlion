@@ -62,13 +62,6 @@ ActiveRecord::Schema.define(version: 20170111071457) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "majors", force: :cascade do |t|
-    t.string   "name",          null: false
-    t.integer  "university_id", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "professors", force: :cascade do |t|
     t.integer  "university_id", null: false
     t.string   "name",          null: false
@@ -103,7 +96,6 @@ ActiveRecord::Schema.define(version: 20170111071457) do
     t.string   "nickname",                           null: false
     t.string   "email",                              null: false
     t.integer  "university_id",                      null: false
-    t.integer  "major_id",                           null: false
     t.string   "password_digest",                    null: false
     t.string   "remember_digest"
     t.boolean  "is_boy",                             null: false

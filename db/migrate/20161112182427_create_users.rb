@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string      :nickname,  null: false, unique: true
       t.string      :email,     null: false, unique: true
       t.integer     :university_id,   null: false
-      t.integer     :major_id,  null: false
 
       # password
       t.string      :password_digest,  null: false
