@@ -119,6 +119,8 @@ GEM
       options (~> 2.3.0)
     puma (3.6.2)
     rack (2.0.1)
+    rack-mini-profiler (0.10.2)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.1)
@@ -229,6 +231,7 @@ DEPENDENCIES
   mailgun-ruby
   progress_bar
   puma (~> 3.0)
+  rack-mini-profiler
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-tether (>= 1.1.0)!
   rails-i18n
