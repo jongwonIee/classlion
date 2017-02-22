@@ -16,98 +16,70 @@
               <%= @course.lecture.name %>
               <% if @current_user %>
                   <%= hidden_field_tag 'c_id', @course.id %>
-                <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
-                    <%= button_tag class: 'favorite_btn', id: 'favorite_delete_btn' do %>
-                      <i class="fa fa-heart favorite" aria-hidden="true"></i>
-                    <% end %>
-                <% else %>
-                    <%= button_tag class: 'favorite_btn', id: 'favorite_add_btn' do %>
-                    <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+                  <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
+                      <span class="heart favorite_btn" id="favorite_delete_btn" style="background-position: right;"></span>
+                  <% else %>
+                      <span class="heart favorite_btn" id="favorite_add_btn" style="background-position: left;"></span>
                   <% end %>
-                <% end %>
-            <% end %>
+              <% end %>
             </span>
-            <br>
-            <% if @course.is_major %>
+          <br>
+          <% if @course.is_major == true %>
               <span class="info_prof_major">
                 <span class="lec_cate lec_major">전공</span><%= @course.professor.name %> 교수님
               </span>
-            <% else %>
+          <% else %>
               <span class="info_prof_kyo">
                 <span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님
               </span>
+          <% end %>
+        </div>
+      </div><%#////info_right_1%>
+
+      <div class="info_right_2">
+        <hr class="info_hr">
+        <div class="info_p_div">
+          <p class="info_1">
+            <span class="info_title">학수번호</span> <%= @course.lecture.code %>
+          </p>
+          <p class="info_2">
+            <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
+          </p>
+          <p class="info_3">
+            <span class="info_title">같은 강의</span>
+            <% if !@identical_courses.present? %>
+                같은 강의가 없습니다
+            <% else %>
+                <% @identical_courses.each do |id| %>
+                    <% @other_course = Course.find(id) %>
+                    <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                <% end %>
             <% end %>
-          </div>
-        </div>
-
-        <div class="info_right_2">
-          <hr class="info_hr">
-          <div class="info_p_div">
-            <p class="info_1">
-              <span class="info_title">학수번호</span>
-              <%= @course.lecture.code %>
-              <!--<= @course.code %>-->
-            </p>
-            <p class="info_2">
-              <span class="info_title">학점</span>
-              3
-              학점
-            </p>
-            <p class="info_3">
-              <span class="info_title">같은 강의</span>
-              <% if !@identical_courses.present? %>
-                  같은 강의가 없습니다
-              <% else %>
-                  <% @identical_courses.each do |id| %>
-                      <% @other_course = Course.find(id) %>
-                      <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-                  <% end %>
-              <% end %>
-            </p>
-            <p class="info_4">
-              <span class="info_title">연관 강의</span>
-              <% if !@related_courses.present? %>
-                  연관 강의가 없습니다
-              <% else %>
-                  <% @related_courses.each do |id| %>
-                      <% @other_course = Course.find(id) %>
-                      <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-                  <% end %>
-              <% end %>
-            </p>
-          </div>
-
-          <div class="info_btn_div">
-            <button class="info_btn">
-              <i class="fa fa-pencil" aria-hidden="true"></i> 강의평가 쓰러가기
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </p>
+          <p class="info_4">
+            <span class="info_title">연관 강의</span>
+            <% if !@related_courses.present? %>
+                연관 강의가 없습니다
+            <% else %>
+                <% @related_courses.each do |id| %>
+                    <% @other_course = Course.find(id) %>
+                    <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                <% end %>
+            <% end %>
+          </p>
+        </div><%#////info_p_div%>
+        <div class="info_btn_div">
+          <button class="info_btn">
+            <i class="fa fa-pencil" aria-hidden="true"></i> 강의평가 쓰러가기
+          </button>
+        </div><%#////info_btn_div%>
+      </div><%#////info_right_2%>
+    </div><%#////course_info_div%>
+  </div><%#////course_top %>
 
     <hr class="bottom_hr">
 
     <div class="info_score col-xs-12 row">
-      <!--<div class="col-xs-3" style="border: 2px solid green;">-->
-      <!--  <div class="score_head">-->
-      <!--    <div>총점</div>-->
-      <!--  </div>-->
-      <!--  <div class="score">-->
-      <!--    <div>-->
-      <!--      <div class="star_num">4.8</div>-->
-      <!--      <div class="star">-->
-      <!--        <select id="stars" class="s4" name="rating" autocomplete="off">-->
-      <!--          <option value="1"></option>-->
-      <!--          <option value="2"></option>-->
-      <!--          <option value="3"></option>-->
-      <!--          <option value="4"></option>-->
-      <!--          <option value="5"></option>-->
-      <!--        </select>-->
-      <!--      </div>-->
-      <!--    </div>-->
-      <!--  </div>  -->
-      <!--</div>-->
 
       <div class="col-xs-6 col-sm-3">
         <div class="score_head">
@@ -156,7 +128,6 @@
   </div>
 
   <div class="tab_div">
-
     <ul class="tab">
       <li>
         <a href="javascript:void(0)" class="review_tab tablinks" onclick="openCity(event, 'review')" id="defaultOpen">
@@ -188,9 +159,7 @@
     <div id="wiki" class="tabcontent">
       키위
     </div>
-
   </div>
-</div>
 </div>
 
 <%# 스크립트 분리할 것%>
@@ -198,16 +167,16 @@
   <%# 관심강의 제거 %>
   $(document).on("click","#favorite_delete_btn",function() {
     var course_id = $('#c_id').val();
+
     $.ajax({
       method: "POST",
       url: '/users/favorites_delete',
       data: {c_id: course_id},
       dataType: "json",
-      success: function ( result) {
+      success: function (result) {
         if(result.msg === "ok"){
-          $('.favorite_btn i').addClass('not_favorite');
-          $('.favorite_btn i').removeClass('favorite');
-          $('.favorite_btn').attr("id", "favorite_add_btn");
+          $('.favorite_btn').removeClass("heartAnimation").attr("id", "favorite_add_btn");
+          $('.favorite_btn').css("background-position","left");
         }else if(result.msg === "error"){
           console.log(result.msg);
         }
@@ -222,11 +191,10 @@
       url: '/users/favorites_add',
       data: {c_id: course_id},
       dataType: "json",
-      success: function ( result) {
+      success: function (result) {
         if(result.msg === "ok"){
-          $('.favorite_btn i').addClass('favorite');
-          $('.favorite_btn i').removeClass('not_favorite');
-          $('.favorite_btn').attr("id", "favorite_delete_btn");
+          $('.favorite_btn').addClass("heartAnimation").attr("id", "favorite_delete_btn");//applying animation class
+          $('.favorite_btn').css("background-position","right");
         }else if(result.msg === "error"){
           console.log(result.msg);
         }
