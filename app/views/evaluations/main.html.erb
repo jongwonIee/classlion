@@ -1,10 +1,10 @@
 <div class="index_container">
   <div class="container-fluid">
-    <div>
+    <div class="main_feed">
       <p class="feed_head">최신 강의평</p>
       <p class="feed_head2">방금 올라온 따끈따끈한 강의평들을 만나보세요!</p>
-      <!--<object type="image/svg+xml" data="/assets/lion_1.svg" id="lion"></object>-->
-      <% @evaluations.each do |e| %>
+      <hr class="info_hr feed_hr feed_top_hr">
+      <% @evaluations.each_with_index do |e, i| %>
           <div class="feed_each">
             <div class="row">
               <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
@@ -83,23 +83,20 @@
                 </div>
 
                 <p class="feed_content col-xs-12">
-                  <%= e.body.html_safe %>
-                </p>
+                  <%= e.body.html_safe %></p>
                 <p class="feed_etc col-xs-12">
-                  <% if (time_ago_in_words(e.created_at)) == "1분 이하" %>
-                      방금 전
-                  <% elsif (time_ago_in_words(e.created_at)).last == '일' and (time_ago_in_words(e.created_at)).chomp('일').to_i > 7 %>
-                      <%= time_tag(e.created_at, :format=>'%Y년 %m월 %d일') %>
-                  <% else %>
-                      <%= time_ago_in_words(e.created_at) + " 전" %>
-                  <% end %>
+                  <%= e.time_ago %>
                   ·
                   <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
                 </p>
               </div>
             </div>
           </div>
-          <hr class="feed_hr">
+
+          <% unless i == 9 %>
+              <hr class="feed_hr">
+          <% end %>
+
       <% end %>
 
     </div>
@@ -107,24 +104,6 @@
 </div>
 
 <script>
-
-  //xs가 아닐 경우, pill-bar 100% 꽉 차도록 padding 조절
-  $(document).ready(function(){
-    if (window.innerWidth >= 768){
-      var targetBar = $('.br-theme-bars-pill .br-widget a');
-
-      var targetWidth = $('.rating-head').outerWidth()/5;
-      targetBar.css('padding', '0 ' + targetWidth +'px')
-    }
-  });
-
-  // $(window).resize(function(){
-
-  //     if ($('header').width() >= 768 ){
-
-  //             // is mobile device
-  //     }
-  // });
 
   $('.p1').barrating('show', {
     theme: 'bars-movie',
@@ -170,18 +149,4 @@
     allowEmpty: true,
     readonly: true
   });
-
-  // $(window).load(function(){
-  //   alert($('.st6').innerHTML);
-  // });
-
-
-  //   function prepare(){
-  //   var S=document.getElementById("sv")
-  //   var SD=S.getSVGDocument();
-  //   E=SD.getElementById('E');
-  //     }
-  // function change(v){
-  //   E.setAttribute("fill", v);
-  // }
 </script>
