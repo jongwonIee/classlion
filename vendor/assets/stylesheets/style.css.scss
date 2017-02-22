@@ -1347,9 +1347,26 @@ ul.tab li a:focus, .active {
 /*리뷰 write page end*/
 
 
-.ui-menu-item-wrapper .ui-state-active {
-  background: #f2f2f2 !important;
-  color: #484848 !important;
+.my_page_top {
+  background:url('/assets/cover_skku.png');
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
+  height: 400px;
+  display: table;
+  .my_page_top_div {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.my_page_top_info {
+  width: 100%;
+  text-align: center;
 }
 
 .my_page_tab_div {

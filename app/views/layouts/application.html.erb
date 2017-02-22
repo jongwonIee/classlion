@@ -2,25 +2,42 @@
 <html>
 <head>
   <title>Classlion</title>
-  <%= csrf_meta_tags %>
-
-  <%= stylesheet_link_tag    'application' %>
-  <%= javascript_include_tag 'application' %>
-
-  <!--fontawesome-->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-  <!--chart js-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
-
-  <%# 네브바가 없는 로그인과 회원가입페이지에서는 해당 js가 로드되지않도록 하는 코드 %>
-  <% unless @current_user.nil? %>
-      <%= javascript_include_tag "nav/nav_jquery.menu-aim", "nav/nav_modernizr", "nav/nav_main" %>
-  <% end %>
-
   <!-- for encoding -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <!--for mobile resize-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all'  %>
+  <%= javascript_include_tag 'application' %>
+
+  <link rel="stylesheet" href="<%= asset_path 'theme/bars-movie.css.scss' %>">
+  <link rel="stylesheet" href="<%= asset_path 'theme/bootstrap-stars.css.scss' %>">
+  <link rel="stylesheet" href="<%= asset_path 'theme/css-stars.css.scss' %>">
+  <link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars.css.scss' %>">
+  <link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars-o.css.scss' %>">
+
+  <link rel="stylesheet" href="<%= asset_path 'nav_reset.css.scss' %>">
+  <link rel="stylesheet" href="<%= asset_path 'nav_style.css.scss' %>">
+  <link rel="stylesheet" href="<%= asset_path 'style.css.scss' %>">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!--fontawesome-->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
+
+  <!--chart js-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+
+  <script src="<%= asset_path 'jquery.barrating.js' %>"></script>
 
 </head>
 
@@ -30,7 +47,7 @@
     <%= render 'flash', name: name, msg: msg %>
 <% end %>
 
-<% unless @current_user.nil? %>
+<% if @current_user %>
     <header class="cd-main-header">
       <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
 
@@ -160,6 +177,9 @@
       <%= button_to '포인트충전', roles_charge_path, method: :post %>
     </div>
 
+    <script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
+    <script src="<%= asset_path 'nav/nav_main.js' %> "></script>
+    <script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
 <% else %>
     <%= yield %>
 <% end %>
