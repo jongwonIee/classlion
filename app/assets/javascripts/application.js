@@ -21,7 +21,7 @@
 
 // 필요한 플러그인은 나중에 수정할것
 tinymce.init({
-    selector: 'textarea',
+    selector: '.tinymce',
     height: 300,
     theme: 'modern',
     menubar: false,
