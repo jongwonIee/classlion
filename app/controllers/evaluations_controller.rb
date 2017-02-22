@@ -20,10 +20,6 @@ class EvaluationsController < ApplicationController
     end
   end
 
-  def show
-
-  end
-
   def new #글작성 폼을 준다
     #자동완성에 관련된 코드
     @evaluation = Evaluation.new
