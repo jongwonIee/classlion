@@ -18,9 +18,7 @@ $(document).ready(function(){
         nicknameCheck = $('#nickname_check'),
 
         university = $('#user_university_id'),
-        major =  $('#user_major_id'),
         univError = $('#university_error'),
-        majorError = $('#major_error'),
 
         newUserForm = $('#new_user');
 
@@ -120,8 +118,8 @@ $(document).ready(function(){
     } //비밀번호 함수 1 끝
 
     function validatePasswordAndPasswordConf(){ //비밀번호와 비밀번호확인 포커스 벗어났을 때
-        passwordVal = password.val();
-        passwordConfVal = passwordConfirmation.val();
+        var passwordVal = password.val();
+        var passwordConfVal = passwordConfirmation.val();
         passwordConfError.show();
 
         if(!passwordVal) {
@@ -243,7 +241,7 @@ $(document).ready(function(){
 
 
 //대학교 및 전공 체크--------------------------------------------------------
-    //대학교 및 전공 함수정의
+    //대학교 함수정의
     function validateUniversity(){
         if(university.val() === ""){
             univError.show().text("대학 선택해주세요.").addClass('red');
@@ -255,40 +253,16 @@ $(document).ready(function(){
         }
     }
 
-    function validateMajor(){
-        if(major.val() === ""){
-            majorError.show().text("전공 선택해주세요.").addClass('red');
-            major[0].parentNode.style.borderColor = "#ff5a5f";
-        }else{//뭔가 선택되었다!
-            majorError.hide();
-            major[0].parentNode.style.borderColor = "#fff";
-            return true;
-        }
-    }
-
-
-    //대학교 및 전공 함수실행
+    //대학교 함수실행
     university.blur(function(){
         validateUniversity();
     });
 
-    major.blur(function(){
-        validateMajor();
-    });
-
-
-    //대학교 및 전공 예외처리
+    //대학교 예외처리
     university.change(function() { //대학교 체크여부 확인
         univError.hide();
         university[0].parentNode.parentNode.style.borderColor = "#fff";
     });
-
-    major.change(function(){ //학과 체크여부 확인
-        majorError.hide();
-        major[0].parentNode.style.borderColor = "#fff";
-    });
-
-
 
 //빈칸없이, 모든 유효조건이 맞는지 체크--------------------------------------------------------
     newUserForm.submit(function(){

@@ -1,82 +1,544 @@
-<br><br><br><br><br>
-<p><%= @course.lecture.name %></p>
+<!--강의 검색결과 -->
+<div class="index_container">
+  <div class="container-fluid">
 
-<% if @course.is_major == true %>
-    <p class="feed_prof_major"><span class="lec_cate lec_major">전공</span><%= @course.professor.name %> 교수님</p>
-<% else %>
-    <p class="feed_prof_kyo"><span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님</p>
-<% end %>
+    <div class="course_top">
+      <div class="course_info_div">
+        <div class="info_left">
+          <!--<div>-->
+          <%= image_tag "/assets/prof.svg", class: "course_prof_img", alt: "professor"%>
+          <!--</div>-->
+        </div>
 
-<% if @course.evaluation_count > 0 %>
-    총점 <%= (@course.point_overall_sum.to_f / @course.evaluation_count).round(1) %>
-    널널함 <%= @course.point_easiness_sum / @course.evaluation_count %>
-    강의만족도 <%= @course.point_gpa_satisfaction_sum / @course.evaluation_count %>
-    학점만족도 <%= @course.point_clarity_sum / @course.evaluation_count %>
+        <div class="info_right_1">
+          <div>
+            <span class="info_course">
+              <%= @course.lecture.name %>
+              <% if @current_user %>
+                  <%= hidden_field_tag 'c_id', @course.id %>
+                  <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
+                      <span class="heart favorite_btn" id="favorite_delete_btn" style="background-position: right;"></span>
+                  <% else %>
+                      <span class="heart favorite_btn" id="favorite_add_btn" style="background-position: left;"></span>
+                  <% end %>
+              <% end %>
+            </span>
+          <br>
+          <% if @course.is_major == true %>
+              <span class="info_prof_major">
+                <span class="lec_cate lec_major">전공</span><%= @course.professor.name %> 교수님
+              </span>
+          <% else %>
+              <span class="info_prof_kyo">
+                <span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님
+              </span>
+          <% end %>
+        </div>
+      </div><%#////info_right_1%>
 
-<% else %>
-    강의평가가 없습니다..
-    <%= button_to '강평작성하러가기', new_evaluation_path, method: :get %>
-<% end %>
+      <div class="info_right_2">
+        <hr class="info_hr">
+        <div class="info_p_div">
+          <p class="info_1">
+            <span class="info_title">학수번호</span> <%= @course.lecture.code %>
+          </p>
+          <p class="info_2">
+            <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
+          </p>
+          <p class="info_3">
+            <span class="info_title">같은 강의</span>
+            <% if !@identical_courses.present? %>
+                같은 강의가 없습니다
+            <% else %>
+                <% @identical_courses.each do |id| %>
+                    <% @other_course = Course.find(id) %>
+                    <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                <% end %>
+            <% end %>
+          </p>
+          <p class="info_4">
+            <span class="info_title">연관 강의</span>
+            <% if !@related_courses.present? %>
+                연관 강의가 없습니다
+            <% else %>
+                <% @related_courses.each do |id| %>
+                    <% @other_course = Course.find(id) %>
+                    <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                <% end %>
+            <% end %>
+          </p>
+        </div><%#////info_p_div%>
+        <div class="info_btn_div">
+          <button class="info_btn">
+            <i class="fa fa-pencil" aria-hidden="true"></i> 강의평가 쓰러가기
+          </button>
+        </div><%#////info_btn_div%>
+      </div><%#////info_right_2%>
+    </div><%#////course_info_div%>
+  </div><%#////course_top %>
 
-<br>
-<%# 관심강의  %>
-<% if @current_user %>
-    <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
-        <%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: @course.id),
-                      method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
-    <% else %>
-        <%= button_to '관심강의에다추가',  users_favorites_add_path(u_id: @current_user.id, c_id: @course.id),
-                      method: :post, :onClick => 'alert("관심강의에 추가되었습니다!")' %>
-    <% end %>
-<% end %>
+    <hr class="bottom_hr">
 
-<br>
-같은강의
-<br>
-<% if !@identical_courses.present? %>
-    같은강의가 없습니다.
-<% else %>
-    <% @identical_courses.each do |id| %>
-        <% @other_course = Course.find(id) %>
-        <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-    <% end %>
-<% end %>
+    <div class="info_score col-xs-12 row">
 
-<br>
-연관강의
-<br>
-<% if !@related_courses.present? %>
-    연관강의가 없습니다.
-<% else %>
-    <% @related_courses.each do |id| %>
-        <% @other_course = Course.find(id) %>
-        <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-    <% end %>
-<% end %>
-<hr>
+      <div class="col-xs-6 col-sm-3">
+        <div class="score_head">
+          <div>총점</div>
+        </div>
+        <div class="score">
+          <div>
+            <canvas id="score1"></canvas>
+          </div>
+        </div>
+      </div>
 
-<ul class="w3-navbar w3-black">
-  <li><a href="javascript:void(0)" onclick="openCity('London')">학생들의 강의평가[<%= @course.evaluation_count %>]</a></li>
-  <li><a href="javascript:void(0)" onclick="openCity('Paris')">강의의 모든 것, WIKI</a></li>
-</ul>
+      <div class="col-xs-6 col-sm-3">
+        <div class="score_head">
+          <div>널널함</div>
+        </div>
+        <div class="score">
+          <div>
+            <canvas id="score2"></canvas>
+          </div>
+        </div>
+      </div>
 
-<div id="London" class="w3-container city">
-  <% if @course.evaluation_count > 0 %>
-      <%= render "evaluations" %>
-  <% end %>
+      <div class="col-xs-6 col-sm-3 score_m">
+        <div class="score_head">
+          <div>강의만족도</div>
+        </div>
+        <div class="score">
+          <div>
+            <canvas id="score3"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-sm-3 score_m">
+        <div class="score_head">
+          <div>학점만족도</div>
+        </div>
+        <div class="score">
+          <div>
+            <canvas id="score4"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab_div">
+    <ul class="tab">
+      <li>
+        <a href="javascript:void(0)" class="review_tab tablinks" onclick="openCity(event, 'review')" id="defaultOpen">
+          <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
+          학생들의 강의평가
+          <span class="review_count"><%= @course.evaluation_count %></span>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openCity(event, 'wiki')">
+          <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
+          강의의 모든것, WIKI
+
+        </a>
+      </li>
+    </ul>
+
+    <div id="review" class="tabcontent">
+      <div class="sort_div">
+        <div class="sort_here">
+          강의평가별: 최신순
+        </div>
+      </div>
+      <% if @course.evaluation_count > 0 %>
+          <%= render "evaluations" %>
+      <% end %>
+    </div>
+
+    <div id="wiki" class="tabcontent">
+      키위
+    </div>
+  </div>
 </div>
 
-<div id="Paris" class="w3-container city" style="display:none">
-  wiki
-</div>
-
+<%# 스크립트 분리할 것%>
 <script>
-  function openCity(cityName) {
-    var i;
-    var x = document.getElementsByClassName("city");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
+  <%# 관심강의 제거 %>
+  $(document).on("click","#favorite_delete_btn",function() {
+    var course_id = $('#c_id').val();
+
+    $.ajax({
+      method: "POST",
+      url: '/users/favorites_delete',
+      data: {c_id: course_id},
+      dataType: "json",
+      success: function (result) {
+        if(result.msg === "ok"){
+          $('.favorite_btn').removeClass("heartAnimation").attr("id", "favorite_add_btn");
+          $('.favorite_btn').css("background-position","left");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+  <%# 관심강의 추가 %>
+  $(document).on("click","#favorite_add_btn",function() {
+    var course_id = $('#c_id').val();
+    $.ajax({
+      method: "POST",
+      url: '/users/favorites_add',
+      data: {c_id: course_id},
+      dataType: "json",
+      success: function (result) {
+        if(result.msg === "ok"){
+          $('.favorite_btn').addClass("heartAnimation").attr("id", "favorite_delete_btn");//applying animation class
+          $('.favorite_btn').css("background-position","right");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+</script>
+<%# 스크립트 분리할 것 %>
+<script>
+  // default chart start //
+  // round corners
+  Chart.pluginService.register({
+    afterUpdate: function (chart) {
+      if (chart.config.options.elements.arc.roundedCornersFor !== undefined) {
+        var arc = chart.getDatasetMeta(0).data[chart.config.options.elements.arc.roundedCornersFor];
+        arc.round = {
+          x: (chart.chartArea.left + chart.chartArea.right) / 2,
+          y: (chart.chartArea.top + chart.chartArea.bottom) / 2,
+          radius: (chart.outerRadius + chart.innerRadius) / 2,
+          thickness: (chart.outerRadius - chart.innerRadius) / 2 - 1,
+          backgroundColor: arc._model.backgroundColor
+        }
+      }
+    },
+
+    afterDraw: function (chart) {
+      if (chart.config.options.elements.arc.roundedCornersFor !== undefined) {
+        var ctx = chart.chart.ctx;
+        var arc = chart.getDatasetMeta(0).data[chart.config.options.elements.arc.roundedCornersFor];
+        var startAngle = Math.PI / 2 - arc._view.startAngle;
+        var endAngle = Math.PI / 2 - arc._view.endAngle;
+
+        ctx.save();
+        ctx.translate(arc.round.x, arc.round.y);
+        console.log(arc.round.startAngle)
+        ctx.fillStyle = arc.round.backgroundColor;
+        ctx.beginPath();
+        ctx.arc(arc.round.radius * Math.sin(startAngle), arc.round.radius * Math.cos(startAngle), arc.round.thickness, 0, 2 * Math.PI);
+        ctx.arc(arc.round.radius * Math.sin(endAngle), arc.round.radius * Math.cos(endAngle), arc.round.thickness, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    },
+  });
+
+  // remove legend
+  Chart.defaults.global.legend.display = false;
+  // remove tooltip
+  Chart.defaults.global.tooltips.enabled = false;
+
+
+  // write text plugin. 가운데 숫자 쓰기
+  Chart.pluginService.register({
+    afterUpdate: function (chart) {
+      if (chart.config.options.elements.center) {
+        var helpers = Chart.helpers;
+        var centerConfig = chart.config.options.elements.center;
+        var globalConfig = Chart.defaults.global;
+        var ctx = chart.chart.ctx;
+
+        var fontStyle = helpers.getValueOrDefault(centerConfig.fontStyle, globalConfig.defaultFontStyle);
+        var fontFamily = helpers.getValueOrDefault(centerConfig.fontFamily, globalConfig.defaultFontFamily);
+
+        if (centerConfig.fontSize)
+          var fontSize = centerConfig.fontSize;
+        // figure out the best font size, if one is not specified
+        else {
+          ctx.save();
+          var fontSize = helpers.getValueOrDefault(centerConfig.minFontSize, 1);
+          var maxFontSize = helpers.getValueOrDefault(centerConfig.maxFontSize, 256);
+          var maxText = helpers.getValueOrDefault(centerConfig.maxText, centerConfig.text);
+
+          do {
+            ctx.font = helpers.fontString(fontSize, fontStyle, fontFamily);
+            var textWidth = ctx.measureText(maxText).width;
+
+            // check if it fits, is within configured limits and that we are not simply toggling back and forth
+            if (textWidth < chart.innerRadius * 2 && fontSize < maxFontSize)
+              fontSize += 1;
+            else {
+              // reverse last step
+              fontSize -= 1;
+              break;
+            }
+          } while (true)
+          ctx.restore();
+        }
+
+        // save properties
+        chart.center = {
+          font: helpers.fontString(fontSize, fontStyle, fontFamily),
+          fillStyle: helpers.getValueOrDefault(centerConfig.fontColor, globalConfig.defaultFontColor)
+        };
+      }
+    },
+    afterDraw: function (chart) {
+      if (chart.center) {
+        var centerConfig = chart.config.options.elements.center;
+        var ctx = chart.chart.ctx;
+
+        ctx.save();
+        ctx.font = chart.center.font;
+        ctx.fillStyle = chart.center.fillStyle;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        var centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+        var centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+        ctx.fillText(centerConfig.text, centerX, centerY);
+        ctx.restore();
+      }
+    },
+  })
+  // default chart end//
+
+  // 개별 chart start //
+  var config1 = {
+    // 차트 유형 지정
+    type: 'doughnut',
+    data: {
+// 			labels: [
+// 				"active",
+// 				"no"
+// 			],
+      datasets: [{
+        // 중요. % 설정하는 부분. 5점만점 반올림 -> [평균, 5-평균] 순서
+        data: [3.5, 1.5],
+        backgroundColor: [
+          "#ffc333",
+          "#fff3d6"
+        ],
+        hoverBackgroundColor: [
+          "#ffc333",
+          "#fff3d6"
+        ]
+      }]
+    },
+
+    options: {
+      cutoutPercentage: 85,
+      elements: {
+        // for rounded edge
+        arc: {
+          roundedCornersFor: 0
+        },
+        // 가운데 숫자
+        center: {
+          // the longest text that could appear in the center
+          maxText: '100%',
+          text: '3.5',
+          fontColor: '#ffc333',
+          fontFamily: "'Nanum Barun Gothic', 'Noto Sans KR', sans-serif",
+          fontStyle: 'normal',
+          // fontSize: 12,
+          // if a fontSize is NOT specified, we will scale (within the below limits) maxText to take up the maximum space in the center
+          // if these are not specified either, we default to 1 and 256
+          minFontSize: 1,
+          maxFontSize: 256,
+        }
+      }
     }
+  };
+
+  var config2 = {
+    // 차트 유형 지정
+    type: 'doughnut',
+    data: {
+// 			labels: [
+// 				"active",
+// 				"no"
+// 			],
+      datasets: [{
+        data: [3, 2],
+        backgroundColor: [
+          "#ff5a5f",
+          "#ffdedf"
+        ],
+        hoverBackgroundColor: [
+          "#ff5a5f",
+          "#ffdedf"
+        ]
+      }]
+    },
+
+    options: {
+      cutoutPercentage: 85,
+      elements: {
+        //  percentageInnerCutout: 10,
+        // for rounded edge
+        arc: {
+          roundedCornersFor: 0
+        },
+        center: {
+          maxText: '100%',
+          text: '3',
+          fontColor: '#ff5a5f',
+          fontFamily: "'Nanum Barun Gothic', 'Noto Sans KR', sans-serif",
+          fontStyle: 'normal',
+          // fontSize: 12,
+          minFontSize: 1,
+          maxFontSize: 256,
+        }
+      }
+    }
+  };
+
+  var config3 = {
+    // 차트 유형 지정
+    type: 'doughnut',
+    data: {
+// 			labels: [
+// 				"active",
+// 				"no"
+// 			],
+      datasets: [{
+        data: [5, 0],
+        backgroundColor: [
+          "#27b5af",
+          "#d3f0ef"
+        ],
+        hoverBackgroundColor: [
+          "#27b5af",
+          "#d3f0ef"
+        ]
+      }]
+    },
+
+    options: {
+      cutoutPercentage: 85,
+      responsive: true,
+      elements: {
+        //  percentageInnerCutout: 10,
+        arc: {
+          roundedCornersFor: 0
+        },
+        center: {
+          maxText: '100%',
+          text: '5',
+          fontColor: '#27b5af',
+          fontFamily: "'Nanum Barun Gothic', 'Noto Sans KR', sans-serif",
+          fontStyle: 'normal',
+          // fontSize: 12,
+          minFontSize: 1,
+          maxFontSize: 256,
+        }
+      }
+    }
+  };
+
+  var config4 = {
+    // 차트 유형 지정
+    type: 'doughnut',
+    data: {
+// 			labels: [
+// 				"active",
+// 				"no"
+// 			],
+      datasets: [{
+        data: [4, 1],
+        backgroundColor: [
+          "#fc642d",
+          "#fee0d5"
+        ],
+        hoverBackgroundColor: [
+          "#fc642d",
+          "#fee0d5"
+        ]
+      }]
+    },
+
+    options: {
+      cutoutPercentage: 85,
+      elements: {
+        arc: {
+          roundedCornersFor: 0
+        },
+        center: {
+          maxText: '100%',
+          text: '4',
+          fontColor: '#fc642d',
+          fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+          fontStyle: 'normal',
+          // fontSize: 12,
+          minFontSize: 1,
+          maxFontSize: 256,
+        }
+      }
+    }
+  };
+
+  var ctx1 = document.getElementById("score1").getContext("2d");
+  var score1 = new Chart(ctx1, config1);
+
+  var ctx2 = document.getElementById("score2").getContext("2d");
+  var score2 = new Chart(ctx2, config2);
+
+  var ctx3 = document.getElementById("score3").getContext("2d");
+  var score3 = new Chart(ctx3, config3);
+
+  var ctx4 = document.getElementById("score4").getContext("2d");
+  var score4 = new Chart(ctx4, config4);
+  //chart js end//
+
+  //tab start//
+  function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // for image change
+    var review_on = '/assets/review_on.svg';
+    var review_off = '/assets/review_off.svg';
+
+    var wiki_on = '/assets/wiki_on.svg';
+    var wiki_off = '/assets/wiki_off.svg';
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    tablinks[0].children[0].src = review_off;
+    tablinks[1].children[0].src = wiki_off;
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    if (evt.currentTarget.className.match('wiki_tab')) {
+      evt.currentTarget.children[0].src = wiki_on;
+    }
+    else {
+      evt.currentTarget.children[0].src = review_on;
+    };
   }
+  //change tab img end//
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  //tab end//
+
 </script>

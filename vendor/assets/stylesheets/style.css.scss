@@ -400,6 +400,7 @@ body {
   margin: 0 auto;
   // margin-top: 135px;
   padding-top: 135px;
+  padding-bottom: 135px;/*우리가 임의로 넣었음! 수정해주세요*/
 }
 
 .index_container > div > div {
@@ -1046,7 +1047,8 @@ ul.tab li a:focus, .active {
 .reply_div {
   color: #484848;
   padding: 0 !important;
-  margin: 6px 15px -20px 15px;
+  // margin: 6px 15px -20px 15px;
+  margin: 15px 15px 0px 15px;
 }
 .reply_lion {
   width: 38px;
@@ -1060,7 +1062,9 @@ ul.tab li a:focus, .active {
 .reply_right {
   padding-left: 0px !important;
   left: -5px;
-  top: -15px;
+  p {
+    margin-top: 5px;
+  }
 }
 
 .bubble img {
@@ -1081,10 +1085,11 @@ ul.tab li a:focus, .active {
   float:left;
   // margin-left:63px;
   //   width:540px;
-  margin: 0px 15px 9px 0px;
+  // margin: 0px 15px 9px 0px;
   width: 90%;
   // width: 100%;
-  padding:10px 12px;
+  padding: 12px 12px 3px 12px;
+  // padding:10px 12px;
   border-top: 1px solid #dbdbdb;
   // border-radius:10px;
   // background-color:#f2f2f2;
@@ -1347,9 +1352,26 @@ ul.tab li a:focus, .active {
 /*리뷰 write page end*/
 
 
-.ui-menu-item-wrapper .ui-state-active {
-  background: #f2f2f2 !important;
-  color: #484848 !important;
+.my_page_top {
+  background:url('/assets/cover_skku.png');
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
+  height: 400px;
+  display: table;
+  .my_page_top_div {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.my_page_top_info {
+  width: 100%;
+  text-align: center;
 }
 
 .my_page_tab_div {
@@ -1380,3 +1402,40 @@ ul.tab li a:focus, .active {
 }
 
 ul.tab li a:focus, .active{}
+
+/* 트위터 하트처럼 뿅 하게끔 하는 css*/
+.heart {
+  background: image-url('web_heart_animation.png');
+  background-repeat: no-repeat;
+  height: 35px;
+  width: 70px;
+  margin-left: -20px;
+  cursor: pointer;
+  position: absolute;
+  background-size: 2900%;
+}
+
+@-webkit-keyframes heartBlast
+{
+  0% {background-position: left;}
+  100% {background-position: right;}
+}
+
+@keyframes heartBlast
+{
+  0% {background-position: left;}
+  100% {background-position: right;}
+}
+
+.heartAnimation
+{
+  -webkit-animation-name: heartBlast; //webkit broswers
+  animation-name: heartBlast;
+  -webkit-animation-duration: .8s;
+  animation-duration: .8s;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-timing-function: steps(28); //background frames count 28
+  animation-timing-function: steps(28);
+  background-position: right;
+}

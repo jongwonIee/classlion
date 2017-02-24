@@ -11,17 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require tether
-//= require jquery-ui
 //= require jquery_ujs
-//= require bootstrap-sprockets
 //= require tinymce/jquery.tinymce.min.js
 //= require tinymce/tinymce.min.js
 //= require_tree .
 
 // 필요한 플러그인은 나중에 수정할것
 tinymce.init({
-    selector: 'textarea',
+    selector: '.tinymce',
     height: 300,
     theme: 'modern',
     menubar: false,
