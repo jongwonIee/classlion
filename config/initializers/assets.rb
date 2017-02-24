@@ -11,7 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 # Javascript
-Rails.application.config.assets.precompile += %w(nav/nav_jquery.menu-aim.js nav/nav_modernizr.js nav/nav_main.js jquery.barrating.js)
+Rails.application.config.assets.precompile += %w(nav/nav_jquery.menu-aim.js nav/nav_modernizr.js nav/nav_main.js jquery.barrating.js jquery.autocomplete.js)
 
 # Stylesheet
 Rails.application.config.assets.precompile += %w(theme/bars-movie.css.scss theme/bootstrap-stars.css.scss theme/css-stars.css.scss theme/fontawesome-stars.css.scss theme/fontawesome-stars-o.css.scss)
