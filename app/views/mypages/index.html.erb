@@ -1,94 +1,241 @@
-<br><br><br><br>
-<ul class="w3-navbar w3-black">
-  <li><a href="javascript:void(0)" onclick="openCity('London')">회원정보</a></li>
-  <li><a href="javascript:void(0)" onclick="openCity('Paris')">내가 쓴 강의평가</a></li>
-  <li><a href="javascript:void(0)" onclick="openCity('Seoul')">내가 쓴 댓글</a></li>
-  <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">관심강의</a></li>
-</ul>
-<div id="London" class="w3-container city">
-  <%# 버튼 대신 렌더하기로 바꿔야할듯 %>
-  <p><%= link_to "버튼", edit_user_path(@current_user) %></p>
-</div>
-<div id="Paris" class="w3-container city" style="display:none">
-  <table>
-    <tr>
-      <th>링크</th>
-      <th>강의명</th>
-      <th>교수명</th>
-      <th>학교</th>
-      <th>평점</th>
-      <th>내용</th>
-    </tr>
-
-    <% @evaluations.each do |e| %>
+<div class="index_container">
+  <div class="container-fluid">
+    
+    <div class="course_top my_page_top">
+        <div class="course_info_div my_page_top_div">
+          <div class="my_page_top_info">
+            <!--<%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%><br>-->
+            
+            <span>하리보해피콜라짱</span>
+            <hr>
+            <div class="my_page_top_icons"></div>
+            
+          </div>
+        	<!--<div class="info_left">-->
+            <!--<div>-->
+         <!--   	<%= image_tag "/assets/prof.svg", class: "course_prof_img", alt: "professor"%>-->
+            <!--</div>-->
+        	<!--</div>-->
+          
+        <!--	<div class="info_right_1">-->
+	       <!--     <div>-->
+	       <!--       <span class="info_course">-->
+	       <!--        탑 오른쪽 위-->
+	       <!--     </div>-->
+        <!--	</div>-->
+            
+      		<!--<div class="info_right_2">    -->
+	       <!-- 	탑 오른쪽 아래-->
+        <!--	</div>-->
+        </div>
+    </div>
+        
+  </div>
+    
+  <div class="tab_div my_page_tab_div">
+  	
+  	<ul class="tab">
+  	  <li>
+  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_info')" id="defaultOpen">
+          회원정보
+  	  	</a>
+  	  </li>
+  	  <li>
+  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_review')">
+  	  		내가 쓴 강의평가
+  	  	</a>
+  	  </li>
+  	  <li>
+  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_comment')">
+  	  		내가 쓴 댓글
+  	  	</a>
+  	  </li>
+  	  <li>
+  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_lecture')">
+  	  		관심강의
+  	  	</a>
+  	  </li>
+    </ul>
+	
+  	<div id="my_info" class="tabcontent">
+  		<div class="sort_div">
+  			<div class="sort_here">
+  				정보
+  			</div>
+  		</div>
+			<%# 버튼 대신 렌더하기로 바꿔야할듯 %>
+      <p><%= link_to "버튼", edit_user_path(@current_user) %></p>
+  	</div>
+  	
+  	<div id="my_review" class="tabcontent">
+  		<div class="sort_div">
+  			<div class="sort_here">
+  				리뷰
+  			</div>
+  		</div>
+  		<table>
         <tr>
-          <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
-          <td><%= e.course.lecture.name %></td>
-          <td><%= e.course.professor.name %></td>
-          <td><%= e.course.university.local_name %></td>
-          <td><%= e.point_overall %></td>
-          <td><%= e.body.html_safe %></td>
+          <th>링크</th>
+          <th>강의명</th>
+          <th>교수명</th>
+          <th>학교</th>
+          <th>평점</th>
+          <th>내용</th>
         </tr>
-    <% end %>
-  </table>
-</div>
-<div id="Seoul" class="w3-container city" style="display:none">
-  <table>
-    <thead>
-      <tr>
-        <th>링크</th>
-        <th>강의명</th>
-        <th>내용</th>
-      </tr>
-    </thead>
-    <% @evaluations.each do |e| %>
-      <tbody>
-        <tr>
-          <% e.comments.each do |c| %>
+    
+        <% @evaluations.each do |e| %>
+            <tr>
               <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
               <td><%= e.course.lecture.name %></td>
-              <td><%= c.body %></td>
-          <% end %>
-        </tr>
-      </tbody>
-    <% end %>
-  </table>
-</div>
-<div id="Tokyo" class="w3-container city" style="display:none">
-  <table>
-    <thead>
-    <tr>
-      <th>링크</th>
-      <th>강의명</th>
-      <th>교수명</th>
-    </tr>
-    </thead>
-    <% @favorite_courses.each do |f| %>
-      <tbody>
-        <tr>
-          <% if @current_user %>
-              <% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>
-                  <%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: f.id),
-                                method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
+              <td><%= e.course.professor.name %></td>
+              <td><%= e.course.university.local_name %></td>
+              <td><%= e.point_overall %></td>
+              <td><%= e.body.html_safe %></td>
+            </tr>
+        <% end %>
+      </table>
+  	</div>
+  	
+  	<div id="my_comment" class="tabcontent">
+  		<div class="sort_div">
+  			<div class="sort_here">
+  				댓글
+  			</div>
+  		</div>
+      <table>
+        <thead>
+          <tr>
+            <th>링크</th>
+            <th>강의명</th>
+            <th>내용</th>
+          </tr>
+        </thead>
+        <% @evaluations.each do |e| %>
+          <tbody>
+            <tr>
+              <% e.comments.each do |c| %>
+                  <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
+                  <td><%= e.course.lecture.name %></td>
+                  <td><%= c.body %></td>
               <% end %>
-          <% end %>
-          <td><a href="/courses/<%=f.id%>">링크</a></td>
-          <td><%= f.lecture.name %></td>
-          <td><%= f.professor.name %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+  	</div>
+  	
+  	<div id="my_lecture" class="tabcontent">
+  		<div class="sort_div">
+  			<div class="sort_here">
+  				내강의
+  			</div>
+  		</div>
+      <table>
+        <thead>
+        <tr>
+          <th>링크</th>
+          <th>강의명</th>
+          <th>교수명</th>
         </tr>
-      </tbody>
-    <% end %>
-  </table>
+        </thead>
+        <% @favorite_courses.each do |f| %>
+          <tbody>
+            <tr>
+              <% if @current_user %>
+                  <% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>
+                      <%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: f.id),
+                                    method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
+                  <% end %>
+              <% end %>
+              <td><a href="/courses/<%=f.id%>">링크</a></td>
+              <td><%= f.lecture.name %></td>
+              <td><%= f.professor.name %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+  	</div>
+	
+  </div>
 </div>
-
 
 <script>
-  function openCity(cityName) {
-    var i;
-    var x = document.getElementsByClassName("city");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    document.getElementById(cityName).style.display = "block";
-  }
+  //nav 바로 아래로 붙이기
+  $(".index_container").css("padding-top",$(".cd-main-header").height());
+  
+  $( window ).resize(function() {
+    $(".index_container").css("padding-top",$(".cd-main-header").height());
+  });
+
+  //tab start//
+	function openCity(evt, cityName) {
+	    // Declare all variables
+	    var i, tabcontent, tablinks;
+	    
+	    // for image change
+	 //   var review_on = '/assets/review_on.svg';
+		// var review_off = '/assets/review_off.svg';
+		
+	 //   var wiki_on = '/assets/wiki_on.svg';
+		// var wiki_off = '/assets/wiki_off.svg';
+	
+	    // Get all elements with class="tabcontent" and hide them
+	    tabcontent = document.getElementsByClassName("tabcontent");
+	    for (i = 0; i < tabcontent.length; i++) {
+	        tabcontent[i].style.display = "none";
+	    }
+	
+	    // Get all elements with class="tablinks" and remove the class "active"
+	    tablinks = document.getElementsByClassName("tablinks");
+	    for (i = 0; i < tablinks.length; i++) {
+	        tablinks[i].className = tablinks[i].className.replace(" active", "");
+	    }
+	   // tablinks[0].children[0].src = review_off;
+    //     tablinks[1].children[0].src = wiki_off;
+	
+	    // Show the current tab, and add an "active" class to the link that opened the tab
+	    document.getElementById(cityName).style.display = "block";
+	    evt.currentTarget.className += " active";
+	    
+	 //   if (evt.currentTarget.className.match('wiki_tab')) {
+		// 	evt.currentTarget.children[0].src = wiki_on;
+	 //   }
+	 //   else {
+		// 	evt.currentTarget.children[0].src = review_on;
+	 //   };
+	}
+	//change tab img end//
+	
+    // Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+	//tab end//
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<ul class="w3-navbar w3-black">-->
+<!--  <li><a href="javascript:void(0)" onclick="openCity('London')">회원정보</a></li>-->
+<!--  <li><a href="javascript:void(0)" onclick="openCity('Paris')">내가 쓴 강의평가</a></li>-->
+<!--  <li><a href="javascript:void(0)" onclick="openCity('Seoul')">내가 쓴 댓글</a></li>-->
+<!--  <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">관심강의</a></li>-->
+<!--</ul>-->
+
+<!--<script>-->
+<!--  function openCity(cityName) {-->
+<!--    var i;-->
+<!--    var x = document.getElementsByClassName("city");-->
+<!--    for (i = 0; i < x.length; i++) {-->
+<!--      x[i].style.display = "none";-->
+<!--    }-->
+<!--    document.getElementById(cityName).style.display = "block";-->
+<!--  }-->
+<!--</script>-->
