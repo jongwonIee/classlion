@@ -23,8 +23,12 @@ class SessionsController < ApplicationController
         redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
       end
     else
-      @msg = 'email과 password를 다시 확인해주세요!'
-      render 'new'
+      # @msg = '이메일과 비밀번호를 올바르게 입력해주세요.'
+      # render 'new'
+      respond_to do |format|
+          format.js
+          format.html { render 'new' }
+      end
     end
   end
 

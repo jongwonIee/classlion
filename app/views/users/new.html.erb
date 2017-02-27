@@ -74,16 +74,14 @@
   </div>
 </div>
 
-
+<%# 스크립트 추가 %>
+<script src="<%= asset_path 'myUsers.js' %>"></script>
 <script>
   // 로고만큼 넓이 고정하기 위한 jquery
   function setWidth() {
-    var fit_logo = $(".logo");
     var fit_div = $(".fit_div");
     var fitWidth = fit_div.outerWidth();
     fit_div.css({ width: fitWidth });
-    // fit_logo.css({ display: "none" });
   }
-
   setWidth();
 </script>
