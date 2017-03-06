@@ -41,7 +41,7 @@ class EvaluationsController < ApplicationController
 
   private
   def eval_params
-  params.require(:evaluation).permit(:user_id, :course_id, :point_overall, :point_easiness, :point_gpa_satisfaction, :point_clarity, :body)
+    params.require(:evaluation).permit(:user_id, :course_id, :point_overall, :point_easiness, :point_gpa_satisfaction, :point_clarity, :body)
   end
 
 end
