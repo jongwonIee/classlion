@@ -1,24 +1,22 @@
 <div class="container-fluid">
   <div>
-    <% @evaluations.each do |e| %>
-      <% e.comments.each_with_index do |c,i| %>
+    <% @comments.each do |c,i| %>
           <% unless i == 0 %>
               <hr class="feed_hr">
           <% end %>
-  
           <div class="feed_each">
             <div class="row">
               <div class="col-xs-12">
                 <p class="feed_course">
-                  <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
+                  <a href='/courses/<%= c.evaluation.course.id %>'><%= c.evaluation.course.lecture.name %></a>
                 </p>
-                <% if e.course.is_major %>
+                <% if c.evaluation.course.is_major %>
                     <p class="feed_prof_major">
-                      <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
+                      <span class="lec_cate lec_major">전공</span><%= c.evaluation.course.professor.name %> 교수님
                     </p>
                 <% else %>
                     <p class="feed_prof_kyo">
-                      <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
+                      <span class="lec_cate lec_kyo">교양</span><%= c.evaluation.course.professor.name %> 교수님
                     </p>
                 <% end %>
               </div>
@@ -27,7 +25,7 @@
                 <p class="feed_content my_reply_content col-xs-12">
                     <%= image_tag "reply_icon.svg", class: "reply_icon", alt: "reply" %>
                     <!--수정사항 : 클릭하면, 해당 댓글이 달린 강평으로 바로 이동.댓글 열려진 상태로 바로 보여지도록-->
-                    <a href='/courses/<%= e.course.id %>'>
+                    <a href='/courses/<%= c.evaluation.course.id %>'>
                       <%= c.body %>
                     </a>
                 </p>
@@ -40,7 +38,6 @@
   
             </div>
           </div>
-        <% end %>
       <% end %>
   </div>
 </div>

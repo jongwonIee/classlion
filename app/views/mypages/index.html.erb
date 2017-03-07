@@ -118,9 +118,11 @@
   	</div>
   	
   	<div id="my_reply" class="tabcontent">
-      <%# 고민해봐야함 %>
-        <%#= render "no_review" %>
-      <%= render "my_reply" %>
+      <% if @comments.nil? %>
+        <%= render "no_reply" %>
+      <% else %>
+        <%= render "my_reply" %>
+      <% end %>
   	</div>
   	
   	<div id="my_lecture" class="tabcontent">
