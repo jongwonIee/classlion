@@ -1,0 +1,24 @@
+ <table>
+    <thead>
+    <tr>
+      <th>작성자</th>
+      <th>강의명</th>
+      <th>교수명</th>
+      <th>강평내용</th>
+      <th>제목</th>
+      <th>내용</th>
+    </tr>
+    </thead>
+    <% @reports.each do |r| %>
+        <tbody>
+        <tr>
+          <td><%= r.evaluation.user.nickname %></td>
+          <td><%= r.evaluation.course.lecture.name %></td>
+          <td><%= r.evaluation.course.professor.name %></td>
+          <td><%= r.evaluation.body %></td>
+          <td><%= r.title %></td>
+          <td><%= r.body %></td>
+        </tr>
+        </tbody>
+    <% end %>
+  </table>

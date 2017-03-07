@@ -77,8 +77,16 @@
                 <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
                 <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
                 &nbsp;·&nbsp;
-                <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
-                <br><br>
+
+                <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
+
+                <%# 만약 글쓴이라면! %>
+                &nbsp;·&nbsp;
+                <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
+                &nbsp;·&nbsp;
+                <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
+                <%# end %>
+                <br>
               </p>
 
               <%# 댓글 달때 빵빵 달리는 부분%>
@@ -86,27 +94,27 @@
                 <div class="reply_div col-xs-12">
                   <div class="reply_right col-xs-12" id="reply_list<%=e.id%>">
                     <% e.comments.each do |c| %>
-                      <div class="bubble_content" id="reply_list_child<%=c.id%>">
-                        <%= c.user.nickname %>
-                        <span class="bubble_top_right">
+                        <div class="bubble_content" id="reply_list_child<%=c.id%>">
+                          <%= c.user.nickname %>
+                          <span class="bubble_top_right">
                         <%= c.time_ago %>
-                        <% if c.user == @current_user %>
+                            <% if c.user == @current_user %>
                           &nbsp;·&nbsp;
-                          <%# 수정 - 구현해야함 %>
-                          <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <%# 수정 - 구현해야함 %>
+                                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                           &nbsp;·&nbsp;
-                          <%# 삭제 %>
-                          <%= link_to comment_path(c), remote: true, method: :delete do %>
+                                <%# 삭제 %>
+                                <%= link_to comment_path(c), remote: true, method: :delete do %>
                               <i class="fa fa-trash-o" aria-hidden="true"></i>
                           <% end %>
                         <% end %>
                         </span>
-                        <br>
-                        <p>
-                          <%= c.body %><br>
-                        </p>
-                      </div>
-                  <% end %>
+                          <br>
+                          <p>
+                            <%= c.body %><br>
+                          </p>
+                        </div>
+                    <% end %>
                   </div>
                 </div>
                 <div class="reply_div col-xs-12">
@@ -128,6 +136,31 @@
 
           </div>
         </div>
+
+
+        <%# report modal form begin %>
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <%= form_for Report.new do |f| %>
+                    <%= f.hidden_field :evaluation_id, value: e.id %>
+                    <%= f.text_field :title %>
+                    <%= f.text_field :body %>
+                    <%= f.submit "send" %>
+                <% end %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%# report modal form end %>
     <% end %>
   </div>
 </div>

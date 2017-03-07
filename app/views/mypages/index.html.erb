@@ -1,14 +1,56 @@
 <div class="index_container">
-  <div class="container-fluid">
+  <div class="container-fluid my_page_fluid">
     
     <div class="course_top my_page_top">
         <div class="course_info_div my_page_top_div">
           <div class="my_page_top_info">
-            <!--<%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%><br>-->
-            
-            <span>하리보해피콜라짱</span>
-            <hr>
-            <div class="my_page_top_icons"></div>
+            <%= image_tag "/assets/lion_1.svg", class: "my_page_lion", alt: "lion"%><br>
+            <p class="my_page_name">
+              <%= @current_user.nickname %>
+            </p>
+            <hr class="info_hr my_page_hr">
+            <div class="my_page_top_icons">
+              <ul>
+                <li>
+                  <%= image_tag "/assets/my_school.svg", class: "" %>
+                  <span>한국예술종합학교</span>
+                </li>
+                <li>
+                  <%= image_tag "/assets/my_point.svg", class: "" %>
+                  <span><%= @current_user.point %></span>
+                </li>
+                <li>
+                  <%= image_tag "/assets/my_review.svg", class: "" %>
+                  <span>3개</span>
+                </li>
+                <li>
+                  <%= image_tag "/assets/my_reply.svg", class: "" %>
+                  <span>1개</span>
+                </li>
+              </ul>
+            </div>
+            <!--<div class="my_page_top_icons">-->
+            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
+            <!--    <%= image_tag "/assets/my_school.svg", class: "" %>-->
+            <!--    <p>성균관대</p>-->
+            <!--  </div>-->
+            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
+            <!--    <%= image_tag "/assets/my_point.svg", class: "" %>-->
+            <!--    <p>1000</p>-->
+            <!--  </div>-->
+            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
+            <!--      <%= image_tag "/assets/my_review.svg", class: "" %>-->
+            <!--      <p>3개</p>-->
+            <!--  </div>-->
+            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
+            <!--      <%= image_tag "/assets/my_reply.svg", class: "" %>-->
+            <!--      <p>1개</p>-->
+            <!--  </div>              -->
+              
+
+
+            <!--</div>-->
+
             
           </div>
         	<!--<div class="info_left">-->
@@ -29,10 +71,8 @@
         <!--	</div>-->
         </div>
     </div>
-        
-  </div>
     
-  <div class="tab_div my_page_tab_div">
+    <div class="tab_div my_page_tab_div">
   	
   	<ul class="tab">
   	  <li>
@@ -46,7 +86,7 @@
   	  	</a>
   	  </li>
   	  <li>
-  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_comment')">
+  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_reply')">
   	  		내가 쓴 댓글
   	  	</a>
   	  </li>
@@ -55,144 +95,40 @@
   	  		관심강의
   	  	</a>
   	  </li>
+      <% if @current_user %>
       <li>
         <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_report')">
           신고내역
         </a>
       </li>
+      <% end %>
     </ul>
 	
   	<div id="my_info" class="tabcontent">
-  		<div class="sort_div">
-  			<div class="sort_here">
-  				정보
-  			</div>
-  		</div>
-			<%# 버튼 대신 렌더하기로 바꿔야할듯 %>
-      <p><%= link_to "버튼", edit_user_path(@current_user) %></p>
+      <%= render "my_info" %>
   	</div>
   	
   	<div id="my_review" class="tabcontent">
-  		<div class="sort_div">
-  			<div class="sort_here">
-  				리뷰
-  			</div>
-  		</div>
-  		<table>
-        <tr>
-          <th>링크</th>
-          <th>강의명</th>
-          <th>교수명</th>
-          <th>학교</th>
-          <th>평점</th>
-          <th>내용</th>
-        </tr>
-    
-        <% @evaluations.each do |e| %>
-            <tr>
-              <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
-              <td><%= e.course.lecture.name %></td>
-              <td><%= e.course.professor.name %></td>
-              <td><%= e.course.university.local_name %></td>
-              <td><%= e.point_overall %></td>
-              <td><%= e.body.html_safe %></td>
-            </tr>
-        <% end %>
-      </table>
+  	  <%#프론트 확인 위해 임시로 둘다 열어놓음%>
+  	  <%#= render "no_review" %>
+  	  <%= render "my_review" %>
   	</div>
   	
-  	<div id="my_comment" class="tabcontent">
-  		<div class="sort_div">
-  			<div class="sort_here">
-  				댓글
-  			</div>
-  		</div>
-      <table>
-        <thead>
-          <tr>
-            <th>링크</th>
-            <th>강의명</th>
-            <th>내용</th>
-          </tr>
-        </thead>
-        <% @evaluations.each do |e| %>
-          <tbody>
-            <tr>
-              <% e.comments.each do |c| %>
-                  <td><a href='/courses/<%= e.course.id %>'>링크</a></td>
-                  <td><%= e.course.lecture.name %></td>
-                  <td><%= c.body %></td>
-              <% end %>
-            </tr>
-          </tbody>
-        <% end %>
-      </table>
+  	<div id="my_reply" class="tabcontent">
+      <%#= render "no_review" %>
+      <%= render "my_reply" %>
   	</div>
   	
   	<div id="my_lecture" class="tabcontent">
-  		<div class="sort_div">
-  			<div class="sort_here">
-  				내강의
-  			</div>
-  		</div>
-      <table>
-        <thead>
-        <tr>
-          <th>링크</th>
-          <th>강의명</th>
-          <th>교수명</th>
-        </tr>
-        </thead>
-        <% @favorite_courses.each do |f| %>
-          <tbody>
-            <tr>
-              <% if @current_user %>
-                  <% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>
-                      <%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: f.id),
-                                    method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>
-                  <% end %>
-              <% end %>
-              <td><a href="/courses/<%=f.id%>">링크</a></td>
-              <td><%= f.lecture.name %></td>
-              <td><%= f.professor.name %></td>
-            </tr>
-          </tbody>
-        <% end %>
-      </table>
+  	  <%#= render "no_lecture" %>
+  	  <%= render "my_lecture" %>
   	</div>
 
     <div id="my_report" class="tabcontent">
-      <div class="sort_div">
-        <div class="sort_here">
-          신고내역
-        </div>
-      </div>
-      <table>
-        <thead>
-        <tr>
-          <th>작성자</th>
-          <th>강의명</th>
-          <th>교수명</th>
-          <th>강평내용</th>
-          <th>제목</th>
-          <th>내용</th>
-        </tr>
-        </thead>
-        <% @reports.each do |r| %>
-            <tbody>
-            <tr>
-              <td><%= r.evaluation.user.nickname %></td>
-              <td><%= r.evaluation.course.lecture.name %></td>
-              <td><%= r.evaluation.course.professor.name %></td>
-              <td><%= r.evaluation.body %></td>
-              <td><%= r.title %></td>
-              <td><%= r.body %></td>
-            </tr>
-            </tbody>
-        <% end %>
-      </table>
+      <%= render "my_report" %>
     </div>
 	
+  </div>
   </div>
 </div>
 
@@ -253,26 +189,3 @@
 
 
 
-
-
-
-
-
-
-<!--<ul class="w3-navbar w3-black">-->
-<!--  <li><a href="javascript:void(0)" onclick="openCity('London')">회원정보</a></li>-->
-<!--  <li><a href="javascript:void(0)" onclick="openCity('Paris')">내가 쓴 강의평가</a></li>-->
-<!--  <li><a href="javascript:void(0)" onclick="openCity('Seoul')">내가 쓴 댓글</a></li>-->
-<!--  <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">관심강의</a></li>-->
-<!--</ul>-->
-
-<!--<script>-->
-<!--  function openCity(cityName) {-->
-<!--    var i;-->
-<!--    var x = document.getElementsByClassName("city");-->
-<!--    for (i = 0; i < x.length; i++) {-->
-<!--      x[i].style.display = "none";-->
-<!--    }-->
-<!--    document.getElementById(cityName).style.display = "block";-->
-<!--  }-->
-<!--</script>-->

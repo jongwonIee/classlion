@@ -4,45 +4,45 @@
       <p class="feed_head">들었던 강의를 평가해주세요!</p>
       <p class="feed_head2">잘 쓴 강의평가 하나가 A+을 낳는다!</p>
       <hr class="info_hr feed_hr feed_top_hr">
-      
+
       <%= form_for @evaluation do |f| %>
-        <%= f.label :terms_and_conditions, value: "강의명(교수명)", class: "write_title" %>
-        <%= f.text_field :course_id, id: "tags", class: "write_content write_content_box", placeholder: "강의명을 입력해주세요", data: {autocomplete_source: Course.all.map { |t| { :label => t.lecture.name + "(" + t.professor.name + ")", :value => t.id }}} %>
-        <hr class="bottom_hr write_hr">
-        <%= f.hidden_field :course_id, id: "course_id" %>
-        
-        <%= f.label :terms_and_conditions, value: "강의평가", class: "write_title" %>
-        <div class="write_content">
-          <div class="write_notice">* 강의에 대한 평가를 마우스로 클릭해주세요.</div>
-          
-          <div class="score_title">총점</div>
-          <div class="score_bar">
-            <%= f.select :point_overall, options_for_select([["드랍추천",1],["약간비추",2],["무난무난",3],["괜춘한편",4],["인생강의",5]]), {}, class: "p" %> 
-          </div><br>
-          
-          <div class="score_title">널널함</div>
-          <div class="score_bar score_bar_2">
-            <%= f.select :point_easiness, options_for_select([["헬오브헬",1],["약간힘듦",2],["무난무난",3],["널널한편",4],["리얼꿀강",5]]), {}, class: "p score_bar" %>
-          </div><br>
-          
-          <div class="score_title">강의만족도</div>
-          <div class="score_bar score_bar_3">
-            <%= f.select :point_gpa_satisfaction, options_for_select([["핵불만족",1],["약간별로",2],["무난무난",3],["괜춘한편",4],["넘나만족",5]]), {}, class: "p score_bar" %>
-          </div><br>
-          
-          <div class="score_title">학점만족도</div>
-          <div class="score_bar score_bar_4">
-            <%= f.select :point_clarity, options_for_select([["소금쟁이",1],["깐깐한편",2],["그냥평타",3],["은근히꿀",4],["갓—혜자",5]]), {}, class: "p score_bar" %>
-          </div><br>
-          
-          <div class="score_title" style="vertical-align: top;">주관식 평가</div>
-          <div class="score_bar write_comment_div">
-            <%= f.text_area :body, placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 3줄 이상 작성해야 합니다.)", rows: 8, class: "write_comment_box" %>
-          <br>
-          <%= f.submit "작성하기", class: "review_write_btn" %>
+          <%= f.label :terms_and_conditions, value: "강의명(교수명)", class: "write_title" %>
+          <%= f.text_field :course_id, id: "tags", class: "write_content write_content_box", placeholder: "강의명을 입력해주세요", data: {autocomplete_source: Course.all.map { |t| { :label => t.lecture.name + "(" + t.professor.name + ")", :value => t.id }}} %>
+          <hr class="bottom_hr write_hr">
+          <%= f.hidden_field :course_id, id: "course_id" %>
+
+          <%= f.label :terms_and_conditions, value: "강의평가", class: "write_title" %>
+          <div class="write_content">
+            <div class="write_notice">* 강의에 대한 평가를 마우스로 클릭해주세요.</div>
+
+            <div class="score_title">총점</div>
+            <div class="score_bar">
+              <%= f.select :point_overall, options_for_select([["드랍추천",1],["약간비추",2],["무난무난",3],["괜춘한편",4],["인생강의",5]]), {}, class: "p" %>
+            </div><br>
+
+            <div class="score_title">널널함</div>
+            <div class="score_bar score_bar_2">
+              <%= f.select :point_easiness, options_for_select([["헬오브헬",1],["약간힘듦",2],["무난무난",3],["널널한편",4],["리얼꿀강",5]]), {}, class: "p score_bar" %>
+            </div><br>
+
+            <div class="score_title">강의만족도</div>
+            <div class="score_bar score_bar_3">
+              <%= f.select :point_gpa_satisfaction, options_for_select([["핵불만족",1],["약간별로",2],["무난무난",3],["괜춘한편",4],["넘나만족",5]]), {}, class: "p score_bar" %>
+            </div><br>
+
+            <div class="score_title">학점만족도</div>
+            <div class="score_bar score_bar_4">
+              <%= f.select :point_clarity, options_for_select([["소금쟁이",1],["깐깐한편",2],["그냥평타",3],["은근히꿀",4],["갓—혜자",5]]), {}, class: "p score_bar" %>
+            </div><br>
+
+            <div class="score_title" style="vertical-align: top;">주관식 평가</div>
+            <div class="score_bar write_comment_div">
+              <%= f.text_area :body, placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 3줄 이상 작성해야 합니다.)", rows: 8, class: "write_comment_box" %>
+              <br>
+              <%= f.submit "작성하기", class: "review_write_btn" %>
+            </div>
           </div>
-        </div>
-        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -58,7 +58,7 @@
       }
     });
   });
-  
+
   $('.p').barrating('show', {
     theme: 'bars-movie',
     initialRating: '3',

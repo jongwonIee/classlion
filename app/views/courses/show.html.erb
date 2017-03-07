@@ -5,9 +5,7 @@
     <div class="course_top">
       <div class="course_info_div">
         <div class="info_left">
-          <!--<div>-->
-          <%= image_tag "/assets/prof.svg", class: "course_prof_img", alt: "professor"%>
-          <!--</div>-->
+          <%= image_tag "/assets/prof.svg", class: "course_prof_img", alt: "professor" %>
         </div>
 
         <div class="info_right_1">
@@ -15,67 +13,72 @@
             <span class="info_course">
               <%= @course.lecture.name %>
               <% if @current_user %>
-                  <%= hidden_field_tag 'c_id', @course.id %>
+                <%= hidden_field_tag 'c_id', @course.id %>
                   <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
-                      <span class="heart favorite_btn" id="favorite_delete_btn" style="background-position: right;"></span>
-                  <% else %>
-                      <span class="heart favorite_btn" id="favorite_add_btn" style="background-position: left;"></span>
-                  <% end %>
+                    <%= button_tag class: 'favorite_btn', id: 'favorite_delete_btn' do %>
+                      <i class="fa fa-heart favorite" aria-hidden="true"></i>
+                    <% end %>
+                <% else %>
+                    <%= button_tag class: 'favorite_btn', id: 'favorite_add_btn' do %>
+                      <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+                    <% end %>
+                <% end %>
               <% end %>
+
             </span>
-          <br>
-          <% if @course.is_major == true %>
+            <br>
+            <% if @course.is_major == true %>
               <span class="info_prof_major">
                 <span class="lec_cate lec_major">전공</span><%= @course.professor.name %> 교수님
               </span>
-          <% else %>
+            <% else %>
               <span class="info_prof_kyo">
                 <span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님
               </span>
-          <% end %>
-        </div>
-      </div><%#////info_right_1%>
+            <% end %>
+          </div>
+        </div><%#////info_right_1%>
 
-      <div class="info_right_2">
-        <hr class="info_hr">
-        <div class="info_p_div">
-          <p class="info_1">
-            <span class="info_title">학수번호</span> <%= @course.lecture.code %>
-          </p>
-          <p class="info_2">
-            <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
-          </p>
-          <p class="info_3">
-            <span class="info_title">같은 강의</span>
-            <% if !@identical_courses.present? %>
-                같은 강의가 없습니다
-            <% else %>
-                <% @identical_courses.each do |id| %>
-                    <% @other_course = Course.find(id) %>
-                    <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-                <% end %>
-            <% end %>
-          </p>
-          <p class="info_4">
-            <span class="info_title">연관 강의</span>
-            <% if !@related_courses.present? %>
-                연관 강의가 없습니다
-            <% else %>
-                <% @related_courses.each do |id| %>
-                    <% @other_course = Course.find(id) %>
-                    <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-                <% end %>
-            <% end %>
-          </p>
-        </div><%#////info_p_div%>
-        <div class="info_btn_div">
-          <button class="info_btn">
-            <i class="fa fa-pencil" aria-hidden="true"></i> 강의평가 쓰러가기
-          </button>
-        </div><%#////info_btn_div%>
-      </div><%#////info_right_2%>
-    </div><%#////course_info_div%>
-  </div><%#////course_top %>
+        <div class="info_right_2">
+          <hr class="info_hr">
+          <div class="info_p_div">
+            <p class="info_1">
+              <span class="info_title">학수번호</span> <%= @course.lecture.code %>
+            </p>
+            <p class="info_2">
+              <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
+            </p>
+            <p class="info_3">
+              <span class="info_title">같은 강의</span>
+              <% if !@identical_courses.present? %>
+                  같은 강의가 없습니다
+              <% else %>
+                  <% @identical_courses.each do |id| %>
+                      <% @other_course = Course.find(id) %>
+                      <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                  <% end %>
+              <% end %>
+            </p>
+            <p class="info_4">
+              <span class="info_title">연관 강의</span>
+              <% if !@related_courses.present? %>
+                  연관 강의가 없습니다
+              <% else %>
+                  <% @related_courses.each do |id| %>
+                      <% @other_course = Course.find(id) %>
+                      <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                  <% end %>
+              <% end %>
+            </p>
+          </div><%#////info_p_div%>
+          <div class="info_btn_div">
+            <button class="info_btn">
+              <i class="fa fa-pencil" aria-hidden="true"></i> 강의평가 쓰러가기
+            </button>
+          </div><%#////info_btn_div%>
+        </div><%#////info_right_2%>
+      </div><%#////course_info_div%>
+    </div><%#////course_top %>
 
     <hr class="bottom_hr">
 
