@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+
   #비로그인 시 root
   root 'home#index'
+
+  #신고
+  resources :reports
 
   #로그인 시 메인
   get '/main' => 'evaluations#main'

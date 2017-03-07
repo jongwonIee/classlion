@@ -2,11 +2,14 @@ class MypagesController < ApplicationController
   include MypagesHelper
 
   def index
-    #자신이 쓴 강의평
+    @evaluations = @current_user.evaluations.order(created_at: :desc)
+
     @favorite_courses = []
-    @evaluations = @current_user.evaluations
     Favorite.where('user_id =?', @current_user.id).each do |f|
       @favorite_courses << Course.find(f.course_id)
     end
+    @favorite_courses.reverse!
+
+    @reports = Report.where('user_id =?', @current_user.id).order(created_at: :desc)
   end
 end

@@ -55,6 +55,11 @@
   	  		관심강의
   	  	</a>
   	  </li>
+      <li>
+        <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_report')">
+          신고내역
+        </a>
+      </li>
     </ul>
 	
   	<div id="my_info" class="tabcontent">
@@ -155,6 +160,38 @@
         <% end %>
       </table>
   	</div>
+
+    <div id="my_report" class="tabcontent">
+      <div class="sort_div">
+        <div class="sort_here">
+          신고내역
+        </div>
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <th>작성자</th>
+          <th>강의명</th>
+          <th>교수명</th>
+          <th>강평내용</th>
+          <th>제목</th>
+          <th>내용</th>
+        </tr>
+        </thead>
+        <% @reports.each do |r| %>
+            <tbody>
+            <tr>
+              <td><%= r.evaluation.user.nickname %></td>
+              <td><%= r.evaluation.course.lecture.name %></td>
+              <td><%= r.evaluation.course.professor.name %></td>
+              <td><%= r.evaluation.body %></td>
+              <td><%= r.title %></td>
+              <td><%= r.body %></td>
+            </tr>
+            </tbody>
+        <% end %>
+      </table>
+    </div>
 	
   </div>
 </div>

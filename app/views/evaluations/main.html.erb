@@ -87,7 +87,30 @@
                 <p class="feed_etc col-xs-12">
                   <%= e.time_ago %>
                   ·
-                  <a href="#"><%= image_tag "siren.svg", alt: "lion" %></a>
+                  <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
+                  <%# report modal form begin %>
+                  <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                          <%= form_for Report.new do |f| %>
+                              <%= f.hidden_field :evaluation_id, value: e.id %>
+                              <%= f.text_field :title %>
+                              <%= f.text_field :body %>
+                              <%= f.submit "send" %>
+                          <% end %>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%# report modal form end %>
                 </p>
               </div>
             </div>

@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'bootstrap-sass'
+gem 'bootstrap-modal-rails'
+
 gem 'rails-i18n'
 
 gem 'sprockets', '3.6.3'

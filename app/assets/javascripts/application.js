@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-modal
 //= require tinymce/jquery.tinymce.min.js
 //= require tinymce/tinymce.min.js
 //= require_tree .
