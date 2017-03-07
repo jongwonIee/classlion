@@ -95,13 +95,6 @@
   	  		관심강의
   	  	</a>
   	  </li>
-      <% if @current_user %>
-      <li>
-        <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_report')">
-          신고내역
-        </a>
-      </li>
-      <% end %>
     </ul>
 	
   	<div id="my_info" class="tabcontent">
@@ -132,10 +125,6 @@
   	    <%= render "my_lecture" %>
       <% end %>
   	</div>
-
-    <div id="my_report" class="tabcontent">
-      <%= render "my_report" %>
-    </div>
 	
   </div>
   </div>
