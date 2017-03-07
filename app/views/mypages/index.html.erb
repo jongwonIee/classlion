@@ -110,18 +110,25 @@
   	
   	<div id="my_review" class="tabcontent">
   	  <%#프론트 확인 위해 임시로 둘다 열어놓음%>
-  	  <%#= render "no_review" %>
-  	  <%= render "my_review" %>
+      <% if @evaluations.empty? %>
+  	    <%= render "no_review" %>
+      <% else %>
+  	    <%= render "my_review" %>
+      <% end %>
   	</div>
   	
   	<div id="my_reply" class="tabcontent">
-      <%#= render "no_review" %>
+      <%# 고민해봐야함 %>
+        <%#= render "no_review" %>
       <%= render "my_reply" %>
   	</div>
   	
   	<div id="my_lecture" class="tabcontent">
-  	  <%#= render "no_lecture" %>
-  	  <%= render "my_lecture" %>
+      <% if @favorite_courses.nil? %>
+  	    <%= render "no_lecture" %>
+      <% else %>
+  	    <%= render "my_lecture" %>
+      <% end %>
   	</div>
 
     <div id="my_report" class="tabcontent">
