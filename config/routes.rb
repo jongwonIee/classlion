@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'admins/index'
+
   #비로그인 시 root
   root 'home#index'
 
