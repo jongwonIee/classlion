@@ -66,7 +66,7 @@
               <% else %>
                   <% @related_courses.each do |id| %>
                       <% @other_course = Course.find(id) %>
-                      <a href=/courses/show/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
+                      <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
                   <% end %>
               <% end %>
             </p>
