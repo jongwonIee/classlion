@@ -13,7 +13,7 @@
               <ul>
                 <li>
                   <%= image_tag "/assets/my_school.svg", class: "" %>
-                  <span>한국예술종합학교</span>
+                  <span><%= @current_user.university.local_name %></span>
                 </li>
                 <li>
                   <%= image_tag "/assets/my_point.svg", class: "" %>
@@ -21,11 +21,11 @@
                 </li>
                 <li>
                   <%= image_tag "/assets/my_review.svg", class: "" %>
-                  <span>3개</span>
+                  <span><%= @current_user.evaluations.count %></span>
                 </li>
                 <li>
                   <%= image_tag "/assets/my_reply.svg", class: "" %>
-                  <span>1개</span>
+                  <span><%= @current_user.comments.count %></span>
                 </li>
               </ul>
             </div>
