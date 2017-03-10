@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'bootstrap-sass'
-gem 'bootstrap-modal-rails'
+#사용자 기기 인식
+gem 'mobvious'
 
 gem 'rails-i18n'
 
 gem 'sprockets', '3.6.3'
 
-# 권한부여
+#권한부여
 gem 'rolify'
 gem 'cancancan'
 
-# 썬스팟
+#썬스팟
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'progress_bar'

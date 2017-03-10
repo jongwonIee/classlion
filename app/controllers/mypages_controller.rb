@@ -11,6 +11,6 @@ class MypagesController < ApplicationController
       @favorite_courses << Course.find(f.course_id)
     end
     @favorite_courses.reverse!
-    
+
   end
 end
