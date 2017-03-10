@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 #사용자 기기 인식
 gem 'mobvious'
+gem 'mobvious-rails'
 
 gem 'rails-i18n'
 

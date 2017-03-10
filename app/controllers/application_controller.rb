@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  include Mobvious::Rails::Controller
   include SessionsHelper
 
   protect_from_forgery with: :exception
@@ -29,4 +29,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id])
   end
 
+  #returns false unless mobile
+  def mobile_check
+    for_device_type :mobile do
+      @is_mobile = true
+    end
+  end
 end
