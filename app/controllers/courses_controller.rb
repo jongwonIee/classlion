@@ -20,14 +20,24 @@ class CoursesController < ApplicationController
     #cancancan
     authorize! :show, Course
 
-    @course = Course.find(params[:id]) #강의를 찾는다
+    @course = Course.find(params[:id])
 
+    #for 즐겨 찾기
     $course = Course.find(params[:id])
 
-    @evaluations = @course.evaluations.order(created_at: :desc) #최신순
-    @evaluations_by_point = @course.evaluations.order(point_overall: :desc) #총점순
-    @evaluations_by_point_desc = @course.evaluations.order(:point_overall) #총점역순
+    #dropdown filter
+    @params = params[:order]
+    if @params == "최신순"
+      @evaluations = @course.evaluations.order(created_at: :desc) #최신순
+    elsif @params == "총점순"
+      @evaluations = @course.evaluations.order(point_overall: :desc) #총점순
+    elsif @params == "총점역순"
+      @evaluations = @course.evaluations.order(:point_overall) #총점역순
+    else
+      @evaluations = @course.evaluations.order(created_at: :desc) #최신순
+    end
 
+    #같은 강의, 연관 강
     @related_courses = Set.new
     @identical_courses = Set.new
 

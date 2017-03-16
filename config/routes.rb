@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   #강의 리스트(검색결과)
   resources :courses
+  #검색결과필터
+  post '/courses/:id', to: 'courses#show', as: 'show'
 
   #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do

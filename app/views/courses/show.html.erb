@@ -151,7 +151,9 @@
     <div id="review" class="tabcontent">
       <div class="sort_div">
         <div class="sort_here">
-          강의평가별: 최신순
+          <%= form_tag course_path do %>
+              <%= select_tag 'order', options_for_select(['최신순','총점순','총점역순'], @params) ,onchange: "$('#order').submit();" %>
+          <% end %>
         </div>
       </div>
       <% if @course.evaluation_count > 0 %>
