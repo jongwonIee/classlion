@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :session_check, :only => ["new", "create", "check_nickname", "check_email"]
+  before_action :session_check
 
   def show
     # 마이페이지로 대처? 고민해볼 것
@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def new
     # 회원가입 form
+    redirect_to "/main" if @current_user #이미 로그인한 상태라면 main페이지로 리다렉트
     @user = User.new
   end
 

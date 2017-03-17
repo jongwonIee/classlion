@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     #로그인 form
-
+    redirect_to "/main" if @current_user #이미 로그인한 상태라면 main페이지로 리다렉트
   end
 
   def create

@@ -20,11 +20,10 @@
                     <% end %>
                 <% else %>
                     <%= button_tag class: 'favorite_btn', id: 'favorite_add_btn' do %>
-                      <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
-                    <% end %>
+                    <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-
+            <% end %>
             </span>
             <br>
             <% if @course.is_major == true %>
@@ -172,16 +171,16 @@
   <%# 관심강의 제거 %>
   $(document).on("click","#favorite_delete_btn",function() {
     var course_id = $('#c_id').val();
-
     $.ajax({
       method: "POST",
       url: '/users/favorites_delete',
       data: {c_id: course_id},
       dataType: "json",
-      success: function (result) {
+      success: function ( result) {
         if(result.msg === "ok"){
-          $('.favorite_btn').removeClass("heartAnimation").attr("id", "favorite_add_btn");
-          $('.favorite_btn').css("background-position","left");
+          $('.favorite_btn i').addClass('not_favorite');
+          $('.favorite_btn i').removeClass('favorite');
+          $('.favorite_btn').attr("id", "favorite_add_btn");
         }else if(result.msg === "error"){
           console.log(result.msg);
         }
@@ -196,10 +195,11 @@
       url: '/users/favorites_add',
       data: {c_id: course_id},
       dataType: "json",
-      success: function (result) {
+      success: function ( result) {
         if(result.msg === "ok"){
-          $('.favorite_btn').addClass("heartAnimation").attr("id", "favorite_delete_btn");//applying animation class
-          $('.favorite_btn').css("background-position","right");
+          $('.favorite_btn i').addClass('favorite');
+          $('.favorite_btn i').removeClass('not_favorite');
+          $('.favorite_btn').attr("id", "favorite_delete_btn");
         }else if(result.msg === "error"){
           console.log(result.msg);
         }
