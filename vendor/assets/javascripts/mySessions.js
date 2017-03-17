@@ -7,7 +7,7 @@ $(document).ready(function(){
     $('.login_input').focusin(function(){
         $(this).addClass('focus');
         //focus가 오면 error메세지를 가리고, 선색은 흰색
-        $('#session_error_div span').hide();
+        $('#session_error_div div').hide();
         $('.remember_div').show(); //로그인 상태 유지 보이기
         sessionEmail[0].parentNode.parentNode.style.borderColor = "#fff";
         sessionPassword[0].parentNode.parentNode.style.borderColor = "#fff";
