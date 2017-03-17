@@ -1,4 +1,3 @@
-<!--강의 검색결과 -->
 <div class="index_container">
   <div class="container-fluid">
 
@@ -52,10 +51,13 @@
               <% if !@identical_courses.present? %>
                   같은 강의가 없습니다
               <% else %>
-                  <% @identical_courses.each do |id| %>
-                      <% @other_course = Course.find(id) %>
-                      <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-                  <% end %>
+                  <select onchange="window.location.replace('/courses/'+this.value);">
+                    <option selected disabled hidden style='display: none' value=''></option>
+                    <% @identical_courses.each do |id| %>
+                        <% @other_course = Course.find(id) %>
+                        <option value="<%= id %>"><%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</option>
+                    <% end %>
+                  </select>
               <% end %>
             </p>
             <p class="info_4">
@@ -63,10 +65,13 @@
               <% if !@related_courses.present? %>
                   연관 강의가 없습니다
               <% else %>
-                  <% @related_courses.each do |id| %>
-                      <% @other_course = Course.find(id) %>
-                      <a href=/courses/<%= id %>> <%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</a>
-                  <% end %>
+                  <select onchange="window.location.replace('/courses/'+this.value);">
+                    <option selected disabled hidden style='display: none' value=''></option>
+                    <% @related_courses.each do |id| %>
+                    <% @other_course = Course.find(id) %>
+                    <option value="<%= id %>"><%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</option>
+                    <% end %>
+                  </select>
               <% end %>
             </p>
           </div><%#////info_p_div%>
@@ -167,7 +172,9 @@
   </div>
 </div>
 
+
 <%# 스크립트 분리할 것%>
+
 <script>
   <%# 관심강의 제거 %>
   $(document).on("click","#favorite_delete_btn",function() {
@@ -548,3 +555,4 @@
   //tab end//
 
 </script>
+
