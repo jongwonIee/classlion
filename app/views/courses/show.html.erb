@@ -150,8 +150,9 @@
     <div id="review" class="tabcontent">
       <div class="sort_div">
         <div class="sort_here">
-          <%= form_tag course_path do %>
-              <%= select_tag 'order', options_for_select(['최신순','총점순','총점역순'], @params) ,onchange: "$('#order').submit();" %>
+          <%# partial refresh needed %>
+          <%= form_tag do %>
+              <%= select_tag 'order', options_for_select(['최신순','총점순','총점역순'], @params), onchange: "$('#order').submit();" %>
           <% end %>
         </div>
       </div>
