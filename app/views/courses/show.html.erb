@@ -51,13 +51,11 @@
               <% if !@identical_courses.present? %>
                   같은 강의가 없습니다
               <% else %>
-                  <select onchange="window.location.replace('/courses/'+this.value);">
-                    <option selected disabled hidden style='display: none' value=''></option>
-                    <% @identical_courses.each do |id| %>
-                        <% @other_course = Course.find(id) %>
-                        <option value="<%= id %>"><%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</option>
-                    <% end %>
-                  </select>
+                  <% @other_course = [] %>
+                  <% @identical_courses.each do |id| %>
+                      <% @other_course << Course.find(id) %>
+                  <% end %>
+                  <%= select_tag 'identical', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [@msg,@msg])  ), selected: @msg, onchange: "window.location.replace('/courses/'+this.value);" %>
               <% end %>
             </p>
             <p class="info_4">
@@ -65,13 +63,11 @@
               <% if !@related_courses.present? %>
                   연관 강의가 없습니다
               <% else %>
-                  <select onchange="window.location.replace('/courses/'+this.value);">
-                    <option selected disabled hidden style='display: none' value=''></option>
-                    <% @related_courses.each do |id| %>
-                    <% @other_course = Course.find(id) %>
-                    <option value="<%= id %>"><%= @other_course.lecture.name %> (<%= @other_course.professor.name %>)</option>
-                    <% end %>
-                  </select>
+                  <% @other_course = [] %>
+                  <% @related_courses.each do |id| %>
+                    <% @other_course << Course.find(id) %>
+                  <% end %>
+                  <%= select_tag 'related', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [@msg,@msg])  ), selected: @msg, onchange: "window.location.replace('/courses/'+this.value);" %>
               <% end %>
             </p>
           </div><%#////info_p_div%>

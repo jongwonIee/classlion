@@ -53,6 +53,8 @@ class CoursesController < ApplicationController
     #자기 자신 제외
     @related_courses.delete(params[:id].to_i)
     @identical_courses.delete(params[:id].to_i)
+
+    @msg = "선택해주세요"
   end
 
   def favorites_add
