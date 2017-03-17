@@ -309,6 +309,12 @@ body {
     border: none;
 }
 
+/* 우리 임의 추가*/
+.focus {
+    //input에 포커스가 왔을 때
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .join_gp { /*check btn 필요한 그룹 묶어주기*/
     width: 100%;
     padding-left: 5%;
@@ -338,7 +344,7 @@ body {
 .check_div {
     display: inline-block;
     width: 35%;
-    /*text-align: right;*/
+    text-align: right;
     /*text-indent: -5%;*/
 }
 
@@ -354,6 +360,7 @@ body {
     width: 100%;
     font-size: 14px;
 }
+
 #error_div{ /*session에서의 에러메세지*/
     margin-top: 10px;
     margin-bottom: 10px;
