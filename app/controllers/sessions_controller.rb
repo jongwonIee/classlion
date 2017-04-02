@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     #로그인 form
-    redirect_to "/main" if @current_user #이미 로그인한 상태라면 main페이지로 리다렉트
+    redirect_to '/main' if @current_user && @current_user.activated? #이미 로그인한 상태고, 이메일인증 된 경우 main페이지로 리다렉트
   end
 
   def create
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
           flash[:notice] = '어서오세요!'
           render js: "window.location='/main'"
         else
-          render js: "window.location='/signup/send_authMail/#{user.email}'"
+          render js: "window.location='/signup/send_authMail'"
         end
       else
         respond_to do |format|

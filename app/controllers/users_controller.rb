@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def new
     # 회원가입 form
-    redirect_to "/main" if @current_user #이미 로그인한 상태라면 main페이지로 리다렉트
+    redirect_to '/main' if @current_user && @current_user.activated? #이미 로그인한 상태고, 이메일인증 된 경우 main페이지로 리다렉트
     @user = User.new
   end
 

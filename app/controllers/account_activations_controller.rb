@@ -38,12 +38,12 @@ class AccountActivationsController < ApplicationController
 
     elsif user.activated?
       @msg = "이미 인증된 이메일 입니다!"
-      render 're_authMail' #로그인하라고 로그인페이지로 리다이렉트
+      render 're_authMail' #로그인하라고 로그인페이지로 리다이렉트하는 식으로 짤까?
 
     elsif user && !user.activated? #사용자가 있으면서 아직 활성화가 되지 않았다면
       if user.resend_activation_email #이메일 재전송
         user.send_activation_email
-        redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
+        redirect_to "/signup/send_authMail" #이메일 인증 안내 페이지로
       else
         flash[:warning] = "어머나, 문제가 생겼어요!"
         redirect_to '/signup/resend_authMail'
