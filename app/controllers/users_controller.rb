@@ -18,7 +18,10 @@ class UsersController < ApplicationController
 
     if user.save
       user.send_activation_email
-      redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
+      # redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
+      session[:user_id] = user.id #세션생성
+      # render text: session[:user_id].email
+      redirect_to '/signup/send_authMail' #세션이 있는 상태에서 리다이렉트
     else
       render action: "new"
     end

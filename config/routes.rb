@@ -24,7 +24,10 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   #인증 이메일 안내
-  get '/signup/send_authMail/:e' => 'account_activations#authMail', :constraints => { :e => /.+@.+\..*/ }
+  #get '/signup/send_authMail/:e' => 'account_activations#authMail', :constraints => { :e => /.+@.+\..*/ }
+  #인증 이메일 안내 수정중
+  get '/signup/send_authMail' => 'account_activations#authMail'
+
   #인증 이메일 재전송
   get '/signup/resend_authMail' => 'account_activations#re_authMail' #안내 폼
   post '/signup/resend_authMail' => 'account_activations#resend_authMail' #실제 전송 프로세스

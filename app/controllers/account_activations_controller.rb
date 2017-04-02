@@ -19,7 +19,8 @@ class AccountActivationsController < ApplicationController
 
   def authMail
     #인증 이메일 안내 view
-    @email = params[:e]
+    # @email = params[:e]
+    @email =  User.find_by(id: session[:user_id]).email
   end
 
   def re_authMail
