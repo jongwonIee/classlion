@@ -4,7 +4,7 @@ class CreateEvaluations < ActiveRecord::Migration[5.0]
       t.integer   :user_id,       null: false
       t.integer   :course_id,     null: false
 
-      t.boolean   :is_like, default: 0 , null: false
+      t.boolean   :is_like, default: false , null: false
 
       t.text      :body,         null: false
 
