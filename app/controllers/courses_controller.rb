@@ -30,9 +30,9 @@ class CoursesController < ApplicationController
     if @params == "최신순"
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     elsif @params == "총점순"
-      @evaluations = @course.evaluations.order(point_overall: :desc) #총점순
+      @evaluations = @course.evaluations.order(is_like: :desc) #총점순
     elsif @params == "총점역순"
-      @evaluations = @course.evaluations.order(:point_overall) #총점역순
+      @evaluations = @course.evaluations.order(:is_like) #총점역순
     else
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     end

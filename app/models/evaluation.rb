@@ -37,10 +37,7 @@ class Evaluation < ApplicationRecord
     course = self.course
     course.update_attributes(
         evaluation_count: course.evaluation_count + 1,
-        point_overall_sum: course.point_overall_sum + self.point_overall,
-        point_gpa_satisfaction_sum: course.point_gpa_satisfaction_sum + self.point_gpa_satisfaction,
-        point_easiness_sum: course.point_easiness_sum + self.point_easiness,
-        point_clarity_sum: course.point_clarity_sum + self.point_clarity
+        is_like_total: course.is_like_total + self.is_like_total
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count + 1)
@@ -50,10 +47,7 @@ class Evaluation < ApplicationRecord
     course = self.course
     course.update_attributes(
         evaluation_count: course.evaluation_count - 1,
-        point_overall_sum: course.point_overall_sum - self.point_overall,
-        point_gpa_satisfaction_sum: course.point_gpa_satisfaction_sum - self.point_gpa_satisfaction,
-        point_easiness_sum: course.point_easiness_sum - self.point_easiness,
-        point_clarity_sum: course.point_clarity_sum - self.point_clarity
+        point_overall_sum: course.is_like_total - self.is_like_total
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count - 1)

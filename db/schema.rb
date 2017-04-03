@@ -21,29 +21,23 @@ ActiveRecord::Schema.define(version: 20170307055410) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.integer  "professor_id",                              null: false
-    t.integer  "lecture_id",                                null: false
-    t.integer  "university_id",                             null: false
-    t.integer  "evaluation_count",           default: 0,    null: false
-    t.integer  "point_overall_sum",          default: 0,    null: false
-    t.integer  "point_easiness_sum",         default: 0,    null: false
-    t.integer  "point_gpa_satisfaction_sum", default: 0,    null: false
-    t.integer  "point_clarity_sum",          default: 0,    null: false
-    t.boolean  "is_major",                   default: true, null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.integer  "professor_id",                    null: false
+    t.integer  "lecture_id",                      null: false
+    t.integer  "university_id",                   null: false
+    t.integer  "evaluation_count", default: 0,    null: false
+    t.integer  "is_like_total",    default: 0,    null: false
+    t.boolean  "is_major",         default: true, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "evaluations", force: :cascade do |t|
-    t.integer  "user_id",                            null: false
-    t.integer  "course_id",                          null: false
-    t.integer  "point_overall",          default: 0, null: false
-    t.integer  "point_easiness",         default: 0, null: false
-    t.integer  "point_gpa_satisfaction", default: 0, null: false
-    t.integer  "point_clarity",          default: 0, null: false
-    t.text     "body",                               null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "course_id",                  null: false
+    t.boolean  "is_like",    default: false, null: false
+    t.text     "body",                       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "favorites", force: :cascade do |t|
