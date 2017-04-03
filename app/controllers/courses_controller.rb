@@ -17,10 +17,19 @@ class CoursesController < ApplicationController
   end
 
   def show
+    #evaluation
+    @evaluation = Evaluation.new
+
     #cancancan
     authorize! :show, Course
 
     @course = Course.find(params[:id])
+    @count = @course.evaluation_count
+    @like = @course.is_like_total
+    @dislike = @count - @like
+    @like_per = (@like.to_f/@count).round(1)
+    @dislike_per = (@dislike.to_f/@count).round(1)
+
 
     #for 즐겨 찾기
     $course = Course.find(params[:id])
@@ -37,7 +46,7 @@ class CoursesController < ApplicationController
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     end
 
-    #같은 강의, 연관 강
+    #같은 강의, 연관 강의
     @related_courses = Set.new
     @identical_courses = Set.new
 
