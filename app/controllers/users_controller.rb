@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def new
     # 회원가입 form
-    redirect_to "/main" if @current_user #이미 로그인한 상태라면 main페이지로 리다렉트
+    redirect_to '/main' if @current_user && @current_user.activated? #이미 로그인한 상태고, 이메일인증 된 경우 main페이지로 리다렉트
     @user = User.new
   end
 
@@ -18,7 +18,10 @@ class UsersController < ApplicationController
 
     if user.save
       user.send_activation_email
-      redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
+      # redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
+      session[:user_id] = user.id #세션생성
+      # render text: session[:user_id].email
+      redirect_to '/signup/send_authMail' #세션이 있는 상태에서 리다이렉트
     else
       render action: "new"
     end

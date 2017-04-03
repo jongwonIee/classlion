@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
         @current_user = user
       end
     else
-      redirect_to "/"
+      redirect_to '/'
     end
   end
 
