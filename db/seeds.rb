@@ -58,14 +58,14 @@ File.read("db/seed_data/courses.csv").split("\n").each do |line|
   )
 end
 
-puts "Inserting evaluation data.."
-File.read("db/seed_data/evaluations.csv").split("\n").each do |line|
-  data = line.strip.split("\t")
-  Evaluation.create(
-      id: data[0],
-      user_id: data[1],
-      course_id: data[2],
-      is_like: data[3],
-      body: data[4]
-  )
-end
+# puts "Inserting evaluation data.."
+# File.read("db/seed_data/evaluations.csv").split("\n").each do |line|
+#   data = line.strip.split("\t")
+#   Evaluation.create(
+#       id: data[0],
+#       user_id: data[1],
+#       course_id: data[2],
+#       is_like: data[3],
+#       body: data[4]
+#   )
+# end
