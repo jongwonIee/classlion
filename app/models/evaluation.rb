@@ -37,7 +37,7 @@ class Evaluation < ApplicationRecord
     course = self.course
     course.update_attributes(
         evaluation_count: course.evaluation_count + 1,
-        is_like_total: course.is_like_total + self.is_like_total
+        is_like_total: course.is_like_total + converter(self.is_like)
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count + 1)
@@ -47,10 +47,17 @@ class Evaluation < ApplicationRecord
     course = self.course
     course.update_attributes(
         evaluation_count: course.evaluation_count - 1,
-        point_overall_sum: course.is_like_total - self.is_like_total
+        is_like_total: course.is_like_total - converter(self.is_like)
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count - 1)
   end
 
+  def converter(boolean)
+    if boolean == true
+      1
+    elsif boolean == false
+      0
+    end
+  end
 end
