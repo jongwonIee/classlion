@@ -27,8 +27,8 @@ class CoursesController < ApplicationController
     @count = @course.evaluation_count
     @like = @course.is_like_total
     @dislike = @count - @like
-    @like_per = (@like.to_f/@count).round(1)
-    @dislike_per = (@dislike.to_f/@count).round(1)
+    @like_per = (@like.to_f/@count).round(2)
+    @dislike_per = (@dislike.to_f/@count).round(2)
 
 
     #for 즐겨 찾기
