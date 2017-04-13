@@ -1,8 +1,9 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
+  before_action :logged_in_user, only: [:main, :index, :info, :new, :create]
 
   def main #최신강평 10개를 보여줌
-    redirect_to '/signup/send_authMail' if !@current_user.activated? #이메일 인증이 안된경우 이메일 인증페이지로
+    #redirect_to '/signup/send_authMail' if !@current_user.activated? #이메일 인증이 안된경우 이메일 인증페이지로
     @evaluations = all_evaluations.limit(10)
   end
 

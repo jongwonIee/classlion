@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <title>Classlion</title>
   <!-- for encoding -->
@@ -122,7 +122,8 @@
           <li class="has-children account nvs">
             <a href="#0">
               <img src="/assets/nav_user.svg" alt="user">
-              <%= @current_user.nickname %>
+              <%= @current_user.nickname %> /
+              메일인증여부: <%=@current_user.activated? %>
             </a>
 
             <ul>

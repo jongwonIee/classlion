@@ -1,25 +1,28 @@
 class UsersController < ApplicationController
-  before_action :session_check
+  before_action :goto_main, only: [:new]
+  before_action :logged_in_user, only: [:edit, :update, :favorites_add, :favorites_delete]
+  # before_action :correct_user,   only: [:edit, :update]
 
-  def show
-    # 마이페이지로 대처? 고민해볼 것
-    @user = User.find(params[:id])
-  end
+  # def show
+  #   # 마이페이지로 대처? 고민해볼 것
+  #   @user = User.find(params[:id])
+  # end
 
   def new
     # 회원가입 form
-    redirect_to '/main' if @current_user && @current_user.activated? #이미 로그인한 상태고, 이메일인증 된 경우 main페이지로 리다렉트
+    #redirect_to '/main' if @current_user && @current_user.activated? #이미 로그인한 상태고, 이메일인증 된 경우 main페이지로 리다렉트
     @user = User.new
   end
 
   def create
     # 회원가입 process
-    user = User.new(user_params)
+    @user = User.new(user_params)
 
-    if user.save
-      user.send_activation_email
+    if @user.save
+      @user.send_activation_email
       # redirect_to "/signup/send_authMail/#{user.email}" #이메일 인증 안내 페이지로
-      session[:user_id] = user.id #세션생성
+      # session[:user_id] = user.id #세션생성
+      log_in @user
       # render text: session[:user_id].email
       redirect_to '/signup/send_authMail' #세션이 있는 상태에서 리다이렉트
     else
@@ -29,6 +32,7 @@ class UsersController < ApplicationController
 
   def edit
     # 회원정보 수정 form
+    #@user = User.find(params[:id])
     @user = @current_user
   end
 
@@ -89,4 +93,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :nickname, :is_boy, :university_id,
                                  :password, :password_confirmation)
   end
+
+  # Before filters
+
+  # Confirms a logged-in user.
+  #application_controller.rb에 정의
+
+  # Confirms the correct user.
+  # def correct_user
+  #   @user = User.find(params[:id])
+  #   redirect_to(root_url) unless current_user?(@user)
+  # end
 end
