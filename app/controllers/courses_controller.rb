@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   include CoursesHelper
+  before_action :set_course, only: [:show]
 
   def index
     if params[:search].nil? or (params[:search].split(" ").join.length < 2)
@@ -17,19 +18,25 @@ class CoursesController < ApplicationController
   end
 
   def show
+
+    @minimum_length = Evaluation.validators_on(:body ).first.options[:minimum]
+
     #evaluation
     @evaluation = Evaluation.new
 
     #cancancan
     authorize! :show, Course
 
-    @course = Course.find(params[:id])
     @count = @course.evaluation_count
     @like = @course.is_like_total
     @dislike = @count - @like
     @like_per = (@like.to_f/@count).round(2)
     @dislike_per = (@dislike.to_f/@count).round(2)
 
+    @evaluated_list = []
+    @current_user.evaluations.each do |e|
+      @evaluated_list << e.course_id
+    end
 
     #for 즐겨 찾기
     $course = Course.find(params[:id])
@@ -66,14 +73,9 @@ class CoursesController < ApplicationController
     @msg = "선택해주세요"
   end
 
-  def favorites_add
-    Favorite.create(user_id: @current_user.id, course_id: $course.id)
-    redirect_to :back
+  private
+  def set_course
+    @course = Course.find(params[:id])
   end
 
-  def favorites_delete
-    favorite = Favorite.where("user_id = ? AND course_id = ?", @current_user.id, $course.id)
-    Favorite.destroy(favorite.first.id)
-    redirect_to :back
-  end
 end
