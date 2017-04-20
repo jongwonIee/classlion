@@ -1,4 +1,5 @@
 class PasswordResetsController < ApplicationController
+  before_action :goto_main, only: [:new, :edit]
   before_action :get_user, only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
@@ -11,7 +12,7 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = "암호 재설정 이메일이 전송되었습니다."
+      flash[:info] = "비밀번호 재설정관련 메일이 전송되었습니다"
       redirect_to root_url
     else
       @msg = "등록되지않은 이메일입니다."
@@ -26,9 +27,12 @@ class PasswordResetsController < ApplicationController
     if params[:user][:password].empty?
       @user.errors.add(:password, "비밀번호는 필수정보입니다.")
       render 'edit'
+    elsif params[:user][:password] != params[:user][:password_confirmation]
+      @user.errors.add(:password, "비밀번호와 비밀번호확인이 일치하지 않습니다.")
+      render 'edit'
     elsif @user.update_attributes(user_params)
       log_in @user
-      flash[:info] = "비밀번호가 초기화 되었습니다"
+      flash[:info] = "비밀번호가 변경되었습니다"
       redirect_to '/main'
     else
       render 'edit'

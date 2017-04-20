@@ -46,7 +46,7 @@
     <%= render 'flash', name: name, msg: msg %>
 <% end %>
 
-<% if @current_user && @current_user.activated? %>
+<% if logged_in? %>
     <header class="cd-main-header">
       <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
 
@@ -122,8 +122,7 @@
           <li class="has-children account nvs">
             <a href="#0">
               <img src="/assets/nav_user.svg" alt="user">
-              <%= @current_user.nickname %> /
-              메일인증여부: <%=@current_user.activated? %>
+              <%= @current_user.nickname %>
             </a>
 
             <ul>

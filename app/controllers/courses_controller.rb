@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   include CoursesHelper
-  before_action :logged_in_user, only: [:index, :show]
+  before_action :goto_login, only: [:index, :show]
 
   def index
     if params[:search].nil? or (params[:search].split(" ").join.length < 2)
@@ -67,15 +67,4 @@ class CoursesController < ApplicationController
     @msg = "선택해주세요"
   end
 
-  # 이거 users_controller랑 겹치는 내용아닌가?
-  # def favorites_add
-  #   Favorite.create(user_id: @current_user.id, course_id: $course.id)
-  #   redirect_to :back
-  # end
-  #
-  # def favorites_delete
-  #   favorite = Favorite.where("user_id = ? AND course_id = ?", @current_user.id, $course.id)
-  #   Favorite.destroy(favorite.first.id)
-  #   redirect_to :back
-  # end
 end

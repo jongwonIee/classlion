@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
 
   def create
     #댓글 생성

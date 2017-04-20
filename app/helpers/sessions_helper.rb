@@ -1,24 +1,33 @@
 module SessionsHelper
 
-  # Logs in the given user.
+  #------------------------------------------------------로그인/로그아웃
+  # 파라미터로 넘어온 user로 로그인
   def log_in(user)
-    #로그인
     session[:user_id] = user.id
   end
 
-  # Remembers a user in a persistent session.
+  def log_out
+    forget(current_user)
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  #------------------------------------------------------'기억해두기'
+  # '기억해두기'체크하면 permanent세션에 유저 저장
   def remember(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
 
-  #######다시 코드 옮기는 중
-  # 넘어온 user가 current user인 경우 true를 반환한다
-  def current_user?(user)
-    user == current_user
+  # '기억해두기'체크 안한경우
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
   end
 
+  #------------------------------------------------------current_user 저장 및 확인
   #remember_token 쿠키와 일치하는 user를 반환한다
   def current_user
     if (user_id = session[:user_id])
@@ -32,24 +41,14 @@ module SessionsHelper
     end
   end
 
-  # user가 로그인 되어 있으면 true, 그게 아니면 false
-  def logged_in?
-    !current_user.nil? #원래 current_user였는데 사실 @붙은거랑의 차이를 잘 모르겠고요
-  end
-########다시 코드 옮기는 중
-
-  def forget(user)
-    user.forget
-    cookies.delete(:user_id)
-    cookies.delete(:remember_token)
+  # 넘어온 user가 current user인 경우 true를 반환한다
+  def current_user?(user)
+    user == current_user
   end
 
-
-  def log_out
-    #로그아웃
-    forget(current_user)
-    session.delete(:user_id)
-    @current_user = nil #####다시 코드 옮기는 중
+  #------------------------------------------------------로그인 유무 확인
+  def logged_in? #로그인이 된 상태란? ->current_user 세션이 있으면서, 이메일 인증이 완료된 사람
+    !current_user.nil? && current_user.activated?
   end
 
 end
