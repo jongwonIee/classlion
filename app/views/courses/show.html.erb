@@ -77,29 +77,22 @@
     <hr class="bottom_hr">
 
     <div class="info_score col-xs-12 row">
-      좋아요<%= @like %> (<%= @like_per %>) - 싫어요<%= @dislike %> (<%= @dislike_per %>)
-      <br>
-      <%= @count %>명의 학생이 평가했습니다.
+      <% if @course.evaluations.exists? %>
+        좋아요<%= @like %> (<%= @like_per %>) - 싫어요<%= @dislike %> (<%= @dislike_per %>)
+        <br>
+        <%= @count %>명의 학생이 평가했습니다.
+      <% else %>
+        아직 평가가 없습니다. 소중한 강의평을 남겨주세요.
+      <% end %>
     </div>
 
     <hr class="feed_hr">
-
-    <div>
-      <%= form_for @evaluation do |f| %>
-            <div class="score_bar">
-              <%= f.hidden_field :course_id, value: @course.id %>
-              <%= f.select :is_like, options_for_select([["좋아요",true],["싫어요",false]]) %>
-            </div><br>
-
-            <div class="score_title" style="vertical-align: top;">주관식 평가</div>
-            <div class="score_bar write_comment_div">
-              <%= f.text_area :body, placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 3줄 이상 작성해야 합니다.)", rows: 8, class: "write_comment_box" %>
-              <br>
-              <%= f.submit "작성하기", class: "review_write_btn" %>
-            </div>
-          </div>
-      <% end %>
-    </div>
+    
+    <% if @evaluated_list.include?(@course.id) %>
+      이미 평가를 했습니다.
+    <% else %>
+      <%= render 'form' %>
+    <% end %>
 
     <div class="tab_div">
       <ul class="tab">
@@ -230,4 +223,3 @@
   //tab end//
 
 </script>
-
