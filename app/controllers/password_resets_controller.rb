@@ -12,10 +12,10 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = "비밀번호 재설정관련 메일이 전송되었습니다"
+      flash[:info] = '비밀번호 재설정관련 메일이 전송되었습니다'
       redirect_to root_url
     else
-      @msg = "등록되지않은 이메일입니다."
+      @msg = '등록되지않은 이메일입니다.'
       render 'new'
     end
   end
@@ -25,14 +25,14 @@ class PasswordResetsController < ApplicationController
 
   def update
     if params[:user][:password].empty?
-      @user.errors.add(:password, "비밀번호는 필수정보입니다.")
+      @user.errors.add(:password, '비밀번호는 필수정보입니다.')
       render 'edit'
     elsif params[:user][:password] != params[:user][:password_confirmation]
-      @user.errors.add(:password, "비밀번호와 비밀번호확인이 일치하지 않습니다.")
+      @user.errors.add(:password, '비밀번호와 비밀번호확인이 일치하지 않습니다.')
       render 'edit'
     elsif @user.update_attributes(user_params)
       log_in @user
-      flash[:info] = "비밀번호가 변경되었습니다"
+      flash[:info] = '비밀번호가 변경되었습니다'
       redirect_to '/main'
     else
       render 'edit'
@@ -63,7 +63,7 @@ class PasswordResetsController < ApplicationController
   #토큰의 유효시간 확인
   def check_expiration
     if @user.password_reset_expired?
-      flash[:warning] = "링크의 유효시간이 초과되었습니다"
+      flash[:warning] = '링크의 유효시간이 초과되었습니다'
       redirect_to new_password_reset_url
     end
   end

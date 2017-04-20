@@ -48,8 +48,8 @@ class User < ApplicationRecord
 
   validates_length_of :password,
     maximum: PASSWORD_LENGTH_MAX, minimum: PASSWORD_LENGTH_MIN,
-    too_long: '비밀번호는 최대 #{PASSWORD_LENGTH_MAX}자 까지 가능합니다.',
-    too_short:  '비밀번호는 최소 #{PASSWORD_LENGTH_MIN}자 이상이어야 합니다.'
+    too_long: "비밀번호는 최대 #{PASSWORD_LENGTH_MAX}자 까지 가능합니다.",
+    too_short:  "비밀번호는 최소 #{PASSWORD_LENGTH_MIN}자 이상이어야 합니다."
 
 #보안토큰 관련 -------------------------------------------------
   #주어진 문자열에 대해서 hash digest를 반환
