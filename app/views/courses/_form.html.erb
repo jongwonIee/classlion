@@ -1,15 +1,15 @@
 <div>
-  <%= form_for @evaluation, html: {novalidate: 'novalidate'} do |f| %>
+  <%= simple_form_for @evaluation, html: {novalidate: 'novalidate'} do |f| %>
       <div class="score_bar">
         <%= f.hidden_field :course_id, value: @course.id %>
         <%= f.select :is_like, options_for_select([["좋아요",true],["싫어요",false]]) %>
       </div><br>
 
-      <div class="score_title" style="vertical-align: top;">주관식 평가</div>
+      <div class="score_body" style="vertical-align: top;">주관식 평가</div>
       <div class="score_bar write_comment_div">
         <%= f.text_area :body, minlength: @minimum_length, placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 3줄 이상 작성해야 합니다.)", rows: 8, class: "write_comment_box" %>
         <br>
-        최소<span id="body_counter" data-minimum-length="<%= @minimum_length %>"></span><br>
+        <span id="body_counter" data-minimum-length="<%= @minimum_length %>"></span><br>
 
         <%= f.submit "작성하기", class: "review_write_btn" %>
       </div>
@@ -20,66 +20,63 @@
 <%# 스크립트 분리할 것 %>
 <script>
   $(document).ready(function() {
-    body_validation();
-    function body_validation() {
-      var body = $("#evaluation_body");
-      var body_counter     = $("#body_counter");
-      var min_length  = body_counter.data("minimum-length");
-
-      body.keyup(function() {
-        body_counter.text(min_length - $(this).val().replace(/ /g,'').length);
-      });
-    }
-  });
-
-
-
-//  $(document).ready(function() {
 //    body_validation();
 //    function body_validation() {
 //      var body = $("#evaluation_body");
 //      var body_counter     = $("#body_counter");
 //      var min_length  = body_counter.data("minimum-length");
 //
-//      if ((body.val().replace(/ /g,'').length) >= min_length){
-//        return true;
-//      }else{
-//        return false;
-//      }
-//    }
-//
-//    $('#body_evaluation').submit(function(){
-//      if(body_validation()){
-//        console.log('true');
-//        return true;
-//      }else{
-//        console.log('false');
-//        return false;
-//      }
-//    });
-//
-//    $('#new_evaluation').submit(function() {
-//      show_body_validation();
-//    });
-//
-//    function show_body_validation() {
-//      var body = $("#evaluation_body");
-//      var body_counter     = $("#body_counter");
-//      var min_length  = body_counter.data("minimum-length");
-//      if(body_validation()){
-//        body_counter.text("");
-//      }else{
-//        body_counter.text("10글자를 채워주세요!");
-//      }
 //      body.keyup(function() {
-//        var current_length = $(this).val().replace(/ /g, '').length
-//        var left_length = min_length - current_length
-//        if(body_validation()) {
-//          body_counter.text("소중한 강의평가 감사합니다!");
-//        }else{
-//          body_counter.text(current_length + '/' + min_length + ' ' + left_length + '글자 남았어요!');
-//        }
+//        body_counter.text(min_length - $(this).val().replace(/ /g,'').length);
 //      });
 //    }
-//  });
+
+    body_validation();
+    function body_validation() {
+      var body = $("#evaluation_body");
+      var body_counter     = $("#body_counter");
+      var min_length  = body_counter.data("minimum-length");
+
+      if ((body.val().replace(/ /g,'').length) >= min_length){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    $('#new_evaluation').submit(function(){
+      if(body_validation()){
+        console.log('true');
+        return true;
+      }else{
+        console.log('false');
+        return false;
+      }
+    });
+
+    $('#new_evaluation').submit(function() {
+      show_body_validation();
+    });
+
+    function show_body_validation() {
+      var body = $("#evaluation_body");
+      var body_counter     = $("#body_counter");
+      var min_length  = body_counter.data("minimum-length");
+      if(body_validation()){
+        body_counter.text("");
+      }else{
+        body_counter.text("150자를 채워주세요!");
+      }
+      body.keyup(function() {
+        var current_length = $(this).val().replace(/ /g, '').length
+        var left_length = min_length - current_length
+        if(body_validation()) {
+          body_counter.text("소중한 강의평가 감사합니다!");
+        }else{
+          body_counter.text(current_length + '/' + min_length + ' ' + left_length + '글자 남았어요!');
+        }
+      });
+    }
+
+  });
 </script>

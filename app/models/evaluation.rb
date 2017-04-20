@@ -11,9 +11,9 @@ class Evaluation < ApplicationRecord
   before_destroy :decrease_evaluation_count
 
   #validations
-  validates :body, length: { minimum: 200 }, presence: true
+  validates :body, length: { minimum: 150 }, presence: true
 
-  before_validation :strip_whitespace, only: [:title, :body]
+  # before_validation :strip_whitespace, only: [:body]
 
   def time_ago
     #강평 작성 시간
@@ -30,9 +30,9 @@ class Evaluation < ApplicationRecord
 
   private
 
-  def strip_whitespace
-    self.title = self.title.strip unless self.title.nil?
-  end
+  # def strip_whitespace
+  #   self.body = self.body.strip unless self.body.nil?
+  # end
 
   def increase_user_point
     user = self.user
@@ -60,6 +60,7 @@ class Evaluation < ApplicationRecord
     university.update_attributes(evaluation_count: university.evaluation_count - 1)
   end
 
+  # for increase_or_decrease_evaluation_count
   def converter(boolean)
     if boolean == true
       1

@@ -19,7 +19,7 @@
             </div>
 
               <p class="feed_content tab_feed col-xs-12">
-                <%= e.body.html_safe %>
+                <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
               </p>
               <p class="feed_etc col-xs-12">
                 <%= e.time_ago %>
