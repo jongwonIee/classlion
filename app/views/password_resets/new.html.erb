@@ -5,7 +5,8 @@
       <div class="centered main_center">
 
         <p class="logo">비밀번호 재설정</p>
-        <p class="main_msg">회원가입 시 이용한 이메일 주소를 입력해주세요.</p>
+        <p class="main_msg">회원가입 시 이용한 이메일 주소를 입력해주시면,<br/>
+          비밀번호 재설정 지침을 보내드리겠습니다.</p>
 
         <%= form_for(:password_reset, url: password_resets_path, method: "post") do |f|%>
             <div class="input_group login_input email_input">

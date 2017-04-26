@@ -309,7 +309,16 @@ body {
     border: none;
 }
 
-/* 우리 임의 추가*/
+/* 우리 임의 추가 - input 에러메세지 출력 될 때 computed style로 변경되는 문제*/
+div.field_with_errors > input {
+    width: 100%;
+    background: #ff5a5f;
+    border: none;
+}
+div.field_with_errors > input::placeholder {
+    color: white;
+}
+
 .focus {
     //input에 포커스가 왔을 때
     background-color: rgba(255, 255, 255, 0.1);
@@ -393,7 +402,13 @@ body {
     font-weight: 400;
 }
 
-.go_pw {
+.go_pw{
+    display: block;
+    text-align: right;
+    margin-bottom: 2%;
+}
+
+.go_pw2{
     display: block;
     text-align: right;
     margin-bottom: 10%;

@@ -1,28 +1,39 @@
 class AccountActivationsController < ApplicationController
+  before_action :goto_main, only: [:authMail, :re_authMail]
+
+  #---------------------------------------------------------------인증 이메일 전송
+  def authMail
+    #인증 이메일 안내 view
+    if !current_user.nil?
+      email_original =  User.find_by(id: session[:user_id]).email
+      email_split = email_original.split('@') #@를 중심으로 앞뒤로 자름
+      email_slice = email_split[0].slice(0..1)#@앞부분은 2개만 겟하기
+      @email = email_slice + "*****@" + email_split[1]
+    else
+      flash[:warning] = "[에러] 잘못된 접근입니다."
+      redirect_to root_url #이메일이 nil, 즉 url로 접근하려고 했을 때
+    end
+  end
+
   def edit
     #인증 이메일 활성 process
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
       if user.activate # 3시간 이내여서 활성화 되었으면
         log_in user
-        flash[:success] = "이메일이 인증되어, 계정이 활성화되었습니다!"
+        flash[:success] = "이메일이 인증되었습니다 #{user.nickname}님 반갑습니다 :)"
         redirect_to '/main'
       else
-        flash[:warning] = "이메일 인증시간이 초과되었습니다. 재전송버튼을 눌러주세요"
-        redirect_to '/'
+        flash[:warning] = '인증시간이 초과되었습니다. 다시 인증메일을 받고싶다면 하단에 메일주소를 입력해주세요'
+        redirect_to '/signup/resend_authMail'
       end
     else
-      flash[:warning] = "[에러] 유효하지않은 링크입니다."
-      redirect_to root_url
+      flash[:warning] = '[에러] 유효하지않은 링크입니다.'
+      redirect_to '/login'
     end
   end
 
-  def authMail
-    #인증 이메일 안내 view
-    # @email = params[:e]
-    @email =  User.find_by(id: session[:user_id]).email
-  end
-
+  #--------------------------------------------------------------인증 이메일 재전송
   def re_authMail
     #인증 이메일 재전송 view
 

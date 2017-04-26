@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   include CoursesHelper
   before_action :set_course, only: [:show]
+  before_action :goto_login, only: [:index, :show]
 
   def index
     if params[:search].nil? or (params[:search].split(" ").join.length < 2)
@@ -73,9 +74,12 @@ class CoursesController < ApplicationController
     @msg = "선택해주세요"
   end
 
+<<<<<<< HEAD
   private
   def set_course
     @course = Course.find(params[:id])
   end
 
+=======
+>>>>>>> user
 end
