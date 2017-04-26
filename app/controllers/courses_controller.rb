@@ -74,12 +74,8 @@ class CoursesController < ApplicationController
     @msg = "선택해주세요"
   end
 
-<<<<<<< HEAD
   private
   def set_course
     @course = Course.find(params[:id])
   end
-
-=======
->>>>>>> user
 end
