@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :favorites
   has_many :courses, through: :favorites
+  has_many :likes
+  has_many :courses, through: :likes
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_create :increase_user_count, :create_activation_digest

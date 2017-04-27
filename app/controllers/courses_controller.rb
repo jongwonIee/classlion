@@ -23,6 +23,7 @@ class CoursesController < ApplicationController
 
     #evaluation
     @evaluation = Evaluation.new
+    @like = Like.new
 
     #cancancan
     authorize! :show, Course

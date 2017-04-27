@@ -6,6 +6,7 @@ class Evaluation < ApplicationRecord
   belongs_to :user
   has_many :comments
   has_many :reports
+  has_one :like
 
   before_create :increase_evaluation_count, :increase_user_point
   before_destroy :decrease_evaluation_count
@@ -43,8 +44,7 @@ class Evaluation < ApplicationRecord
   def increase_evaluation_count
     course = self.course
     course.update_attributes(
-        evaluation_count: course.evaluation_count + 1,
-        is_like_total: course.is_like_total + converter(self.is_like)
+        evaluation_count: course.evaluation_count + 1
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count + 1)
@@ -53,8 +53,7 @@ class Evaluation < ApplicationRecord
   def decrease_evaluation_count
     course = self.course
     course.update_attributes(
-        evaluation_count: course.evaluation_count - 1,
-        is_like_total: course.is_like_total - converter(self.is_like)
+        evaluation_count: course.evaluation_count - 1
     )
     university = self.course.university
     university.update_attributes(evaluation_count: university.evaluation_count - 1)

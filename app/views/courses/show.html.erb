@@ -91,6 +91,7 @@
     <% if @evaluated_list.include?(@course.id) %>
       이미 평가를 했습니다.
     <% else %>
+      <%= render 'like_form' %>
       <%= render 'form' %>
     <% end %>
 
