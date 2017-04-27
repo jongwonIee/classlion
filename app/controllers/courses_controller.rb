@@ -32,16 +32,13 @@ class CoursesController < ApplicationController
     @count = @course.evaluation_count
     @like = @course.is_like_total
     @dislike = @count - @like
-    @like_per = (@like.to_f/@count).round(2)
-    @dislike_per = (@dislike.to_f/@count).round(2)
+    @like_per = (@like.to_f/@count).round(2)*100
+    @dislike_per = (@dislike.to_f/@count).round(2)*100
 
     @evaluated_list = []
     @current_user.evaluations.each do |e|
       @evaluated_list << e.course_id
     end
-
-    #for 즐겨 찾기
-    $course = Course.find(params[:id])
 
     #dropdown filter
     @params = params[:order]
