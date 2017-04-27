@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
+  resources :likes, only: [:create, :update]
+
   #댓글 수정 및 삭제
   resources :comments, only: [:destroy]
 
