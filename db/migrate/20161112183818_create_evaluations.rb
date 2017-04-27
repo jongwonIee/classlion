@@ -3,8 +3,7 @@ class CreateEvaluations < ActiveRecord::Migration[5.0]
     create_table :evaluations do |t|
       t.integer   :user_id,       null: false
       t.integer   :course_id,     null: false
-      t.text      :body,         null: false
-      t.integer   :like_id
+      t.text      :body,          null: false
 
       t.timestamps null: false
     end

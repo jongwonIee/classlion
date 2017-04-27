@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170425141618) do
     t.integer  "university_id",                   null: false
     t.integer  "evaluation_count", default: 0,    null: false
     t.integer  "is_like_total",    default: 0,    null: false
+    t.integer  "like_count",       default: 0,    null: false
     t.boolean  "is_major",         default: true, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -34,7 +35,6 @@ ActiveRecord::Schema.define(version: 20170425141618) do
   create_table "evaluations", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "course_id",  null: false
-    t.integer  "like_id",    null: false
     t.text     "body",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,12 +58,12 @@ ActiveRecord::Schema.define(version: 20170425141618) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer  "user_id",                           null: false
-    t.integer  "evaluation_id",                     null: false
-    t.string   "state",         default: "unknown"
-    t.integer  "is_like_total"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.integer  "user_id",       null: false
+    t.integer  "course_id",     null: false
+    t.integer  "evaluation_id"
+    t.boolean  "is_like",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "professors", force: :cascade do |t|
