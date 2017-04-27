@@ -5,7 +5,7 @@
       <div class="centered main_center">
 
         <p class="logo">비밀번호 재설정</p>
-        <p class="main_msg">회원가입 시 이용한 이메일 주소를 입력해주세요.</p>
+        <p class="main_msg">새로 설정하실 비빌번호를 입력해주세요.</p>
 
         <%= form_for(@user, url: password_reset_path(params[:id])) do |f|%>
             <%# 이거 보안상 수정해야할 듯%>

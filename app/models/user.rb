@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   rolify
   belongs_to :university
-  belongs_to :major
   has_many :evaluations
   has_many :comments
   has_many :favorites
@@ -26,15 +25,15 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #이메일 유효성체크
   validates :email,
-    presence: { message: "입력해주세요."},
-    uniqueness: { message: "이미 사용중!"},
-    format: { with: VALID_EMAIL_REGEX, message: "이메일 형식확인!"},
+    presence: { message: '이메일을 입력해주세요.'},
+    uniqueness: { message: '이미 사용중인 이메일입니다.'},
+    format: { with: VALID_EMAIL_REGEX, message: '이메일 형식을 확인해주세요.'},
     length: {maximum: 255}
   #닉네임 유효성체크
   validates :nickname,
-    presence: { message: "입력해주세요."},
-    uniqueness: { message: "이미 사용중!"},
-    format: { without: /\s/, message: "공백안돼요!"}
+    presence: { message: '닉네임을 입력해주세요.'},
+    uniqueness: { message: '이미 사용중인 닉네임입니다.'},
+    format: { without: /\s/, message: '닉네임에는 공백을 사용할 수 없습니다.'}
   #닉네임 유효성체크
   validates_length_of :words_in_nickname,
     maximum: NICKNAME_LENGTH_MAX, minimum: NICKNAME_LENGTH_MIN,
@@ -42,7 +41,7 @@ class User < ApplicationRecord
     too_short: "닉네임은 최소 #{NICKNAME_LENGTH_MIN}자 이상이어야 합니다."
 
   #학교 및 전공 유효성 체크
-  validates_presence_of :university_id, message: "학교를 선택해주세요!"
+  validates_presence_of :university_id, message: '학교를 선택해주세요.'
 
   has_secure_password
   validates :password,
@@ -85,8 +84,6 @@ class User < ApplicationRecord
 
   def activate
     #이메일 인증 후 계정 활성화
-    # update_attribute(:activated, true)
-    # update_attribute(:activated_at, Time.zone.now)
     if activation_sent_at > 3.hours.ago #3시간 이내면
       update_columns(activated: true, activated_at: Time.zone.now) #활성화
     end
@@ -121,25 +118,13 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-  # def major_name
-  #   major.try(:name)
-  # end
-
-  # def major_id name
-  #   self.major = Major.find_by_name(name).id if name.present?
-  # end
-
-  # def university_name
-  #   university.try(:name)
-  # end
-
   #즐찾
   def favorites_addition(user_id, course_id)
     Favorite.create(user_id: user_id, course_id: course_id)
   end
 
   def favorites_deletion(user_id, course_id)
-    favorite = Favorite.where("user_id = ? AND course_id = ?", user_id, course_id)
+    favorite = Favorite.where('user_id = ? AND course_id = ?', user_id, course_id)
     Favorite.destroy(favorite.first.id)
   end
 

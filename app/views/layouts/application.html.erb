@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <title>Classlion</title>
   <!-- for encoding -->
@@ -46,7 +46,7 @@
     <%= render 'flash', name: name, msg: msg %>
 <% end %>
 
-<% if @current_user && @current_user.activated? %>
+<% if logged_in? %>
     <header class="cd-main-header">
       <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
 

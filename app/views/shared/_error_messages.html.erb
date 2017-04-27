@@ -1,11 +1,11 @@
 <% if @user.errors.any? %>
     <div>
       <div>
-        오류발생! <%= pluralize(@user.errors.count, "error") %>.
+        <h4>어머나, <%= pluralize(@user.errors.count, "개의 문제가 발생했습니다!") %></h4>
       </div>
       <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+        <% @user.errors.each do |attr, msg| %>
+            <li>- <%= "#{msg}" %></li>
         <% end %>
       </ul>
     </div>

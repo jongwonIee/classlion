@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :session_check
 
   def create
     #댓글 생성
