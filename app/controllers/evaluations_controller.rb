@@ -8,7 +8,7 @@ class EvaluationsController < ApplicationController
   end
 
   def index #권한이 있으면, 모든 강평보여줌
-    unless @current_user.has_role? :evaluator
+    unless current_user.has_role? :evaluator
       flash[:notice] = "권한이 없습니다!"
       redirect_to '/main'
     else
@@ -17,7 +17,7 @@ class EvaluationsController < ApplicationController
   end
 
   def info
-    if @current_user.has_role? :evaluator
+    if current_user.has_role? :evaluator
       redirect_to '/main'
     end
   end
@@ -30,7 +30,7 @@ class EvaluationsController < ApplicationController
 
   def create #디비에 넣는다
     evaluation = Evaluation.new(eval_params)
-    evaluation.user = @current_user
+    evaluation.user = current_user
     if evaluation.save
       redirect_to :back
     else
