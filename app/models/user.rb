@@ -128,6 +128,21 @@ class User < ApplicationRecord
     Favorite.destroy(favorite.first.id)
   end
 
+  #좋아요
+  def is_like_creation(user_id, course_id, boolean)
+    Like.create(user_id: user_id, course_id: course_id, is_like: boolean)
+  end
+
+  def is_like_update(user_id, course_id, boolean)
+    like = Like.where('user_id = ? AND course_id = ?', user_id, course_id)
+    Like.update(like.first.id, is_like: boolean)
+  end
+
+  def is_like_deletion(user_id, course_id)
+    like = Like.where('user_id = ? AND course_id = ?', user_id, course_id)
+    Like.destroy(like.first.id)
+  end
+
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
   private
 

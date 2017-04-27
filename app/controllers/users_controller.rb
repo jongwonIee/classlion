@@ -78,6 +78,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # 좋아요
+  def likes_add
+
+  end
+
   private
 
   def user_params

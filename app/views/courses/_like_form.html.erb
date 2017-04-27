@@ -1,6 +1,0 @@
-<div class="score_bar">
-  <%= form_for Like.new, html: {novalidate: 'novalidate'} do |f| %>
-    <%= f.hidden_field :course_id, value: @course.id %>
-    <%= f.select :is_like, options_for_select([["좋아요",true],["싫어요",false]]) %>
-  <% end %>
-</div><br>
