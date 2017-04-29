@@ -1,0 +1,61 @@
+좋아요버튼<br>
+<%# 왼쪽 %>
+<% if @current_user %>
+  <%= hidden_field_tag 'c_id', @course.id %>
+    <%= hidden_field_tag 'boolean', true %>
+    <%# 좋아요가 아예 없는 경우, 좋아요 %>
+    <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
+      좋아요가 아예 없는 경우
+      <%= button_tag id: 'is_like_create_btn' do %>
+      <% end %>
+    <%# 좋아요가 눌린 경우 %>
+    <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == true %>
+      좋아요가 눌린 경우
+    <%# 싫어요가 눌린 경우 %>
+    <% else %>
+      싫어요가 눌린 경우
+  <% end %>
+<% end %>
+
+<%# 오른쪽 %>
+<script>
+  <%# 좋아요가 아예 없는 경우 %>
+  $(document).on("click","#is_like_create_btn",function() {
+    var course_id = $('#c_id').val();
+    var boolean = $('#boolean').val();
+    $.ajax({
+      method: "POST",
+      url: '/users/is_like_create',
+      data: {c_id: course_id, boolean: boolean},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+//          $('.favorite_btn i').addClass('not_favorite');
+//          $('.favorite_btn i').removeClass('favorite');
+          $('.favorite_btn').attr("id", "favorite_add_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+  <%# 좋아요가 눌린 경우 %>
+//  $(document).on("click","#favorite_add_btn",function() {
+//    var course_id = $('#c_id').val();
+//    $.ajax({
+//      method: "POST",
+//      url: '/users/favorites_add',
+//      data: {c_id: course_id},
+//      dataType: "json",
+//      success: function ( result) {
+//        if(result.msg === "ok"){
+//          $('.favorite_btn i').addClass('favorite');
+//          $('.favorite_btn i').removeClass('not_favorite');
+//          $('.favorite_btn').attr("id", "favorite_delete_btn");
+//        }else if(result.msg === "error"){
+//          console.log(result.msg);
+//        }
+//      }
+//    });
+//  });
+</script>

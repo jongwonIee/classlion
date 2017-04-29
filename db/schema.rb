@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20170425141618) do
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "course_id",  null: false
-    t.boolean  "is_like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -133,7 +133,8 @@ class User < ApplicationRecord
     Like.create(user_id: user_id, course_id: course_id, is_like: boolean)
   end
 
-  def is_like_update(user_id, course_id, boolean)
+  #updation이라는 단어는 없지만 포맷통일을 위해..
+  def is_like_updation(user_id, course_id, boolean)
     like = Like.where('user_id = ? AND course_id = ?', user_id, course_id)
     Like.update(like.first.id, is_like: boolean)
   end

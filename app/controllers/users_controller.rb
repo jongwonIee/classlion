@@ -79,8 +79,28 @@ class UsersController < ApplicationController
   end
 
   # 좋아요
-  def likes_add
+  def is_like_create
+    if current_user.is_like_creation(current_user.id, params[:c_id].to_i, params[:boolean])
+      render json: { msg: 'ok'}
+    else
+      render json: { msg: 'error'}
+    end
+  end
 
+  def is_like_update
+    if current_user.is_like_updation(current_user.id, params[:c_id].to_i, params[:boolean])
+      render json: { msg: 'ok'}
+    else
+      render json: { msg: 'error'}
+    end
+  end
+
+  def is_like_delete
+    if current_user.is_like_deletion(current_user.id, params[:c_id].to_i)
+      render json: { msg: 'ok'}
+    else
+      render json: { msg: 'error'}
+    end
   end
 
   private

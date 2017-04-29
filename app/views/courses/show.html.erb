@@ -78,16 +78,15 @@
 
     <div class="info_score col-xs-12 row">
       <% if @course.evaluations.exists? %>
-        좋아요 <%= @like %> (<%= @like_per %>%) - 싫어요 <%= @dislike %> (<%= @dislike_per %>%)
-        <br>
         <%= @count %>명의 학생이 평가했습니다.
+        <br>
+        좋아요 <%= @like %> (<%= @like_per %>%) - 싫어요 <%= @dislike %> (<%= @dislike_per %>%)
       <% else %>
         아직 평가가 없습니다. 소중한 강의평을 남겨주세요.
       <% end %>
     </div>
 
-    <hr class="feed_hr">
-    
+    <hr class="bottom_hr">
     <% if @evaluated_list.include?(@course.id) %>
       이미 평가를 했습니다.
     <% else %>

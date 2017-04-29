@@ -63,6 +63,11 @@ Rails.application.routes.draw do
   post 'users/favorites_add'
   post 'users/favorites_delete'
 
+  #is_like
+  post 'users/is_like_create'
+  post 'users/is_like_update'
+  post 'users/is_like_delete'
+
   #cancancan 테스트용
   post 'roles/remove'
   post 'roles/reset'
