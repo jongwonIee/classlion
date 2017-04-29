@@ -2,10 +2,10 @@
 <%# 왼쪽 %>
 <% if @current_user %>
   <%= hidden_field_tag 'c_id', @course.id %>
-    <%= hidden_field_tag 'boolean', true %>
     <%# 좋아요가 아예 없는 경우, 좋아요 %>
     <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
-      좋아요가 아예 없는 경우
+      <%= hidden_field_tag 'boolean', true %>
+      좋아요가 아예 없는 경우, 좋아요
       <%= button_tag id: 'is_like_create_btn' do %>
       <% end %>
     <%# 좋아요가 눌린 경우 %>
@@ -18,6 +18,23 @@
 <% end %>
 
 <%# 오른쪽 %>
+<% if @current_user %>
+    <%= hidden_field_tag 'c_id', @course.id %>
+    <%# 좋아요가 아예 없는 경우, 싫어요 %>
+    <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
+        <%= hidden_field_tag 'boolean', false %>
+        좋아요가 아예 없는 경우, 싫어요
+        <%= button_tag id: 'is_like_create_btn' do %>
+        <% end %>
+        <%# 좋아요가 눌린 경우 %>
+    <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == false %>
+        싫어요가 눌린 경우
+        <%# 싫어요가 눌린 경우 %>
+    <% else %>
+        좋아요가 눌린 경우
+    <% end %>
+<% end %>
+
 <script>
   <%# 좋아요가 아예 없는 경우 %>
   $(document).on("click","#is_like_create_btn",function() {
