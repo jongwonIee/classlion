@@ -1,4 +1,4 @@
-class CreateUniversities < ActiveRecord::Migration[5.0]
+class CreateUniversities < ActiveRecord::Migration[5.1]
   def change
     create_table :universities do |t|
       t.string      :local_name,            null: false #한국이면 한국어, 호주면 영어

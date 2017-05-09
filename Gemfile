@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'mobvious'
 gem 'mobvious-rails'
 
+# HTML file diff
+gem 'diffy'
+
 gem 'rails-i18n'
 
 gem 'sprockets', '3.6.3'
