@@ -2,21 +2,21 @@
 좋아요
 <% if @current_user %>
   <%= hidden_field_tag 'c_id', @course.id %>
-    <%# 좋아요가 아예 없는 경우, 좋아요 %>
-    <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
+
+  <%# 좋아요가 아예 없는 경우, 좋아요 %>
+  <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
       <%= button_tag class: 'like_btn', id: 'like_create_btn' do %>
         <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
       <% end %>
 
-    <%# 좋아요가 눌린 경우 %>
-    <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == true %>
+  <%# 좋아요가 눌린 경우 %>
+  <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == true %>
       <%= button_tag class: 'like_btn', id: 'like_delete_btn' do %>
         <i class="fa fa-heart favorite" aria-hidden="true"></i>
       <% end %>
 
-
-    <%# 싫어요가 눌린 경우 %>
-    <% else %>
+  <%# 싫어요가 눌린 경우 %>
+  <% else %>
       <%= button_tag class: 'like_btn', id: 'like_create_dislike_delete_btn' do %>
           <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
       <% end %>
