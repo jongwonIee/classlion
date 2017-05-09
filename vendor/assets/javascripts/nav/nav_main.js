@@ -185,7 +185,11 @@ jQuery(document).ready(function(){
 
 	function checkMQ() {
 		//check if mobile or desktop device
-		return window.getComputedStyle(document.querySelector('.cd-main-content'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      return 'mobile'
+    }else{
+      return 'desktop'
+    }
 	}
 
 	function moveNavigation(){
