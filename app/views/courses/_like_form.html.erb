@@ -1,5 +1,5 @@
-좋아요버튼<br>
-<%# 왼쪽 %>
+<%# 좋아요 %>
+좋아요
 <% if @current_user %>
   <%= hidden_field_tag 'c_id', @course.id %>
     <%# 좋아요가 아예 없는 경우, 좋아요 %>
@@ -23,7 +23,8 @@
   <% end %>
 <% end %>
 
-<%# 오른쪽 %>
+<%# 싫어요 %>
+싫어요
 <% if @current_user %>
     <%= hidden_field_tag 'c_id', @course.id %>
     <%# 좋아요가 아예 없는 경우, 싫어요 %>
