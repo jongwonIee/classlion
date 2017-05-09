@@ -30,9 +30,6 @@
 
 <script src="<%= asset_path 'jquery.barrating.js' %>"></script>
 <script src="<%= asset_path 'jquery.autocomplete.js' %>"></script>
-<script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
-<script src="<%= asset_path 'nav/nav_main.js' %> "></script>
-<script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
 
 <%# Chart.js %>
 <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
@@ -53,6 +50,10 @@
 <% else %>
   <%= yield %>
 <% end %>
+
+<script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
+<script src="<%= asset_path 'nav/nav_main.js' %> "></script>
+<script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
 
 </body>
 </html>
