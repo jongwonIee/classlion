@@ -2,12 +2,9 @@
   <div class="outer">
     <div class="inner">
       <div class="centered main_center">
-        
         <p class="logo">CLASSLION</p>
           <%= form_for(@user, url: signup_path) do |f| %>
-              <%= render 'shared/error_messages' %>
-
-              <div class="input_group login_input email_input fit_div">
+              <div class="input_group login_input email_input fit_div fake_input">
                 <div class="join_gp">
                   <div class="input_div">
                     <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
@@ -19,13 +16,13 @@
               </div>
               <p class="error" id="email_error"></p>
 
-              <div class="input_group login_input email_input fit_div">
+              <div class="input_group login_input email_input fit_div fake_input">
                 <div class="full_input input_div">
                   <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
                 </div>
               </div>
 
-              <div class="input_group login_input fit_div">
+              <div class="input_group login_input fit_div fake_input">
                 <div class="join_gp">
                   <div class="input_div">
                     <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
@@ -37,7 +34,7 @@
               </div>
               <p class="error" id="password_validate"></p>
 
-              <div class="input_group login_input email_input fit_div">
+              <div class="input_group login_input email_input fit_div fake_input">
                 <div class="join_gp">
                   <div class="input_div">
                     <%= f.text_field :nickname, autofocus: false, placeholder: "닉네임(2~8자)", maxlength: 8%>
@@ -74,14 +71,8 @@
   </div>
 </div>
 
-<%# 스크립트 추가 %>
-<script src="<%= asset_path 'myUsers.js' %>"></script>
 <script>
-  // 로고만큼 넓이 고정하기 위한 jquery
-  function setWidth() {
-    var fit_div = $(".fit_div");
-    var fitWidth = fit_div.outerWidth();
-    fit_div.css({ width: fitWidth });
-  }
-  setWidth();
+  $(".input_group").on("touchstart click", function(){
+    $(this).find("input").focus();
+  });
 </script>

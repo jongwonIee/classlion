@@ -1,186 +1,59 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>Classlion</title>
-  <!-- for encoding -->
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <!--for mobile resize-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classlion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag    'application', media: 'all'  %>
-  <%= javascript_include_tag 'application' %>
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag    'application', media: 'all'  %>
+<%= javascript_include_tag 'application' %>
 
-  <link rel="stylesheet" href="<%= asset_path 'theme/bars-movie.css.scss' %>">
-  <link rel="stylesheet" href="<%= asset_path 'theme/bootstrap-stars.css.scss' %>">
-  <link rel="stylesheet" href="<%= asset_path 'theme/css-stars.css.scss' %>">
-  <link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars.css.scss' %>">
-  <link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars-o.css.scss' %>">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="<%= asset_path 'nav_reset.css.scss' %>">
-  <link rel="stylesheet" href="<%= asset_path 'nav_style.css.scss' %>">
-  <link rel="stylesheet" href="<%= asset_path 'style.css.scss' %>">
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<%# Font AWESOME %>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="<%= asset_path 'theme/bars-movie.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/bootstrap-stars.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/css-stars.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars-o.css.scss' %>">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="<%= asset_path 'nav_reset.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'nav_style.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'style.css.scss' %>">
 
-  <!--fontawesome-->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<script src="<%= asset_path 'jquery.barrating.js' %>"></script>
+<script src="<%= asset_path 'jquery.autocomplete.js' %>"></script>
 
-  <script src="<%= asset_path 'jquery.barrating.js' %>"></script>
-  <script src="<%= asset_path 'jquery.autocomplete.js' %>"></script>
-  <!--chart js-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+<%# Chart.js %>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
 
 </head>
 
 <body>
-<%# rails flash %>
 <% flash.each do |name, msg| %>
-    <%= render 'flash', name: name, msg: msg %>
+  <%= render 'flash', name: name, msg: msg %>
 <% end %>
 
 <% if logged_in? %>
-    <header class="cd-main-header">
-      <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
-
-      <div class="cd-search is-hidden">
-        <%= form_tag courses_path, :method => :get do %>
-            <%= text_field_tag :search, params[:search], placeholder: "강의명, 교수명, 전공명으로 검색해보세요!" %>
-            <%#= submit_tag "Search", :name => nil %>
-        <% end %>
-      </div> <!-- cd-search -->
-
-      <a href="#0" class="cd-nav-trigger"><!--Menu--><span></span></a>
-
-      <nav class="cd-nav">
-        <ul class="cd-top-nav">
-
-          <li class="has-children point_info nvs">
-            <a href="#0">
-              <%= image_tag "nav_point.svg" %>
-              <%= @current_user.point %> 점
-            </a>
-
-            <ul>
-              <li><a href="#0">강의평 하나당 300 점이<br>적립됩니다!</a></li>
-            </ul>
-          </li>
-
-          <li class="has-children lec_open nvs">
-            <a href="#0" class="onoff_a">
-              <% if (@current_user.has_role? 'evaluator') %>
-                  <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
-              <% else %>
-                  <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
-              <% end %>
-              <div class="open_on"></div>
-              강평열람
-            </a>
-
-            <ul>
-              <% if !(@current_user.has_role? 'evaluator') && @current_user.point >= 1000 %>
-                  <li><br>1000점<br><%= button_to '오픈하기', roles_evaluator_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br></li>
-              <% elsif !(@current_user.has_role? 'evaluator') && @current_user.point < 1000 %>
-                  <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
-              <% else %>
-                  <li>강의평가를 열람해보세요!</li>
-              <% end %>
-            </ul>
-          </li>
-
-          <li class="has-children wiki_open nvs">
-            <a href="#0" class="onoff_a">
-              <% if (@current_user.has_role? 'wikier') %>
-                  <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
-              <% else %>
-                  <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
-              <% end %>
-              위키열람
-            </a>
-
-            <ul>
-              <% if !(@current_user.has_role? 'wikier') && @current_user.point >= 1000 %>
-                  <li><br>1000점<br><%= button_to '오픈하기', roles_wikier_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")' %><br></li>
-              <% elsif !(@current_user.has_role? 'wikier') && @current_user.point < 1000 %>
-                  <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
-              <% else %>
-                  <li>위키를 열람해보세요!</li>
-              <% end %>
-
-              <!--<li><a href="#0">1000 Points <button class="nav_btn">오픈하기</button></a></li>-->
-            </ul>
-          </li>
-
-          <li class="has-children account nvs">
-            <a href="#0">
-              <img src="/assets/nav_user.svg" alt="user">
-              <%= @current_user.nickname %>
-            </a>
-
-            <ul>
-              <li><a href="/mypage">마이페이지</a></li>
-              <li><%= link_to "로그아웃", logout_path, method: :delete %></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </header> <!-- .cd-main-header -->
-
-    <!--지우면 안되는 부분-->
-    <main class="cd-main-content">
-      <nav class="cd-side-nav">
-      </nav>
-    </main> <!-- .cd-main-content -->
-
-    <div id="content">
-      <%= yield %>
-    </div>
-
-    <div id="foot">
-      <div class="foot_top">
-        <ul>
-          <li>공지사항</li>
-          <li>·</li>
-          <li>소개</li>
-          <li>·</li>
-          <li>만든사람들</li>
-          <li>·</li>
-          <li>개인정보취급방침</li>
-        </ul>
-      </div>
-
-      <!--<hr class="info_hr">-->
-
-      <div class="foot_top foot_middle">
-        <ul>
-          <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
-          <li><i class="fa fa-facebook-square" aria-hidden="true"></i></li>
-        </ul>
-      </div>
-
-      <div class="foot_bottom">
-        <p>COPYRIGHT © 사단법인 멋쟁이사자처럼 ALL RIGHTS RESERVED</p>
-      </div>
-      <!-- 공지사항 소개 만든사람들 개인정보취급방침 -->
-      <br><br>
-      <%= button_to '권한삭제', roles_remove_path, method: :post %>
-      <%= button_to '포인트초기화', roles_reset_path, method: :post %>
-      <%= button_to '포인트충전', roles_charge_path, method: :post %>
-    </div>
-
-    <script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
-    <script src="<%= asset_path 'nav/nav_main.js' %> "></script>
-    <script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
-<% else %>
+  <%= render :partial => "/layouts/header" %>
+  <div id="content">
     <%= yield %>
+  </div>
+  <%= render :partial => "/layouts/footer" %>
+<% else %>
+  <%= yield %>
 <% end %>
-</body>
 
+<script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
+<script src="<%= asset_path 'nav/nav_main.js' %> "></script>
+<script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
+
+</body>
 </html>
