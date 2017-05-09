@@ -78,10 +78,9 @@
 <script src="<%= asset_path 'myUsers.js' %>"></script>
 <script>
   // 로고만큼 넓이 고정하기 위한 jquery
-  function setWidth() {
+  $(function() {
     var fit_div = $(".fit_div");
     var fitWidth = fit_div.outerWidth();
     fit_div.css({ width: fitWidth });
-  }
-  setWidth();
+  });
 </script>

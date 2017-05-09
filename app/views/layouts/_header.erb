@@ -1,0 +1,84 @@
+<header class="cd-main-header">
+  <a href="/" class="cd-logo"><img src="/assets/nav_logo_mini.svg" alt="Logo"></a>
+
+  <div class="cd-search is-hidden">
+    <%= form_tag courses_path, :method => :get do %>
+      <%= text_field_tag :search, params[:search], placeholder: "강의명, 교수명, 전공명으로 검색해보세요!" %>
+    <% end %>
+  </div> 
+
+  <a href="#0" class="cd-nav-trigger"><!--Menu--><span></span></a>
+
+  <nav class="cd-nav">
+    <ul class="cd-top-nav">
+      <li class="has-children point_info nvs">
+        <a href="#0">
+          <%= image_tag "nav_point.svg" %>
+          <%= @current_user.point %> 점
+        </a>
+
+        <ul><li><a href="#0">강의평 하나당 300 점이<br>적립됩니다!</a></li></ul>
+      </li>
+
+      <li class="has-children lec_open nvs">
+        <a href="#0" class="onoff_a">
+          <% if (@current_user.has_role? 'evaluator') %>
+            <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
+          <% else %>
+            <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
+          <% end %>
+          <div class="open_on"></div>
+          강평열람
+        </a>
+
+        <ul>
+          <% if !(@current_user.has_role? 'evaluator') && @current_user.point >= 1000 %>
+              <li><br>1000점<br><%= button_to '오픈하기', roles_evaluator_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br></li>
+          <% elsif !(@current_user.has_role? 'evaluator') && @current_user.point < 1000 %>
+              <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
+          <% else %>
+              <li>강의평가를 열람해보세요!</li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="has-children wiki_open nvs">
+        <a href="#0" class="onoff_a">
+          <% if (@current_user.has_role? 'wikier') %>
+              <%= image_tag "nav_on.svg", class: "onoff", alt: "on" %>
+          <% else %>
+              <%= image_tag "nav_off.svg", class: "onoff", alt: "off" %>
+          <% end %>
+          위키열람
+        </a>
+
+        <ul>
+          <% if !(@current_user.has_role? 'wikier') && @current_user.point >= 1000 %>
+              <li><br>1000점<br><%= button_to '오픈하기', roles_wikier_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")' %><br></li>
+          <% elsif !(@current_user.has_role? 'wikier') && @current_user.point < 1000 %>
+              <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
+          <% else %>
+              <li>위키를 열람해보세요!</li>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="has-children account nvs">
+        <a href="#0">
+          <img src="/assets/nav_user.svg" alt="user">
+          <%= @current_user.nickname %>
+        </a>
+
+        <ul>
+          <li><a href="/mypage">마이페이지</a></li>
+          <li><%= link_to "로그아웃", logout_path, method: :delete %></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main class="cd-main-content">
+  <nav class="cd-side-nav">
+  </nav>
+</main> 

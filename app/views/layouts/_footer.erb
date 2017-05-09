@@ -1,0 +1,28 @@
+<div id="foot">
+  <div class="foot_top">
+    <ul>
+      <li>공지사항</li>
+      <li>·</li>
+      <li>소개</li>
+      <li>·</li>
+      <li>만든사람들</li>
+      <li>·</li>
+      <li>개인정보취급방침</li>
+    </ul>
+  </div>
+
+  <div class="foot_top foot_middle">
+    <ul>
+      <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+      <li><i class="fa fa-facebook-square" aria-hidden="true"></i></li>
+    </ul>
+  </div>
+
+  <div class="foot_bottom">
+    <p>COPYRIGHT © 사단법인 멋쟁이사자처럼 ALL RIGHTS RESERVED</p>
+  </div>
+  <br><br>
+  <%= button_to '권한삭제', roles_remove_path, method: :post %>
+  <%= button_to '포인트초기화', roles_reset_path, method: :post %>
+  <%= button_to '포인트충전', roles_charge_path, method: :post %>
+</div>
