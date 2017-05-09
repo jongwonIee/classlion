@@ -189,17 +189,17 @@ jQuery(document).ready(function(){
 	}
 
 	function moveNavigation(){
-  		var mq = checkMQ();
-        
-        if ( mq == 'mobile' && topNavigation.parents('.cd-side-nav').length == 0 ) {
-        	detachElements();
-			topNavigation.appendTo(sidebar);
-			searchForm.removeClass('is-hidden').prependTo(sidebar);
-		} else if ( ( mq == 'tablet' || mq == 'desktop') &&  topNavigation.parents('.cd-side-nav').length > 0 ) {
-			detachElements();
-			searchForm.insertAfter(header.find('.cd-logo'));
-			topNavigation.appendTo(header.find('.cd-nav'));
-		}
+    var mq = checkMQ();
+      
+    if ( mq == 'mobile' && topNavigation.parents('.cd-side-nav').length == 0 ) {
+      detachElements();
+      topNavigation.appendTo(sidebar);
+      searchForm.removeClass('is-hidden').prependTo(sidebar);
+    } else if ( ( mq == 'tablet' || mq == 'desktop') &&  topNavigation.parents('.cd-side-nav').length > 0 ) {
+      detachElements();
+      searchForm.insertAfter(header.find('.cd-logo'));
+      topNavigation.appendTo(header.find('.cd-nav'));
+    }
 		checkSelected(mq);
 		resizing = false;
 	}
