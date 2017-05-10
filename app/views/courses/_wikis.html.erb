@@ -1,9 +1,22 @@
 <script src="<%= asset_path 'tinymce/tinymce.min.js' %>"></script>
-<script src="<%= asset_path 'tinymce/jquery.tinymce.min.js' %>"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+<script>
+tinymce.init({
+  selector: '#wiki_editor', 
+  theme: 'inlite',
+  plugins: 'image table link paste contextmenu textpattern autolink',
+  insert_toolbar: 'quickimage quicktable',
+  selection_toolbar: 'bold italic | quicklink h2 h3 blockquote',
+  inline: true,
+  paste_data_images: true,
+  content_css: [
+    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    '//www.tinymce.com/css/codepen.min.css'    
+  ]
+});
+</script>
 <% wiki = @course.recent_wiki %>
 <% if wiki.nil? %>
-  <textarea>아직 위키가 없습니다. 새로 만들어보세요!</textarea>
+  <div id="wiki_editor">아직 위키가 없습니다. 새로 만들어보세요!</div>
 <% else %>
 <%= wiki.body %>
 <a href=/wiki/history>지난 기록 보기</a>
