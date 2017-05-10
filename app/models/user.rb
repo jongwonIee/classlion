@@ -53,7 +53,7 @@ class User < ApplicationRecord
     too_long: "비밀번호는 최대 #{PASSWORD_LENGTH_MAX}자 까지 가능합니다.",
     too_short:  "비밀번호는 최소 #{PASSWORD_LENGTH_MIN}자 이상이어야 합니다."
 
-#보안토큰 관련 -------------------------------------------------
+  #보안토큰 관련 -------------------------------------------------
   #주어진 문자열에 대해서 hash digest를 반환
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -65,7 +65,7 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-#로그인상태 유지 관련 -------------------------------------------------
+  #로그인상태 유지 관련 -------------------------------------------------
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
@@ -75,7 +75,7 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-#인증메일 & 비밀번호 초기화 관련 -------------------------------------------------
+  #인증메일 & 비밀번호 초기화 관련 -------------------------------------------------
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
@@ -142,6 +142,15 @@ class User < ApplicationRecord
   def is_like_deletion(user_id, course_id)
     like = Like.where('user_id = ? AND course_id = ?', user_id, course_id)
     Like.destroy(like.first.id)
+  end
+
+          
+  def self.pre_validation_email(email)
+    if true #여기다가 이메일 validation 추가하면 됨. email regex + 중복검사 + 특수문자 검사등
+      { message: "사용가능ㅋ", status: :ok }
+    else
+      { message: "사용 불가능ㅋ", status: :bad_request }
+    end
   end
 
   #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함

@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require tinymce/jquery.tinymce.min.js
 //= require tinymce/tinymce.min.js
+//= require tinymce/jquery.tinymce.min.js
 //= require_tree .
 
 // 필요한 플러그인은 나중에 수정할것

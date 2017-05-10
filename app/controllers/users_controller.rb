@@ -41,24 +41,13 @@ class UsersController < ApplicationController
 
   # 닉네임 중복검사
   def check_nickname
-    nickname = params[:nickname]
-    user = User.where('nickname = ?', nickname).first
-    if user.present? #있으면
-      render json: { msg: 'overlap' }
-    else #없으면
-      render json: { msg: 'ok' }
-    end
+    #check_email 보고 따라하셈ㅋ
   end
 
-  # 이메일 중복검사
+  # 이메일 Valiation
   def check_email
-    email = params[:email]
-    user = User.where('email = ?', email).first
-    if user.present? #있으면
-      render json: { msg: 'overlap' }
-    else #없으면
-      render json: { msg: 'ok' }
-    end 
+    validation = User.pre_validation_email params[:email]
+    render json: { message: validation[:message] }, status: validation[:status]
   end
 
   # 관심강의 추가/제거
