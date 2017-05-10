@@ -1,6 +1,10 @@
-키위
-<% unless @is_mobile %>
-    수정하기
+<script src="<%= asset_path 'tinymce/tinymce.min.js' %>"></script>
+<script src="<%= asset_path 'tinymce/jquery.tinymce.min.js' %>"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+<% wiki = @course.recent_wiki %>
+<% if wiki.nil? %>
+  <textarea>아직 위키가 없습니다. 새로 만들어보세요!</textarea>
 <% else %>
-    모바일에서는 수정하기가 불가능합니다.
+<%= wiki.body %>
+<a href=/wiki/history>지난 기록 보기</a>
 <% end %>

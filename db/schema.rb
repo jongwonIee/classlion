@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20170425141618) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["revision"], name: "index_wikis_on_revision"
   end
 
 end

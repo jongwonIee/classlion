@@ -1,10 +1,16 @@
 class Course < ApplicationRecord
   has_many :evaluations
+  has_many :favorites
+  has_many :wikis
+  has_many :users, through: :favorites
+
   belongs_to :lecture
   belongs_to :professor
   belongs_to :university
-  has_many :favorites
-  has_many :users, through: :favorites
+
+  def recent_wiki
+    self.wikis.order("revision desc").first
+  end
 
   #solr
   searchable do
