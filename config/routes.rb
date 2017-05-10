@@ -34,8 +34,8 @@ Rails.application.routes.draw do
   get 'edit', to: 'users#edit'
 
   #이메일, 닉네임 유무 체크 (jQuery)
-  post '/check-nickname' => 'users#check_nickname'
-  post '/check-email' => 'users#check_email'
+  post '/check_nickname' => 'users#check_nickname'
+  post '/check_email' => 'users#check_email'
 
   #강의 리스트(검색결과)
   resources :courses
