@@ -1,5 +1,5 @@
 <div class="index_container">
-  <div class="container-fluid">
+  <div class="container-fluid" style="background:white;">
     <div class="course_top">
       <div class="course_info_div">
         <div class="info_left">
@@ -25,12 +25,12 @@
             </span>
             <br>
             <% if @course.is_major == true %>
-              <span class="info_prof_major">
-                <span class="lec_cate lec_major">전공</span><%= @course.professor.name %> 교수님
+              <span class="info_prof">
+                <span class="lec_cate">전공</span><%= @course.professor.name %> 교수
               </span>
             <% else %>
-              <span class="info_prof_kyo">
-                <span class="lec_cate lec_kyo">교양</span><%= @course.professor.name %> 교수님
+              <span class="info_prof">
+                <span class="lec_cate">교양</span><%= @course.professor.name %> 교수
               </span>
             <% end %>
           </div>
@@ -74,9 +74,9 @@
       </div><%#////course_info_div%>
     </div><%#////course_top %>
 
-    <hr class="bottom_hr">
-
-    <div class="info_score col-xs-12 row">
+    <div class="course_score" style="background:blue;">
+      추천/비추 비율이 들어가는 공간입니다 
+      
       <% if @course.evaluations.exists? %>
         <%= @count %>명의 학생이 평가했습니다.
         <br>
@@ -85,44 +85,43 @@
         아직 평가가 없습니다. 소중한 강의평을 남겨주세요.
       <% end %>
     </div>
-
-    <hr class="bottom_hr">
-    <% if @evaluated_list.include?(@course.id) %>
-      이미 평가를 했습니다.
-    <% else %>
-      <%= render 'like_form' %>
-      <% if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
-        <%= render 'form' %>
-      <% end %>
-    <% end %>
-
+  </div>
+  
+  <div class="container-fluid">  
     <div class="tab_div">
+      <div class="tab_menu">
       <ul class="tab">
         <li>
           <a href="javascript:void(0)" class="review_tab tablinks" onclick="openCity(event, 'review')" id="defaultOpen">
             <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
-            학생들의 강의평가
-            <span class="review_count"><%= @course.evaluation_count %></span>
+            강의평가
           </a>
         </li>
         <li>
           <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openCity(event, 'wiki')">
             <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
-            강의의 모든것, WIKI
-
+            WIKI
           </a>
         </li>
+        <li class="filter">
+          <%# partial refresh needed %>
+          <%= form_tag do %>
+              <%= select_tag 'order', options_for_select(['최신순','총점순','총점역순'], @params), onchange: "$('#order').submit();" %>
+          <% end %>
+        </li>
       </ul>
+      </div>
 
       <div id="review" class="tabcontent">
-        <div class="sort_div">
-          <div class="sort_here">
-            <%# partial refresh needed %>
-            <%= form_tag do %>
-                <%= select_tag 'order', options_for_select(['최신순','총점순','총점역순'], @params), onchange: "$('#order').submit();" %>
+          <% if @evaluated_list.include?(@course.id) %>
+            이미 평가를 했습니다.
+          <% else %>
+            <%= render 'like_form' %>
+            <% if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
+              <%= render 'form' %>
             <% end %>
-          </div>
-        </div>
+          <% end %>
+          
         <% if @course.evaluation_count > 0 %>
             <%= render "evaluations" %>
         <% end %>

@@ -1,48 +1,43 @@
-<div class="index_container">
-  <div class="container-fluid">
-    <div class="main_feed">
-      <p class="feed_head">최신 강의평</p>
-      <p class="feed_head2">방금 올라온 따끈따끈한 강의평들을 만나보세요!</p>
-      <hr class="info_hr feed_hr feed_top_hr">
-      <% @evaluations.each_with_index do |e, i| %>
-          <div class="feed_each">
-            <div class="row">
-              <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
-                <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
-                <p class="feed_nickname"><%= e.user.nickname %></p>
-              </div>
-
-              <div class="col-xs-9 col-sm-10 feed_each_div">
+<div id="content">
+  <div class="index_container">
+    <div class="container-fluid">
+      <div class="main_feed">
+        <p class="feed_head">앗! 뜨거워! 방금 막 올라온 강의평</p>
+        <p class="feed_head2">학우들이 쓴 강의평을 실시간으로 확인해보세요!</p>
+        <!--<hr class="info_hr feed_hr feed_top_hr">-->
+        <% @evaluations.each_with_index do |e, i| %>
+            <div class="feed_each">
+              <div class="row">
+              
+              
+              <div class="col-xs-12 col-sm-12 feed_each_div">
                 <div class="col-xs-12">
                   <p class="feed_course">
-                    <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
+                    <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
+                    <a href='/courses/<%= e.course.id %>'>
+                      <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
+                    </a>
                   </p>
-                  <% if e.course.is_major %>
-                      <p class="feed_prof_major">
-                        <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
-                      </p>
-                  <% else %>
-                      <p class="feed_prof_kyo">
-                        <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
-                      </p>
-                  <% end %>
                 </div>
 
-                <p class="feed_content col-xs-12">
-                  <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
-                <p class="feed_etc col-xs-12">
-                  <%= e.time_ago %>
-                  ·
-                  <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <% unless i == 9 %>
-              <hr class="feed_hr">
-          <% end %>
-
+                  <p class="feed_content col-xs-12">
+                    <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
+                  </p>
+                
+                  <div class="feed_etc col-xs-12">
+                    <p class="feed_etc_left">
+                      <%= e.time_ago %>
+                      ·
+                      <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
+                    </p>
+                    <p class="feed_etc_right">
+                      <span>작성자</span> <%= e.user.nickname %>
+                    </p>
+                  </div>
+                </div>
+                </div>
+                </div>
+                
           <%# report modal form begin %>
           <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -70,52 +65,4 @@
     </div>
   </div>
 </div>
-
-<script>
-
-  $('.p1').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '1',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p2').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '2',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p3').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '3',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p4').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '4',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p5').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '5',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-</script>
+</div>

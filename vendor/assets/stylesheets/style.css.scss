@@ -58,24 +58,6 @@
     outline: none;
 }
 
-
-html {
-    height: 100% !important;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    display: table;
-    width: 100%;
-    min-width: 320px;
-    min-height: 100% !important;
-    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    margin: 0;
-    position: relative;
-}
-
 .container {
     height: 100%;
     max-width: 100%;
@@ -96,7 +78,7 @@ body {
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
     font-weight: 300;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     min-height: 100% !important;
     background-image: image-url('main_bg.png');
     //background: url('main_bg.png');
@@ -137,7 +119,8 @@ body {
 
 
 #content {
-    min-height: 100vh;
+    background: rgba(89, 88, 88, 0.03);
+    min-height: 100%;
     // margin-bottom: -100px;
 }
 
@@ -188,7 +171,8 @@ body {
 .main_msg {
     margin-top: 7%;
     margin-bottom: 7%;
-    font-size: 1.1em;
+    font-size: 15px;
+    line-height: 23px;
 }
 
 .error_msg {
@@ -202,7 +186,7 @@ body {
     border-radius: 5px;
     background-color: #ff5a5f;
     color: white;
-    font-size: 1.1em;
+    font-size: 15px;
     padding: 3%;
     margin-top: 4%;
     margin-bottom: 4%;
@@ -215,7 +199,7 @@ body {
     border-radius: 3px;
     background-color: transparent;
     color: white;
-    font-size: 1.1em;
+    font-size: 15px;
     padding: 3%;
     /*margin-top: 3%;*/
     margin-bottom: 4%;
@@ -235,7 +219,7 @@ body {
 
 .go_about {
     color: white;
-    font-size: 1.1em;
+    font-size: 14px;
 }
 
 .go_about:hover, .go_about:link, .go_about:visited, .go_about:active {
@@ -244,6 +228,56 @@ body {
 }
 /*home end*/
 
+/*index start*/
+html, body {
+    position: relative;
+    height: 100% !important;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100% !important;
+    position: relative;
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+/*index end*/
+
+/*about start*/
+.linkheader {
+    box-sizing: border-box;
+}
+.signup_link login-button {
+    float: right;
+}
+/*about end*/
 
 /*login, signup start*/
 .email_input {
@@ -280,7 +314,7 @@ body {
 .remember_me {
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
     font-weight: 300;
-    font-size: 1.1em;
+    font-size: 15px;
 }
 /*login, signup end*/
 
@@ -291,47 +325,20 @@ body {
 
 .input_div {
     display: inline-block;
-    width: 63%;
+    height: 100%;
     /*text-indent: 5%;*/
 }
 
-.full_input { /*check btn 필요없는 경우*/
-    width: 100%;
-}
-
 .input_div > input {
+    font-size: 15px;
     width: 100%;
+    height: 100%;
     padding-left: 5%;
     padding-right: 5%;
     background: transparent;
     /*text-indent: 5%; 임시로 안되게 처리. 나중에 바꿔야함*/
     /*border: 1px solid white;*/
     border: none;
-}
-
-/* 우리 임의 추가 - input 에러메세지 출력 될 때 computed style로 변경되는 문제*/
-div.field_with_errors > input {
-    width: 100%;
-    background: #ff5a5f;
-    border: none;
-}
-div.field_with_errors > input::placeholder {
-    color: white;
-}
-
-.focus {
-    //input에 포커스가 왔을 때
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.join_gp { /*check btn 필요한 그룹 묶어주기*/
-    width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-.join_gp > div > input {
-    padding: 0;
 }
 
 .input_div > input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -353,7 +360,7 @@ div.field_with_errors > input::placeholder {
 .check_div {
     display: inline-block;
     width: 35%;
-    text-align: right;
+    /*text-align: right;*/
     /*text-indent: -5%;*/
 }
 
@@ -369,7 +376,6 @@ div.field_with_errors > input::placeholder {
     width: 100%;
     font-size: 14px;
 }
-
 #error_div{ /*session에서의 에러메세지*/
     margin-top: 10px;
     margin-bottom: 10px;
@@ -387,7 +393,7 @@ div.field_with_errors > input::placeholder {
     height: 45px;
     border: 1px solid white;
     border-radius: 3px;
-    font-size: 1.1em;
+    font-size: 15px;
     padding: 3%;
     margin-bottom: 4%;
 }
@@ -402,13 +408,7 @@ div.field_with_errors > input::placeholder {
     font-weight: 400;
 }
 
-.go_pw{
-    display: block;
-    text-align: right;
-    margin-bottom: 2%;
-}
-
-.go_pw2{
+.go_pw {
     display: block;
     text-align: right;
     margin-bottom: 10%;
@@ -424,7 +424,7 @@ div.field_with_errors > input::placeholder {
 }
 
 .rule_msg {
-    font-size: 0.9em;
+    font-size: 12px;
 }
 /*signup end*/
 
@@ -465,22 +465,27 @@ div.field_with_errors > input::placeholder {
 }
 
 .index_container {
-    max-width: 960px;
+    // max-width: 1200px;
+    // padding-left: 35px;
+    // padding-right: 35px;
     width: 100%;
     min-height: 100%;
-    // height: 100%;
     margin: 0 auto;
-    // margin-top: 135px;
-    padding-top: 135px;
-    padding-bottom: 135px;/*우리가 임의로 넣었음! 수정해주세요*/
+    padding-top: 60px;
+    padding-bottom: 135px;
+    /* background: white; */
+    /* border-left: 1px solid #f2f2f2; */
+    /* border-right: 1px solid #f2f2f2; */
 }
 
 .index_container > div > div {
+    max-width: 1200px;
+    margin: 0 auto;
     width: 100%;
     text-align: left;
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
     font-weight: 300;
-    font-size: 1em;
+    font-size: 15px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -507,17 +512,17 @@ div.field_with_errors > input::placeholder {
     // margin-bottom: 100px;
 }
 .feed_head {
-    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+    font-family: 'TmonMonsori', sans-serif;
     font-weight: 400;
     color: #ff5a5f;
-    font-size: 2em;
-    margin: 0px 10px 20px 10px;
+    font-size: 34px;
+    margin: 0px 10px 20px 0px;
 }
 
 @media only screen and (min-width: 768px) {
     .feed_head {
-        font-size: 30px;
-        margin: 0px 10px 5px 10px;
+        //font-size: 30px;
+        margin: 0px 10px 5px 0px;
     }
 }
 
@@ -525,8 +530,9 @@ div.field_with_errors > input::placeholder {
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
     font-weight: 400;
     color: #484848;
-    font-size: 18px;
-    margin: 0px 10px 5px 10px;
+    font-size: 20px;
+    margin: 0px 10px 5px 0px;
+    padding-bottom: 25px;
 }
 
 .feed_hr {
@@ -543,6 +549,12 @@ div.field_with_errors > input::placeholder {
     width: 100%;
     display: inherit;
     margin: 15px 0px 15px 0px;
+    background: white;
+    padding: 30px 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    border: 1px solid rgba(0,0,0,.09);
+    border-left: 6px solid #ff5a5f;
+    border-radius: 3px;
 }
 
 .feed_each_div {
@@ -557,15 +569,19 @@ div.field_with_errors > input::placeholder {
 
 .feed_writer {
     text-align: center;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .feed_lion {
-    width: 65%;
+    width: 60%;
+    min-width: 60px;
+    min-height: 60px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     .feed_lion {
-        width: 60%;
+        // width: 65%;
     }
 }
 
@@ -581,15 +597,21 @@ div.field_with_errors > input::placeholder {
 }
 
 .feed_course{
+    margin: 0 !important;
     color: #484848;
     font-weight: 400;
     margin-bottom: 8px;
     display: inline-block;
+    img {
+        width: 40px;
+        vertical-align: middle;
+    }
 }
 
 .feed_course a {
     color: #484848;
-    font-size: 16px;
+    font-size: 18px;
+    padding-left: 8px; 
 }
 
 .feed_course a:hover {
@@ -616,27 +638,46 @@ div.field_with_errors > input::placeholder {
 .feed_content {
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
     color: #484848;
-    font-size: 14px;
-    margin-top: 13px;
-    margin-bottom: 13px;
+    font-size: 15px;
+    line-height: 25px;
+    margin: 20px 0;
     // font-family: 'RixSGo EB';
 }
+    .feed_content col-xs-12{
+        margin-bottom: 15px;
+    }
 
 .feed_etc {
     color: #484848;
-    font-size: 12px;
+    font-size: 14px;
+    .feed_etc_left {
+        margin: 0 !important;
+        float: left;
+    }
+    .feed_etc_right {
+        margin: 0 !important;
+        float: right;
+        span {
+            color: #777777;
+        }
+    }
 }
 
-.feed_etc img {
+.feed_etc_left img {
     width: 15px;
+    vertical-align: middle;
 }
 
 .writer_icon {
     color: #484848;
     font-size: 15px !important;
     position: relative;
-    top: 2px;
+    top: 3px;
     margin-right: 0px !important;
+}
+
+.writer_trash {
+    top: 2px;
 }
 
 .reply_count {
@@ -750,22 +791,15 @@ div.field_with_errors > input::placeholder {
     font-weight: 400;
     // top: -1px;
     position: relative;
-}
-
-.lec_kyo {
-    color: #ff5a5f;
-    border: 1px solid #ff5a5f;
-}
-
-.lec_major {
-    color: #27b5af;
-    border: 1px solid #27b5af;
+    color: #484848;
+    border: 1px solid #484848;
 }
 /*search page end*/
 
 
 /*강의 정보 show page start*/
-.feed_writer, .course_top, .info_left {
+// .feed_writer, 
+.course_top, .info_left {
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
@@ -778,7 +812,12 @@ div.field_with_errors > input::placeholder {
 
 .course_info_div, .info_left, .info_right_1, .info_right_2, .info_score {
     height: auto;
-    overflow: hidden;
+    // overflow: hidden;
+}
+
+.course_score {
+    // border-bottom: solid #dce0e0;
+    // border-width: 0.5px 0px 0px 0px;
 }
 
 .info_score {
@@ -925,20 +964,11 @@ div.field_with_errors > input::placeholder {
     background-position: right;
 }
 
-.info_prof_kyo {
-    color: #ff5a5f;
+.info_prof{
     display: inline-block;
     font-weight: 400;
     font-size: 18px;
-    margin-top: 4px;
-}
-
-.info_prof_major {
-    color: #27b5af;
-    display: inline-block;
-    font-weight: 400;
-    font-size: 18px;
-    margin-top: 4px;
+    margin-top: 14px;
 }
 
 .info_hr {
@@ -957,7 +987,7 @@ div.field_with_errors > input::placeholder {
 
 .info_1, .info_2, .info_3, .info_4 {
     font-size: 14px;
-    margin-bottom: 6px !important;
+    margin-bottom: 12px !important;
 }
 
 .info_1, .info_2 {
@@ -999,67 +1029,31 @@ div.field_with_errors > input::placeholder {
     .info_btn_div {
         width: 100%;
     }
-
-    .info_course {
-        font-size: 1.5em;
-    }
-    .info_prof_kyo, .info_prof_major {
-        font-size: 1em;
-    }
-
-    .score_m {
-        margin-top: 30px;
-    }
-}
-
-.score_head {
-    display: table;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.score_head > div {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 18px;
-    // letter-spacing: -1px;
-    font-weight: 400;
-}
-
-.score {
-    display: table;
-    width: 100%;
-    // height: 80%;
-    margin-top: -20px;
-}
-
-.score > div {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.star_num {
-    font-size: 3em;
-    font-weight: 400;
-}
-
-.score > div > canvas {
-    width: 80% !important;
-    padding-top: 20%;
-    // width: 80% !important;
-    // height: 80% !important;
-    display: inline-block;
-    margin: 0 auto;
+    // .info_course {
+    //     font-size: 1.5em;
+    // }
+    // .info_prof_kyo, .info_prof_major {
+    //     font-size: 1em;
+    // }
 }
 
 
 .tab_div {
-    margin-top: 50px;
+    // max-width: 1200px;
+    // margin: 0 auto;
+    max-width: none !important;
     padding: 0px 0px 0px 0px;
 }
 
+.tab_menu {
+    border-bottom: 1px solid #dce0e0;
+    background: white;
+    max-width: none !important;
+}
+
+.filter {
+    float: right;
+}
 .tab_feed {
     width: 90% !important;
 }
@@ -1072,39 +1066,56 @@ div.field_with_errors > input::placeholder {
 
 
 /* Style the list */
+.content_header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #eee;
+}
+.tab_contents .inner_tab {
+    height: 48px;
+}
+.tab_contents .inner_tab .on .tablinks{
+    border-bottom: 2px solid #00c3bd;
+    color: #00c3bd;
+}
+.tab_contents .inner_tab .link_tab {
+    float: left;
+    width: 130px;
+    height: 36px;
+    padding: 11px 0 0;
+    font-size: 16px;
+    color: #666;
+    letter-spacing: -1px;
+}
+a:active, a:hover {
+    text-decoration: none;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
 ul.tab {
+    background: white;
+    max-width: 1200px;
+    margin: 0 auto;
     list-style-type: none;
-    margin: 0px;
     padding: 0;
     overflow: hidden;
-    border-bottom: 1px solid #ff5a5f;
     // background-color: #f1f1f1;
-}
-
-/* Float the list items side by side */
-ul.tab li {
-    float: left;
+    li {
+        display: inline-block;
+    }
 }
 
 ul.tab li img {
     width: 25px;
     top: -3px;
     position: relative;
-}
-
-/* Style the links inside the list items */
-ul.tab li a {
-    height: 38px;
-    border-top: 6px solid #ffffff;
-    font-weight: 400;
-    display: inline-block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 7px 16px;
-    text-decoration: none;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-    font-size: 14px;
 }
 
 /* Change background color of links on hover */
@@ -1135,6 +1146,8 @@ ul.tab li a:focus, .active {
 
 /* Style the tab content */
 .tabcontent {
+    max-width: 1200px;
+    margin: 0 auto;
     display: none;
     padding: 0px 5px 0px 5px;
     // border: 1px solid #ccc;
@@ -1616,7 +1629,14 @@ ul.tab li a:focus, .active {
         background: #f2f2f2;
         border: none !important;
         margin: 0px;
+        // width: 360px;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
         li {
+            float: none;
+            display: inline-block;
             a {
                 color: #484848;
                 border-top: none;
@@ -1732,6 +1752,10 @@ ul.tab li a:focus, .active {
     box-shadow: none;
 }
 
+.input_edit:focus {
+    background: rgba(219, 219, 219, 0.2);
+}
+
 .edit_cancel_btn {
     border: none;
     border-radius: 4px;
@@ -1810,7 +1834,6 @@ ul.tab li a:focus, .active {
         margin: 13px 0px 3px 0px;
         font-size: 20px;
         padding-left: 15px;
-        padding-right: 15px;
     }
     .feed_head2 {
         margin: 0px 0px 13px 0px;
