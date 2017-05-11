@@ -4,19 +4,19 @@ class RolesController < ApplicationController
   def remove
     current_user.remove_role 'evaluator'
     current_user.remove_role 'wikier'
-    redirect_to :back
+    redirect_to request.env['HTTP_REFERER']
   end
 
   def reset
     point = 0
     current_user.update_attribute(:point, point)
-    redirect_to :back
+    redirect_to request.env['HTTP_REFERER']
   end
 
   def charge
     point = 1000
     current_user.update_attribute(:point, point)
-    redirect_to :back
+    redirect_to request.env['HTTP_REFERER']
   end
 
   def evaluator

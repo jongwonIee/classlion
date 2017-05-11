@@ -32,12 +32,9 @@ class EvaluationsController < ApplicationController
     evaluation = Evaluation.new(eval_params)
     evaluation.user = current_user
     if evaluation.save
-      redirect_to :back
+      redirect_to request.env['HTTP_REFERER']
     else
-      #공백이거나, space로 채운글이거나 3줄이하인 경우에 대한 에러처리 필요할 듯
-      #우선 급한대로 flash
-      flash[:warning] = "어머나, 문제가 생겼어요!"
-      redirect_to :back
+      redirect_to request.env['HTTP_REFERER']
     end
   end
 

@@ -3,11 +3,11 @@
       <!--<div class="score_body" style="vertical-align: top;">주관식 평가</div>-->
       <div class="score_bar write_comment_div">
         <%= f.hidden_field :course_id, value: @course.id %>
-        <%= f.text_area :body, minlength: @minimum_length, placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 3줄 이상 작성해야 합니다.)", rows: 8, class: "write_comment_box" %>
+        <%= f.text_area :body, minlength: @minimum_length, placeholder: (t "form.placeholder" ), rows: 8, class: "write_comment_box" %>
         <br>
         <span id="body_counter" data-minimum-length="<%= @minimum_length %>"></span><br>
 
-        <%= f.submit "작성하기", class: "review_write_btn" %>
+        <%= f.submit (t "form.submit_button"), class: "review_write_btn" %>
       </div>
   <% end %>
 </div>
@@ -49,15 +49,15 @@
       if(body_validation()){
         body_counter.text("");
       }else{
-        body_counter.text("150자를 채워주세요!");
+        body_counter.text("<%= t "form.lack_word" %>");
       }
       body.keyup(function() {
         var current_length = $(this).val().replace(/ /g, '').length
         var left_length = min_length - current_length
         if(body_validation()) {
-          body_counter.text("소중한 강의평가 감사합니다!");
+          body_counter.text("<%= t "form.complete" %>");
         }else{
-          body_counter.text(current_length + '/' + min_length + ' ' + left_length + '글자 남았어요!');
+          body_counter.text(current_length + '/' + min_length + ' ' + left_length + "<%= t "form.left_word" %>");
         }
       });
     }
