@@ -202,6 +202,7 @@
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
     }
     tablinks[0].children[0].src = review_off;
     tablinks[1].children[0].src = wiki_off;
@@ -209,6 +210,7 @@
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+    evt.currentTarget.parentNode.className += " active_li";
 
     if (evt.currentTarget.className.match('wiki_tab')) {
       evt.currentTarget.children[0].src = wiki_on;
