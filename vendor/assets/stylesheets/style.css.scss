@@ -661,11 +661,10 @@ body {
             color: #777777;
         }
     }
-}
-
-.feed_etc_left img {
-    width: 15px;
-    vertical-align: middle;
+    img {
+        width: 17px;
+        vertical-align: middle;
+    }
 }
 
 .writer_icon {
@@ -816,6 +815,8 @@ body {
 }
 
 .course_score {
+    margin-top: 30px !important;
+    margin-bottom: 100px !important;
     // border-bottom: solid #dce0e0;
     // border-width: 0.5px 0px 0px 0px;
 }
@@ -856,7 +857,7 @@ body {
 .info_left {
     position: relative !important;
     width: 25% !important;
-    padding-bottom: 25%;
+    padding-bottom: 17%;
     // background:green;
     float: left !important;
 }

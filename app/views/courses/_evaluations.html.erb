@@ -1,26 +1,21 @@
 <div class="container-fluid">
-    <% @evaluations.each_with_index do |e, i|  %>
-        <% unless i == 0 %>
-            <hr class="feed_hr">
-        <% end %>
-
+    <% @evaluations.each_with_index do |e|  %>
         <div class="feed_each">
           <div class="row">
-            <div class="col-xs-3 col-sm-2 feed_writer feed_each_div">
-              <%= image_tag "/assets/lion_1.svg", class: "feed_lion", alt: "lion"%>
-              <p class="feed_nickname"><%= e.user.nickname %></p>
-            </div>
-
-            <div class="col-xs-12 col-sm-5">
-              <div class="rating_div">
-                <div class="rating-head">이 강의를 좋아하냐</div>
-                <%= e.like.is_like %>
+            <div class="col-xs-12 col-sm-12 feed_each_div">
+              <div class="col-xs-12">
+                <p class="feed_course">
+                  <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
+                  <a href='/courses/<%= e.course.id %>'>
+                    <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
+                  </a>
+                </p>
               </div>
-            </div>
-
-              <p class="feed_content tab_feed col-xs-12">
-                <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+  
+              <p class="feed_content col-xs-12">
+                <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
               </p>
+              
               <p class="feed_etc col-xs-12">
                 <%= e.time_ago %>
                 &nbsp;·&nbsp;
@@ -82,9 +77,9 @@
                 </div>
               </div>
             </div>
+          </div>
         </div>
-
-
+        
         <%# report modal form begin %>
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">

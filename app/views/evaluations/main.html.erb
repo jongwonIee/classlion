@@ -6,10 +6,8 @@
         <p class="feed_head2">학우들이 쓴 강의평을 실시간으로 확인해보세요!</p>
         <!--<hr class="info_hr feed_hr feed_top_hr">-->
         <% @evaluations.each_with_index do |e, i| %>
-            <div class="feed_each">
-              <div class="row">
-              
-              
+          <div class="feed_each">
+            <div class="row">
               <div class="col-xs-12 col-sm-12 feed_each_div">
                 <div class="col-xs-12">
                   <p class="feed_course">
@@ -19,24 +17,24 @@
                     </a>
                   </p>
                 </div>
-
-                  <p class="feed_content col-xs-12">
-                    <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
-                  </p>
+    
+                <p class="feed_content col-xs-12">
+                  <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
+                </p>
                 
-                  <div class="feed_etc col-xs-12">
-                    <p class="feed_etc_left">
-                      <%= e.time_ago %>
-                      ·
-                      <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
-                    </p>
-                    <p class="feed_etc_right">
-                      <span>작성자</span> <%= e.user.nickname %>
-                    </p>
-                  </div>
+                <div class="feed_etc col-xs-12">
+                  <p class="feed_etc_left">
+                    <%= e.time_ago %>
+                    ·
+                    <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
+                  </p>
+                  <p class="feed_etc_right">
+                    <span>작성자</span> <%= e.user.nickname %>
+                  </p>
                 </div>
-                </div>
-                </div>
+              </div>
+            </div>
+          </div>
                 
           <%# report modal form begin %>
           <div class="modal fade" id="myModal" role="dialog">
