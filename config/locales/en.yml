@@ -1,23 +1,14 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  hello: "Hello world"
+  evaluation_lack: "강평열람 권한을 오픈하기 위해 강평을 해주세요!"
+  more_search_keyword: "두 글자 이상 입력해주세요"
+
+  form:
+    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 100자이상 작성해야 합니다.)"
+    submit_button: "작성하기"
+    lack_word: "100자를 채워주세요!"
+    complete: "소중한 강의평가 감사합니다!"
+    left_word: "글자 남았어요!"
+
+  comment:
+    placeholder: "Add Comment!"

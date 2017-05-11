@@ -10,3 +10,6 @@ ko:
     complete: "소중한 강의평가 감사합니다!"
     left_word: "글자 남았어요!"
 
+  comment:
+    placeholder: "자유롭게 댓글을 입력해주세요."
+
