@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   #검색결과필터
   post '/courses/:id', to: 'courses#show', as: 'show'
 
+  #Wiki
+  post 'send_wiki' => "wikis#send_wiki"
+
   #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do
     resources :comments, only: [:create]

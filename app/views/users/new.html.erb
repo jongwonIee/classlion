@@ -56,10 +56,10 @@
   </div>
 </div>
 
-<!--//   $(".input_group").on("touchstart click", function(){-->
-<!--//     $(this).find("input").focus();-->
-<!--//   });-->
-
-
-<%# 스크립트 추가 %>
-<script src="<%= asset_path 'mySessions.js' %>"></script>
+<script>
+$(function(){
+  $(".input_group").on("touchstart click", function(){
+    $(this).find("input").focus();
+  });
+});
+<script>

@@ -9,15 +9,41 @@ tinymce.init({
   inline: true,
   paste_data_images: true,
   content_css: [
-    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-    '//www.tinymce.com/css/codepen.min.css'    
+    'https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    'https://www.tinymce.com/css/codepen.min.css'    
   ]
 });
 </script>
 <% wiki = @course.recent_wiki %>
 <% if wiki.nil? %>
-  <div id="wiki_editor">아직 위키가 없습니다. 새로 만들어보세요!</div>
+  <div id="wiki_editor">
+  아직 위키가 없습니다. 여기를 클릭하여 새로 만들어보세요!
+  사용법 : 마우스 우클릭하면 이미지 넣을 수 있고 blah blah
+  </div>
 <% else %>
+  <div id="wiki_editor">
 <%= wiki.body %>
-<a href=/wiki/history>지난 기록 보기</a>
+  </div>
 <% end %>
+<a href="#" id="send_wiki_content">위키 전송</a>||<a href=/wiki/history>지난 기록 보기</a>
+<script>
+$(function(){
+  $("#send_wiki_content").on("click touchstart", function(){
+    $.ajax({
+      url: '/send_wiki', 
+      method: 'post',
+      data: {
+        course_id: <%= @course.id %>,
+        content: $("#wiki_editor").text()
+      },
+      dataType: "json",
+      success: function(e){
+      },
+      error: function(e){
+      }
+    });
+    return false;
+  });
+});
+
+</script>
