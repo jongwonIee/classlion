@@ -10,5 +10,6 @@ class CreateWikis < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :wikis, :revision
+    add_index :wikis, [:course_id, :revision], :unique => true
   end
 end
