@@ -12,7 +12,8 @@ class Evaluation < ApplicationRecord
   before_destroy :decrease_evaluation_count
 
   #validations
-  validates :body, length: { minimum: 150 }, presence: true
+  validates :user_id, uniqueness: true
+  validates :body, length: { minimum: 100 }, presence: true
 
   # before_validation :strip_whitespace, only: [:body]
 
