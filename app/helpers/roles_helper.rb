@@ -5,7 +5,7 @@ module RolesHelper
     user.add_role 'evaluator'
     point = user.point - 1000
     user.update_attribute(:point, point)
-    redirect_to :back
+    request.env['HTTP_REFERER']
   end
 
   def add_role_wikier
@@ -13,6 +13,6 @@ module RolesHelper
     user.add_role 'wikier'
     point = user.point - 1000
     user.update_attribute(:point, point)
-    redirect_to :back
+    request.env['HTTP_REFERER']
   end
 end
