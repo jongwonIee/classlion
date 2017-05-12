@@ -19,6 +19,18 @@ class WikisController < ApplicationController
   end
   end
 
+  def show
+
+  end
+
+  def diff
+
+  end
+
+  def roll_back
+
+  end
+
   def history
     @wiki_history = Wiki.where(course_id: params[:id])
   end
