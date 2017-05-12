@@ -8,6 +8,7 @@ tinymce.init({
   selection_toolbar: 'bold italic | quicklink h2 h3 blockquote',
   inline: true,
   paste_data_images: true,
+  //forced_root_block : false,
   content_css: [
     'https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
     'https://www.tinymce.com/css/codepen.min.css'    
@@ -22,27 +23,30 @@ tinymce.init({
   </div>
 <% else %>
   <div id="wiki_editor">
-<%= wiki.body %>
+<%= wiki.body.html_safe %>
   </div>
 <% end %>
 <a href="#" id="send_wiki_content">위키 전송</a>||<a href=/wiki/history>지난 기록 보기</a>
 <script>
 $(function(){
-  $("#send_wiki_content").on("click touchstart", function(){
+  $("#send_wiki_content").on("click", function(e){
+    e.preventDefault();
     $.ajax({
+      headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
       url: '/send_wiki', 
       method: 'post',
       data: {
         course_id: <%= @course.id %>,
-        content: $("#wiki_editor").text()
+        content: $("#wiki_editor").html()
       },
       dataType: "json",
       success: function(e){
+        alert("저장되었습니다.");
       },
       error: function(e){
+        alert("실패하였습니다.");
       }
     });
-    return false;
   });
 });
 

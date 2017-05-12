@@ -6,7 +6,7 @@
         <p class="logo">CLASSLION</p>
         <p class="main_msg"><%= University.ids.count %>개의 학교, <%=User.ids.count%>명의 대학생,<br><%=Evaluation.ids.count%>개의 강의평가</p>
 
-        <%= form_for(:session, url: login_path, :html => { :id => 'session_user' }, remote: true) do |f| %>
+        <%= form_for(:session, url: login_path, :html => { :id => 'session_user' }, remote: true, :authenticity_token => true) do |f| %>
         <div class="input_group login_input email_input">
           <div class="full_input input_div"> 
             <%= f.email_field :email, placeholder: '이메일', autofocus: true %><br>
