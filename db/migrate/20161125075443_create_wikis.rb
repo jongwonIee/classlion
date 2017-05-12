@@ -5,7 +5,9 @@ class CreateWikis < ActiveRecord::Migration[5.1]
       t.integer   :user_id,       null: false
       t.integer   :revision,      null: false
       t.integer   :course_id,     null: false
+      t.integer   :diff,          null: false
       t.text      :body,          null: false
+      t.string    :comment
 
       t.timestamps
     end

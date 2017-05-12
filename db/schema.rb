@@ -144,7 +144,9 @@ ActiveRecord::Schema.define(version: 20170425141618) do
     t.integer "user_id", null: false
     t.integer "revision", null: false
     t.integer "course_id", null: false
+    t.integer "diff", null: false
     t.text "body", null: false
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id", "revision"], name: "index_wikis_on_course_id_and_revision", unique: true

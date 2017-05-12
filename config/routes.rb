@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   #Wiki
   post 'send_wiki' => "wikis#send_wiki"
+  get  'wiki/:id/history' => "wikis#history"
 
   #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do
