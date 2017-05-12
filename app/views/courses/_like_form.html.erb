@@ -1,5 +1,4 @@
-<%# 좋아요 %>
-좋아요
+<%= t "like_form.like" %>
 <% if @current_user %>
   <%= hidden_field_tag 'c_id', @course.id %>
 
@@ -23,8 +22,7 @@
   <% end %>
 <% end %>
 
-<%# 싫어요 %>
-싫어요
+<%= t "like_form.dislike" %>
 <% if @current_user %>
     <%= hidden_field_tag 'c_id', @course.id %>
     <%# 좋아요가 아예 없는 경우, 싫어요 %>

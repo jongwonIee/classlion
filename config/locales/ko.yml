@@ -13,3 +13,6 @@ ko:
   comment:
     placeholder: "자유롭게 댓글을 입력해주세요."
 
+  like_form:
+    like:   "좋아요"
+    dislike: "싫어요"

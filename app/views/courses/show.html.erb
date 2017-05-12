@@ -80,7 +80,7 @@
       <% if @course.evaluations.exists? %>
         <%= @count %>명의 학생이 평가했습니다.
         <br>
-        좋아요 <%= @like %> (<%= @like_per %>%) - 싫어요 <%= @dislike %> (<%= @dislike_per %>%)
+          <%= t "like_form.like" %> <%= @like %> (<%= @like_per %>%) - <%= t "like_form.dislike" %> <%= @dislike %> (<%= @dislike_per %>%)
       <% else %>
         아직 평가가 없습니다. 소중한 강의평을 남겨주세요.
       <% end %>
