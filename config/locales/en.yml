@@ -1,7 +1,7 @@
 ---
 en:
-  evaluation_lack: "강평열람 권한을 오픈하기 위해 강평을 해주세요!"
-  more_search_keyword: "두 글자 이상 입력해주세요"
+  evaluation_lack: "Please make some reviews to access lecture reviews"
+  more_search_keyword: "*More than two letters please!"
 
   form:
     placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 100자이상 작성해야 합니다.)"
@@ -16,3 +16,12 @@ en:
   like_form:
     like:   "좋아요"
     dislike: "싫어요"
+
+  user:
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+    email: "Email"
+    password: "Password"
+    forgot: "Forgot your email or password?"
+    remember: "Remember me?"
+    facebook: "Login with Facebook?"
