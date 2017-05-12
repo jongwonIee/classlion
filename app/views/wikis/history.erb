@@ -1,5 +1,7 @@
 <div style="margin-top:200px;">
-  <a href="#">리비전 비교하기</a>
+  <% if @wiki_history.size > 1 %>
+  <a href="#" id="diff_revisions">리비전 비교하기</a>
+  <% end %>
   <% @wiki_history.each do |w| %>
     <p>
     <a href="/wiki/<%= w.course_id %>/show/<%= w.revision %>">보기</a>
@@ -9,8 +11,10 @@
     <a href="/wiki/<%= w.course_id %>/diff/<%= w.revision%>/<%= w.course.recent_wiki.revision %>">바뀐점</a>
     |
     <%= w.revision %>
-    <input type="radio" name="left" value="<%= w.id %>">
-    <input type="radio" name="right" value="<%= w.id %>">
+    <% if @wiki_history.size > 1 %>
+    <input type="radio" class="revision_left" id="revision_left_<%= w.revision %>" name="left" value="<%= w.revision %>">
+    <input type="radio" class="revision_right" id="revision_right_<%= w.revision %>" name="right" value="<%= w.revision %>">
+    <% end %>
     //
     <%= w.created_at %>
     //
@@ -24,3 +28,42 @@
     </p>
   <% end %>
 </div>
+<script>
+$(function(){
+  <% if @wiki_history.size > 1 %>
+  $("#diff_revisions").on("click touchstart", function(){
+    window.location.replace("/wiki/<%= params[:id] %>/diff/" + $("input[name='left']:checked").val() + "/" + $("input[name='right']:checked").val());
+  });
+  function left_flush(left_number){
+    $(".revision_left").each(function() {
+      if(parseInt($(this).val()) >= left_number){
+        $(this).css("visibility", "hidden");
+      }else{
+        $(this).css("visibility", "visible");
+      }
+    });
+  }
+  function right_flush(right_number){
+    $(".revision_right").each(function() {
+      if(parseInt($(this).val()) <= right_number){
+        $(this).css("visibility", "hidden");
+      }else{
+        $(this).css("visibility", "visible");
+      }
+    });
+  }
+  $(".revision_right").on("click touchstart", function(){
+    left_flush(parseInt($(this).val()));
+  });
+  $(".revision_left").on("click touchstart", function(){
+    right_flush(parseInt($(this).val()));
+  });
+
+  $("#revision_left_" + <%= @wiki_history.first.revision - 1 %>).attr('checked', 'checked');
+  $("#revision_right_" + <%= @wiki_history.first.revision %>).attr('checked', 'checked');
+
+  left_flush(<%= @wiki_history.first.revision %>);
+  right_flush(<%= @wiki_history.first.revision - 1 %>);
+  <% end %>
+});
+</script>
