@@ -12,3 +12,7 @@ en:
 
   comment:
     placeholder: "Add Comment!"
+
+  like_form:
+    like:   "좋아요"
+    dislike: "싫어요"
