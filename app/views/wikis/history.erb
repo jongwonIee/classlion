@@ -1,0 +1,26 @@
+<div style="margin-top:200px;">
+  <a href="#">리비전 비교하기</a>
+  <% @wiki_history.each do |w| %>
+    <p>
+    <a href="/wiki/<%= w.course_id %>/show/<%= w.revision %>">보기</a>
+    |
+    <a href="/wiki/<%= w.course_id %>/rollback/<%= w.revision %>">이 리비전으로 돌리기</a>
+    |
+    <a href="/wiki/<%= w.course_id %>/diff/<%= w.revision%>/<%= w.course.recent_wiki.revision %>">바뀐점</a>
+    |
+    <%= w.revision %>
+    <input type="radio" name="left" value="<%= w.id %>">
+    <input type="radio" name="right" value="<%= w.id %>">
+    //
+    <%= w.created_at %>
+    //
+    <%= w.user.nickname %>
+    //
+    <%= w.comment %>
+    <% if w.rollback >= 0 %>
+    //
+    <span style="font-weight:bold">Roll back from <%= w.rollback%><span>
+    <% end %>
+    </p>
+  <% end %>
+</div>

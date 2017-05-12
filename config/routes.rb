@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   #Wiki
   post 'send_wiki' => "wikis#send_wiki"
   get  'wiki/:id/history' => "wikis#history"
+  get  'wiki/:id/show/:revision' => "wikis#show"
+  get  'wiki/:id/rollback/:revision' => "wikis#rollback"
+  get  'wiki/:id/diff/:rev_1/:rev_2' => "wikis#diff"
 
   #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do

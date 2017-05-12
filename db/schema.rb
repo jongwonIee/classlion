@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170425141618) do
     t.integer "course_id", null: false
     t.integer "diff", null: false
     t.text "body", null: false
+    t.integer "rollback", default: -1, null: false
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

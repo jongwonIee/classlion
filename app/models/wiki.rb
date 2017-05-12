@@ -10,5 +10,6 @@ class Wiki < ApplicationRecord
     previous_number = 0
     previous_number = previous_wiki.revision if !previous_wiki.nil?
     self.revision = previous_number + 1
+    self.diff = if previous_wiki.nil? then 0 else 100 end
   end
 end
