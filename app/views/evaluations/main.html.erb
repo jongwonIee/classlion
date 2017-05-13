@@ -1,4 +1,16 @@
 <div id="content">
+  <div class="swiper-container">
+      <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <%= image_tag "/assets/main_photo.png", class: "" %>
+          </div>
+          <div class="swiper-slide">Slide 2</div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+  </div>
+  
   <div class="index_container">
     <div class="container-fluid">
       <div class="main_feed">
@@ -61,6 +73,19 @@
           <%# report modal form end %>
       <% end %>
     </div>
+    </div>
   </div>
 </div>
-</div>
+
+<!-- Swiper JS -->
+<script src="/assets/javascripts/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.swiper-container', {
+      pagination: '.swiper-pagination',
+      paginationClickable: true,
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      spaceBetween: 30
+  });
+</script>

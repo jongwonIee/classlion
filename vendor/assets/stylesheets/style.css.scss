@@ -461,9 +461,10 @@ body {
 
 /*index page start*/
 .container-fluid {
-    padding-left: 5px !important;
-    padding-right: 5px !important;
-    margin-top: -20px;
+    height: 100%;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    // margin-top: -20px;
 }
 
 .index_container {
@@ -473,7 +474,7 @@ body {
     width: 100%;
     min-height: 100%;
     margin: 0 auto;
-    padding-top: 60px;
+    padding-top: 50px;
     padding-bottom: 135px;
     /* background: white; */
     /* border-left: 1px solid #f2f2f2; */
@@ -483,7 +484,7 @@ body {
 .index_container > div > div {
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 25px;
     width: 100%;
     text-align: left;
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
@@ -992,6 +993,9 @@ body {
 .info_1, .info_2, .info_3, .info_4 {
     font-size: 14px;
     margin-bottom: 12px !important;
+    select {
+        width: auto;
+    }
 }
 
 .info_1, .info_2 {
@@ -1046,6 +1050,7 @@ body {
     // max-width: 1200px;
     // margin: 0 auto;
     max-width: none !important;
+    margin-top: 0px !important;
     padding: 0px 0px 0px 0px;
 }
 
