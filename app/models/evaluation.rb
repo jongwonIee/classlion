@@ -38,7 +38,7 @@ class Evaluation < ApplicationRecord
 
   def increase_user_point
     user = self.user
-    point = user.point + 300
+    point = user.point + 200
     user.update_attribute(:point, point)
   end
 
