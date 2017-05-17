@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resources :courses
   #검색결과필터
   post '/courses/:id', to: 'courses#show', as: 'show'
+  get  '/recent_evaluations', to: 'evaluations#recent'
 
   #Wiki
   post 'send_wiki' => "wikis#send_wiki"
@@ -56,7 +57,6 @@ Rails.application.routes.draw do
 
   #댓글 수정 및 삭제
   resources :comments, only: [:destroy]
-
 
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크
   get 'mypage' => 'mypages#index'
@@ -75,10 +75,4 @@ Rails.application.routes.draw do
   post 'users/is_like_update'
   post 'users/is_like_delete'
 
-  #cancancan 테스트용
-  post 'roles/remove'
-  post 'roles/reset'
-  post 'roles/charge'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

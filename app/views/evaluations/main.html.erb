@@ -4,63 +4,16 @@
       <div class="main_feed">
         <p class="feed_head">앗! 뜨거워! 방금 막 올라온 강의평</p>
         <p class="feed_head2">학우들이 쓴 강의평을 실시간으로 확인해보세요!</p>
-        <!--<hr class="info_hr feed_hr feed_top_hr">-->
-        <% @evaluations.each_with_index do |e, i| %>
-          <div class="feed_each">
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 feed_each_div">
-                <div class="col-xs-12">
-                  <p class="feed_course">
-                    <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
-                    <a href='/courses/<%= e.course.id %>'>
-                      <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
-                    </a>
-                  </p>
-                </div>
-    
-                <p class="feed_content col-xs-12">
-                  <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
-                </p>
-                
-                <div class="feed_etc col-xs-12">
-                  <p class="feed_etc_left">
-                    <%= e.time_ago %>
-                    ·
-                    <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
-                  </p>
-                  <p class="feed_etc_right">
-                    <span>작성자</span> <%= e.user.nickname %>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-                
-          <%# report modal form begin %>
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                  <%= form_for Report.new do |f| %>
-                      <%= f.hidden_field :evaluation_id, value: e.id %>
-                      <%= f.text_field :title %>
-                      <%= f.text_field :body %>
-                      <%= f.submit "send" %>
-                  <% end %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <%# report modal form end %>
-      <% end %>
-    </div>
+        <div id="infinite_scroll">
+        <a href="/recent_evaluations?since=0" class="next_content"></a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  $('#infinite_scroll').jscroll({
+    nextSelector: '.next_content'
+  });
+</script>
