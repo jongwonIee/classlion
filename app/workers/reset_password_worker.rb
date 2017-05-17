@@ -1,4 +1,4 @@
-class EmailWorker
+class ResetPasswordWorker
   include Sidekiq::Worker
 
   def perform(*args)
