@@ -17,6 +17,7 @@
                   <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
                   <a href='/courses/<%= e.course.id %>'>
                     <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
+                    <%= e.user.nickname %>
                   </a>
                 </p>
               </div>
