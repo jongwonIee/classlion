@@ -4,8 +4,8 @@ class Like < ApplicationRecord
   belongs_to :user
   has_one :evaluation
 
-  before_create :increase_evaluation_count, :increase_user_point
-  before_destroy :decrease_evaluation_count
+  before_create :increase_like_count
+  before_destroy :decrease_like_count
 
   def increase_like_count
 
