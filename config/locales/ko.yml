@@ -10,6 +10,7 @@ ko:
     lack_word: "100자를 채워주세요!"
     complete: "소중한 강의평가 감사합니다!"
     left_word: "글자 남았어요!"
+    evaluated: "이미 평가한 강의입니다."
 
   comment:
     placeholder: "자유롭게 댓글을 입력해주세요."
