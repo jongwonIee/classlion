@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 gem 'mobvious'
 gem 'mobvious-rails'
 
+#delayed
+gem 'sidekiq'
+
 # HTML file diff
 gem 'diffy'
 

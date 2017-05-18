@@ -10,7 +10,7 @@
     아래 버튼을 눌러, 이메일 인증을 해주시면 가입이 완료됩니다.<br>
     이제 <%= Evaluation.count %>개의 강의평가는 당신의 것!</p>
 
-    <%= link_to "이메일 인증하기", edit_account_activation_url(@user.activation_token, email: @user.email)%>
+    <a href="<%= ENV["MAIL_HOST_WITH_PORT"] %>/account_activations/<%= @user.activation_token %>/edit?email=<%= @user.email %>">이메일 인증하기</a>
 
     <p>love from classlion</p>
     <p><a href="http://classlion.net">classlion.net</a></p>

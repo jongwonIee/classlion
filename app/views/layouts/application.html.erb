@@ -25,6 +25,7 @@
 <script src="<%= asset_path 'jquery.barrating.js' %>"></script>
 <script src="<%= asset_path 'jquery.autocomplete.js' %>"></script>
 <script src="<%= asset_path 'sweetalert2.min.js' %>"></script>
+<script src="<%= asset_path 'jquery.jscroll.min.js' %>"></script>
 
 <%= stylesheet_link_tag    'application', media: 'all'  %>
 <%= javascript_include_tag 'application' %>
@@ -44,10 +45,8 @@
 <% else %>
   <%= yield %>
 <% end %>
-
 <script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
 <script src="<%= asset_path 'nav/nav_main.js' %> "></script>
 <script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
-
 </body>
 </html>

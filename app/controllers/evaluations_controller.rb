@@ -4,7 +4,18 @@ class EvaluationsController < ApplicationController
 
   def main #최신강평 10개를 보여줌
     #redirect_to '/signup/send_authMail' if !@current_user.activated? #이메일 인증이 안된경우 이메일 인증페이지로
-    @evaluations = all_evaluations.limit(10)
+  end
+
+  def recent
+    load_limit = 2
+    refresh_limit = 100
+    if params[:since].nil? or params[:since].to_i == 0
+      @evaluations = Evaluation.order("id desc").limit(load_limit)
+    else
+      @evaluations = Evaluation.where("id < ?", params[:since]).order("id desc").limit(load_limit)
+      @evaluations = Array.new if params[:since].to_i < Evaluation.last.id - refresh_limit
+    end
+    render layout: false
   end
 
   def index #권한이 있으면, 모든 강평보여줌
