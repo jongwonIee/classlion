@@ -90,31 +90,25 @@
   <div class="container-fluid">  
     <div class="tab_div">
       <div class="tab_menu">
-      <ul class="tab">
-        <li>
-          <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openCity(event, 'wiki')" id="defaultOpen">
-            <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
-            WIKI
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" class="review_tab tablinks" onclick="openCity(event, 'review')">
-            <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
-            강의평가
-          </a>
-        </li>
-        <li class="filter">
-          <%# partial refresh needed %>
-          <%= form_tag do %>
-              <%= select_tag 'order', options_for_select({"최신순" => 1, "좋아요만" => 2, "싫어요만" => 3}, @params), onchange: "$('#order').submit();" %>
-          <% end %>
-        </li>
-      </ul>
+        <ul class="tab">
+          <li>
+            <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openCity(event, 'wiki')" id="defaultOpen">
+              <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
+              WIKI
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" class="review_tab tablinks" onclick="openCity(event, 'review')">
+              <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
+              강의평가
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div id="review" class="tabcontent">
           <% if @evaluated_list.include?(@course.id) %>
-            이미 평가를 했습니다.
+            <%= (t "form.evaluated") %>
           <% else %>
             <%= render 'like_form' %>
             <%# if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
@@ -143,6 +137,9 @@
   $(document).on("click","#favorite_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/favorites_delete',
       data: {c_id: course_id},
@@ -162,6 +159,9 @@
   $(document).on("click","#favorite_add_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/favorites_add',
       data: {c_id: course_id},
