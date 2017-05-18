@@ -75,4 +75,6 @@ Rails.application.routes.draw do
   post 'users/is_like_update'
   post 'users/is_like_delete'
 
+  #cheat
+  get 'roles/charge'
 end
