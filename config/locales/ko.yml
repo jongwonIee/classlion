@@ -4,7 +4,8 @@ ko:
   more_search_keyword: "두 글자 이상 입력해주세요"
 
   form:
-    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 100자이상 작성해야 합니다.)"
+    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!
+    (최소 100자이상 작성해야 합니다.)"
     submit_button: "작성하기"
     lack_word: "100자를 채워주세요!"
     complete: "소중한 강의평가 감사합니다!"
@@ -16,3 +17,8 @@ ko:
   like_form:
     like:   "좋아요"
     dislike: "싫어요"
+
+  point:
+    notice: "강의평 하나당 200점이 적립됩니다!"
+  role:
+    evaluator:

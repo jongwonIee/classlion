@@ -117,9 +117,9 @@
             이미 평가를 했습니다.
           <% else %>
             <%= render 'like_form' %>
-            <% if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
+            <%# if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
               <%= render 'form' %>
-            <% end %>
+            <%# end %>
           <% end %>
           
         <% if @course.evaluation_count > 0 %>
