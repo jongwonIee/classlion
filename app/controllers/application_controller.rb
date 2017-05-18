@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   rescue_from CanCan::AccessDenied do
-    redirect_to info_path, alert: t(:evaluation_lack)
+    redirect_to info_path, alert: t("role.lack.evaluator")
   end
 
   def goto_login
     unless logged_in? #로그인이 안되어 있는데, 특정페이지로 접근하려고 한다면
-        flash[:warning] = '로그인이 필요한 서비스 입니다'
+        flash[:warning] = t("role.user.goto_login")
         redirect_to root_url #루트페이지
     end
   end
