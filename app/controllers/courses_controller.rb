@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
 
   def index
     if params[:search].nil? or (params[:search].split(" ").join.length < 2)
-      flash[:notice] = t(:more_search_keyword)
+      flash[:notice] = t(:search.lack_word)
       redirect_to '/'
     else
       @search = Course.search do
@@ -19,14 +19,14 @@ class CoursesController < ApplicationController
   end
 
   def show
-
+    #word count
     @minimum_length = Evaluation.validators_on(:body ).first.options[:minimum]
 
     #evaluation
     @evaluation = Evaluation.new
     @like = Like.new
 
-    #cancancan
+    #cancancan 수정해야함
     authorize! :show, Course
 
     @count = @course.evaluation_count
@@ -42,20 +42,19 @@ class CoursesController < ApplicationController
 
     #dropdown filter
     @params = params[:order]
-    if @params == "최신순"
+    if @params == 1
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
-    elsif @params == "총점순"
-      @evaluations = @course.evaluations.order(is_like: :desc) #총점순
-    elsif @params == "총점역순"
-      @evaluations = @course.evaluations.order(:is_like) #총점역순
+    elsif @params == 2
+      @evaluations = @course.evaluations.where("like.is_like = ?", true) #좋아요만
+    elsif @params == 3
+      @evaluations = @course.evaluations.where("like.is_like = ?", false) #싫어요만
     else
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     end
 
-    #같은 강의, 연관 강의
+    #같은 강의, 연관 강의start - refactoring 가능할지..
     @related_courses = Set.new
     @identical_courses = Set.new
-
     Course.where("professor_id = ?", @course.professor.id).each do |course|
       @related_courses << course.id
     end
@@ -64,12 +63,10 @@ class CoursesController < ApplicationController
       @related_courses << lecture.id
       @identical_courses << lecture.id
     end
-
     #자기 자신 제외
     @related_courses.delete(params[:id].to_i)
     @identical_courses.delete(params[:id].to_i)
-
-    @msg = "선택해주세요"
+    #같은 강의, 연관 강의end
   end
 
   private
