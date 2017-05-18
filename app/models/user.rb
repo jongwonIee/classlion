@@ -8,32 +8,37 @@ class User < ApplicationRecord
   has_many :likes
   has_many :courses, through: :likes
 
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :password_confirm
+
+  before_save :downcase_email 
   before_create :increase_user_count, :create_activation_digest
   before_destroy :decrease_user_count
-  before_save :downcase_email #이메일 저장 전 소문화화
 
-  #상수들
-  #비밀번호 관련
+  #CONSTS
+  #Passwords
   PASSWORD_LENGTH_MAX = 32
   PASSWORD_LENGTH_MIN = 8
-  #닉네임 관련
+
+  #Nicks
   NICKNAME_LENGTH_MAX = 8
   NICKNAME_LENGTH_MIN = 2
   #is_impressionable
 
+  #Email Valiation
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  #이메일 유효성체크
+
   validates :email,
     presence: { message: '이메일을 입력해주세요.'},
     uniqueness: { message: '이미 사용중인 이메일입니다.'},
     format: { with: VALID_EMAIL_REGEX, message: '이메일 형식을 확인해주세요.'},
     length: {maximum: 255}
+
   #닉네임 유효성체크
   validates :nickname,
     presence: { message: '닉네임을 입력해주세요.'},
     uniqueness: { message: '이미 사용중인 닉네임입니다.'},
     format: { without: /\s/, message: '닉네임에는 공백을 사용할 수 없습니다.'}
+
   #닉네임 유효성체크
   validates_length_of :words_in_nickname,
     maximum: NICKNAME_LENGTH_MAX, minimum: NICKNAME_LENGTH_MIN,
@@ -158,16 +163,6 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
-  end
-
-  def increase_user_count
-    university = self.university
-    university.update_attributes(user_count: university.user_count + 1)
-  end
-
-  def decrease_user_count
-    university = self.university
-    university.update_attributes(user_count: university.user_count - 1)
   end
 
   def words_in_nickname

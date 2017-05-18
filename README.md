@@ -1,8 +1,10 @@
 # README
 
-CLASSLION Project
+To run classlion project at the first time.
 
-* Run solr/sunspot before running rails project
-
-*mobvious
-@is_mobile returns false unless user's device is mobile
+* rails db:drop
+* rails db:migrate
+* bundle exec rake sunspot:solr:start
+* rails db:seed
+* redis-server
+* bundle exec sidekiq --environment development -C config/sidekiq.yml 
