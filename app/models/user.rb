@@ -110,6 +110,6 @@ class User < ApplicationRecord
 
   def encrypt_password
     self.password_digest = BCrypt::Password.create(self.password) unless self.renew_password.nil?
-  end 
+  end
 end
 
