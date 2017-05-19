@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params.merge(renew_password: Object))
     if @user.save
       log_in @user
-      redirect_to '/signup/send_authMail' #세션이 있는 상태에서 리다이렉트
+      redirect_to '/not_activated' #세션이 있는 상태에서 리다이렉트
     else
       render action: 'new'
     end
