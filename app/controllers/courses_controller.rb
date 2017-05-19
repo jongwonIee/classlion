@@ -41,13 +41,13 @@ class CoursesController < ApplicationController
     end
 
     #dropdown filter
-    @params = params[:order]
+    @params = params[:order].to_i
     if @params == 1
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     elsif @params == 2
-      @evaluations = @course.evaluations.where("like.is_like = ?", true) #좋아요만
+      @evaluations = @course.evaluations.joins(:like).where("is_like = ?", true) #좋아요만
     elsif @params == 3
-      @evaluations = @course.evaluations.where("like.is_like = ?", false) #싫어요만
+      @evaluations = @course.evaluations.joins(:like).where("is_like = ?", false) #싫어요만
     else
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     end
