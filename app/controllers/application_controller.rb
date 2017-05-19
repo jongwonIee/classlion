@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     redirect_to info_path, alert: t("role.lack.evaluator")
   end
 
-  def goto_login
+  def session_check
     unless logged_in? #로그인이 안되어 있는데, 특정페이지로 접근하려고 한다면
         flash[:warning] = t("role.user.goto_login")
         redirect_to root_url #루트페이지
