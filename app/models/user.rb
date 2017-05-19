@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :favorites
   has_many :likes
+  has_many :auth_tokens
   has_many :courses, through: :favorites
   has_many :courses, through: :likes
 
@@ -16,9 +17,10 @@ class User < ApplicationRecord
   NICKNAME_LENGTH_MIN = 2
 
   #Email Valiation
-  attr_accessor :password, :password_confirmation, :renew_password
+  attr_accessor :password, :password_confirmation, :renew_password, :skip_activation
   before_save   :encrypt_password
   before_validation :strip_information
+  after_create  :send_activaion_email, unless: Proc.new { self.skip_activation }
 
   validates :email,   format: {          with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, 
                                       message: I18n.t("invalid_email", scope: :user)},
@@ -48,6 +50,13 @@ class User < ApplicationRecord
                                       too_long: I18n.t("password_too_long",  max: PASSWORD_LENGTH_MAX, scope: :user),
                                      too_short: I18n.t("password_too_short", min: PASSWORD_LENGTH_MIN, scope: :user)}
 
+
+  #인증
+  def activate(auth_token)
+    if auth_token.created_at > 3.hours.ago #3시간 이내면
+      update_columns(activated: true, activated_at: Time.zone.now) #활성화
+    end
+  end
 
   #로그인상태 유지 관련 -------------------------------------------------
   def remember
@@ -111,5 +120,10 @@ class User < ApplicationRecord
   def encrypt_password
     self.password_digest = BCrypt::Password.create(self.password) unless self.renew_password.nil?
   end 
+
+  def send_activaion_email
+    at = AuthToken.create(user: self, auth_type: 1, token: SecureRandom.uuid.gsub("-", ""))
+    UserMailer.account_activation(self, at).deliver_now
+  end
 end
 

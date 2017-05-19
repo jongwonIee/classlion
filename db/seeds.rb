@@ -13,15 +13,15 @@ end
 puts "Inserting user data.."
 [
    [1, true, "이브이", "admin@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
-   [2, false, "와플스튜디오", "jradoo2@snu.ac.kr",	1,'password', 'password', true, Time.zone.now],
-   [3, false, "flyest", "minsu007@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
-   [4, false, "korellas", "korellas@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
-   [5, false, "이소룡", "cjw1213@snu.ac.kr", 1, 'password', 'password', true, Time.zone.now],
+   [2, false, "와플스튜디오", "asdf@asdf.com",	1,'password', 'password', true, Time.zone.now],
+   [3, false, "flyest", "ffffffff@asdf.com", 1, 'password', 'password', true, Time.zone.now],
+   [4, false, "korellas", "ttttt@asdf.com", 1, 'password', 'password', true, Time.zone.now],
+   [5, false, "이소룡", "asdfasd@asdfasdf.com", 1, 'password', 'password', true, Time.zone.now],
    [6, false, "앙우리", "a@a.com", 1, '11111111', '11111111', true, Time.zone.now]
 
 ].each do |x|
   User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4],
-              password: x[5], password_confirmation: x[6], activated: x[7], activated_at: x[8], renew_password: true)
+              password: x[5], password_confirmation: x[6], activated: x[7], activated_at: x[8], renew_password: true, skip_activation: true)
 end
 
 puts "Inserting lecture data.."

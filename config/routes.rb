@@ -19,12 +19,13 @@ Rails.application.routes.draw do
   get   '/login',   to: 'sessions#new'
   post  '/login',   to: 'sessions#create'
   get   '/logout',  to: 'sessions#destroy'
+
   resources :users
-  resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   #인증 이메일 안내 수정중
   get '/not_activated' => 'account_activations#not_activated'
+  get '/activate/:token' => 'account_activations#activate'
 
   #인증 이메일 재전송
   get '/retry_activation' => 'account_activations#retry_activation' #안내 폼

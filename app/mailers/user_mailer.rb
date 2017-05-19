@@ -1,8 +1,9 @@
 class UserMailer < ApplicationMailer
 
-  def account_activation(user)
+  def account_activation(user, at)
     #인증메일 전송
     @user = user
+    @at = at
     mail(to: user.email, subject: "[클래스라이언] 이메일을 인증해주세요!")do |format|
       format.html #형식을 html로 지정
     end

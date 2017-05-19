@@ -12,17 +12,14 @@ class AccountActivationsController < ApplicationController
 
   def activate
     #인증 이메일 활성 process
-    user = User.find_by(email: params[:email])
-    if user && !user.activated? && user.authenticated?(:activation, params[:id])
-      if user.activate # 3시간 이내여서 활성화 되었으면
-        log_in user
-        flash[:success] = "이메일이 인증되었습니다 #{user.nickname}님 반갑습니다 :)"
-        redirect_to '/main'
-      else
-        flash[:warning] = '인증시간이 초과되었습니다. 다시 인증메일을 받고싶다면 하단에 메일주소를 입력해주세요'
-        redirect_to '/signup/resend_authMail'
-      end
+    auth_token = AuthToken.where(token: params[:token], auth_type: 1).take
+    user = auth_token.user
+    if !user.nil? and user.activate(auth_token) # 3시간 이내여서 활성화 되었으면
+      log_in user
+      flash[:success] = "이메일이 인증되었습니다 #{user.nickname}님 반갑습니다 :)"
+      redirect_to '/'
     else
+      log_out
       flash[:warning] = '[에러] 유효하지않은 링크입니다.'
       redirect_to '/login'
     end
