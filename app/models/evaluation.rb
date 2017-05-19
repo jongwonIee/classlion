@@ -8,12 +8,10 @@ class Evaluation < ApplicationRecord
   has_many :reports
   has_one :like
 
-  before_create :increase_evaluation_count, :increase_user_point
-  before_destroy :decrease_evaluation_count
+  before_create :increase_user_point
 
   #validations
-  validates :user_id, uniqueness: true
-  validates :body, length: { minimum: 100 }, presence: true
+  validates :body, length: { minimum: 10 }, presence: true
 
   # before_validation :strip_whitespace, only: [:body]
 
@@ -40,24 +38,6 @@ class Evaluation < ApplicationRecord
     user = self.user
     point = user.point + 200
     user.update_attribute(:point, point)
-  end
-
-  def increase_evaluation_count
-    course = self.course
-    course.update_attributes(
-        evaluation_count: course.evaluation_count + 1
-    )
-    university = self.course.university
-    university.update_attributes(evaluation_count: university.evaluation_count + 1)
-  end
-
-  def decrease_evaluation_count
-    course = self.course
-    course.update_attributes(
-        evaluation_count: course.evaluation_count - 1
-    )
-    university = self.course.university
-    university.update_attributes(evaluation_count: university.evaluation_count - 1)
   end
 
   # for increase_or_decrease_evaluation_count

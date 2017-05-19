@@ -1,19 +1,14 @@
 class UsersController < ApplicationController
-  before_action :goto_main, only: [:new]
-  before_action :goto_login, only: [:edit]
-  # before_action :correct_user,   only: [:edit, :update]
+
+  before_action :session_check, only: [:edit]
 
   def new
-    # 회원가입 form
     @user = User.new
   end
 
   def create
-    # 회원가입 process
-    @user = User.new(user_params)
-
+    @user = User.new(user_params.merge(renew_password: Object))
     if @user.save
-      @user.send_activation_email
       log_in @user
       redirect_to '/signup/send_authMail' #세션이 있는 상태에서 리다이렉트
     else
@@ -22,8 +17,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # 회원정보 수정 form
-    #@user = User.find(params[:id])
     @user = @current_user
   end
 
@@ -31,7 +24,6 @@ class UsersController < ApplicationController
     # 회원정보 수정 process
     @user = @current_user
     if @user.update_attributes(user_params)
-    # 업데이트 성공시
       flash[:success] = '변경 완료!'
     else
       flash[:warning] = '어머나, 문제가 생겼어요 ㅜㅜ'
