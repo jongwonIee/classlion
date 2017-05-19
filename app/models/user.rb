@@ -36,12 +36,12 @@ class User < ApplicationRecord
                                      too_long: I18n.t("nickname_too_long",  max: NICKNAME_LENGTH_MAX, scope: :user),
                                     too_short: I18n.t("nickname_too_short", min: NICKNAME_LENGTH_MIN, scope: :user)}
 
-  validates :password_confirmation,    unless: "renew_password.nil?",
+  validates :password_confirmation,    unless: Proc.new { self.renew_password.nil? },
                                      presence: {  message: I18n.t("password_empty", scope: :user)}
 
   validates :university_id, presence: { message: I18n.t("invalid_university", scope: :user)}
 
-  validates :password,       unless: "renew_password.nil?",
+  validates :password,       unless: Proc.new { self.renew_password.nil? }, 
                        confirmation: { case_sensitive: true,
                                               message: I18n.t("password_mismatch", scope: :user)},
                            presence: { message: I18n.t("password_empty", scope: :user)},
