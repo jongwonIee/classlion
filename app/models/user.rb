@@ -59,9 +59,13 @@ class User < ApplicationRecord
   end
 
   #로그인상태 유지 관련 -------------------------------------------------
+  def authenticated?(cookie)
+    BCrypt::Password.new(self.remember_digest).is_password?(cookie)
+  end
+
   def remember
     self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+    update_attribute(:remember_digest, BCrypt::Password.create(remember_token))
   end
 
   def forget
