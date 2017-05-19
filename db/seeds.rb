@@ -21,7 +21,7 @@ puts "Inserting user data.."
 
 ].each do |x|
   User.create(id: x[0], is_boy: x[1], nickname: x[2], email: x[3], university_id: x[4],
-              password: x[5], password_confirmation: x[6], activated: x[7], activated_at: x[8])
+              password: x[5], password_confirmation: x[6], activated: x[7], activated_at: x[8], renew_password: true)
 end
 
 puts "Inserting lecture data.."
@@ -65,7 +65,6 @@ File.read("db/seed_data/likes.csv").split("\n").each do |line|
       id: data[0],
       user_id: data[1],
       course_id: data[2],
-      evaluation_id: data[3],
       is_like: data[4]
   )
 end
@@ -73,10 +72,14 @@ end
 puts "Inserting evaluation data.."
 File.read("db/seed_data/evaluations.csv").split("\n").each do |line|
   data = line.strip.split("\t")
-  Evaluation.create(
+  e = Evaluation.new(
       id: data[0],
       user_id: data[1],
       course_id: data[2],
+      like_id: data[0],
       body: data[3]
   )
+  unless e.save
+    puts e.errors.inspect
+  end
 end

@@ -48,7 +48,7 @@ module SessionsHelper
 
   #------------------------------------------------------로그인 유무 확인
   def logged_in? #로그인이 된 상태란? ->current_user 세션이 있으면서, 이메일 인증이 완료된 사람
-    !current_user.nil? && current_user.activated?
+    !current_user.nil? # && current_user.activated?
   end
 
 end

@@ -1,21 +1,16 @@
 class AccountActivationsController < ApplicationController
-  before_action :goto_main, only: [:authMail, :re_authMail]
+  before_action :session_check, except: [:edit]
 
   #---------------------------------------------------------------인증 이메일 전송
-  def authMail
+  def not_activated
     #인증 이메일 안내 view
-    if !current_user.nil?
-      email_original =  User.find_by(id: session[:user_id]).email
-      email_split = email_original.split('@') #@를 중심으로 앞뒤로 자름
-      email_slice = email_split[0].slice(0..1)#@앞부분은 2개만 겟하기
-      @email = email_slice + "*****@" + email_split[1]
-    else
-      flash[:warning] = "[에러] 잘못된 접근입니다."
-      redirect_to root_url #이메일이 nil, 즉 url로 접근하려고 했을 때
-    end
+    email_original =  current_user.email
+    email_split = email_original.split('@') #@를 중심으로 앞뒤로 자름
+    email_slice = email_split[0].slice(0..1)#@앞부분은 2개만 겟하기
+    @email = email_slice + "*****@" + email_split[1]
   end
 
-  def edit
+  def activate
     #인증 이메일 활성 process
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
@@ -33,14 +28,7 @@ class AccountActivationsController < ApplicationController
     end
   end
 
-  #--------------------------------------------------------------인증 이메일 재전송
-  def re_authMail
-    #인증 이메일 재전송 view
-
-  end
-
-  def resend_authMail
-    #인증 이메일 재전송 process
+  def process_activation  #인증 이메일 재전송 process
     user = User.find_by_email(params[:re_authMail][:email])
 
     if !user #이메일 주소 없으면

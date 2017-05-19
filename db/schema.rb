@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425141618) do
+ActiveRecord::Schema.define(version: 20170518091439) do
+
+  create_table "auth_tokens", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "auth_type", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.integer "evaluation_id", null: false
@@ -35,9 +43,11 @@ ActiveRecord::Schema.define(version: 20170425141618) do
   create_table "evaluations", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_id", null: false
+    t.integer "like_id", null: false
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["like_id"], name: "index_evaluations_on_like_id", unique: true
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -59,7 +69,6 @@ ActiveRecord::Schema.define(version: 20170425141618) do
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_id", null: false
-    t.integer "evaluation_id"
     t.boolean "is_like", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,9 +84,8 @@ ActiveRecord::Schema.define(version: 20170425141618) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "evaluation_id"
-    t.string "title"
+    t.integer "user_id", null: false
+    t.integer "evaluation_id", null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,8 +107,6 @@ ActiveRecord::Schema.define(version: 20170425141618) do
     t.string "english_name", null: false
     t.string "email_domain", null: false
     t.boolean "need_activation", null: false
-    t.integer "user_count", default: 0
-    t.integer "evaluation_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -115,19 +121,9 @@ ActiveRecord::Schema.define(version: 20170425141618) do
     t.boolean "confirmed", default: false, null: false
     t.boolean "dropped_out", default: false, null: false
     t.datetime "dropped_out_at"
-    t.boolean "allowed", default: false, null: false
     t.integer "point", default: 0, null: false
-    t.integer "sign_in_count", default: 1, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.boolean "activated", default: false
-    t.string "activation_digest"
     t.datetime "activated_at"
-    t.datetime "activation_sent_at"
-    t.string "reset_digest"
-    t.datetime "reset_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

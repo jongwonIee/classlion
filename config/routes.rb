@@ -24,11 +24,11 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   #인증 이메일 안내 수정중
-  get '/signup/send_authMail' => 'account_activations#authMail'
+  get '/not_activated' => 'account_activations#not_activated'
 
   #인증 이메일 재전송
-  get '/signup/resend_authMail' => 'account_activations#re_authMail' #안내 폼
-  post '/signup/resend_authMail' => 'account_activations#resend_authMail' #실제 전송 프로세스
+  get '/retry_activation' => 'account_activations#retry_activation' #안내 폼
+  post '/retry_activation' => 'account_activations#process_activation' #실제 전송 프로세스
 
   #사용자 정보 수정
   get 'edit', to: 'users#edit'
