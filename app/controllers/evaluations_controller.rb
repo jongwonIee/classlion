@@ -47,6 +47,7 @@ class EvaluationsController < ApplicationController
     else
       redirect_to request.env['HTTP_REFERER']
     end
+
   end
 
   private

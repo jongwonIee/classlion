@@ -8,3 +8,5 @@ To run classlion project at the first time.
 * rails db:seed
 * redis-server
 * bundle exec sidekiq --environment development -C config/sidekiq.yml 
+
+* after seed, uncomment line 11-15 of @evaluation.rb

@@ -8,12 +8,11 @@ class Evaluation < ApplicationRecord
   has_many :reports
   has_one :like
 
-  before_create :increase_user_point
+  # before_create :increase_user_point
+  # before_destroy :decrease_user_point
 
-  #validations
-  validates :body, length: { minimum: 10 }, presence: true
-
-  # before_validation :strip_whitespace, only: [:body]
+  # validations
+  # validates :body, length: { minimum: 100 }, presence: true
 
   def time_ago
     #강평 작성 시간
@@ -29,23 +28,15 @@ class Evaluation < ApplicationRecord
   end
 
   private
-
-  # def strip_whitespace
-  #   self.body = self.body.strip unless self.body.nil?
-  # end
-
   def increase_user_point
-    user = self.user
+    user = current_user
     point = user.point + 200
     user.update_attribute(:point, point)
   end
 
-  # for increase_or_decrease_evaluation_count
-  def converter(boolean)
-    if boolean == true
-      1
-    elsif boolean == false
-      0
-    end
+  def decrease_user_point
+    user = current_user
+    point = user.point - 200
+    user.update_attribute(:point, point)
   end
 end

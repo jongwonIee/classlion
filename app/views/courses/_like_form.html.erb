@@ -49,6 +49,9 @@
     var course_id = $('#c_id').val();
     var boolean = $('#boolean').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/is_like_create',
       data: {c_id: course_id, boolean: true},
@@ -69,6 +72,9 @@
   $(document).on("click","#like_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/is_like_delete',
       data: {c_id: course_id},
@@ -90,6 +96,9 @@
   $(document).on("click","#like_create_dislike_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/is_like_update',
       data: {c_id: course_id, boolean: true},
@@ -115,6 +124,9 @@
     var course_id = $('#c_id').val();
     var boolean = $('#boolean').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/is_like_create',
       data: {c_id: course_id, boolean: false},
@@ -136,6 +148,9 @@
   $(document).on("click","#dislike_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/is_like_delete',
       data: {c_id: course_id},
@@ -157,6 +172,9 @@
   $(document).on("click","#dislike_create_like_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/is_like_update',
       data: {c_id: course_id, boolean: false},

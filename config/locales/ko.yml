@@ -1,14 +1,16 @@
 ---
 ko:
-  evaluation_lack: "강평열람 권한을 오픈하기 위해 강평을 해주세요!" 
-  more_search_keyword: "두 글자 이상 입력해주세요"
+  search:
+    lack_word: "두 글자 이상 입력해주세요"
 
   form:
-    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 100자이상 작성해야 합니다.)"
+    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!
+    (최소 100자이상 작성해야 합니다.)"
     submit_button: "작성하기"
     lack_word: "100자를 채워주세요!"
     complete: "소중한 강의평가 감사합니다!"
     left_word: "글자 남았어요!"
+    evaluated: "이미 평가한 강의입니다."
 
   comment:
     placeholder: "자유롭게 댓글을 입력해주세요."
@@ -16,3 +18,31 @@ ko:
   like_form:
     like:   "좋아요"
     dislike: "싫어요"
+
+  point:
+    notice: "강의평 하나당 200점이 적립됩니다!"
+
+  role:
+    evaluator: "강평열람권한"
+    wikier: "위키열람권한"
+    lack:
+      evaluator: "강평열람권한을 오픈하기 위해 강평을 작성해주세요!"
+      wikier: "위키열람권한을 오픈하기 위해 강평을 작성해주세요!"
+
+  user:
+    sign_in: "로그인"
+    sign_up: "회원가입"
+    sign_out: "로그아웃"
+    email: "이메일"
+    password: "비밀번호"
+    forgot: "아이디/비밀번호를 잊어버리셨나요?"
+    already: "이미 회원이신가요?"
+    remember: "로그인 상태 유지"
+    facebook: "페이스북으로 로그인"
+    kakaotalk: "카카오톡으로 로그인"
+    goto_login: "로그인이 필요한 페이지입니다."
+
+  course:
+    choose: "선택해주세요"
+    identical: "같은 강의"
+    related: "연관 강의"

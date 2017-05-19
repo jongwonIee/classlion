@@ -14,8 +14,8 @@ en:
     placeholder: "Add Comment!"
 
   like_form:
-    like:   "좋아요"
-    dislike: "싫어요"
+    like:   "Good"
+    dislike: "Bad"
 
   user:
     sign_in: "Sign In"
