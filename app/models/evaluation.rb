@@ -26,26 +26,4 @@ class Evaluation < ApplicationRecord
       return ActionController::Base.helpers.time_tag(self.created_at, :format=>'%Y년 %m월 %d일')
     end
   end
-
-  private
-
-  def increase_user_point
-    user = self.user
-    point = user.point + 200
-    user.update_attribute(:point, point)
-  end
-
-  def increase_evaluation_count
-    course = self.course
-    course.update_attributes(
-        evaluation_count: course.evaluation_count + 1
-    )
-  end
-
-  def decrease_evaluation_count
-    course = self.course
-    course.update_attributes(
-        evaluation_count: course.evaluation_count - 1
-    )
-  end
 end
