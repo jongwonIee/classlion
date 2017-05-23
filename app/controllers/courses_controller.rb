@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   include CoursesHelper
   before_action :set_course, only: [:show]
-  before_action :goto_login, only: [:index, :show]
+  before_action :activation_check
 
   def index
     if params[:search].nil? or (params[:search].split(" ").join.length < 2)
@@ -20,7 +20,7 @@ class CoursesController < ApplicationController
 
   def show
     #word count
-    @minimum_length = Evaluation.validators_on(:body ).first.options[:minimum]
+    @minimum_length = Evaluation.validators_on(:body).first.options[:minimum]
 
     #evaluation
     @evaluation = Evaluation.new

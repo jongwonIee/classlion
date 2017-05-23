@@ -20,7 +20,7 @@ class User < ApplicationRecord
   attr_accessor :password, :password_confirmation, :renew_password, :skip_activation
   before_save   :encrypt_password
   before_validation :strip_information
-  after_create  :send_activaion_email, unless: Proc.new { self.skip_activation }
+  after_create  :send_activation_email, unless: Proc.new { self.skip_activation }
 
   validates :email,   format: {          with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, 
                                       message: I18n.t("invalid_email", scope: :user)},
@@ -55,7 +55,14 @@ class User < ApplicationRecord
   def activate(auth_token)
     if auth_token.created_at > 3.hours.ago #3시간 이내면
       update_columns(activated: true, activated_at: Time.zone.now) #활성화
+      return true
+    else
+      return false
     end
+  end
+
+  def activated?
+    self.activated
   end
 
   #로그인상태 유지 관련 -------------------------------------------------
@@ -110,6 +117,11 @@ class User < ApplicationRecord
     BCrypt::Password.new(self.password_digest) == password
   end 
 
+  def send_activation_email
+    at = AuthToken.create(user: self, auth_type: 1, token: SecureRandom.uuid.gsub("-", ""))
+    UserMailer.account_activation(self, at).deliver_now
+  end
+
   private
   def self.new_token
     SecureRandom.urlsafe_base64
@@ -125,9 +137,5 @@ class User < ApplicationRecord
     self.password_digest = BCrypt::Password.create(self.password) unless self.renew_password.nil?
   end 
 
-  def send_activaion_email
-    at = AuthToken.create(user: self, auth_type: 1, token: SecureRandom.uuid.gsub("-", ""))
-    UserMailer.account_activation(self, at).deliver_now
-  end
 end
 

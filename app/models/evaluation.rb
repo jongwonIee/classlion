@@ -12,7 +12,7 @@ class Evaluation < ApplicationRecord
   # before_destroy :decrease_user_point
 
   # validations
-  # validates :body, length: { minimum: 100 }, presence: true
+  validates :body, length: { minimum: 10 }, presence: true
 
   def time_ago
     #강평 작성 시간

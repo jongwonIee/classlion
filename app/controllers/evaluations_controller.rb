@@ -1,9 +1,9 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
-  before_action :session_check
+  before_action :activation_check
 
-  def main #최신강평 10개를 보여줌
-    #redirect_to '/signup/send_authMail' if !@current_user.activated? #이메일 인증이 안된경우 이메일 인증페이지로
+  def main 
+
   end
 
   def recent

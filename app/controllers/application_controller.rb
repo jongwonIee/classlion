@@ -9,15 +9,21 @@ class ApplicationController < ActionController::Base
   end
 
   def session_check
-    unless logged_in? #로그인이 안되어 있는데, 특정페이지로 접근하려고 한다면
-        flash[:warning] = t("role.user.goto_login")
-        redirect_to root_url #루트페이지
+    if !logged_in?
+      flash[:warning] = t("role.user.goto_login")
+      redirect_to login
     end
   end
 
-  def goto_main
-    if logged_in? #로그인이 되어있는데, 로그인 혹은 회원가입페이지로 접근하려고 한다면
-       redirect_to '/main' #메인으로
+  def activation_check
+    if !logged_in? 
+      if !current_user.activated?
+        flash[:warning] = "인증이 되지 않았습니다."
+        redirect_to not_activated
+      else
+        flash[:warning] = t("role.user.goto_login")
+        redirect_to login
+      end
     end
   end
 
