@@ -1,5 +1,5 @@
-<div class="index_container">
-  <div class="container-fluid" style="background:white;">
+<div class="index_container course_show_index">
+  <div class="container-fluid">
     <div class="course_top">
       <div class="course_info_div">
         <div class="info_left">
@@ -46,27 +46,27 @@
               <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
             </p>
             <p class="info_3">
-              <span class="info_title"><%= (t"course.identical") %></span>
+              <span class="info_title">같은 강의</span>
               <% if !@identical_courses.present? %>
-                  <%= (t"course.identical") %>가 없습니다
+                  같은 강의가 없습니다
               <% else %>
                   <% @other_course = [] %>
                   <% @identical_courses.each do |id| %>
                       <% @other_course << Course.find(id) %>
                   <% end %>
-                  <%= select_tag 'identical', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [(t"course.choose"),(t"course.choose")])), selected: (t"course.choose"), onchange: "window.location.replace('/courses/'+this.value);" %>
+                  <%= select_tag 'identical', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [@msg,@msg])  ), selected: @msg, onchange: "window.location.replace('/courses/'+this.value);" %>
               <% end %>
             </p>
             <p class="info_4">
-              <span class="info_title"><%= (t"course.related") %></span>
+              <span class="info_title">연관 강의</span>
               <% if !@related_courses.present? %>
-                  <%= (t"course.related") %>가 없습니다
+                  연관 강의가 없습니다
               <% else %>
                   <% @other_course = [] %>
                   <% @related_courses.each do |id| %>
                     <% @other_course << Course.find(id) %>
                   <% end %>
-                  <%= select_tag 'related', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [(t"course.choose"),(t"course.choose")])  ), selected: (t"course.choose"), onchange: "window.location.replace('/courses/'+this.value);" %>
+                  <%= select_tag 'related', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [@msg,@msg])  ), selected: @msg, onchange: "window.location.replace('/courses/'+this.value);" %>
               <% end %>
             </p>
           </div><%#////info_p_div%>
@@ -74,15 +74,18 @@
       </div><%#////course_info_div%>
     </div><%#////course_top %>
 
-    <div class="course_score" style="background:blue;">
-      추천/비추 비율이 들어가는 공간입니다 
-      
+    <div class="course_score">
       <% if @course.evaluations.exists? %>
-        <%= @count %>명의 학생이 평가했습니다.
-        <br>
-          <%= t "like_form.like" %> <%= @like %> (<%= @like_per %>%) - <%= t "like_form.dislike" %> <%= @dislike %> (<%= @dislike_per %>%)
+        <!--<button onclick="moveBar(20, 80)">Click Me</button> <br> -->
+        
+        <div class="bar_bg">
+          <div id="bar_left" class="review_bar"></div>
+          <div id="bar_right" class="review_bar"></div>
+        </div>
+        <div class="bar_comment"><%= @count %>명의 학생이 평가했습니다</div>
+        
       <% else %>
-        아직 평가가 없습니다. 소중한 강의평을 남겨주세요.
+        <%= render "no_review" %>
       <% end %>
     </div>
   </div>
@@ -90,56 +93,61 @@
   <div class="container-fluid">  
     <div class="tab_div">
       <div class="tab_menu">
-        <ul class="tab">
-          <li>
-            <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openCity(event, 'wiki')" id="defaultOpen">
-              <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
-              WIKI
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" class="review_tab tablinks" onclick="openCity(event, 'review')">
-              <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
-              강의평가
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div id="review" class="tabcontent">
-          <% if @evaluated_list.include?(@course.id) %>
-            <%= (t "form.evaluated") %>
-          <% else %>
-            <%= render 'like_form' %>
-            <%# if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
-              <%= render 'form' %>
-            <%# end %>
+      <ul class="tab">
+        <li>
+          <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openTab(event, 'wiki');" id="defaultOpen">
+            <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
+            WIKI
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="review_tab tablinks" onclick="openTab(event, 'review');">
+            <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
+            강의평가
+          </a>
+        </li>
+        <li id="filter" class="filter">
+          <%# partial refresh needed %>
+          <%= form_tag do %>
+              <%= select_tag 'order', options_for_select(['최신순','총점순','총점역순'], @params), onchange: "$('#order').submit();" %>
           <% end %>
-          
-        <% if @course.evaluation_count > 0 %>
-            <%= render "evaluations" %>
-        <% end %>
+        </li>
+      </ul>
       </div>
 
       <div id="wiki" class="tabcontent">
         <%= render "wikis" %>
       </div>
-
+      
+      <div id="review" class="tabcontent">
+          <%# if @evaluated_list.include?(@course.id) %>
+            <!--이미 평가를 했습니다.-->
+          <%# else %>
+            <%= render 'like_form' %>
+            <%# if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
+              <%= render 'form' %>
+            <%# end %>
+          <%# end %>
+          
+        <% if @course.evaluation_count > 0 %>
+            <%= render "evaluations" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
 
-<%# 스크립트 분리할 것%>
-
 <script>
+
+// $(document).ready(function() {
+//   $('select').niceSelect();
+// });
+
   <%# 관심강의 제거 %>
   $(document).on("click","#favorite_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      },
       method: "POST",
       url: '/users/favorites_delete',
       data: {c_id: course_id},
@@ -159,9 +167,6 @@
   $(document).on("click","#favorite_add_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      },
       method: "POST",
       url: '/users/favorites_add',
       data: {c_id: course_id},
@@ -177,23 +182,32 @@
       }
     });
   });
-</script>
-<%# 스크립트 분리할 것 %>
-<script>
+
+  function hideFilter() {
+    filter = document.getElementById("filter");
+    filter.className += " hide";
+  }
+  
+  function showFilter() {
+    filter = document.getElementById("filter");
+    filter.className = filter.className.replace(" hide", "");
+  }
+  
   //tab start//
-  function openCity(evt, cityName) {
+  function openTab(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
     // for image change
-    var review_on = '/assets/review_on.svg';
-    var review_off = '/assets/review_off.svg';
-
     var wiki_on = '/assets/wiki_on.svg';
     var wiki_off = '/assets/wiki_off.svg';
 
+    var review_on = '/assets/review_on.svg';
+    var review_off = '/assets/review_off.svg';
+
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
+    
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
     }
@@ -204,19 +218,21 @@
       tablinks[i].className = tablinks[i].className.replace(" active", "");
       tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
     }
-    tablinks[0].children[0].src = review_off;
-    tablinks[1].children[0].src = wiki_off;
+    tablinks[0].children[0].src = wiki_off;
+    tablinks[1].children[0].src = review_off;
 
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
     evt.currentTarget.parentNode.className += " active_li";
 
-    if (evt.currentTarget.className.match('wiki_tab')) {
-      evt.currentTarget.children[0].src = wiki_on;
+    if (evt.currentTarget.className.match('review_tab')) {
+      evt.currentTarget.children[0].src = review_on;
+      showFilter();
     }
     else {
-      evt.currentTarget.children[0].src = review_on;
+      evt.currentTarget.children[0].src = wiki_on;
+      hideFilter();
     };
   }
   //change tab img end//
@@ -224,5 +240,38 @@
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
   //tab end//
+  
+  //bar graph//
+  function moveBar(left_per, right_per) {
+    var left = document.getElementById("bar_left");   
+    var right = document.getElementById("bar_right");   
+    var left_width = 0; //default width set 
+    var right_width = 0; //default width set 
+    var left_time = setInterval(left_frame, 10); 
+    var right_time = setInterval(right_frame, 10); 
+    
+    // .animate({marginTop:  '50px'  }, 1000, 'easeOutBounce')
 
+    function left_frame() {
+      if (left_width >= left_per) {
+        clearInterval(left_time);
+      } else {
+        left_width++; 
+        left.style.width = left_width + '%'; 
+        left.innerHTML = left_width * 1  + '%&nbsp;&nbsp;&nbsp;';
+      }
+    }
+    function right_frame() {
+      if (right_width >= right_per) {
+        clearInterval(right_time);
+      } else {
+        right_width++; 
+        right.style.width = right_width + '%'; 
+        right.innerHTML = '&nbsp;&nbsp;&nbsp;' + right_width * 1  + '%';
+      }
+    }
+  }
+  
+  moveBar(30, 70);
+  //bar graph end//
 </script>

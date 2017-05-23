@@ -5,7 +5,6 @@
 <style type="text/css">
 	.st0{fill:#26B4AE;}
 	.st1{fill:#494949;}
-	.st2{fill:none;stroke:#26B4AE;stroke-width:2;stroke-miterlimit:10;}
 </style>
 <g>
 	<g id="XMLID_1037_">
@@ -20,6 +19,5 @@
 				l0,0c-0.2,1.4-1,2.1-2.6,2.1h-9.6C-269,429.1-269.9,428.2-269.9,427.1z"/>
 		</g>
 	</g>
-	<circle id="XMLID_1036_" class="st2" cx="-264.6" cy="421.3" r="15.3"/>
 </g>
 </svg>
