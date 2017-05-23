@@ -46,15 +46,15 @@
               <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
             </p>
             <p class="info_3">
-              <span class="info_title">같은 강의</span>
+              <span class="info_title"><%= (t"course.identical") %></span>
               <% if !@identical_courses.present? %>
-                  같은 강의가 없습니다
+                  <%= (t"course.identical") %>가 없습니다
               <% else %>
                   <% @other_course = [] %>
                   <% @identical_courses.each do |id| %>
                       <% @other_course << Course.find(id) %>
                   <% end %>
-                  <%= select_tag 'identical', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [@msg,@msg])  ), selected: @msg, onchange: "window.location.replace('/courses/'+this.value);" %>
+                  <%= select_tag 'identical', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [(t"course.choose"),(t"course.choose")])), selected: (t"course.choose"), onchange: "window.location.replace('/courses/'+this.value);" %>
               <% end %>
             </p>
             <p class="info_4">
@@ -120,14 +120,14 @@
       </div>
       
       <div id="review" class="tabcontent">
-          <%# if @evaluated_list.include?(@course.id) %>
-            <!--이미 평가를 했습니다.-->
-          <%# else %>
+          <% if @evaluated_list.include?(@course.id) %>
+            <%= (t "form.evaluated") %>
+          <% else %>
             <%= render 'like_form' %>
             <%# if Like.exists?(course_id: @course.id, user_id: @current_user.id) %>
               <%= render 'form' %>
             <%# end %>
-          <%# end %>
+          <% end %>
           
         <% if @course.evaluation_count > 0 %>
             <%= render "evaluations" %>
@@ -148,6 +148,9 @@
   $(document).on("click","#favorite_delete_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/favorites_delete',
       data: {c_id: course_id},
@@ -167,6 +170,9 @@
   $(document).on("click","#favorite_add_btn",function() {
     var course_id = $('#c_id').val();
     $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
       method: "POST",
       url: '/users/favorites_add',
       data: {c_id: course_id},
