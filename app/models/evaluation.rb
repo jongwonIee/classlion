@@ -8,11 +8,8 @@ class Evaluation < ApplicationRecord
   has_many :reports
   has_one :like
 
-  # before_create :increase_user_point
-  # before_destroy :decrease_user_point
-
-  # validations
-  validates :body, length: { minimum: 10 }, presence: true
+  # validations 
+  validates :body, length: { minimum: 10 }, presence: true #Don't Delete it.
 
   def time_ago
     #강평 작성 시간

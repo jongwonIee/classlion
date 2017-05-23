@@ -82,7 +82,7 @@
           <div id="bar_left" class="review_bar"></div>
           <div id="bar_right" class="review_bar"></div>
         </div>
-        <div class="bar_comment"><%= @count %>명의 학생이 평가했습니다</div>
+        <div class="bar_comment"><%= @evaluations.count %>명의 학생이 평가했습니다</div>
         
       <% else %>
         <%= render "no_review" %>
@@ -129,7 +129,7 @@
             <%# end %>
           <% end %>
           
-        <% if @course.evaluation_count > 0 %>
+        <% if @course.evaluations.count > 0 %>
             <%= render "evaluations" %>
         <% end %>
       </div>
