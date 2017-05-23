@@ -1,6 +1,5 @@
-<div class="index_container">
-  <div class="container-fluid my_page_fluid">
-    
+<div class="index_container course_show_index my_page">
+  <div class="container-fluid">
     <div class="course_top my_page_top">
         <div class="course_info_div my_page_top_div">
           <div class="my_page_top_info">
@@ -12,121 +11,79 @@
             <div class="my_page_top_icons">
               <ul>
                 <li>
-                  <%= image_tag "/assets/my_school.svg", class: "" %>
                   <span><%= @current_user.university.local_name %></span>
                 </li>
                 <li>
-                  <%= image_tag "/assets/my_point.svg", class: "" %>
+                  포인트
                   <span><%= @current_user.point %></span>
                 </li>
                 <li>
-                  <%= image_tag "/assets/my_review.svg", class: "" %>
+                  강의평가
                   <span><%= @current_user.evaluations.count %></span>
                 </li>
                 <li>
-                  <%= image_tag "/assets/my_reply.svg", class: "" %>
+                  댓글
                   <span><%= @current_user.comments.count %></span>
                 </li>
               </ul>
             </div>
-            <!--<div class="my_page_top_icons">-->
-            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
-            <!--    <%= image_tag "/assets/my_school.svg", class: "" %>-->
-            <!--    <p>성균관대</p>-->
-            <!--  </div>-->
-            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
-            <!--    <%= image_tag "/assets/my_point.svg", class: "" %>-->
-            <!--    <p>1000</p>-->
-            <!--  </div>-->
-            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
-            <!--      <%= image_tag "/assets/my_review.svg", class: "" %>-->
-            <!--      <p>3개</p>-->
-            <!--  </div>-->
-            <!--  <div style="display: inline-block; width:23%; height:100%; background: red;">-->
-            <!--      <%= image_tag "/assets/my_reply.svg", class: "" %>-->
-            <!--      <p>1개</p>-->
-            <!--  </div>              -->
-              
-
-
-            <!--</div>-->
-
-            
           </div>
-        	<!--<div class="info_left">-->
-            <!--<div>-->
-         <!--   	<%= image_tag "/assets/prof.svg", class: "course_prof_img", alt: "professor"%>-->
-            <!--</div>-->
-        	<!--</div>-->
-          
-        <!--	<div class="info_right_1">-->
-	       <!--     <div>-->
-	       <!--       <span class="info_course">-->
-	       <!--        탑 오른쪽 위-->
-	       <!--     </div>-->
-        <!--	</div>-->
-            
-      		<!--<div class="info_right_2">    -->
-	       <!-- 	탑 오른쪽 아래-->
-        <!--	</div>-->
         </div>
+      </div>
     </div>
-    
-    <div class="tab_div my_page_tab_div">
-  	
-  	<ul class="tab">
-  	  <li>
-  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_info')" id="defaultOpen">
-          회원정보
-  	  	</a>
-  	  </li>
-  	  <li>
-  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_review')">
-  	  		내가 쓴 강의평가
-  	  	</a>
-  	  </li>
-  	  <li>
-  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_reply')">
-  	  		내가 쓴 댓글
-  	  	</a>
-  	  </li>
-  	  <li>
-  	  	<a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openCity(event, 'my_lecture')">
-  	  		관심강의
-  	  	</a>
-  	  </li>
-    </ul>
-	
-  	<div id="my_info" class="tabcontent">
-      <%= render "my_info" %>
-  	</div>
-  	
-  	<div id="my_review" class="tabcontent">
-  	  <%#프론트 확인 위해 임시로 둘다 열어놓음%>
-      <% if @evaluations.empty? %>
-  	    <%= render "no_review" %>
-      <% else %>
-  	    <%= render "my_review" %>
-      <% end %>
-  	</div>
-  	
-  	<div id="my_reply" class="tabcontent">
-      <% if @comments.nil? %>
-        <%= render "no_reply" %>
-      <% else %>
-        <%= render "my_reply" %>
-      <% end %>
-  	</div>
-  	
-  	<div id="my_lecture" class="tabcontent">
-      <% if @favorite_courses.nil? %>
-  	    <%= render "no_lecture" %>
-      <% else %>
-  	    <%= render "my_lecture" %>
-      <% end %>
-  	</div>
-	
-  </div>
+  
+  <div class="container-fluid">  
+    <div class="tab_div">
+    <!--<div class="tab_div my_page_tab_div"> 위에꺼인지 이거인지 몰라서 일단 얘 주석처리해놓음!!!-->
+      <div class="tab_menu">
+      <ul class="tab">
+        <li>
+  	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_review')" id="defaultOpen">
+  	  		  내가 쓴 강의평가
+  	    	</a>
+  	    </li>
+  	    <li>
+  	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_reply')">
+  	    		내가 쓴 댓글
+  	  	  </a>
+  	    </li>
+  	    <li>
+  	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_lecture')">
+  	  		  관심강의
+  	  	  </a>
+  	    </li>
+      </ul>
+      </div>
+
+      <div id="my_info" class="tabcontent">
+        <%= render "my_info" %>
+    	</div>
+    	
+    	<div id="my_review" class="tabcontent">
+    	  <%#프론트 확인 위해 임시로 둘다 열어놓음%>
+        <% if @evaluations.empty? %>
+    	    <%= render "no_review" %>
+        <% else %>
+    	    <%= render "my_review" %>
+        <% end %>
+    	</div>
+    	
+    	<div id="my_reply" class="tabcontent">
+        <% if @comments.nil? %>
+          <%= render "no_reply" %>
+        <% else %>
+          <%= render "my_reply" %>
+        <% end %>
+    	</div>
+    	
+    	<div id="my_lecture" class="tabcontent">
+        <% if @favorite_courses.nil? %>
+    	    <%= render "no_lecture" %>
+        <% else %>
+    	    <%= render "my_lecture" %>
+        <% end %>
+    	</div>
+    </div>
   </div>
 </div>
 
@@ -138,48 +95,53 @@
     $(".index_container").css("padding-top",$(".cd-main-header").height());
   });
 
-  //tab start//
-	function openCity(evt, cityName) {
-	    // Declare all variables
-	    var i, tabcontent, tablinks;
-	    
-	    // for image change
-	 //   var review_on = '/assets/review_on.svg';
-		// var review_off = '/assets/review_off.svg';
-		
-	 //   var wiki_on = '/assets/wiki_on.svg';
-		// var wiki_off = '/assets/wiki_off.svg';
-	
-	    // Get all elements with class="tabcontent" and hide them
-	    tabcontent = document.getElementsByClassName("tabcontent");
-	    for (i = 0; i < tabcontent.length; i++) {
-	        tabcontent[i].style.display = "none";
-	    }
-	
-	    // Get all elements with class="tablinks" and remove the class "active"
-	    tablinks = document.getElementsByClassName("tablinks");
-	    for (i = 0; i < tablinks.length; i++) {
-	        tablinks[i].className = tablinks[i].className.replace(" active", "");
-	    }
-	   // tablinks[0].children[0].src = review_off;
-    //     tablinks[1].children[0].src = wiki_off;
-	
-	    // Show the current tab, and add an "active" class to the link that opened the tab
-	    document.getElementById(cityName).style.display = "block";
-	    evt.currentTarget.className += " active";
-	    
-	 //   if (evt.currentTarget.className.match('wiki_tab')) {
-		// 	evt.currentTarget.children[0].src = wiki_on;
-	 //   }
-	 //   else {
-		// 	evt.currentTarget.children[0].src = review_on;
-	 //   };
-	}
-	//change tab img end//
-	
-    // Get the element with id="defaultOpen" and click on it
-	document.getElementById("defaultOpen").click();
-	//tab end//
+	//tab start//
+  function openTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // for image change
+    // var wiki_on = '/assets/wiki_on.svg';
+    // var wiki_off = '/assets/wiki_off.svg';
+
+    // var review_on = '/assets/review_on.svg';
+    // var review_off = '/assets/review_off.svg';
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
+    }
+    // tablinks[0].children[0].src = wiki_off;
+    // tablinks[1].children[0].src = review_off;
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    evt.currentTarget.parentNode.className += " active_li";
+
+    // if (evt.currentTarget.className.match('review_tab')) {
+    //   evt.currentTarget.children[0].src = review_on;
+    //   showFilter();
+    // }
+    // else {
+    //   evt.currentTarget.children[0].src = wiki_on;
+    //   hideFilter();
+    // };
+  }
+  //change tab img end//
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  //tab end//
 </script>
 
 

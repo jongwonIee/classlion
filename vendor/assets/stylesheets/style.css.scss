@@ -1584,12 +1584,13 @@ ul.tab li img {
 
 /*my page start*/
 /*my page layout start*/
-.my_page_fluid {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-}
+// .my_page_fluid {
+//     padding-left: 0px !important;
+//     padding-right: 0px !important;
+// }
 
 .my_page_top {
+    margin-top: 0 !important;
     background-position:center;
     height: 280px;
     display: table;
