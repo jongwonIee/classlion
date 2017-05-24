@@ -1,4 +1,5 @@
 class Course < ApplicationRecord
+  has_many :likes
   has_many :evaluations
   has_many :favorites
   has_many :wikis

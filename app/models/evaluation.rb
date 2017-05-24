@@ -6,7 +6,6 @@ class Evaluation < ApplicationRecord
   belongs_to :user
   has_many :comments
   has_many :reports
-  has_one :like
 
   # validations 
   validates :body, length: { minimum: 10 }, presence: true #Don't Delete it.
