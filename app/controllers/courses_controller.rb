@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
     #cancancan 수정해야함
     authorize! :show, Course
 
-    @count = @course.evaluation_count
+    @count = @course.evaluation.count
     @like = @course.is_like_total
     @dislike = @count - @like
     @like_per = (@like.to_f/@count).round(2)*100

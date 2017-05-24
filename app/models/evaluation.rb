@@ -14,6 +14,7 @@ class Evaluation < ApplicationRecord
   # validations
   # validates :body, length: { minimum: 100 }, presence: true
 
+  # refactor needed
   def time_ago
     #강평 작성 시간
     if (time_ago_in_words(self.created_at)) == "1분 이하"
