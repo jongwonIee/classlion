@@ -1,11 +1,10 @@
 class CoursesController < ApplicationController
   include CoursesHelper
-  before_action :set_course, only: [:show]
-  before_action :goto_login, only: [:index, :show]
+  before_action :activation_check
 
   def index
-    if params[:search].nil? or (params[:search].split(" ").join.length < 2)
-      flash[:notice] = t(:search.lack_word)
+    if params[:search].nil? or (params[:search].gsub(" ","").length < 2)
+      flash[:notice] = t("lack_word", scope: :search)
       redirect_to '/'
     else
       @search = Course.search do
@@ -19,14 +18,15 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:id])
     #word count
-    @minimum_length = Evaluation.validators_on(:body ).first.options[:minimum]
+    @minimum_length = Evaluation.validators_on(:body).first.options[:minimum]
 
     #evaluation
     @evaluation = Evaluation.new
     @like = Like.new
 
-    #cancancan 수정해야함
+    #cancancan 수정해야함 # TODO
     authorize! :show, Course
 
     @count = @course.evaluation.count
@@ -67,10 +67,5 @@ class CoursesController < ApplicationController
     @related_courses.delete(params[:id].to_i)
     @identical_courses.delete(params[:id].to_i)
     #같은 강의, 연관 강의end
-  end
-
-  private
-  def set_course
-    @course = Course.find(params[:id])
   end
 end

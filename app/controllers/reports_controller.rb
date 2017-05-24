@@ -1,7 +1,6 @@
 class ReportsController < ApplicationController
-  def index
-    @reports = Report.all
-  end
+
+  before_action :activation_check
 
   def new
     @report = Report.new
@@ -10,13 +9,14 @@ class ReportsController < ApplicationController
   def create
     report = Report.new(report_params)
     report.user_id = @current_user.id
-    if report.save
-      redirect_to :back
+    if !report.save
+      flash[:warning] = '문제가 발생했습니다.'
     end
+    redirect_to :back
   end
 
   private
   def report_params
-    params.require(:report).permit(:user_id, :evaluation_id, :title, :body)
+    params.require(:report).permit(:user_id, :evaluation_id, :body)
   end
 end

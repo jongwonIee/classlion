@@ -1,9 +1,9 @@
 class EvaluationsController < ApplicationController
   include EvaluationsHelper
-  before_action :session_check
+  before_action :activation_check
 
-  def main #최신강평 10개를 보여줌
-    #redirect_to '/signup/send_authMail' if !@current_user.activated? #이메일 인증이 안된경우 이메일 인증페이지로
+  def main 
+
   end
 
   def recent
@@ -18,21 +18,6 @@ class EvaluationsController < ApplicationController
     render layout: false
   end
 
-  def index #권한이 있으면, 모든 강평보여줌
-    unless current_user.has_role? :evaluator
-      flash[:notice] = "권한이 없습니다!"
-      redirect_to '/main'
-    else
-      @evaluations = all_evaluations
-    end
-  end
-
-  def info
-    if current_user.has_role? :evaluator
-      redirect_to '/main'
-    end
-  end
-
   def new #글작성 폼을 준다
     #자동완성에 관련된 코드
     @evaluation = Evaluation.new
@@ -40,20 +25,22 @@ class EvaluationsController < ApplicationController
   end
 
   def create #디비에 넣는다
+    like = Like.where(course_id: params[:evaluation][:course_id], user_id: current_user.id).take
+
     evaluation = Evaluation.new(eval_params)
     evaluation.user = current_user
-    if evaluation.save
-      redirect_to request.env['HTTP_REFERER']
-    else
-      redirect_to request.env['HTTP_REFERER']
+    evaluation.like_id = like.id
+    puts like.inspect
+    if !evaluation.save
+      flash[:warning] = "문제가 생겼습니다."
     end
-
+    redirect_to course_url(id: params[:evaluation][:course_id])
   end
 
   private
 
   def eval_params
-    params.require(:evaluation).permit(:user_id, :course_id, :is_like, :body)
+    params.require(:evaluation).permit(:course_id, :body)
   end
 
 end

@@ -1,6 +1,6 @@
 class MypagesController < ApplicationController
   include MypagesHelper
-  before_action :goto_login, only: [:index]
+  before_action :session_check
 
   def index
     @evaluations = @current_user.evaluations.order(created_at: :desc)
