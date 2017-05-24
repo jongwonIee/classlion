@@ -58,15 +58,15 @@
               <% end %>
             </p>
             <p class="info_4">
-              <span class="info_title">연관 강의</span>
+              <span class="info_title"><%= (t"course.related") %></span>
               <% if !@related_courses.present? %>
-                  연관 강의가 없습니다
+                  <%= (t"course.related") %>가 없습니다
               <% else %>
                   <% @other_course = [] %>
                   <% @related_courses.each do |id| %>
-                    <% @other_course << Course.find(id) %>
+                      <% @other_course << Course.find(id) %>
                   <% end %>
-                  <%= select_tag 'related', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [@msg,@msg])  ), selected: @msg, onchange: "window.location.replace('/courses/'+this.value);" %>
+                  <%= select_tag 'related', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [(t"course.choose"),(t"course.choose")])  ), selected: (t"course.choose"), onchange: "window.location.replace('/courses/'+this.value);" %>
               <% end %>
             </p>
           </div><%#////info_p_div%>
