@@ -10,3 +10,6 @@ To run classlion project at the first time.
 * bundle exec sidekiq --environment development -C config/sidekiq.yml 
 
 * #TODO CAPTCHA
+
+* cheat
+* current_user.update_attribute(:point, 1000)

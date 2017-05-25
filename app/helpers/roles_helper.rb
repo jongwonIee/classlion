@@ -1,11 +1,11 @@
 module RolesHelper
-  #권한부여 / 포인트 차감
+  #TODO model로 move
   def add_role_evaluator
     user = current_user
     user.add_role 'evaluator'
     point = user.point - 1000
     user.update_attribute(:point, point)
-    redirect_to request.env['HTTP_REFERER']
+    redirect_back(fallback_location: root_path)
   end
 
   def add_role_wikier
@@ -13,6 +13,6 @@ module RolesHelper
     user.add_role 'wikier'
     point = user.point - 1000
     user.update_attribute(:point, point)
-    redirect_to request.env['HTTP_REFERER']
+    redirect_back(fallback_location: root_path)
   end
 end
