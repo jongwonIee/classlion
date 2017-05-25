@@ -12,6 +12,30 @@
   <% end %>
 </div>
 
+<%# form render %>
+<script>
+  $(document).ready(function() {
+
+    function form_initial_setting() {
+      var $target = $('#new_evaluation');
+      {
+        $target.slideToggle(500, function () {
+          $target.is(':visible') ? 'Hide' : 'Show';
+        })
+      }
+    }
+
+    var bool = <%= @like_exists %>
+    if (bool) {
+      console.log(bool);
+      console.log("nothing happens");
+    }else{
+      form_initial_setting();
+      console.log(bool);
+      console.log("form is hidden");
+    }
+  })
+</script>
 <%# 워드 카운터 %>
 <script>
   $(document).ready(function() {

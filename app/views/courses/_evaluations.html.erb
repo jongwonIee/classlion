@@ -77,7 +77,7 @@
                     <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
                         <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
                         <div class="bubble_content reply_btn_div bubble_btn">
-                          <%= f.submit "작성하기", class: "reply_write_btn" %>
+                          <%= f.submit (t "form.submit_button"), class: "reply_write_btn" %>
                         </div>
                     <% end %>
                   </div>
