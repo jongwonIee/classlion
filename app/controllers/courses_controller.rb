@@ -33,11 +33,12 @@ class CoursesController < ApplicationController
     #cancancan 수정해야함 # TODO
     authorize! :show, Course
 
-    @count = @course.evaluations.count
-    @like = @course.is_like_total
-    @dislike = @count - @like
-    @like_per = (@like.to_f/@count).round(2)*100
-    @dislike_per = (@dislike.to_f/@count).round(2)*100
+    @evaluation_count = @course.evaluations.count
+    @like_count = @course.likes.count
+    @like = @course.likes.where("is_like = ?", true).count
+    @dislike = @like_count - @like
+    @like_per = (@like.to_f/@like_count).round(2)*100
+    @dislike_per = (@dislike.to_f/@like_count).round(2)*100
 
     @evaluated_list = []
     @current_user.evaluations.each do |e|
@@ -49,7 +50,7 @@ class CoursesController < ApplicationController
     if @params == 1
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     elsif @params == 2
-      @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation) #좋아요만
+      @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation).order(created_at: :desc) #좋아요만
     elsif @params == 3
       @evaluations = @course.likes.where("is_like = ?", false).order(created_at: :desc).map(&:evaluation) #싫어요만
     else

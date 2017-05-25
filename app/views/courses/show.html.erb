@@ -39,9 +39,10 @@
         <div class="info_right_2">
           <hr class="info_hr">
           <div class="info_p_div">
-            <p class="info_1">
-              <span class="info_title">학수번호</span> <%= @course.lecture.code %>
-            </p>
+            <%# 학수번호 주석했음 %>
+            <!--<p class="info_1">-->
+              <!--<span class="info_title">학수번호</span>-->
+            <!--</p>-->
             <p class="info_2">
               <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
             </p>
@@ -82,7 +83,7 @@
           <div id="bar_left" class="review_bar"></div>
           <div id="bar_right" class="review_bar"></div>
         </div>
-        <div class="bar_comment"><%= @evaluations.count %>명의 학생이 평가했습니다</div>
+        <div class="bar_comment"><%= @like_count %>명의 학생이 평가했습니다</div>
         
       <% else %>
         <%= render "no_review" %>
@@ -103,7 +104,7 @@
         <li>
           <a href="javascript:void(0)" class="review_tab tablinks" onclick="openTab(event, 'review');">
             <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
-            강의평가
+            강의평가[<%= @evaluation_count %>]
           </a>
         </li>
         <li id="history" class="filter tab_move">
@@ -285,6 +286,6 @@
     }
   }
   
-  moveBar(30, 70);
+  moveBar(<%= @like_per %>, <%= @dislike_per %>);
   //bar graph end//
 </script>
