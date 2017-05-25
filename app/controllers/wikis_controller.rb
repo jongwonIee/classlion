@@ -18,10 +18,12 @@ class WikisController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:id]) #FE작업 중 임시추가-검토 바람
     @wiki = Wiki.where(course_id: params[:id]).where(revision: params[:revision]).take
   end
 
   def diff
+    @course = Course.find(params[:id]) #FE작업 중 임시추가-검토 바람 
     wiki_1 = Wiki.where(course_id: params[:id]).where(revision: params[:rev_1]).take
     wiki_2 = Wiki.where(course_id: params[:id]).where(revision: params[:rev_2]).take
     @diff = Diffy::Diff.new(wiki_1.body, wiki_2.body, :format => :html)
@@ -46,6 +48,7 @@ class WikisController < ApplicationController
   end
 
   def history
+    @course = Course.find(params[:id]) #FE작업 중 임시추가-검토 바람  
     @wiki_history = Wiki.where(course_id: params[:id]).order("revision desc")
   end
 end

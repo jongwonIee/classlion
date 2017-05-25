@@ -938,7 +938,7 @@ body {
 }
 
 .info_prof{
-    display: inline-block;
+    display: block;
     font-weight: 400;
     font-size: 18px;
     margin-top: 14px;
@@ -1068,10 +1068,16 @@ body {
     margin-top:-20px;
 }
 
+.tab_move {
+    a {
+        color: #484848 !important;
+    }
+}
+
 .filter {
     float: right;
     position: relative;
-    bottom: -4px;
+    bottom: -6px;
 }
 
 .hide {
@@ -1605,6 +1611,26 @@ ul.tab li img {
 }
 
 /*리뷰 write page end*/
+
+/*wiki page start*/
+.wiki_top {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+
+.wiki_prof {
+    display: inline-block;
+}
+
+.wiki_tab_menu {
+    li {
+        height: 48px;
+        a {
+            vertical-align: -webkit-baseline-middle;
+        }
+    }
+}
+/*wiki page end*/
 
 /*my page start*/
 /*my page layout start*/

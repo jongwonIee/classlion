@@ -1,3 +1,87 @@
-<div style="margin-top:200px;">
-<%= @wiki.body.html_safe %>
+<div class="index_container course_show_index">
+  <div class="container-fluid">
+    <div class="course_top wiki_top">
+      <div class="course_info_div">
+        <div>
+          <span class="info_course">
+            <%= @course.lecture.name %>
+            <% if @course.is_major == true %>
+              <span class="info_prof wiki_prof">
+                <span class="lec_cate">전공</span><%= @course.professor.name %> 교수
+              </span>
+            <% else %>
+              <span class="info_prof wiki_prof">
+                <span class="lec_cate">교양</span><%= @course.professor.name %> 교수
+              </span>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid">  
+    <div class="tab_div">
+      <div class="tab_menu wiki_tab_menu">
+      <ul class="tab">
+        <li>
+          <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openTab(event, 'diff');" id="defaultOpen">
+            6판
+          </a>
+        </li>
+        <li class="filter tab_move">
+          <a href="/wiki/<%= @course.id %>/history">
+            히스토리 <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </a>
+        </li>
+      </ul>
+      </div>
+
+      <div id="diff" class="tabcontent">
+        <%= @wiki.body.html_safe %>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<script>
+  function hideTarget(target) {
+    tar = document.getElementById(target);
+    tar.className += " hide";
+  }
+  
+  function showTarget(target) {
+    tar = document.getElementById(target)
+    tar.className = tar.className.replace(" hide", "");
+  }
+  
+  //tab start//
+  function openTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    evt.currentTarget.parentNode.className += " active_li";
+  }
+  //change tab img end//
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  //tab end//
+</script>
