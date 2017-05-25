@@ -61,7 +61,7 @@ Rails.application.routes.draw do
 
   #마이페이지 - 열람권한 on/off, 작성한 강평리스트, 작성한 댓글리스트, 회원정보 수정 링크
   get 'mypage' => 'mypages#index'
-  get 'info' => 'mypages#info'
+  get 'mypage/info' => 'mypages#info'
 
   #cancancan
   post 'roles/evaluator'

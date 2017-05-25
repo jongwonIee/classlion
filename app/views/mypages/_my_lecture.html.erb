@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div>
       <% @favorite_courses.each do |f| %>
-      <div class="col-xs-6 col-sm-3 my_lect_div">
+      <ul class="my_lect_div">
         <%= image_tag "/assets/prof.svg", class: "", alt: "professor" %>
         <p class="feed_course">
           <a href="/courses/<%=f.id%>"><%= f.lecture.name %></a>
@@ -40,7 +40,3 @@
       <% end %>
     </div>
 </div>
-
-
-
-

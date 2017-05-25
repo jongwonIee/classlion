@@ -13,4 +13,8 @@ class MypagesController < ApplicationController
 
     @favorite_courses.reverse!
   end
+  
+  def info
+    
+  end
 end

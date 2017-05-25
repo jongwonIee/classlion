@@ -1,17 +1,18 @@
-<div class="info_div">
+<div class="container-fluid">
+  <div class="info_div">
 <%# provide(:title, "Edit User") %>
 <%#= form_for(@current_user) do |f| %>
   <%#=  render 'shared/error_messages' %>
     
-  <div class="edit_div">
-    <div class="edit_title title_nick">닉네임</div>
-    <div class="edit_content_div">
-      <div class="edit_content 1_nick">
-        <div class="edit_value">
-          <%= @current_user.nickname %>
+    <div class="edit_div">
+      <div class="edit_title title_nick">닉네임</div>
+      <div class="edit_content_div">
+        <div class="edit_content 1_nick">
+          <div class="edit_value">
+            <%= @current_user.nickname %>
+          </div>
+          <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i><br>
         </div>
-        <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i><br>
-      </div>
     
       <div class="edit_content 2_nick" style="display: none;">
         <%= form_for(@current_user) do |f| %>
@@ -121,6 +122,7 @@
         </div>
       </div>
     </div>
+  </div>
     
 
     <%#= f.submit "변경사항 저장하기" %>
