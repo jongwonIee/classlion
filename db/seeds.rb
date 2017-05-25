@@ -30,7 +30,6 @@ File.read("db/seed_data/lectures.csv").split("\n").each do |line|
   Lecture.create(
       id: data[0],
       name: data[1],
-      code: data[2],
       university_id: data[3],
       unit: data[4]
   )
