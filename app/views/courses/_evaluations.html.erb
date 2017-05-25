@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <% if @evaluations.present? %>
     <% @evaluations.each_with_index do |e|  %>
       <% if e.like.is_like %>
         <div class="feed_each">
@@ -121,9 +122,12 @@
           </div>
         </div>
       </div>
-      </div>
       <%# report modal form end %>
     <% end %>
+    </div>
+  <% else %>
+    조건에 맞는 강평이 없어요..
+  <% end %>
 </div>
 
 
