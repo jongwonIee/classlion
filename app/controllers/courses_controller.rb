@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
     #cancancan 수정해야함 # TODO
     authorize! :show, Course
 
-    @count = @course.evaluation_count
+    @count = @course.evaluations.count
     @like = @course.is_like_total
     @dislike = @count - @like
     @like_per = (@like.to_f/@count).round(2)*100
@@ -45,9 +45,9 @@ class CoursesController < ApplicationController
     if @params == 1
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     elsif @params == 2
-      @evaluations = @course.evaluations.joins(:like).where("is_like = ?", true) #좋아요만
+      @evaluations = @course.likes.where("is_like = ?", true).map(&:evaluation)
     elsif @params == 3
-      @evaluations = @course.evaluations.joins(:like).where("is_like = ?", false) #싫어요만
+      @evaluations = @course.likes.where("is_like = ?", false).map(&:evaluation)
     else
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     end

@@ -6,11 +6,11 @@ class Evaluation < ApplicationRecord
   belongs_to :user
   has_many :comments
   has_many :reports
-  has_one :like
 
   # validations 
   validates :body, length: { minimum: 10 }, presence: true #Don't Delete it.
 
+  # refactor needed
   def time_ago
     #강평 작성 시간
     if (time_ago_in_words(self.created_at)) == "1분 이하"
