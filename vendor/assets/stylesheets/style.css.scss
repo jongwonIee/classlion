@@ -1925,16 +1925,24 @@ ul.tab li img {
 
 
 /*report modal start*/
+.modal-content {
+    padding: 20px;
+    border-radius: 5px;
+}
+
 .modal-dialog {
     height: 100%;
     top: 25%;
 }
 
 .modal-header {
+    padding-bottom: 0px;
     color: #484848;
-    border-color: #DBDBDB;
+    // border-color: #DBDBDB;
+    border: none;
+    font-size: 20px;
     button {
-        font-size: 18px;
+        font-size: 26px;
     }
 }
 
