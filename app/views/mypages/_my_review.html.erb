@@ -2,144 +2,88 @@
     <div>
         <% @evaluations.each_with_index do |e, i|  %>
             <% unless i == 0 %>
-                <hr class="feed_hr">
             <% end %>
+        <div class="feed_each">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 feed_each_div">
+              <div class="col-xs-12">
+                <p class="feed_course">
+                  <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
+                  <a href='/courses/<%= e.course.id %>'>
+                    <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
+                  </a>
+                </p>
+              </div>
+  
+              <p class="feed_content col-xs-12">
+                <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
+              </p>
+              
+              <div class="feed_etc col-xs-12">
+                <p class="feed_etc_left">
+                  <%= e.time_ago %>
+                  &nbsp;·&nbsp;
     
-            <div class="feed_each">
-              <div class="row">
-                <div class="col-xs-12">
-                  <p class="feed_course">
-                    <a href='/courses/<%= e.course.id %>'><%= e.course.lecture.name %></a>
-                  </p>
-                  <% if e.course.is_major %>
-                      <p class="feed_prof_major">
-                        <span class="lec_cate lec_major">전공</span><%= e.course.professor.name %> 교수님
-                      </p>
-                  <% else %>
-                      <p class="feed_prof_kyo">
-                        <span class="lec_cate lec_kyo">교양</span><%= e.course.professor.name %> 교수님
-                      </p>
-                  <% end %>
-                </div>
-    
-                <div class="col-xs-12 feed_each_div">
-                  <div class="col-xs-12 col-sm-5">
-                    <div class="rating_div">
-                      <div class="rating-head">총점</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_overall}" %> name="rating" autocomplete="off">
-                          <option value="1"></option>
-                          <option value="2"></option>
-                          <option value="3"></option>
-                          <option value="4"></option>
-                          <option value="5"></option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="rating_div">
-                      <div class="rating-head">널널함</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_easiness}" %> name="rating" autocomplete="off">
-                          <option value="1"></option>
-                          <option value="2"></option>
-                          <option value="3"></option>
-                          <option value="4"></option>
-                          <option value="5"></option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div class="col-xs-12 col-sm-5">
-                    <div class="rating_div">
-                      <div class="rating-head">강의만족도</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_gpa_satisfaction}" %> name="rating" autocomplete="off">
-                          <option value="1"></option>
-                          <option value="2"></option>
-                          <option value="3"></option>
-                          <option value="4"></option>
-                          <option value="5"></option>
-                        </select>
-                      </div>
-                    </div>
-    
-                    <div class="rating_div">
-                      <div class="rating-head">학점만족도</div>
-                      <div class="rating">
-                        <select id="pillbar" class=<%= "p#{e.point_clarity}" %> name="rating" autocomplete="off">
-                          <option value="1"></option>
-                          <option value="2"></option>
-                          <option value="3"></option>
-                          <option value="4"></option>
-                          <option value="5"></option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <p class="feed_content col-xs-12">
-                    <%= e.body.html_safe %>
-                  </p>
-                  <p class="feed_etc col-xs-12">
-                    <%= e.time_ago %>
-                    &nbsp;·&nbsp;
-                    <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
-                    <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
-                    &nbsp;·&nbsp;
-                    <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
-                    &nbsp;·&nbsp;
-                    <a href="#"><i class="fa fa-trash-o writer_icon" aria-hidden="true"></i></a>
-                    <br>
-                  </p>
-    
-                  <%# 댓글 달때 빵빵 달리는 부분%>
-                  <div class="col-xs-12 reply_list_wrap" id="reply_list_wrap<%=e.id%>" style="display: none;">
-                    <div class="reply_div col-xs-12">
-                      <div class="reply_right col-xs-12" id="reply_list<%=e.id%>">
-                        <% e.comments.each do |c| %>
-                          <div class="bubble_content my_page_bubble" id="reply_list_child<%=c.id%>">
-                            <%= c.user.nickname %>
-                            <span class="bubble_top_right">
-                            <%= c.time_ago %>
+                  <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
+                  <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
+                  &nbsp;·&nbsp;
+
+                  <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
+                  &nbsp;·&nbsp;
+                  <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
+                  <%# end %>
+                </p>
+                <p class="feed_etc_right">
+                  <span>작성자</span> <%= e.user.nickname %>
+                </p>
+                <br>
+              </div>
+
+              <%# 댓글 달때 빵빵 달리는 부분%>
+              <div class="col-xs-12 reply_list_wrap" id="reply_list_wrap<%=e.id%>" style="display: none;">
+                <div class="reply_div col-xs-12">
+                  <div class="reply_right col-xs-12" id="reply_list<%=e.id%>">
+                    <% e.comments.each do |c| %>
+                        <div class="bubble_content" id="reply_list_child<%=c.id%>">
+                          <%= c.user.nickname %>
+                          <span class="bubble_top_right">
+                        <%= c.time_ago %>
                             <% if c.user == @current_user %>
-                              &nbsp;·&nbsp;
-                              <%# 수정 - 구현해야함 %>
-                              <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                              &nbsp;·&nbsp;
-                              <%# 삭제 %>
-                              <%= link_to comment_path(c), remote: true, method: :delete do %>
-                                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-                              <% end %>
-                            <% end %>
-                            </span>
-                            <br>
-                            <p>
-                              <%= c.body %><br>
-                            </p>
-                          </div>
-                      <% end %>
-                      </div>
-                    </div>
-                    <div class="reply_div col-xs-12">
-                      <div class="bubble_list">
-                        <div class="bubble clearfix"></div>
-                      </div>
-                      <div class="reply_right col-xs-12">
-                        <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
-                            <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: "자유롭게 댓글을 입력해주세요.", rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
-                            <div class="bubble_content reply_btn_div bubble_btn">
-                              <%= f.submit "작성하기", class: "reply_write_btn" %>
-                            </div>
+                          &nbsp;·&nbsp;
+                                <%# 수정 - 구현해야함 %>
+                                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          &nbsp;·&nbsp;
+                                <%# 삭제 %>
+                                <%= link_to comment_path(c), remote: true, method: :delete do %>
+                              <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <% end %>
                         <% end %>
-                      </div>
-                    </div>
+                        </span>
+                          <br>
+                          <p>
+                            <%= c.body %><br>
+                          </p>
+                        </div>
+                    <% end %>
                   </div>
-                  <!--///여기까지-->
                 </div>
-    
+                <div class="reply_div col-xs-12">
+                  <div class="bubble_list">
+                    <div class="bubble clearfix"></div>
+                  </div>
+                  <div class="reply_right col-xs-12">
+                    <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
+                        <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
+                        <div class="bubble_content reply_btn_div bubble_btn">
+                          <%= f.submit "작성하기", class: "reply_write_btn" %>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        </div>    
         <% end %>
     </div>
 </div>
@@ -154,51 +98,5 @@
     $target.slideToggle( 500, function () {
       $target.is(':visible') ? 'Hide' : 'Show';
     });
-  });
-
-  <%# 평점별점바 %>
-  $('.p1').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '1',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p2').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '2',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p3').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '3',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p4').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '4',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
-  });
-
-  $('.p5').barrating('show', {
-    theme: 'bars-movie',
-    initialRating: '5',
-    showValues: true,
-    showSelectedRating: false,
-    allowEmpty: true,
-    readonly: true
   });
 </script>

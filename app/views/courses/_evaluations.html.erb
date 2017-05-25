@@ -1,11 +1,11 @@
-<ul class="tab">
-  <li class="filter">
+<!--<ul class="tab">-->
+<!--  <li class="filter">-->
     <%# partial refresh needed %>
-    <%= form_tag do %>
-        <%= select_tag 'order', options_for_select({"최신순" => 1, "좋아요만" => 2, "싫어요만" => 3}, @params), onchange: "$('#order').submit();" %>
-    <% end %>
-  </li>
-</ul>
+<!--    <%#= form_tag do %>-->
+<!--        <%#= select_tag 'order', options_for_select({"최신순" => 1, "좋아요만" => 2, "싫어요만" => 3}, @params), onchange: "$('#order').submit();" %>-->
+<!--    <%# end %>-->
+<!--  </li>-->
+<!--</ul>-->
 
 <div class="container-fluid">
     <% @evaluations.each_with_index do |e|  %>
@@ -17,7 +17,6 @@
                   <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
                   <a href='/courses/<%= e.course.id %>'>
                     <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
-                    <%= e.user.nickname %>
                   </a>
                 </p>
               </div>
@@ -26,23 +25,30 @@
                 <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
               </p>
               
-              <p class="feed_etc col-xs-12">
-                <%= e.time_ago %>
-                &nbsp;·&nbsp;
-                <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
-                <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
-                &nbsp;·&nbsp;
+              <div class="feed_etc col-xs-12">
+                <p class="feed_etc_left">
+                  <%= e.time_ago %>
+                  &nbsp;·&nbsp;
+    
+                  <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
+                  <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
+                  &nbsp;·&nbsp;
+  
+                  <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
 
-                <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
-
-                <%# 만약 글쓴이라면! %>
-                &nbsp;·&nbsp;
-                <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
-                &nbsp;·&nbsp;
-                <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
-                <%# end %>
+                  <%# 만약 글쓴이라면! %>
+                  &nbsp;·&nbsp;
+                  
+                  <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
+                  &nbsp;·&nbsp;
+                  <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
+                  <%# end %>
+                </p>
+                <p class="feed_etc_right">
+                  <span>작성자</span> <%= e.user.nickname %>
+                </p>
                 <br>
-              </p>
+              </div>
 
               <%# 댓글 달때 빵빵 달리는 부분%>
               <div class="col-xs-12 reply_list_wrap" id="reply_list_wrap<%=e.id%>" style="display: none;">
@@ -95,19 +101,24 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
+                <p class="modal-title">신고하기</p>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
               </div>
               <div class="modal-body">
                 <%= form_for Report.new do |f| %>
                     <%= f.hidden_field :evaluation_id, value: e.id %>
-                    <%= f.text_field :body %>
-                    <%= f.submit "send" %>
+                    <%#= f.text_field :body %>
+                    <%= f.text_area :body, placeholder: (t "report.placeholder" ), rows: 8, class: "write_comment_box report_box" %>
+                    <%= f.submit (t "report.submit_button"), class: "review_write_btn report_write_btn" %>
+                    <%#= f.submit "send" %>
                 <% end %>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+              <!--<div class="modal-footer">-->
+              <!--  <p>-->
+              <!--    신고하신 내용은 확인, 수정, 삭제가 불가능합니다. 운영자가 검토할게요~ -->
+              <!--  </p>-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+              <!--</div>-->
             </div>
           </div>
         </div>

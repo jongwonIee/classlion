@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :reports
 
   #로그인 시 메인
-  get '/main' => 'evaluations#main'
-  get '/info' => 'evaluations#info'
+    get '/main' => 'evaluations#main'
+    get '/info' => 'evaluations#info'
 
   #회원가입, 로그인
   get   '/signup',  to: 'users#new'

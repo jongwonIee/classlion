@@ -6,6 +6,9 @@
             <%= image_tag "/assets/lion_1.svg", class: "my_page_lion", alt: "lion"%><br>
             <p class="my_page_name">
               <%= @current_user.nickname %>
+            <a href="/mypage">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            </a>
             </p>
             <hr class="info_hr my_page_hr">
             <div class="my_page_top_icons">
@@ -34,8 +37,7 @@
   
   <div class="container-fluid">  
     <div class="tab_div">
-    <!--<div class="tab_div my_page_tab_div"> 위에꺼인지 이거인지 몰라서 일단 얘 주석처리해놓음!!!-->
-      <div class="tab_menu">
+      <div class="my_page_tab_menu">
       <ul class="tab">
         <li>
   	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_review')" id="defaultOpen">
@@ -55,11 +57,7 @@
       </ul>
       </div>
 
-      <div id="my_info" class="tabcontent">
-        <%= render "my_info" %>
-    	</div>
-    	
-    	<div id="my_review" class="tabcontent">
+      <div id="my_review" class="tabcontent">
     	  <%#프론트 확인 위해 임시로 둘다 열어놓음%>
         <% if @evaluations.empty? %>
     	    <%= render "no_review" %>

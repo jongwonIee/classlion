@@ -620,7 +620,7 @@ body {
 }
 
 .feed_prof_major {
-    color: #27b5af;
+    color: #484848;
     display: inline-block;
     font-size: 14px;
     margin-left: 7px;
@@ -974,6 +974,25 @@ body {
     font-weight: 400;
 }
 
+.info_btn_div {
+    width: 24%;
+    display: inline-block;
+    text-align: right;
+}
+
+.info_btn {
+    height: 35px;
+    width: 100%;
+    border: 1px solid #ff5a5f;
+    border-radius: 5px;
+    background-color: #ff5a5f;
+    color: white;
+    font-size: 14px;
+    // padding: 2.5%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
 .fa {
     margin-right: 5px;
 }
@@ -1249,7 +1268,7 @@ ul.tab {
     // background-color: #f1f1f1;
     li {
         display: inline-block;
-        padding: 5px 0;
+        padding: 10px 0;
         text-align: center;
         min-width: 85px;
         width: 10%;
@@ -1483,9 +1502,9 @@ ul.tab li img {
     // width: 19%;
     padding: 0px 30px 0px 30px;
     margin: 19px 0px 0px 0px;
-    border: 1px solid #ff5a5f;
+    border: 1px solid #484848;
     border-radius: 5px;
-    background-color: #ff5a5f;
+    background-color: #484848;
     color: white;
     font-size: 14px;
     // margin-bottom: 50px;
@@ -1508,6 +1527,7 @@ ul.tab li img {
 }
 
 .write_comment_box {
+    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif !important;
     background: white;
     width: 100%;
     color: #484848;
@@ -1620,7 +1640,7 @@ ul.tab li img {
             display: inline-block;
             color: #484848;
             font-size: 14px;
-            width: 23%;
+            width: 10%;
             // margin: 0px 15px;
             img {
                 display: block;
@@ -1659,46 +1679,13 @@ ul.tab li img {
     text-align: center;
     margin: 20px auto;
 }
-.my_page_tab_div {
-    margin-top: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    ul {
-        background: #f2f2f2;
-        border: none !important;
-        margin: 0px;
-        // width: 360px;
-        white-space: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        li {
-            float: none;
-            display: inline-block;
-            a {
-                color: #484848;
-                border-top: none;
-                border-bottom: 4px solid #f2f2f2;
-                &:focus, .active {
-                    background: #f2f2f2 !important;
-                    border-top: none !important;
-                    border-bottom: 4px solid #ff5a5f !important;
-                }
-            }
-            a.active {
-                background: #f2f2f2 !important;
-                border-top: none !important;
-                border-bottom: 4px solid #ff5a5f !important;
-            }
-        }
-    }
-    #my_info, #my_review, #my_reply, #my_lecture {
-        padding-left: 5px;
-        padding-right: 5px;
-        margin-top: 50px;
-    }
-}
 
+.my_page_tab_menu {
+    border-bottom: 1px solid #dce0e0;
+    background: white;
+    max-width: none !important;
+    margin-top:-8px;
+}
 
 @media only screen and (max-width: 768px) {
     .my_page_top {
@@ -1874,7 +1861,7 @@ ul.tab li img {
         padding-left: 15px;
     }
     .feed_head2 {
-        margin: 0px 0px 13px 0px;
+        margin: 8px 0px 13px 0px;
         font-size: 16px;
         padding-left: 15px;
         padding-right: 15px;
@@ -1905,3 +1892,27 @@ ul.tab li img {
 /*my favorite end*/
 
 /*my page end*/
+
+
+/*report modal start*/
+.modal-dialog {
+    height: 100%;
+    top: 25%;
+}
+
+.modal-header {
+    color: #484848;
+    border-color: #DBDBDB;
+    button {
+        font-size: 18px;
+    }
+}
+
+.report_box {
+    margin-top: 0px;
+}
+
+.report_write_btn {
+    margin-bottom: 0px;
+}
+/*report modal end*/
