@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
     if @params == 1
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     elsif @params == 2
-      @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation).order(created_at: :desc) #좋아요만
+      @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation) #좋아요만
     elsif @params == 3
       @evaluations = @course.likes.where("is_like = ?", false).order(created_at: :desc).map(&:evaluation) #싫어요만
     else
