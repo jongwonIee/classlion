@@ -9,9 +9,9 @@ class Evaluation < ApplicationRecord
   has_many :reports
 
   # validations 
-  validates :body, length: { minimum: 10 }, presence: true #Don't Delete it.
+  validates :body, length: { minimum: 100 }, presence: true
 
-  # refactor needed
+  #TODO i18nize needed
   def time_ago
     #강평 작성 시간
     if (time_ago_in_words(self.created_at)) == "1분 이하"
@@ -26,6 +26,9 @@ class Evaluation < ApplicationRecord
   end
 
   private
+
+
+
   def increase_user_point
     user = current_user
     point = user.point + 200

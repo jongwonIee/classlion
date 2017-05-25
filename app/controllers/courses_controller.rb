@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
     @like_exists = (Like.exists?(course_id: @course.id, user_id: current_user.id))
 
     #word count
-    @minimum_length = Evaluation.validators_on(:body).first.options[:minimum]
+    @minimum_length = 100
 
     #evaluation
     @evaluation = Evaluation.new
@@ -49,9 +49,9 @@ class CoursesController < ApplicationController
     if @params == 1
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     elsif @params == 2
-      @evaluations = @course.likes.where("is_like = ?", true).map(&:evaluation)
+      @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation) #좋아요만
     elsif @params == 3
-      @evaluations = @course.likes.where("is_like = ?", false).map(&:evaluation)
+      @evaluations = @course.likes.where("is_like = ?", false).order(created_at: :desc).map(&:evaluation) #싫어요만
     else
       @evaluations = @course.evaluations.order(created_at: :desc) #최신순
     end
