@@ -32,9 +32,6 @@ ActiveRecord::Schema.define(version: 20170518091439) do
     t.integer "professor_id", null: false
     t.integer "lecture_id", null: false
     t.integer "university_id", null: false
-    t.integer "evaluation_count", default: 0, null: false
-    t.integer "is_like_total", default: 0, null: false
-    t.integer "like_count", default: 0, null: false
     t.boolean "is_major", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,7 +56,6 @@ ActiveRecord::Schema.define(version: 20170518091439) do
 
   create_table "lectures", force: :cascade do |t|
     t.string "name", null: false
-    t.string "code", null: false
     t.integer "university_id", null: false
     t.integer "unit"
     t.datetime "created_at", null: false
