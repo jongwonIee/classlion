@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.evaluation_id = params[:evaluation_id]
     @comment.user = @current_user
+    #TODO
     respond_to do |format|
       if @comment.save
         format.js
@@ -17,6 +18,7 @@ class CommentsController < ApplicationController
   def destroy
     #댓글 삭제
    @comment = Comment.find(params[:id])
+   #TODO
    respond_to do |format|
      if @comment.destroy
        format.js
