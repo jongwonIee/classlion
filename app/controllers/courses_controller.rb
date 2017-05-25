@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   def index
     if params[:search].nil? or (params[:search].gsub(" ","").length < 2)
       flash[:notice] = t("lack_word", scope: :search)
-      redirect_to '/'
+      redirect_back(fallback_location: root_path)
     else
       @search = Course.search do
         fulltext '*' + params[:search] + '*' do
@@ -19,6 +19,10 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+
+    #render form
+    @like_exists = (Like.exists?(course_id: @course.id, user_id: current_user.id))
+
     #word count
     @minimum_length = Evaluation.validators_on(:body).first.options[:minimum]
 
