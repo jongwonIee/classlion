@@ -1,11 +1,19 @@
 <% since_id = 1 %>
 <% @evaluations.each_with_index do |e, i| %>
-  <div class="feed_each">
+  <% if e.like.is_like %>
+    <div class="feed_each">
+  <% else %>
+    <div class="feed_each feed_each_dislike">
+  <% end %>
     <div class="row">
       <div class="col-xs-12 col-sm-12 feed_each_div">
         <div class="col-xs-12">
           <p class="feed_course">
-            <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_up"%>
+            <% if e.like.is_like %>
+              <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
+            <% else %>
+              <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_down"%>
+            <% end %>
             <a href='/courses/<%= e.course.id %>'>
               <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
             </a>

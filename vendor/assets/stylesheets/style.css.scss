@@ -550,8 +550,12 @@ body {
     padding: 30px 20px;
     box-shadow: 0 1px 4px rgba(0,0,0,.04);
     border: 1px solid rgba(0,0,0,.09);
-    border-left: 6px solid #ff5a5f;
+    border-left: 6px solid #27b5af;
     border-radius: 3px;
+}
+
+.feed_each_dislike {
+    border-left: 6px solid #ff5a5f;
 }
 
 .feed_each_div {

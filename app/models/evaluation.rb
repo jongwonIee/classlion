@@ -2,6 +2,7 @@ include ActionView::Helpers::DateHelper
 class Evaluation < ApplicationRecord
 
   resourcify
+  belongs_to :like
   belongs_to :course
   belongs_to :user
   has_many :comments
