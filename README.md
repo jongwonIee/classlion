@@ -2,6 +2,7 @@
 
 To run classlion project at the first time.
 
+* go to @evaluation.rb and comment line 12 to seed
 * rails db:drop
 * rails db:migrate
 * bundle exec rake sunspot:solr:start
@@ -12,4 +13,6 @@ To run classlion project at the first time.
 * #TODO CAPTCHA
 
 * cheat
-* current_user.update_attribute(:point, 1000)
+* rails c
+* depending on your user_id,
+* User.find(user_id).update_attribute(:point, 1000)
