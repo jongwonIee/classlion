@@ -63,10 +63,10 @@
   
               <% if @wiki_history.size > 1 %>
               <input type="radio" class="revision_left" id="revision_left_<%= w.revision %>" name="left" value="<%= w.revision %>">
-              <label for="revision_left_<%= w.revision %>" class="revision_label"></label>
+              <label for="revision_left_<%= w.revision %>" class="revision_label" id="label_left_<%= w.revision %>" ></label>
               
               <input type="radio" class="revision_right" id="revision_right_<%= w.revision %>" name="right" value="<%= w.revision %>">
-              <label for="revision_right_<%= w.revision %>" class="revision_label"></label>
+              <label for="revision_right_<%= w.revision %>" class="revision_label" id="label_right_<%= w.revision %>"></label>
               <% end %>
            
               <%= w.revision %>
@@ -135,19 +135,23 @@
     });
     function left_flush(left_number){
       $(".revision_left").each(function() {
+      var label = $("label[for='"+$(this).attr('id')+"']");
         if(parseInt($(this).val()) >= left_number){
-          $(this).css("visibility", "hidden");
+          // $(this).css("visibility", "hidden");
+          label.css("visibility", "hidden");
         }else{
-          $(this).css("visibility", "visible");
+          // $(this).css("visibility", "visible");
+          label.css("visibility", "visible");
         }
       });
     }
     function right_flush(right_number){
       $(".revision_right").each(function() {
+              var label = $("label[for='"+$(this).attr('id')+"']");
         if(parseInt($(this).val()) <= right_number){
-          $(this).css("visibility", "hidden");
+          label.css("visibility", "hidden");
         }else{
-          $(this).css("visibility", "visible");
+          label.css("visibility", "visible");
         }
       });
     }

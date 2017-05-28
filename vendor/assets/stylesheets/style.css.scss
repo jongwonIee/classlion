@@ -1646,7 +1646,7 @@ ul.tab li img {
     margin: 0;
     padding: 0;
     input[type="radio"] {
-        // display: none;
+        display: none;
         + .revision_label {
             &:before {
                 content: '';
@@ -1658,7 +1658,7 @@ ul.tab li img {
                 height: 1em;
                 position: relative;
                 // top: -0.2em;
-                margin-right: 1em; 
+                margin-right: 3px; 
                 vertical-align: top;
                 cursor: pointer;
                 text-align: center;
