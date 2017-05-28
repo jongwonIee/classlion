@@ -1613,6 +1613,7 @@ ul.tab li img {
 /*리뷰 write page end*/
 
 /*wiki page start*/
+/*wiki all start*/
 .wiki_top {
     margin-top: 50px !important;
     margin-bottom: 50px !important;
@@ -1631,6 +1632,33 @@ ul.tab li img {
     }
 }
 
+.history_top {
+    overflow: hidden;
+}
+
+.history_btn {
+    display: inline-block;
+    float: right;
+    border: 1.3px solid #484848;
+    padding: 5px 0px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    font-weight: 400;
+    a {
+        padding: 5px 10px;
+        color: #484848;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.history_btn_left {
+    border-right: 1.3px solid #484848;
+}
+/*wiki all end*/
+
+/*wiki history page start*/
 #diff_revisions {
     color: #484848;
     font-weight: 400;
@@ -1708,7 +1736,15 @@ ul.tab li img {
         }
     }
 }
+/*wiki history page end*/
 
+/*wiki show page start*/
+.history_show_title {
+    color: #ff5a5f;
+    font-size: 20px;
+    font-weight: 400;
+}
+/*wiki show page end*/
 /*wiki page end*/
 
 /*my page start*/

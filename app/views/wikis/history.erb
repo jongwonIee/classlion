@@ -33,19 +33,26 @@
         <!--    수정비교-->
         <!--  </a>-->
         <!--</li>-->
-        <li class="filter tab_move">
-          <a href="/courses/<%= @course.id %>">
-            최신판/편집하기 <i class="fa fa-angle-right" aria-hidden="true"></i>
-          </a>
-        </li>
+        <!--<li class="filter tab_move">-->
+        <!--  <a href="/courses/<%= @course.id %>">-->
+        <!--    최신판/편집하기 <i class="fa fa-angle-right" aria-hidden="true"></i>-->
+        <!--  </a>-->
+        <!--</li>-->
       </ul>
       </div>
 
       <div id="wiki_history" class="tabcontent">
         <div>
-          <% if @wiki_history.size > 1 %>
-          <a href="#" id="diff_revisions">선택된 리비전 비교하기</a>
-          <% end %>
+          <div class="history_top">
+            <% if @wiki_history.size > 1 %>
+            <a href="#" id="diff_revisions">선택된 리비전 비교하기</a>
+            <% end %>
+            <div class="history_btn">
+              <a href="/courses/<%= @course.id %>" class="history_btn_left">편집</a>
+              <a href="/wiki/<%= @course.id %>/history" class="history_btn_right">히스토리</a>
+            </div>
+          </div>
+          
           <ul class="history_ul">
           <% @wiki_history.each do |w| %>
             <li class="history_list">
