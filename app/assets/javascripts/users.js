@@ -4,12 +4,9 @@ $(function() {
         emailError = $('#email_error'),
         emailCheck = $('#email_check'),
 
-
-
         password = $('#user_password'),
         passwordConfirmation = $('#user_password_confirmation'),
 
-        passwordLengthError = $('#password_length_error'),
         passwordCheck = $('#password_check'),
         passwordError = $('#password_error'),
         passwordInputs = $('#user_password, #user_password_confirmation'),
@@ -38,8 +35,8 @@ $(function() {
           success: function(e){
               emailError.hide();
               emailCheck.show();
-              email[0].parentNode.parentNode.style.borderColor = "#fff";
               emailCheck.text(e.message).removeClass('red').addClass('green');
+              email[0].parentNode.parentNode.style.borderColor = "#fff";
           },
           error: function(e){
               emailCheck.hide();
@@ -58,37 +55,21 @@ $(function() {
             },
             url: '/check_password',
             method: 'post',
-            data: { password: password.val() },
+            data: { password: password.val(), password_confirmation: passwordConfirmation.val() },
             success: function(e){
+                passwordError.hide();
+                passwordCheck.show();
                 password[0].parentNode.parentNode.style.borderColor = "#fff";
                 passwordCheck.text(e.message).removeClass('red').addClass('green');
-                passwordError.hide();
             },
             error: function(e){
+                passwordCheck.hide();
+                passwordError.show();
                 passwordError.text(e.responseJSON.message).removeClass('green').addClass('red');
                 password[0].parentNode.parentNode.style.borderColor = "#ff5a5f"; //input box색상 변경 (빨)
             }
         });
     });
-    //일치여부
-    // passwordConfirmation.focusout(function(){
-    //     $.ajax({
-    //         headers: {
-    //             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         url: '/check_pw_same',
-    //         method: 'post',
-    //         data: { password: password.val(), password_confirmation: passwordConfirmation.val() },
-    //         success: function(e){
-    //             passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#fff";
-    //             passwordCheck.text(e.message)
-    //         },
-    //         error: function(e){
-    //             passwordConfirmation[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
-    //             passwordSameError.text(e.responseJSON.message).removeClass('green').addClass('red');
-    //         }
-    //     });
-    // });
 
     //닉네임 중복확인-----------------------------------------
     nickname.focusout(function(){
@@ -100,11 +81,14 @@ $(function() {
           method: 'post',
           data: { nickname: nickname.val() },
           success: function(e){
+              nicknameError.hide();
+              nicknameCheck.show();
               nickname[0].parentNode.parentNode.style.borderColor = "#fff";
               nicknameCheck.text(e.message).removeClass('red').addClass('green');
           },
           error: function(e){
               nicknameCheck.hide();
+              nicknameError.show();
               nickname[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
               nicknameError.text(e.responseJSON.message).removeClass('green').addClass('red');
           }

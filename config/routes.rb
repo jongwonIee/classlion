@@ -36,8 +36,6 @@ Rails.application.routes.draw do
   #이메일, 비밀번호,닉네임 체크(jQuery)
   post '/check_nickname' => 'users#check_nickname'
   post '/check_email' => 'users#check_email'
-  # post '/check_pw_length' => 'users#check_pw_length'
-  # post '/check_pw_same' => 'users#check_pw_same'
   post '/check_password' => 'users#check_password'
 
 

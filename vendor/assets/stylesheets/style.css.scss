@@ -120,7 +120,7 @@
 }
 
 .login_btn {
-    width: 100%;
+    width: 300px;/*우리왈 여기 창이 자꾸 늘었다 줄었다 해서 임의로 설정 login_input과 같은이유*/
     height: 45px;
     border: 1px solid #ff5a5f;
     border-radius: 5px;
@@ -133,7 +133,7 @@
 }
 
 .join_btn, .login_input {
-    width: 100%;
+    width: 300px; /*우리왈 여기 창이 자꾸 늘었다 줄었다 해서 임의로 설정 login_btn과 같은이유*/
     height: 45px;
     border: 1px solid white;
     border-radius: 3px;
@@ -219,6 +219,7 @@
 .input_group {
     text-indent: 0;
 }
+
 .input_div {
     height: 100%;
     width: 75%;
@@ -256,6 +257,9 @@
 
 
 /* 우리 임의 추가 */
+.error{
+    font-size: 13px;
+}
 
 .check_div {
     width: 25%;
@@ -299,15 +303,6 @@
     font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
     font-weight: 300;
 }
-
-/* Change Autocomplete styles in Chrome*/
-//input:-webkit-autofill,
-//{
-//    border: 0px;
-//    -webkit-text-fill-color: #fff;
-//    -webkit-box-shadow: 0 0 0px 1000px #27b5af inset;
-//    transition: background-color 5000s ease-in-out 0s;
-//}
 
 //에러메세지 색상
 .red {

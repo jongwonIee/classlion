@@ -162,28 +162,19 @@ class User < ApplicationRecord
 
   #비밀번호 길이 확인
   def self.pre_validation_password_length(password, password_confirmation) #'비밀번호'가 오면
-    if (password.length >= 8) && (password.length <= 32)
+    if password == '' #비밀번호가 비어있으면
+      { message: '필수정보입니다.', status: :bad_request }
+    elsif (password.length >= 8) && (password.length <= 32)
       if password == password_confirmation
-        { message: '일치', status: :ok }
-      else
+        { message: '일치함', status: :ok }
+      elsif password_confirmation != ''
         { message: '두 비밀번호가 일치하지 않습니다.', status: :bad_request }
+
       end
     else
       { message: '비밀번호는 8자이상 32자 이하만 가능합니다.', status: :bad_request }
     end
   end
-
-  #비밀번호 일치여부 확인
-  # def self.pre_validation_password_same(password, password_confirmation) #'비밀번호'랑 '비밀번호 확인'이 같이 넘어오면
-  #    if (password.length >= 8) && (password.length <= 32)
-  #      if password == password_confirmation
-  #         { message: '일치', status: :ok }
-  #      else
-  #         { message: '두 비밀번호가 일치하지 않습니다.', status: :bad_request }
-  #      end
-  #    end
-  # end
-
 
   #닉네임 중복 확인
   def self.pre_validation_nickname(nickname)

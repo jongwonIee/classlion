@@ -51,12 +51,6 @@ class UsersController < ApplicationController
     render json: { message: validation[:message] }, status: validation[:status]
   end
 
-  #비밀번호 일치여부 확인
-  # def check_pw_same
-  #   validation = User.pre_validation_password_same(params[:password], params[:password_confirmation])
-  #   render json: { message: validation[:message] }, staus: validation[:status]
-  # end
-
   # 닉네임 중복검사
   def check_nickname
     validation = User.pre_validation_nickname params[:nickname]
