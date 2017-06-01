@@ -1,0 +1,66 @@
+<div class="info_container">
+  <div class="info_content clearfix">
+    <div class="myinfo_div">
+      <div class="info_form">
+        <h2 class="info_head">설정</h2>
+          <div class="nickname_group setting_group">
+            <div class="group_title">
+              <h3 class="info_title">닉네임</h3>
+            </div>
+            <div class="group_content">
+              <div class="info info_accordion">
+                <div class="accordion_trigger_wrapper">
+                  <p class="accordion_title accordion_trigger"><%= @current_user.nickname %></p>
+                  <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i>
+                  <div class="clear"></div>
+                </div>
+                <div class="accordion_content" style="display: none;">
+                  <%= form_for(@current_user) do |f| %>
+                  <!--아이디, pw hidden값으로 같이 넘겨줘야하는데 id는 되는데 pw는 안됨! pw만 같이 넘기면 해결-->
+                  <%= f.hidden_field :email, value: @current_user.email %>
+                  <%#= f.hidden_field :password, value: @current_user.password %>  
+                  <%= f.password_field :password %><br/>
+                  <div class="edit_value">
+                  <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
+                  </div><br>
+                    <div class="edit_btns edit_btns_nickname">
+                    <!--span 말고 button으로 해야하는데 button 클릭 시 form 넘어가버려서 임시로 바꿈. css는 button 기준으로 작성-->
+                      <span class="edit_cancel_btn" onclick="edit_close('nick');">취소</span>
+                      <button class="edit_save_btn">저장</button>
+                    </div>
+                  <% end %>
+                </div>       
+                  
+              </div>
+            </div>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //수정하기
+  function edit_open(editData) {
+    $(".1_"+editData).toggle();
+    $(".2_"+editData).toggle(250);
+    
+    //추후 수정 필요. 임시
+    $(".edit_title").css("color", "#DBDBDB");
+    $(".title_"+editData).css("color", "#484848");
+    $(".edit_value").css("color", "#DBDBDB");
+  }
+  
+  //수정 취소
+  function edit_close(editData) {
+    $(".2_"+editData).toggle(250);
+    $(".1_"+editData).toggle(10);
+    
+    //추후 수정 필요. 임시
+    $(".edit_title").css("color", "#484848");
+    $(".edit_value").css("color", "#484848");
+  }
+  
+</script>

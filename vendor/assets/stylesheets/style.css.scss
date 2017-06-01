@@ -798,7 +798,7 @@ body {
     padding-bottom: 0px;
 }
 
-.course_top, .info_left {
+.course_top {
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
@@ -809,7 +809,7 @@ body {
     overflow: hidden;
 }
 
-.course_info_div, .info_left, .info_right_1, .info_right_2, .info_score {
+.course_info_div, .info_right_1, .info_right_2, .info_score {
     height: auto;
     // overflow: hidden;
 }
@@ -826,21 +826,6 @@ body {
     border-width: 0.5px 0px 0px 0px;
 }
 
-.info_left {
-    position: relative !important;
-    width: 25% !important;
-    padding-bottom: 17%;
-    // background:green;
-    float: left !important;
-}
-
-.info_left > div {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    // background:red;
-    text-align: center;
-}
 .course_prof_img {
     position: absolute;
     top: 0;
@@ -855,13 +840,13 @@ body {
 }
 
 .info_right_1 {
-    width: 75% !important;
+    width: 100% !important;
     height: 100%;
     float: right !important;
 }
 
 .info_right_2 {
-    width: 75% !important;
+    width: 100% !important;
     height: 100%;
     float: right !important;
 }
@@ -958,7 +943,7 @@ body {
     display: inline-block;
 }
 
-.info_1, .info_2, .info_3, .info_4 {
+.info_1, .info_2, .info_3 {
     font-size: 14px;
     margin-bottom: 12px !important;
     select {
@@ -966,17 +951,9 @@ body {
     }
 }
 
-.info_1, .info_2 {
-    display: inline-block;
-}
-
-.info_1 {
-    margin-right: 25px;
-}
-
-.info_title {
-    font-weight: 400;
-}
+// .info_1, .info_2 {
+//     display: inline-block;
+// }
 
 .info_btn_div {
     width: 24%;
@@ -1589,30 +1566,84 @@ ul.tab li img {
     color: #ff5a5f;   
 }
 
+.before_like_btn {
+    font-weight: 500;
+    color: #484848;
+}
+
 .like_btn, .dislike_btn {
-    border-radius: 5px;
-    padding: 2px 12px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    font-size: 18px;
     img {
-        width: 23px;
+        width: 40px;
         vertical-align: middle;
         position: relative;
+    }
+    &:focus {
+        outline: none !important;
     }
 }
 
 .like_btn {
-    border: 2px solid #27b5af;
+    color: #27b5af;
 }
 
 .dislike_btn {
-    border: 2px solid #ff5a5f;
+    color: #ff5a5f;
     img {
         top: -2px;
+    }
+}
+
+.grey_like_btn {
+    color: #dbdbdb;
+    font-weight: 300;
+    font-size: 15px;
+    img {
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        filter: grayscale(100%); 
+    }
+    &:hover {
+        font-size: 18px;
+        color: #27b5af;
+        font-weight: 400;
+        img {
+            filter: none;
+        }
+    }
+}
+
+.grey_dislike_btn {
+    color: #dbdbdb;
+    font-weight: 300;
+    font-size: 15px;
+    img {
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        filter: grayscale(100%); 
+    }
+    &:hover {
+        font-size: 18px;
+        color: #ff5a5f;
+        font-weight: 400;
+        img {
+            filter: none;
+        }
     }
 }
 
 /*리뷰 write page end*/
 
 /*wiki page start*/
+/*wiki all start*/
 .wiki_top {
     margin-top: 50px !important;
     margin-bottom: 50px !important;
@@ -1630,6 +1661,120 @@ ul.tab li img {
         }
     }
 }
+
+.history_top {
+    overflow: hidden;
+}
+
+.history_btn {
+    display: inline-block;
+    float: right;
+    border: 1.3px solid #484848;
+    padding: 5px 0px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    font-weight: 400;
+    a {
+        padding: 5px 10px;
+        color: #484848;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.history_btn_left {
+    border-right: 1.3px solid #484848;
+}
+/*wiki all end*/
+
+/*wiki history page start*/
+#diff_revisions {
+    color: #484848;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.history_ul {
+    -webkit-padding-start: 0px;
+}
+
+.history_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    input[type="radio"] {
+        display: none;
+        + .revision_label {
+            &:before {
+                content: '';
+                background: rgba(89, 88, 88, 0.03);
+                border-radius: 100%;
+                border: 1px solid darken(#dce0e0, 25%);
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                position: relative;
+                // top: -0.2em;
+                margin-right: 3px; 
+                vertical-align: top;
+                cursor: pointer;
+                text-align: center;
+                transition: all 250ms ease;
+            }
+        }
+        &:checked {
+            + .revision_label {
+                &:before {
+                  background-color: black;
+                  box-shadow: inset 0 0 0 2.5px #dce0e0;
+                }
+            }
+        }
+    }
+    
+    // input[type="radio"] + label span {
+    //     display:inline-block;
+    //     width:19px;
+    //     height:19px;
+    //     margin:-2px 10px 0 0;
+    //     vertical-align:middle;
+    //     background: black;
+    //     // background:url(wiki_off.svg) left top no-repeat;
+    //     cursor:pointer;
+    // }
+    // input[type="radio"]:checked + label span {
+    //     background: red;
+    //     // background:url(check_radio_sheet.png) -19px top no-repeat;
+    // }
+}
+
+.history_list:before {
+    content: "• ";
+    color: #dce0e0;
+    font-size: 25px;
+    top: 3px;
+    position: relative;
+}
+
+.history_go {
+    color : #27b5af;
+    a {
+        color : #27b5af;
+        &:hover { 
+            text-decoration: none !important;
+        }
+    }
+}
+/*wiki history page end*/
+
+/*wiki show page start*/
+.history_show_title {
+    color: #ff5a5f;
+    font-size: 20px;
+    font-weight: 400;
+}
+/*wiki show page end*/
 /*wiki page end*/
 
 /*my page start*/
@@ -1703,6 +1848,7 @@ ul.tab li img {
     font-size: 20px;
     font-weight: 400;
     margin-top: 10px;
+    margin-left: 40px;
 }
 
 .my_page_hr {
@@ -1715,6 +1861,11 @@ ul.tab li img {
     background: white;
     max-width: none !important;
     margin-top:-8px;
+}
+
+.fa-cog {
+    color : #484848;
+    margin-left: 10px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1740,26 +1891,78 @@ ul.tab li img {
     width: 100%;
 }
 
-.info_div {
-    width: 60%;
+.info_container {
+    width: 900px;
     margin: 0 auto;
+    padding: 0 5px;
+    padding-top: 120px;
 }
 
-.edit_div {
-    border-bottom: 1px solid #dce0e0;
-    line-height: 35px;
-    .edit_title {
-        display: inline-block;
-        width: 40%;
-        font-size: 14px;
-        color: #484848;
-        font-weight: 400;
-        vertical-align: top;
+.info_content {
+    padding: 0 5px;
+    border-radius: 3px;
+    .clearfix {
+        zoom: 1;
     }
 }
 
-.edit_last_div {
+.myinfo_div {
+    min-height: 403px;
+    box-sizing: border-box;
+    background: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 25px;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+.info_head {
+    border-bottom: 2px solid #dce0e0;
+    font-size: 24px;
+    font-weight: 400;
+    color: #ff5a5f;
+    line-height: 1;
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+.setting_group {
+    border-bottom: 1px solid #f2f2f2;
+    display: table;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.group_title {
+    font-weight: 300;
+    display: table-cell;
+    padding: 0 10px;
+    vertical-align: top;
+    width: 150px;
+    position: relative;
+    z-index: 999;
+}
+
+.info_title {
+    font-weight: 400;
+    color: #484848;
+    font-size: 14px;
+    line-height: 1.2;
+    // margin-left: 30px;
+}
+
+.group_content{
+    display: table-cell;
+    padding: 0 10px;
+    vertical-align: top;
+}
+
+.setting_group_last {
     border-bottom: none;
+    display: table;
+    padding: 20px 0;
+    width: 100%;
 }
 
 .edit_content_div {
@@ -1782,14 +1985,11 @@ ul.tab li img {
     }
 }
 
-.hide_i {
-    visibility: hidden;
-}
-
 .edit_value {
-    width: 88%;
+    width: 80%;
     display: inline-block;
-    text-align: center;
+    text-align: left;
+    margin-left: 65px;
 }
 
 .input_edit{
