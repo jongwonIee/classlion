@@ -38,7 +38,8 @@ class CoursesController < ApplicationController
     @like = @course.likes.where("is_like = ?", true).count
     @dislike = @like_count - @like
     @like_per = (@like.to_f/@like_count).round(2)*100
-    @dislike_per = (@dislike.to_f/@like_count).round(2)*100
+    @dislike_per = 100 - @like_per
+    # @dislike_per = (@dislike.to_f/@like_count).round(2)*100
 
     @evaluated_list = []
     @current_user.evaluations.each do |e|

@@ -1,12 +1,12 @@
 <% if @current_user %>
+  <span class="before_like_btn">나는 이 강의가</span>
   <%= hidden_field_tag 'c_id', @course.id %>
-
   <%# 좋아요가 아예 없는 경우, 좋아요 %>
   <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
-    <%= button_tag class: 'like_btn', id: 'like_create_btn' do %>
+    <%= button_tag class: 'like_btn grey_like_btn', id: 'like_create_btn' do %>
       <img src="/assets/thumbs_up_ox.svg">
       <%= t "like_form.like" %>
-      <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+      <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
     <% end %>
 
   <%# 좋아요가 눌린 경우 %>
@@ -14,15 +14,15 @@
     <%= button_tag class: 'like_btn', id: 'like_delete_btn' do %>
         <img src="/assets/thumbs_up_ox.svg">
         <%= t "like_form.like" %>
-        <i class="fa fa-heart favorite" aria-hidden="true"></i>
+        <!--<i class="fa fa-heart favorite" aria-hidden="true"></i>-->
     <% end %>
 
   <%# 싫어요가 눌린 경우 %>
   <% else %>
-      <%= button_tag class: 'like_btn', id: 'like_create_dislike_delete_btn' do %>
+      <%= button_tag class: 'like_btn grey_like_btn', id: 'like_create_dislike_delete_btn' do %>
           <img src="/assets/thumbs_up_ox.svg">
           <%= t "like_form.like" %>
-          <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+          <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
       <% end %>
   <% end %>
 <% end %>
@@ -31,34 +31,34 @@
     <%= hidden_field_tag 'c_id', @course.id %>
     <%# 좋아요가 아예 없는 경우, 싫어요 %>
     <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
-        <%= button_tag class: 'dislike_btn', id: 'dislike_create_btn' do %>
+        <%= button_tag class: 'dislike_btn grey_dislike_btn', id: 'dislike_create_btn' do %>
             <img src="/assets/thumbs_down_ox.svg">
             <%= t "like_form.dislike" %>
-            <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+            <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
         <% end %>
         
-    <%# 좋아요가 눌린 경우 %>
+    <%# 싫어요가 눌린 경우 %>
     <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == false %>
         <%= button_tag class: 'dislike_btn', id: 'dislike_delete_btn' do %>
             <img src="/assets/thumbs_down_ox.svg">
             <%= t "like_form.dislike" %>
-            <i class="fa fa-heart favorite" aria-hidden="true"></i>
+            <!--<i class="fa fa-heart favorite" aria-hidden="true"></i>-->
         <% end %>
         
-    <%# 싫어요가 눌린 경우 %>
+    <%# 좋아요가 눌린 경우 %>
     <% else %>
-        <%= button_tag class: 'dislike_btn', id: 'dislike_create_like_delete_btn' do %>
+        <%= button_tag class: 'dislike_btn grey_dislike_btn', id: 'dislike_create_like_delete_btn' do %>
           <img src="/assets/thumbs_down_ox.svg">
           <%= t "like_form.dislike" %>
-          <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+          <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
         <% end %>
     <% end %>
 <% end %>
 
 <script>
-    <%# 좋아요 생성 %>
+  <%# 좋아요 생성 %>
   $(document).on("click","#like_create_btn",function() {
-
+    
     var $target = $('#new_evaluation');
 
     function slide() {
@@ -79,8 +79,7 @@
       dataType: "json",
       success: function ( result) {
         if(result.msg === "ok"){
-          $('.like_btn i').addClass('favorite');
-          $('.like_btn i').removeClass('not_favorite');
+          $('.like_btn').removeClass('grey_like_btn');
           $('.like_btn').attr("id", "like_delete_btn");
           $('.dislike_btn').attr("id", "dislike_create_like_delete_btn");
         }else if(result.msg === "error"){
@@ -113,8 +112,7 @@
       dataType: "json",
       success: function ( result) {
         if(result.msg === "ok"){
-          $('.like_btn i').addClass('not_favorite');
-          $('.like_btn i').removeClass('favorite');
+          $('.like_btn').addClass('grey_like_btn');
           $('.like_btn').attr("id", "like_create_btn");
           $('.dislike_btn').attr("id", "dislike_create_btn");
         }else if(result.msg === "error"){
@@ -139,11 +137,9 @@
       dataType: "json",
       success: function ( result) {
         if(result.msg === "ok"){
-          $('.like_btn i').addClass('favorite');
-          $('.like_btn i').removeClass('not_favorite');
+          $('.dislike_btn').addClass('grey_dislike_btn');
+          $('.like_btn').removeClass('grey_like_btn');
           $('.like_btn').attr("id", "like_delete_btn");
-          $('.dislike_btn i').addClass('not_favorite');
-          $('.dislike_btn i').removeClass('favorite');
           $('.dislike_btn').attr("id", "dislike_create_like_delete_btn");
         }else if(result.msg === "error"){
           console.log(result.msg);
@@ -176,8 +172,7 @@
       dataType: "json",
       success: function ( result) {
         if(result.msg === "ok"){
-          $('.dislike_btn i').addClass('favorite');
-          $('.dislike_btn i').removeClass('not_favorite');
+          $('.dislike_btn').removeClass('grey_dislike_btn');
           $('.dislike_btn').attr("id", "dislike_delete_btn");
           $('.like_btn').attr("id", "like_create_dislike_delete_btn");
         }else if(result.msg === "error"){
@@ -211,8 +206,7 @@
       dataType: "json",
       success: function ( result) {
         if(result.msg === "ok"){
-          $('.dislike_btn i').addClass('not_favorite');
-          $('.dislike_btn i').removeClass('favorite');
+          $('.dislike_btn').addClass('grey_dislike_btn');
           $('.dislike_btn').attr("id", "dislike_create_btn");
           $('.like_btn').attr("id", "like_create_btn");
         }else if(result.msg === "error"){
@@ -237,11 +231,9 @@
       dataType: "json",
       success: function ( result) {
         if(result.msg === "ok"){
-          $('.dislike_btn i').addClass('favorite');
-          $('.dislike_btn i').removeClass('not_favorite');
+          $('.like_btn').addClass('grey_like_btn');
+          $('.dislike_btn').removeClass('grey_dislike_btn');
           $('.dislike_btn').attr("id", "dislike_delete_btn");
-          $('.like_btn i').addClass('not_favorite');
-          $('.like_btn i').removeClass('favorite');
           $('.like_btn').attr("id", "like_create_dislike_delete_btn");
         }else if(result.msg === "error"){
           console.log(result.msg);

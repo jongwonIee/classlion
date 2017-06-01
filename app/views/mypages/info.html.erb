@@ -1,131 +1,143 @@
-<div class="container-fluid">
-  <div class="info_div">
-<%# provide(:title, "Edit User") %>
-<%#= form_for(@current_user) do |f| %>
-  <%#=  render 'shared/error_messages' %>
-    
-    <div class="edit_div">
-      <div class="edit_title title_nick">닉네임</div>
-      <div class="edit_content_div">
-        <div class="edit_content 1_nick">
-          <div class="edit_value">
-            <%= @current_user.nickname %>
+<div class="info_container">
+  <div class="info_content clearfix">
+    <div class="myinfo_div">
+      <div class="info_form">
+        <h2 class="info_head">계정 설정</h2>
+          <div class="nickname_group setting_group">
+            <div class="group_title">
+              <div class="info_title">닉네임</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content 1_nick">
+                <div class="edit_value">
+                <%= @current_user.nickname %>
+                </div>
+                <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i>
+              </div>
+              <div class="edit_content 2_nick" style="display: none;">
+                <%= form_for(@current_user) do |f| %>
+                  <!--아이디, pw hidden값으로 같이 넘겨줘야하는데 id는 되는데 pw는 안됨! pw만 같이 넘기면 해결-->
+                  <%= f.hidden_field :email, value: @current_user.email %>
+                  <%#= f.hidden_field :password, value: @current_user.password %>  
+                <div class="edit_value">
+                  <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
+                </div>
+                <div class="button_group">
+                  <button class="edit_cancel_btn" onclick="edit_close('nick')" type="button">
+                    <span class="label">취소</span>
+                  </button>
+                  <button class="edit_save_btn" type="submit">
+                    <span class="label">저장</span>
+                  </button>
+                </div>
+                  <% end %>
+              </div>
+            </div>
           </div>
-          <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i><br>
-        </div>
-    
-      <div class="edit_content 2_nick" style="display: none;">
-        <%= form_for(@current_user) do |f| %>
-          <!--아이디, pw hidden값으로 같이 넘겨줘야하는데 id는 되는데 pw는 안됨! pw만 같이 넘기면 해결-->
-          <%= f.hidden_field :email, value: @current_user.email %>
-          <%#= f.hidden_field :password, value: @current_user.password %>  
-          <%= f.password_field :password %><br/>
-          <div class="edit_value">
-            <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
-          </div><br>
-          <div class="edit_btns edit_btns_nickname">
-            <!--span 말고 button으로 해야하는데 button 클릭 시 form 넘어가버려서 임시로 바꿈. css는 button 기준으로 작성-->
-            <span class="edit_cancel_btn" onclick="edit_close('nick');">취소</span>
-            <button class="edit_save_btn">저장</button>
+          
+          <div class="email_group setting_group">
+            <div class="group_title">
+              <div class="info_title">이메일</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.email %>
+                </div>
+              </div>
+            </div>
           </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="edit_div">
-    <div class="edit_title">이메일</div>
-    <div class="edit_content_div">
-      <div class="edit_content">
-        <div class="edit_value">
-          <%= @current_user.email %>
-        </div>
-      </div>
-    </div>
-  </div>
-    
-  <div class="edit_div">
-    <div class="edit_title title_pw">비밀번호</div>
-    <div class="edit_content_div">
-      <div class="edit_content 1_pw">
-        <div class="edit_value">
-          ●●●●●●●● <%# 이 부분 어떻게 표기할 것인지 의논필요! 자릿수만큼 보여줄건지? 그냥 임의로 동그라미 8개? %>
-          <%#= @current_user.password %>
-        </div>
-        <i class="fa fa-pencil pencil_pw" aria-hidden="true" onclick="edit_open('pw');"></i><br>
-      </div>
-    
-      <div class="edit_content 2_pw" style="display: none;">
-        <%= form_for(@current_user) do |f| %>
-          <%= f.hidden_field :email, value: @current_user.email %>
-          <%#= f.hidden_field :password, value: @current_user.password %>  
-          <%= f.password_field :password %><br/>
-          <div class="edit_value">
-            <%= f.password_field :password, placeholder: "현재 비밀번호", class: "input_edit" %>
-            <%= f.password_field :password, placeholder: "새 비밀번호", class: "input_edit" %>
-            <%= f.password_field :password, placeholder: "새 비밀번호 확인", class: "input_edit" %>
-          </div><br>
-          <div class="edit_btns edit_btns_nickname">
-            <!--span 말고 button으로 해야하는데 button 클릭 시 form 넘어가버려서 임시로 바꿈. css는 button 기준으로 작성-->
-            <span class="edit_cancel_btn" onclick="edit_close('pw');">취소</span>
-            <button class="edit_save_btn">저장</button>
+            
+          <div class="password_group setting_group">
+            <div class="group_title">
+              <div class="info_title">비밀번호</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content 1_pw">
+                <div class="edit_value">
+                  ●●●●●●●● <%# 이 부분 어떻게 표기할 것인지 의논필요! 자릿수만큼 보여줄건지? 그냥 임의로 동그라미 8개? %>
+                  <%#= @current_user.password %>
+                </div>
+                <i class="fa fa-pencil pencil_pw" aria-hidden="true" onclick="edit_open('pw');"></i><br>
+              </div>
+              
+              <div class="edit_content 2_pw" style="display: none;">
+                <%= form_for(@current_user) do |f| %>
+                  <%= f.hidden_field :email, value: @current_user.email %>
+                  <%#= f.hidden_field :password, value: @current_user.password %>  
+                  <%= f.password_field :password %><br/>
+                  <div class="edit_value">
+                    <%= f.password_field :password, placeholder: "현재 비밀번호", class: "input_edit" %>
+                    <%= f.password_field :password, placeholder: "새 비밀번호", class: "input_edit" %>
+                    <%= f.password_field :password, placeholder: "새 비밀번호 확인", class: "input_edit" %>
+                  </div>
+                  <div class="edit_btns edit_btns_nickname">
+                    <!--span 말고 button으로 해야하는데 button 클릭 시 form 넘어가버려서 임시로 바꿈. css는 button 기준으로 작성-->
+                    <span class="edit_cancel_btn" onclick="edit_close('pw');">취소</span>
+                   <button class="edit_save_btn">저장</button>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="edit_div">
-    <div class="edit_title">성별</div>
-    <div class="edit_content_div">
-      <div class="edit_content">
-        <div class="edit_value">
-          <% if :is_boy === true %>
-          남자
-          <% else %>
-          여자
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="edit_div">
-    <div class="edit_title">인증여부</div>
-    <div class="edit_content_div">
-      <div class="edit_content">
-        <div class="edit_value">
-          <%= @current_user.activated %>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="edit_div">
-    <div class="edit_title">강의평가 권한</div>
-    <div class="edit_content_div">
-      <div class="edit_content">
-        <div class="edit_value">
-          <%= @current_user.activated %>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="edit_div edit_last_div">
-      <div class="edit_title">위키열람 권한</div>
-      <div class="edit_content_div">
-        <div class="edit_content">
-          <div class="edit_value">
-            <%= @current_user.activated %>
+          
+          <div class="sex_group setting_group">
+            <div class="group_title">
+              <div class="info_title">성별</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <% if :is_boy === true %>
+                  남자
+                  <% else %>
+                  여자
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    
+          
+          <div class="confirm_group setting_group">
+            <div class="group_title">
+              <div class="info_title">인증여부</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.activated %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="review_group setting_group">
+            <div class="group_title">
+              <div class="info_title">강의평가 권한</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.activated %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wiki_group setting_group_last">
+            <div class="group_title">
+              <div class="info_title">위키열람 권한</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.activated %>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <%#= f.submit "변경사항 저장하기" %>
+<%#= f.submit "변경사항 저장하기" %>
 <%# end %>
 </div>
 
