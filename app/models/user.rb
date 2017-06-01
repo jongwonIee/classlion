@@ -104,6 +104,21 @@ class User < ApplicationRecord
     like = Like.where('user_id = ? AND course_id = ?', user_id, course_id)
     Like.destroy(like.first.id)
   end
+
+  #Adding Roles
+  def evaluator_addition(user_id)
+    user = User.find(user_id)
+    user.add_role 'evaluator'
+    point = user.point - 1000
+    user.update_attribute(:point, point)
+  end
+
+  def wikier_addition(user_id)
+    user = User.find(user_id)
+    user.add_role 'wikier'
+    point = user.point - 1000
+    user.update_attribute(:point, point)
+  end
           
   def self.pre_validation_email(email)
     if true #여기다가 이메일 validation 추가하면 됨. email regex + 중복검사 + 특수문자 검사등

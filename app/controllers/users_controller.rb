@@ -84,6 +84,17 @@ class UsersController < ApplicationController
     end
   end
 
+  # 권한 획득
+  def evaluator_add
+    current_user.evaluator_addition(current_user.id)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def wikier_add
+    current_user.wikier_addition(current_user.id)
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def user_params

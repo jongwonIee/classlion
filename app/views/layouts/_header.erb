@@ -33,9 +33,9 @@
 
         <ul>
           <% if !(@current_user.has_role? 'evaluator') && @current_user.point >= 1000 %>
-              <li><br>1000점<br><%= button_to '오픈하기', roles_evaluator_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br></li>
+              <li><br>1000점<br><%= button_to '오픈하기', users_evaluator_add_path, class: "nav_btn", user_id: session[:user_id], method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br></li>
           <% elsif !(@current_user.has_role? 'evaluator') && @current_user.point < 1000 %>
-              <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
+              <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", user_id: session[:user_id], method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
           <% else %>
               <li>강의평가를 열람해보세요!</li>
           <% end %>
@@ -54,7 +54,7 @@
 
         <ul>
           <% if !(@current_user.has_role? 'wikier') && @current_user.point >= 1000 %>
-              <li><br>1000점<br><%= button_to '오픈하기', roles_wikier_path, class: "nav_btn", method: :post, :onClick => 'alert("1000포인트 차감! 위키열람 권한이 부여되었습니다!")' %><br></li>
+              <li><br>1000점<br><%= button_to '오픈하기', users_wikier_add_path, class: "nav_btn", user_id: session[:user_id], method: :post, :onClick => 'alert("1000포인트 차감! 강평열람 권한이 부여되었습니다!")' %><br>
           <% elsif !(@current_user.has_role? 'wikier') && @current_user.point < 1000 %>
               <li><br>1000점<br><%= button_to '오픈하기', roles_lack_path, class: "nav_btn", method: :post, :onClick => 'alert("포인트가 부족합니다! 강의평가로 포인트를 획득하세요!")' %><br></li>
           <% else %>

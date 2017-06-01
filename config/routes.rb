@@ -64,8 +64,8 @@ Rails.application.routes.draw do
   get 'mypage/info' => 'mypages#info'
 
   #cancancan
-  post 'roles/evaluator'
-  post 'roles/wikier'
+  post 'users/evaluator_add'
+  post 'users/wikier_add'
   post 'roles/lack'
 
   #favoites
