@@ -26,7 +26,7 @@ $(function() {
     });
 
     //이메일 중복확인-----------------------------------------
-    email.focusout(function() {
+   email.focusout(function() {
         $.ajax({
           headers: {
             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
@@ -98,7 +98,7 @@ $(function() {
         });
     });
 
-    //대학교 및 전공 체크--------------------------------------------------------
+    //대학교 체크--------------------------------------------------------
     //대학교 함수정의
     function validateUniversity(){
         if(university.val() === ""){
@@ -107,6 +107,7 @@ $(function() {
         }else{//뭔가 선택되었다!
             univError.hide();
             university[0].parentNode.parentNode.style.borderColor = "#fff";
+            return true;
         }
     }
 
@@ -120,4 +121,6 @@ $(function() {
         univError.hide();
         university[0].parentNode.parentNode.style.borderColor = "#fff";
     });
+
 });
+
