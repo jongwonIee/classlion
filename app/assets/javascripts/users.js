@@ -13,7 +13,10 @@ $(function() {
 
         nickname = $('#user_nickname'),
         nicknameError = $('#nickname_error'),
-        nicknameCheck = $('#nickname_check');
+        nicknameCheck = $('#nickname_check'),
+
+        university = $('#user_university_id'),
+        univError = $('#university_error');
 
     //input에 focus가 왔을 때, css변경 (불투명 색상)
     $('.login_input').focusin(function(){
@@ -95,4 +98,26 @@ $(function() {
         });
     });
 
+    //대학교 및 전공 체크--------------------------------------------------------
+    //대학교 함수정의
+    function validateUniversity(){
+        if(university.val() === ""){
+            univError.show().text("대학 선택해주세요.").addClass('red');
+            university[0].parentNode.parentNode.style.borderColor = "#ff5a5f";
+        }else{//뭔가 선택되었다!
+            univError.hide();
+            university[0].parentNode.parentNode.style.borderColor = "#fff";
+        }
+    }
+
+    //대학교 함수실행
+    university.blur(function(){
+        validateUniversity();
+    });
+
+    //대학교 예외처리
+    university.change(function() { //대학교 체크여부 확인
+        univError.hide();
+        university[0].parentNode.parentNode.style.borderColor = "#fff";
+    });
 });
