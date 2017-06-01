@@ -11,14 +11,14 @@
               <div class="edit_content 1_nick">
                 <div class="edit_value">
                 <%= @current_user.nickname %>
-                <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i>
                 </div>
+                <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i>
               </div>
               <div class="edit_content 2_nick" style="display: none;">
                 <%= form_for(@current_user) do |f| %>
                   <!--아이디, pw hidden값으로 같이 넘겨줘야하는데 id는 되는데 pw는 안됨! pw만 같이 넘기면 해결-->
                   <%= f.hidden_field :email, value: @current_user.email %>
-                  <%= f.hidden_field :password, value: @current_user.password %>
+                  <%#= f.hidden_field :password, value: @current_user.password %>  
                 <div class="edit_value">
                   <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
                 </div>
@@ -56,7 +56,7 @@
               <div class="edit_content 1_pw">
                 <div class="edit_value">
                   ●●●●●●●● <%# 이 부분 어떻게 표기할 것인지 의논필요! 자릿수만큼 보여줄건지? 그냥 임의로 동그라미 8개? %>
-                  <%= @current_user.password %>
+                  <%#= @current_user.password %>
                 </div>
                 <i class="fa fa-pencil pencil_pw" aria-hidden="true" onclick="edit_open('pw');"></i><br>
               </div>
