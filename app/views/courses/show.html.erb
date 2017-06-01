@@ -89,7 +89,7 @@
       <ul class="tab">
         <li>
           <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openTab(event, 'wiki');" id="defaultOpen">
-            <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "review"%>
+            <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "wiki"%>
             WIKI
           </a>
         </li>
@@ -97,11 +97,6 @@
           <a href="javascript:void(0)" class="review_tab tablinks" onclick="openTab(event, 'review');">
             <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
             강의평가
-          </a>
-        </li>
-        <li id="history" class="filter tab_move">
-          <a href="/wiki/<%= @course.id %>/history">
-            history <i class="fa fa-angle-right" aria-hidden="true"></i>
           </a>
         </li>
         <li id="filter" class="filter">
@@ -119,7 +114,7 @@
       
       <div id="review" class="tabcontent">
           <% if @evaluated_list.include?(@course.id) %>
-            <%= (t "form.evaluated") %>
+            <span class="before_like_btn"><%= (t "form.evaluated") %></span>
           <% else %>
             <%= render 'like_form' %>
             <%= render 'form' %>
@@ -231,12 +226,12 @@
     if (evt.currentTarget.className.match('review_tab')) {
       evt.currentTarget.children[0].src = review_on;
       showTarget("filter");
-      hideTarget("history");
+      // hideTarget("history");
     }
     else {
       evt.currentTarget.children[0].src = wiki_on;
       hideTarget("filter");
-      showTarget("history");
+      // showTarget("history");
     };
   }
   //change tab img end//

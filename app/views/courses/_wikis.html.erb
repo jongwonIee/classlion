@@ -15,11 +15,17 @@
   사용법 : 마우스 우클릭하면 이미지 넣을 수 있고 blah blah
   </div>
 <% else %>
+  <div class="history_top">
+    <a href="/wiki/<%= @course.id %>/history" class="history_btn">
+      <i class="fa fa-history" aria-hidden="true"></i>히스토리
+    </a>
+  </div>
   <div id="wiki_editor">
-<%= wiki.body.html_safe %>
+    <%= wiki.body.html_safe %>
   </div>
 <% end %>
 <a href="#" id="send_wiki_content">위키 전송</a>||<a href="/wiki/<%= @course.id %>/history">지난 기록 보기</a>
+
 <script>
 $(function(){
   $("#send_wiki_content").on("click", function(e){

@@ -1669,22 +1669,21 @@ ul.tab li img {
 .history_btn {
     display: inline-block;
     float: right;
-    border: 1.3px solid #484848;
+    // border: 1.3px solid #484848;
     padding: 5px 0px;
-    border-radius: 3px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    // border-radius: 3px;
+    // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     font-weight: 400;
-    a {
-        padding: 5px 10px;
-        color: #484848;
-        &:hover {
-            text-decoration: none;
-        }
+    color: #9c9a9a;
+    &:hover {
+        text-decoration: none;
+        color: #27b5af;
     }
 }
 
 .history_btn_left {
-    border-right: 1.3px solid #484848;
+    margin-right: 20px;
+    // border-right: 1.3px solid #484848;
 }
 /*wiki all end*/
 
@@ -1896,6 +1895,7 @@ ul.tab li img {
     margin: 0 auto;
     padding: 0 5px;
     padding-top: 120px;
+    min-width: 640px;
 }
 
 .info_content {
@@ -1994,11 +1994,12 @@ ul.tab li img {
 
 .input_edit{
     padding: 0px 8px;
+    margin-bottom: 4px;
     width: 100%;
     text-align: center;
     border-radius: 4px;
     border: none;
-    line-height: 25px;
+    line-height: 30px;
     text-align: left;
     border: 1px solid #DBDBDB;
     -webkit-appearance: none;
@@ -2016,23 +2017,19 @@ ul.tab li img {
     border-radius: 4px;
     background: #DBDBDB;
     color: white;
-    padding: 0px 12px;
-    line-height: 25px;
+    padding: 0px 20px;
+    margin: 8px 6px 0 65px;
+    line-height: 30px;
 }
 .edit_save_btn {
     border: none;
     border-radius: 4px;
     background: #ff5a5f;
     color: white;
-    padding: 0px 12px;
-    line-height: 25px;
+    padding: 0px 20px;
+    line-height: 30px;
 }
 
-@media (max-width: 768px) {
-    .info_div {
-        width: 90%;
-    }
-}
 /*my info end*/
 
 /*my review, reply start*/

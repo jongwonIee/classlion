@@ -44,15 +44,17 @@
       <div id="wiki_history" class="tabcontent">
         <div>
           <div class="history_top">
-            <% if @wiki_history.size > 1 %>
-            <a href="#" id="diff_revisions">선택된 리비전 비교하기</a>
-            <% end %>
-            <div class="history_btn">
-              <a href="/courses/<%= @course.id %>" class="history_btn_left">편집</a>
-              <a href="/wiki/<%= @course.id %>/history" class="history_btn_right">히스토리</a>
-            </div>
-          </div>
+          <!--<span class="history_show_title">6판(몇판인지 써주는 백엔드 처리 필요)</span>-->
           
+          <a href="/courses/<%= @course.id %>" class="history_btn ">
+            <i class="fa fa-pencil" aria-hidden="true"></i>편집
+          </a>
+        </div>
+        
+          <% if @wiki_history.size > 1 %>
+            <a href="#" id="diff_revisions">선택된 리비전 비교하기</a>
+          <% end %>
+            
           <ul class="history_ul">
           <% @wiki_history.each do |w| %>
             <li class="history_list">
