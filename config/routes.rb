@@ -33,9 +33,13 @@ Rails.application.routes.draw do
   #사용자 정보 수정
   get 'edit', to: 'users#edit'
 
-  #이메일, 닉네임 유무 체크 (jQuery)
+  #이메일, 비밀번호,닉네임 체크(jQuery)
   post '/check_nickname' => 'users#check_nickname'
   post '/check_email' => 'users#check_email'
+  # post '/check_pw_length' => 'users#check_pw_length'
+  # post '/check_pw_same' => 'users#check_pw_same'
+  post '/check_password' => 'users#check_password'
+
 
   #강의 리스트(검색결과)
   resources :courses
@@ -75,4 +79,6 @@ Rails.application.routes.draw do
   post 'users/is_like_update'
   post 'users/is_like_delete'
 
+  #임시
+  get 'roles/charge'
 end

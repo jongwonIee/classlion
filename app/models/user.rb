@@ -25,8 +25,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #이메일 유효성체크
   validates :email,
-    presence: { message: '이메일을 입력해주세요.'},
-    uniqueness: { message: '이미 사용중인 이메일입니다.'},
+    presence: { message: '이메일을 입력해주세요.'}, uniqueness: { message: '이미 사용중인 이메일입니다.'},
     format: { with: VALID_EMAIL_REGEX, message: '이메일 형식을 확인해주세요.'},
     length: {maximum: 255}
   #닉네임 유효성체크
@@ -101,6 +100,7 @@ class User < ApplicationRecord
     self.send :recreate_activation_digest
   end
 
+  #------------------------------------------------------비밀번호
   def create_reset_digest
     #비밀번호 초기화
     self.reset_token = User.new_token
@@ -117,7 +117,7 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
-
+  #------------------------------------------------------즐겨찾기 및 강평 좋아요
   #즐찾
   def favorites_addition(user_id, course_id)
     Favorite.create(user_id: user_id, course_id: course_id)
@@ -144,16 +144,76 @@ class User < ApplicationRecord
     Like.destroy(like.first.id)
   end
 
-          
+  #------------------------------------------------------이메일, 비밀번호 및 닉네임 중복 확인
+  #이메일 중복 확인
   def self.pre_validation_email(email)
-    if true #여기다가 이메일 validation 추가하면 됨. email regex + 중복검사 + 특수문자 검사등
-      { message: "사용가능ㅋ", status: :ok }
+    if valid_email? email #이메일 형식이 맞고
+      if User.where(email: email).present? #사용자가 있으면
+        { message: '이미 사용 중인 이메일 입니다.', status: :bad_request}
+      else #사용자가 없으면
+        { message: '사용가능', status: :ok }
+      end
+    elsif email == '' #이메일이 비어있으면
+      { message: '필수정보입니다.', status: :bad_request }
     else
-      { message: "사용 불가능ㅋ", status: :bad_request }
+      { message: '이메일 형식을 확인해주세요.', status: :bad_request }
     end
   end
 
-  #회원가입 시, 해당 대학교의 가입 수를 확인하기 위해서 ++함
+  #비밀번호 길이 확인
+  def self.pre_validation_password_length(password, password_confirmation) #'비밀번호'가 오면
+    if (password.length >= 8) && (password.length <= 32)
+      if password == password_confirmation
+        { message: '일치', status: :ok }
+      else
+        { message: '두 비밀번호가 일치하지 않습니다.', status: :bad_request }
+      end
+    else
+      { message: '비밀번호는 8자이상 32자 이하만 가능합니다.', status: :bad_request }
+    end
+  end
+
+  #비밀번호 일치여부 확인
+  # def self.pre_validation_password_same(password, password_confirmation) #'비밀번호'랑 '비밀번호 확인'이 같이 넘어오면
+  #    if (password.length >= 8) && (password.length <= 32)
+  #      if password == password_confirmation
+  #         { message: '일치', status: :ok }
+  #      else
+  #         { message: '두 비밀번호가 일치하지 않습니다.', status: :bad_request }
+  #      end
+  #    end
+  # end
+
+
+  #닉네임 중복 확인
+  def self.pre_validation_nickname(nickname)
+    if valid_nickname? nickname #닉네임 형식이 맞으면
+      if User.where(nickname: nickname).present? #해당 닉네임을 가진 사용자가 있으면
+        { message: '이미 사용중인 닉네임입니다.', status: :bad_request }
+      else
+        { message: '사용가능', status: :ok }
+      end
+    else #닉네임 형식이 맞지않으면
+      { message: '닉네임은 2자이상 8자이하여야 합니다.', status: :bad_request }
+    end
+  end
+
+  #------------------------------------------------------이메일, 비밀번호 및 닉네임 형식확인
+  #이메일 형식 확인
+  def self.valid_email? email
+    (email =~ VALID_EMAIL_REGEX)
+  end
+
+  #닉네임 형식 확인
+  def self.valid_nickname? nickname
+    if (nickname.length >= 2) && (nickname.length <= 8)
+      true
+    else
+      false
+    end
+  end
+
+
   private
 
   def downcase_email

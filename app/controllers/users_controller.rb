@@ -39,14 +39,27 @@ class UsersController < ApplicationController
     end
   end
 
-  # 닉네임 중복검사
-  def check_nickname
-    #check_email 보고 따라하셈ㅋ
-  end
-
-  # 이메일 Valiation
+  # 이메일 가능여부 확인
   def check_email
     validation = User.pre_validation_email params[:email]
+    render json: { message: validation[:message] }, status: validation[:status]
+  end
+
+  #비밀번호 길이 확인
+  def check_password
+    validation = User.pre_validation_password_length(params[:password], params[:password_confirmation])
+    render json: { message: validation[:message] }, status: validation[:status]
+  end
+
+  #비밀번호 일치여부 확인
+  # def check_pw_same
+  #   validation = User.pre_validation_password_same(params[:password], params[:password_confirmation])
+  #   render json: { message: validation[:message] }, staus: validation[:status]
+  # end
+
+  # 닉네임 중복검사
+  def check_nickname
+    validation = User.pre_validation_nickname params[:nickname]
     render json: { message: validation[:message] }, status: validation[:status]
   end
 

@@ -4,39 +4,49 @@
       <div class="centered main_center">
         <p class="logo">CLASSLION</p>
           <%= form_for(@user, url: signup_path) do |f| %>
-              <div class="input_group login_input email_input fit_div fake_input">
+              <div class="input_group login_input signup_input fit_div">
                 <div class="input_div">
-                  <%= f.email_field :email, autofocus: true, placeholder: "이메일" %>
+                  <%= f.email_field :email, autofocus: true, placeholder: '이메일' %>
+                </div>
+                <div class="check_div">
+                  <span class="error" id="email_check"></span>
                 </div>
               </div>
               <p class="error" id="email_error"></p>
 
-              <div class="input_group login_input email_input fit_div fake_input">
+              <div class="input_group login_input signup_input fit_div">
                 <div class="input_div">
-                  <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
+                  <%= f.password_field :password, autocomplete: false, placeholder: '비밀번호(8자~32자)', maxlength: 32%>
                 </div>
               </div>
+              <p class="error" id="password_length_error"></p>
 
-              <div class="input_group login_input fit_div fake_input">
+              <div class="input_group login_input signup_input  fit_div">
                 <div class="input_div">
-                  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
+                  <%= f.password_field :password_confirmation, autocomplete: false, placeholder: '비밀번호 확인(8~32자)',  maxlength: 32 %>
+                </div>
+                <div class="check_div">
+                  <span class="error" id="password_check"></span>
                 </div>
               </div>
-              <p class="error" id="password_validate"></p>
+              <p class="error" id="password_error"></p>
 
-              <div class="input_group login_input email_input fit_div fake_input">
+              <div class="input_group login_input signup_input fit_div">
                 <div class="input_div">
-                  <%= f.text_field :nickname, autofocus: false, placeholder: "닉네임(2~8자)", maxlength: 8%>
+                  <%= f.text_field :nickname, autofocus: false, placeholder: '닉네임(2~8자)', maxlength: 8 %>
+                </div>
+                <div class="check_div">
+                  <span class="error" id="nickname_check"></span>
                 </div>
               </div>
               <p class="error" id="nickname_error"></p>
 
-              <div class="gender_div">
-                <%= f.radio_button :is_boy, "true", checked: true, id: "male" %>
-                <%= f.label :is_boy, "남자", class: "gender_input", for: "male" %>
+              <div class="gender_div signup_input">
+                <%= f.radio_button :is_boy, 'true', checked: true, id: 'male' %>
+                <%= f.label :is_boy, '남자', class: 'gender_input', for: 'male' %>
 
-                <%= f.radio_button :is_boy, "false", id: "female" %>
-                <%= f.label :is_boy, "여자", class: "gender_input", for: "female" %>
+                <%= f.radio_button :is_boy, 'false', id: 'female' %>
+                <%= f.label :is_boy, '여자', class: 'gender_input', for: 'female' %>
               </div>
 
               <div class="input_group login_input fit_div">
@@ -46,9 +56,9 @@
               </div>
               <p class="error" id="university_error"></p>
 
-              <%= f.submit "가입하기", class: "login_btn"%><br>
+              <%= f.submit '가입하기', class: 'login_btn' %><br>
           <% end %>
-          <p class="main_msg">이미 회원이신가요? <%= link_to "로그인", login_path, class: "go_join" %></p>
+          <p class="main_msg">이미 회원이신가요? <%= link_to '로그인', login_path, class: 'go_join' %></p>
           <p class="main_msg rule_msg">계속 진행하시면 <a href="#" class="go_join">개인정보 취급방침</a> 및 <a href="#" class="go_join">약관</a>에 동의하게 됩니다</p>
         
       </div>

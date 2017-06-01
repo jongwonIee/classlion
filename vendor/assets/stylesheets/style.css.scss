@@ -177,7 +177,7 @@
 /*about end*/
 
 /*login, signup start*/
-.email_input {
+.signup_input {
     margin-top: 4%;
 }
 
@@ -219,11 +219,10 @@
 .input_group {
     text-indent: 0;
 }
-
 .input_div {
-    display: inline-block;
     height: 100%;
-    width: 100%;
+    width: 75%;
+    float: left;
     /*text-indent: 5%;*/
 }
 
@@ -255,29 +254,79 @@
     color: white;
 }
 
-.check_div {
-    display: inline-block;
-    width: 35%;
-    /*text-align: right;*/
-    /*text-indent: -5%;*/
-}
-
-.check_div > button {
-    width: 100%;
-    background: transparent;
-    border: 1px solid white;
-    border-radius: 23px;
-}
 
 /* 우리 임의 추가 */
+
+.check_div {
+    width: 25%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+
+.check_div:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;  /* Align inline level elements vertically */
+    height: 100%;
+}
+
 .check_div span{
-    width: 100%;
+    vertical-align: middle;
     font-size: 14px;
+
 }
 #error_div{ /*session에서의 에러메세지*/
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.input_div > input, select {
+    color: white;
+}
+
+.input_div > select {
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    font-size: 15px;
+    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+}
+
+/* Change Autocomplete styles in Chrome*/
+//input:-webkit-autofill,
+//{
+//    border: 0px;
+//    -webkit-text-fill-color: #fff;
+//    -webkit-box-shadow: 0 0 0px 1000px #27b5af inset;
+//    transition: background-color 5000s ease-in-out 0s;
+//}
+
+//에러메세지 색상
+.red {
+    color: #ff5a5f;
+}
+
+.green {
+    color: #27b5af;
+}
+
+.orange {
+    color: #fc642d;
+}
+
+//input에 포커스가 왔을 때
+.focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* 여기까지 우리 임의 추가 */
 
 .gender_div > input {
