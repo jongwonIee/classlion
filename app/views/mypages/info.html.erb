@@ -18,7 +18,7 @@
                 <%= form_for(@current_user) do |f| %>
                   <!--아이디, pw hidden값으로 같이 넘겨줘야하는데 id는 되는데 pw는 안됨! pw만 같이 넘기면 해결-->
                   <%= f.hidden_field :email, value: @current_user.email %>
-                  <%#= f.hidden_field :password, value: @current_user.password %>  
+                  <%= f.hidden_field :password, value: @current_user.password % 
                 <div class="edit_value">
                   <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
                 </div>

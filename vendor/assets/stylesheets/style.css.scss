@@ -1979,17 +1979,18 @@ ul.tab li img {
     color: #484848;
     font-weight: 300;
     i {
-        width: 6%;
+        width: 10%;
+        float: right;
         cursor: pointer;
         color: #ff5a5f;
     }
 }
 
 .edit_value {
-    width: 80%;
+    width: 34%;
     display: inline-block;
     text-align: left;
-    margin-left: 65px;
+    margin-left: 77px;
 }
 
 .input_edit{
@@ -2018,7 +2019,7 @@ ul.tab li img {
     background: #DBDBDB;
     color: white;
     padding: 0px 20px;
-    margin: 8px 6px 0 65px;
+    margin: 8px 6px 0 77px;
     line-height: 30px;
 }
 .edit_save_btn {
