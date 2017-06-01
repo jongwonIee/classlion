@@ -2,19 +2,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # 비로그인
     if user.nil?
       redirect_to '/home/index'
-
-    # 평가 열람편집 권한 획득
-    elsif user.has_role? :evaluator
-      can :manage, Course
-
-    # 위키 열람편집 권한 획득
-    elsif user.has_role? :wikier
-      can :manage, Wiki
+    elsif user.has_role? :admin
+      can :manage, :all
     else
-
+      can :create, Course
+      can :create, Wiki
     end
     # Define abilities for the passed in user here. For example:
     #

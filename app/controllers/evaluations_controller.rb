@@ -1,5 +1,4 @@
 class EvaluationsController < ApplicationController
-  include EvaluationsHelper
   before_action :activation_check
 
   def main 
@@ -31,10 +30,21 @@ class EvaluationsController < ApplicationController
     evaluation.user = current_user
     evaluation.like_id = like.id
     puts like.inspect
-    if !evaluation.save
+    if evaluation.save
+      user = current_user
+      user.point += 200
+      user.save
+    else
       flash[:warning] = "문제가 생겼습니다."
     end
     redirect_to course_url(id: params[:evaluation][:course_id])
+  end
+
+  def destroy
+    #after_destroy
+      user = current_user
+      user.point -= 200
+      user.save
   end
 
   private

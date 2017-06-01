@@ -9,7 +9,8 @@ class Evaluation < ApplicationRecord
   has_many :reports
 
   # validations 
-  # validates :body, length: { minimum: 100 }, presence: true
+  validates :body, length: { minimum: 100 }, presence: true
+  validates :body, length: { minimum: 100 }, presence: true
 
   #TODO i18nize needed
   def time_ago
@@ -23,21 +24,5 @@ class Evaluation < ApplicationRecord
     else
       return ActionController::Base.helpers.time_tag(self.created_at, :format=>'%Y년 %m월 %d일')
     end
-  end
-
-  private
-
-
-
-  def increase_user_point
-    user = current_user
-    point = user.point + 200
-    user.update_attribute(:point, point)
-  end
-
-  def decrease_user_point
-    user = current_user
-    point = user.point - 200
-    user.update_attribute(:point, point)
   end
 end

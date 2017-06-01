@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
 
-  rescue_from CanCan::AccessDenied do
-    redirect_to info_path, alert: t("role.lack.evaluator")
-  end
-
   def session_check
     if !logged_in?
       flash[:warning] = t("role.user.goto_login")
