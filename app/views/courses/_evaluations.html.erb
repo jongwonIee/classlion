@@ -24,12 +24,12 @@
             <p class="feed_content col-xs-12">
               <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
             </p>
-            
+
             <div class="feed_etc col-xs-12">
               <p class="feed_etc_left">
                 <%= e.time_ago %>
                 &nbsp;·&nbsp;
-  
+
                 <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
                 <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
                 &nbsp;·&nbsp;
@@ -38,7 +38,7 @@
 
                 <%# 만약 글쓴이라면! %>
                 &nbsp;·&nbsp;
-                
+
                 <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
                 &nbsp;·&nbsp;
                 <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      
+
       <%# report modal form begin %>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -126,7 +126,7 @@
     <% end %>
     </div>
   <% else %>
-    조건에 맞는 강평이 없어요..
+    <br>조건에 맞는 강평이 없어요..
   <% end %>
 </div>
 

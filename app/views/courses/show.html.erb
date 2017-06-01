@@ -122,7 +122,11 @@
       </div>
 
       <div id="wiki" class="tabcontent">
+      <% if @current_user.has_role?('wikier') %>
         <%= render "wikis" %>
+      <% else %>
+            <br>위키 열람 권한을 획득해주세요..
+      <% end %>
       </div>
       
       <div id="review" class="tabcontent">
@@ -132,9 +136,10 @@
             <%= render 'like_form' %>
             <%= render 'form' %>
           <% end %>
-          
-        <% if @course.evaluations.count > 0 %>
-            <%= render "evaluations" %>
+        <% if @current_user.has_role?('evaluator') && (@course.evaluations.count > 0) %>
+            <%= render 'evaluations' %>
+        <% else %>
+            <br>강평 열람 권한을 획득해주세요..
         <% end %>
       </div>
     </div>

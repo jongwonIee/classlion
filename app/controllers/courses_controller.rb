@@ -30,31 +30,33 @@ class CoursesController < ApplicationController
     @evaluation = Evaluation.new
     @like = Like.new
 
-    #cancancan 수정해야함 # TODO
-    authorize! :show, Course
-
     @evaluation_count = @course.evaluations.count
     @like_count = @course.likes.count
     @like = @course.likes.where("is_like = ?", true).count
     @dislike = @like_count - @like
     @like_per = (@like.to_f/@like_count).round(2)*100
-    @dislike_per = (@dislike.to_f/@like_count).round(2)*100
+    @dislike_per = 100 - @like_per
 
     @evaluated_list = []
     @current_user.evaluations.each do |e|
       @evaluated_list << e.course_id
     end
 
-    #dropdown filter
-    @params = params[:order].to_i
-    if @params == 1
-      @evaluations = @course.evaluations.order(created_at: :desc) #최신순
-    elsif @params == 2
-      @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation) #좋아요만
-    elsif @params == 3
-      @evaluations = @course.likes.where("is_like = ?", false).order(created_at: :desc).map(&:evaluation) #싫어요만
+    #do not load @evaluations when no role
+    if current_user.has_role? :evaluator
+      #dropdown filter
+      @params = params[:order].to_i
+      if @params == 1
+        @evaluations = @course.evaluations.order(created_at: :desc) #최신순
+      elsif @params == 2
+        @evaluations = @course.likes.where("is_like = ?", true).order(created_at: :desc).map(&:evaluation) #좋아요만
+      elsif @params == 3
+        @evaluations = @course.likes.where("is_like = ?", false).order(created_at: :desc).map(&:evaluation) #싫어요만
+      else
+        @evaluations = @course.evaluations.order(created_at: :desc) #최신순
+      end
     else
-      @evaluations = @course.evaluations.order(created_at: :desc) #최신순
+      @evaluations = []
     end
 
     #같은 강의, 연관 강의start - refactoring 가능할지..
