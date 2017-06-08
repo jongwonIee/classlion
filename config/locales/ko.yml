@@ -51,3 +51,6 @@ ko:
     choose: "선택해주세요"
     identical: "같은 강의"
     related: "연관 강의"
+
+  evaluation:
+    writer: "작성자"

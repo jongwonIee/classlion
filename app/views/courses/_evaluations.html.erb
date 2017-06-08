@@ -45,7 +45,7 @@
                 <%# end %>
               </p>
               <p class="feed_etc_right">
-                <span>작성자</span> <%= e.user.nickname %>
+                <span><%= t "evaluation.writer" %></span> <%= e.user.nickname %>
               </p>
               <br>
             </div>
@@ -61,7 +61,7 @@
                       <%= c.time_ago %>
                           <% if c.user == @current_user %>
                         &nbsp;·&nbsp;
-                              <%# 수정 - 구현해야함 %>
+                              <%# TODO 수정 - 구현해야함 %>
                               <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                         &nbsp;·&nbsp;
                               <%# 삭제 %>
@@ -113,12 +113,6 @@
                   <%#= f.submit "send" %>
               <% end %>
             </div>
-            <!--<div class="modal-footer">-->
-            <!--  <p>-->
-            <!--    신고하신 내용은 확인, 수정, 삭제가 불가능합니다. 운영자가 검토할게요~ -->
-            <!--  </p>-->
-              <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-            <!--</div>-->
           </div>
         </div>
       </div>
@@ -126,6 +120,7 @@
     <% end %>
     </div>
   <% else %>
+      <%# TODO renders blur image %>
     <br>조건에 맞는 강평이 없어요..
   <% end %>
 </div>
