@@ -1,5 +1,5 @@
 <% if @current_user %>
-  <span class="before_like_btn">나는 이 강의가</span>
+  <span class="before_like_btn"><%= (t "like_form.i") %></span>
   <%= hidden_field_tag 'c_id', @course.id %>
   <%# 좋아요가 아예 없는 경우, 좋아요 %>
   <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>

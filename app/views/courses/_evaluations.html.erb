@@ -100,7 +100,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <p class="modal-title">신고하기</p>
+              <p class="modal-title"><%= (t "report.submit_button") %></p>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -118,9 +118,10 @@
       <%# report modal form end %>
     <% end %>
     </div>
-  <% else %>
+  <% elsif @params.present? %>
       <%# TODO renders blur image %>
-    <br>조건에 맞는 강평이 없어요..
+    <br>조건에 맞는 강평이 없어요..(blurred img)
+  <% else %>
   <% end %>
 </div>
 

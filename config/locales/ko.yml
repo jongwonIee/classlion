@@ -21,6 +21,7 @@ ko:
     placeholder: "자유롭게 댓글을 입력해주세요."
 
   like_form:
+    i: "나는 이 강의가"
     like:   "좋아요"
     dislike: "싫어요"
 
@@ -54,3 +55,5 @@ ko:
 
   evaluation:
     writer: "작성자"
+    no_evaluation: "아직 작성된 평가가 없어요!"
+    recomment: "지금 소중한 강의평가를 남겨주세요"
