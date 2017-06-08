@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
     end
 
     #do not load @evaluations when no role
-    if current_user.has_role? :evaluator
+    if (current_user.has_role? :evaluator) && (@course.evaluations.count > 0)
       #dropdown filter
       @params = params[:order].to_i
       if @params == 1
@@ -56,7 +56,7 @@ class CoursesController < ApplicationController
         @evaluations = @course.evaluations.order(created_at: :desc) #최신순
       end
     else
-      @evaluations = []
+      @evaluations = @course.evaluations.where("user_id = ?", current_user.id)
     end
 
     #같은 강의, 연관 강의start - refactoring 가능할지..

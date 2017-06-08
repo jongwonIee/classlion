@@ -36,13 +36,12 @@
 
                 <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
 
-                <%# 만약 글쓴이라면! %>
+                <% if e.user.id == current_user.id %>
                 &nbsp;·&nbsp;
-
                 <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
                 &nbsp;·&nbsp;
                 <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
-                <%# end %>
+                <% end %>
               </p>
               <p class="feed_etc_right">
                 <span><%= t "evaluation.writer" %></span> <%= e.user.nickname %>

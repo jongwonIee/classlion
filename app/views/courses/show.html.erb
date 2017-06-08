@@ -114,21 +114,26 @@
       <% if @current_user.has_role?('wikier') %>
         <%= render "wikis" %>
       <% else %>
-            <br>위키 열람 권한을 획득해주세요..
+            <br>위키 열람 권한을 획득해주세요..(blurred img)
       <% end %>
       </div>
       
       <div id="review" class="tabcontent">
-          <% if @evaluated_list.include?(@course.id) %>
-            <span class="before_like_btn"><%= (t "form.evaluated") %></span>
-          <% else %>
-            <%= render 'like_form' %>
-            <%= render 'form' %>
-          <% end %>
+        <% if @evaluated_list.include?(@course.id) %>
+
+          <span class="before_like_btn"><%= (t "form.evaluated") %></span>
+        <% else %>
+          <%= render 'like_form' %>
+          <%= render 'form' %>
+        <% end %>
+
         <% if @current_user.has_role?('evaluator') && (@course.evaluations.count > 0) %>
             <%= render 'evaluations' %>
         <% else %>
-            <br>강평 열람 권한을 획득해주세요..
+            <br>
+            강평 열람 권한을 획득해주세요..(blurred img)
+            <%# 내가 쓴 강의평 %>
+            <%= render 'evaluations' %>
         <% end %>
       </div>
     </div>
