@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out 
+    log_out
     flash[:success] = '로그아웃되었습니다'
     redirect_to root_url
   end

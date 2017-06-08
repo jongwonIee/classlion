@@ -18,7 +18,7 @@
                 <%= form_for(@current_user) do |f| %>
                   <!--아이디, pw hidden값으로 같이 넘겨줘야하는데 id는 되는데 pw는 안됨! pw만 같이 넘기면 해결-->
                   <%= f.hidden_field :email, value: @current_user.email %>
-                  <%#= f.hidden_field :password, value: @current_user.password %>  
+                  <%= f.hidden_field :password, value: @current_user.password % 
                 <div class="edit_value">
                   <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
                 </div>
@@ -64,17 +64,19 @@
               <div class="edit_content 2_pw" style="display: none;">
                 <%= form_for(@current_user) do |f| %>
                   <%= f.hidden_field :email, value: @current_user.email %>
-                  <%#= f.hidden_field :password, value: @current_user.password %>  
-                  <%= f.password_field :password %><br/>
+                  <%= f.hidden_field :password, value: @current_user.password %>
                   <div class="edit_value">
                     <%= f.password_field :password, placeholder: "현재 비밀번호", class: "input_edit" %>
                     <%= f.password_field :password, placeholder: "새 비밀번호", class: "input_edit" %>
                     <%= f.password_field :password, placeholder: "새 비밀번호 확인", class: "input_edit" %>
                   </div>
                   <div class="edit_btns edit_btns_nickname">
-                    <!--span 말고 button으로 해야하는데 button 클릭 시 form 넘어가버려서 임시로 바꿈. css는 button 기준으로 작성-->
-                    <span class="edit_cancel_btn" onclick="edit_close('pw');">취소</span>
-                   <button class="edit_save_btn">저장</button>
+                    <button class="edit_cancel_btn" onclick="edit_close('pw')" type="button">
+                      <span class="label">취소</span>
+                    </button>
+                    <button class="edit_save_btn" type="submit">
+                      <span class="label">저장</span>
+                    </button>
                   </div>
                 <% end %>
               </div>

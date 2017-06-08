@@ -30,14 +30,16 @@
         </li>
       </ul>
       </div>
-
+  
       <div id="diff" class="tabcontent">
         <div class="history_top">
-          <!--<span class="history_show_title">6판(몇판인지 써주는 백엔드 처리 필요)</span>-->
-          <div class="history_btn">
-            <a href="/courses/<%= @course.id %>" class="history_btn_left">편집</a>
-            <a href="/wiki/<%= @course.id %>/history" class="history_btn_right">히스토리</a>
-          </div>
+          <a href="/wiki/<%= @course.id %>/history" class="history_btn">
+            <i class="fa fa-history" aria-hidden="true"></i>히스토리
+          </a>
+          
+          <a href="/courses/<%= @course.id %>" class="history_btn history_btn_left">
+            <i class="fa fa-pencil" aria-hidden="true"></i>편집
+          </a>
         </div>
         <%= @wiki.body.html_safe %>
       </div>

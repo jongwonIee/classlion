@@ -180,7 +180,7 @@
 }
 
 .login_btn {
-    width: 100%;
+    width: 300px;/*우리왈 여기 창이 자꾸 늘었다 줄었다 해서 임의로 설정 login_input과 같은이유*/
     height: 45px;
     border: 1px solid #ff5a5f;
     border-radius: 5px;
@@ -193,7 +193,7 @@
 }
 
 .join_btn, .login_input {
-    width: 100%;
+    width: 300px; /*우리왈 여기 창이 자꾸 늘었다 줄었다 해서 임의로 설정 login_btn과 같은이유*/
     height: 45px;
     border: 1px solid white;
     border-radius: 3px;
@@ -280,7 +280,7 @@ body {
 /*about end*/
 
 /*login, signup start*/
-.email_input {
+.signup_input {
     margin-top: 4%;
 }
 
@@ -324,9 +324,9 @@ body {
 }
 
 .input_div {
-    display: inline-block;
     height: 100%;
-    width: 100%;
+    width: 75%;
+    float: left;
     /*text-indent: 5%;*/
 }
 
@@ -358,29 +358,73 @@ body {
     color: white;
 }
 
-.check_div {
-    display: inline-block;
-    width: 35%;
-    /*text-align: right;*/
-    /*text-indent: -5%;*/
-}
-
-.check_div > button {
-    width: 100%;
-    background: transparent;
-    border: 1px solid white;
-    border-radius: 23px;
-}
 
 /* 우리 임의 추가 */
+.error{
+    font-size: 13px;
+}
+
+.check_div {
+    width: 25%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+
+.check_div:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;  /* Align inline level elements vertically */
+    height: 100%;
+}
+
 .check_div span{
-    width: 100%;
+    vertical-align: middle;
     font-size: 14px;
+
 }
 #error_div{ /*session에서의 에러메세지*/
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.input_div > input, select {
+    color: white;
+}
+
+.input_div > select {
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+    font-size: 15px;
+    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+}
+
+//에러메세지 색상
+.red {
+    color: #ff5a5f;
+}
+
+.green {
+    color: #27b5af;
+}
+
+.orange {
+    color: #fc642d;
+}
+
+//input에 포커스가 왔을 때
+.focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* 여기까지 우리 임의 추가 */
 
 .gender_div > input {
@@ -1669,22 +1713,21 @@ ul.tab li img {
 .history_btn {
     display: inline-block;
     float: right;
-    border: 1.3px solid #484848;
+    // border: 1.3px solid #484848;
     padding: 5px 0px;
-    border-radius: 3px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    // border-radius: 3px;
+    // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     font-weight: 400;
-    a {
-        padding: 5px 10px;
-        color: #484848;
-        &:hover {
-            text-decoration: none;
-        }
+    color: #9c9a9a;
+    &:hover {
+        text-decoration: none;
+        color: #27b5af;
     }
 }
 
 .history_btn_left {
-    border-right: 1.3px solid #484848;
+    margin-right: 20px;
+    // border-right: 1.3px solid #484848;
 }
 /*wiki all end*/
 
@@ -1896,6 +1939,7 @@ ul.tab li img {
     margin: 0 auto;
     padding: 0 5px;
     padding-top: 120px;
+    min-width: 640px;
 }
 
 .info_content {
@@ -1979,26 +2023,28 @@ ul.tab li img {
     color: #484848;
     font-weight: 300;
     i {
-        width: 6%;
+        width: 10%;
+        float: right;
         cursor: pointer;
         color: #ff5a5f;
     }
 }
 
 .edit_value {
-    width: 80%;
+    width: 34%;
     display: inline-block;
     text-align: left;
-    margin-left: 65px;
+    margin-left: 77px;
 }
 
 .input_edit{
     padding: 0px 8px;
+    margin-bottom: 4px;
     width: 100%;
     text-align: center;
     border-radius: 4px;
     border: none;
-    line-height: 25px;
+    line-height: 30px;
     text-align: left;
     border: 1px solid #DBDBDB;
     -webkit-appearance: none;
@@ -2016,23 +2062,19 @@ ul.tab li img {
     border-radius: 4px;
     background: #DBDBDB;
     color: white;
-    padding: 0px 12px;
-    line-height: 25px;
+    padding: 0px 20px;
+    margin: 8px 6px 0 77px;
+    line-height: 30px;
 }
 .edit_save_btn {
     border: none;
     border-radius: 4px;
     background: #ff5a5f;
     color: white;
-    padding: 0px 12px;
-    line-height: 25px;
+    padding: 0px 20px;
+    line-height: 30px;
 }
 
-@media (max-width: 768px) {
-    .info_div {
-        width: 90%;
-    }
-}
 /*my info end*/
 
 /*my review, reply start*/
