@@ -22,11 +22,11 @@
             <!--<br>-->
             <% if @course.is_major == true %>
               <span class="info_prof">
-                <span class="lec_cate">전공</span><%= @course.professor.name %> 교수
+                <span class="lec_cate"><%= t "course.major" %></span><%= @course.professor.name %> <%= t "course.professor" %>
               </span>
             <% else %>
               <span class="info_prof">
-                <span class="lec_cate">교양</span><%= @course.professor.name %> 교수
+                <span class="lec_cate"><%= t "course.general" %></span><%= @course.professor.name %> <%= t "course.professor" %>
               </span>
             <% end %>
           </div>
@@ -36,12 +36,12 @@
           <hr class="info_hr">
           <div class="info_p_div">
             <p class="info_1">
-              <span class="info_title">학점</span> <%= @course.lecture.unit %>학점
+              <span class="info_title">학점</span> <%= @course.lecture.unit %><%= t "course.credit" %>
             </p>
             <p class="info_2">
               <span class="info_title"><%= (t"course.identical") %></span>
               <% if !@identical_courses.present? %>
-                  <%= (t"course.identical") %>가 없습니다
+                  <%= (t"course.identical") %><%= t "course.is_null" %>
               <% else %>
                   <% @other_course = [] %>
                   <% @identical_courses.each do |id| %>
@@ -53,7 +53,7 @@
             <p class="info_3">
               <span class="info_title"><%= (t"course.related") %></span>
               <% if !@related_courses.present? %>
-                  <%= (t"course.related") %>가 없습니다
+                  <%= (t"course.related") %><%= t "course.is_null" %>
               <% else %>
                   <% @other_course = [] %>
                   <% @related_courses.each do |id| %>
@@ -75,7 +75,7 @@
           <div id="bar_left" class="review_bar"></div>
           <div id="bar_right" class="review_bar"></div>
         </div>
-        <div class="bar_comment"><%= @like_count %>명의 학생이 평가했습니다</div>
+        <div class="bar_comment"><%= @like_count %><%= t "course.like_total" %></div>
         
       <% else %>
         <%= render "no_evaluations" %>
@@ -90,20 +90,20 @@
         <li>
           <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openTab(event, 'wiki');" id="defaultOpen">
             <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "wiki"%>
-            WIKI
+            <%= t "course.wiki" %>
           </a>
         </li>
         <li>
           <a href="javascript:void(0)" class="review_tab tablinks" onclick="openTab(event, 'review');">
             <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
-            강의평가
+            <%= t "course.evaluations" %>
           </a>
         </li>
         <li id="filter" class="filter">
           <% if @current_user.has_role?('evaluator') %>
             <%# TODO partial refresh needed %>
             <%= form_tag do %>
-                <%= select_tag 'order', options_for_select({"최신순" => 1, "좋아요만" => 2, "싫어요만" => 3}, @params), onchange: "$('#order').submit();" %>
+                <%= select_tag 'order', options_for_select({(t "course.filter.by_date") => 1, (t "course.filter.by_like") => 2, (t "course.filter.by_dislike") => 3}, @params), onchange: "$('#order').submit();" %>
             <% end %>
           <% end %>
         </li>

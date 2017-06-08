@@ -52,6 +52,18 @@ ko:
     choose: "선택해주세요"
     identical: "같은 강의"
     related: "연관 강의"
+    is_null: "가 없습니다"
+    major: "전공"
+    general: "교양"
+    professor: "교수"
+    credit: "학점"
+    like_total: "명의 학생이 평가했습니다"
+    wiki: "WIKI"
+    evaluations: "강의평가"
+    filter:
+      by_date: "최신순"
+      by_like: "좋아요만"
+      by_dislike: "싫어요만"
 
   evaluation:
     writer: "작성자"
