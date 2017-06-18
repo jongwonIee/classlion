@@ -64,6 +64,12 @@ ko:
       by_date: "최신순"
       by_like: "좋아요만"
       by_dislike: "싫어요만"
+    no_search_result: "검색결과가 없습니다"
+    search_result: "%{search_param}에 대한 검색결과입니다"
+    search_count: "%{search_count}개의 수업을 찾았습니다"
+    subject_name: "과목명"
+    professor_name: "교수명"
+
 
   evaluation:
     writer: "작성자"
