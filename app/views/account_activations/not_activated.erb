@@ -5,15 +5,20 @@
         <img src="/assets/mail_icon.svg" class="mail_icon" alt="mail">
 
         <div class="mail_div">
-          <p class="mail_p1"><span class="mail_to"><%= @email %></span>으로 인증메일이 발송되었습니다!</p>
+          <p class="mail_p1">
+            <span class="mail_to"></span>
+            <%= (I18n.t 'user.p1', email: @email).gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+          </p>
+          <p class="mail_p2">
+            <%= (I18n.t 'user.p2').gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+          </p>
+            <%= (I18n.t 'user.p3').gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+          <p class="mail_p3">
 
-          <p class="mail_p2">3시간 이내에 이메일의 인증 링크를 클릭하시면<br> 회원 가입이 완료됩니다.
-            <br>이메일이 인증되지 않았을 경우, 로그인을 할 수 없습니다</p>
-
-          <p class="mail_p3">이메일을 받지 못하셨다면,<br>인증메일을 재발송하여 다시 메일을 확인해주세요.</p>
+          </p>
         </div>
-      </div><br>
-
+      </div>
+      <br>
       <div class="centered main_center fit_div">
         <p class="logo fit_logo">CLASSLION</p>
         <a href="/retry_activation"><button type="button" class="login_btn mail_btn">인증메일 재발송</button></a><br>

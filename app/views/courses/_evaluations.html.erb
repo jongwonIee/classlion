@@ -16,11 +16,10 @@
                   <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_down"%>
                 <% end %>
                 <a href='/courses/<%= e.course.id %>'>
-                  <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
+                  <%= e.course.lecture.name %>(<%= e.course.professor.name %> <%= (I18n.t 'course.professor') %>)
                 </a>
               </p>
             </div>
-
             <p class="feed_content col-xs-12">
               <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
             </p>
