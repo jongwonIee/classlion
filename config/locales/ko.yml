@@ -75,6 +75,13 @@ ko:
     writer: "작성자"
     no_evaluation: "아직 작성된 평가가 없어요!"
     recomment: "지금 소중한 강의평가를 남겨주세요"
+    main_head1: "앗! 뜨거워! 방금 막 올라온 강의평"
+    main_head2: "학우들이 쓴 강의평을 실시간으로 확인해보세요!"
+    report: "신고하기"
+
+  home:
+    classlion: "CLASSLION"
+
 
 
   user:

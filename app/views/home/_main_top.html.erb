@@ -2,8 +2,8 @@
   <div class="outer">
     <div class="inner">
       <div class="centered main_center">
-        <p class="logo">CLASSLION</p>
-        <p class="main_msg"><%= University.ids.count %>개의 학교, <%=User.ids.count%>명의 대학생,<br><%=Evaluation.ids.count%>개의 강의평가</p>
+        <p class="logo"><%= (I18n.t 'home.classlion') %></p>
+        <p class="main_msg"><%= University.ids.count %>개의 학교, <%= User.ids.count%>명의 대학생,<br><%= Evaluation.ids.count%>개의 강의평가</p>
 
         <a href="<%= login_path %>"><button type="button" class="login_btn">로그인</button></a><br>
         <a href="<%= signup_path %>"><button type="button" class="join_btn">회원가입</button></a><br>
