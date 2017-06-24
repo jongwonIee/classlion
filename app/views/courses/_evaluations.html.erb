@@ -43,7 +43,7 @@
                 <% end %>
               </p>
               <p class="feed_etc_right">
-                <span><%= t "evaluation.writer" %></span> <%= e.user.nickname %>
+                <span><%= I18n.t "evaluation.writer" %></span> <%= e.user.nickname %>
               </p>
               <br>
             </div>
@@ -82,9 +82,9 @@
                 </div>
                 <div class="reply_right col-xs-12">
                   <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
-                      <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
+                      <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (I18n.t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
                       <div class="bubble_content reply_btn_div bubble_btn">
-                        <%= f.submit (t "form.submit_button"), class: "reply_write_btn" %>
+                        <%= f.submit (I18n.t "form.submit_button"), class: "reply_write_btn" %>
                       </div>
                   <% end %>
                 </div>
@@ -99,15 +99,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <p class="modal-title"><%= (t "report.submit_button") %></p>
+              <p class="modal-title"><%= (I18n.t "report.submit_button") %></p>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
               <%= form_for Report.new do |f| %>
                   <%= f.hidden_field :evaluation_id, value: e.id %>
                   <%#= f.text_field :body %>
-                  <%= f.text_area :body, placeholder: (t "report.placeholder" ), rows: 8, class: "write_comment_box report_box" %>
-                  <%= f.submit (t "report.submit_button"), class: "review_write_btn report_write_btn" %>
+                  <%= f.text_area :body, placeholder: (I18n.t "report.placeholder" ), rows: 8, class: "write_comment_box report_box" %>
+                  <%= f.submit (I18n.t "report.submit_button"), class: "review_write_btn report_write_btn" %>
                   <%#= f.submit "send" %>
               <% end %>
             </div>

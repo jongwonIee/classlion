@@ -11,7 +11,7 @@
               <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_down"%>
             <% end %>
             <a href='/courses/<%= e.course.id %>'>
-              <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
+              <%= e.course.lecture.name %>(<%= e.course.professor.name %> <%= (I18n.t 'course.professor') %>)
             </a>
           </p>
         </div>
@@ -45,8 +45,8 @@
         <div class="modal-body">
           <%= form_for Report.new do |f| %>
               <%= f.hidden_field :evaluation_id, value: e.id %>
-              <%= f.text_area :body, placeholder: (t "report.placeholder" ), rows: 8, class: "write_comment_box report_box" %>
-              <%= f.submit (t "report.submit_button"), class: "review_write_btn report_write_btn" %>
+              <%= f.text_area :body, placeholder: (I18n.t "report.placeholder" ), rows: 8, class: "write_comment_box report_box" %>
+              <%= f.submit (I18n.t "report.submit_button"), class: "review_write_btn report_write_btn" %>
           <% end %>
         </div>
       </div>

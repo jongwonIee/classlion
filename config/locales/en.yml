@@ -1,21 +1,88 @@
 ---
 en:
-  evaluation_lack: "Please make some reviews to access lecture reviews"
-  more_search_keyword: "*More than two letters please!"
+  search:
+    lack_word: "Two or more letters please!"
+
+  report:
+    placeholder: "지나친 욕설/비방/허위 정보/무성의한 정보 등을 신고해주세요 쏼라쏼라
+    한번 신고하신 내용은 취소가 불가능하니 신중히 작성해주세요 빠른 시일 내에 운영자가 검토 후 처리하겠습니다"
+    submit_button: "신고하기"
 
   form:
-    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!\n(최소 100자이상 작성해야 합니다.)"
+    placeholder: "위의 내용 외에 더 자세히 작성해주시면 큰 도움이 될거에요!
+    (최소 100자이상 작성해야 합니다.)"
     submit_button: "작성하기"
     lack_word: "100자를 채워주세요!"
     complete: "소중한 강의평가 감사합니다!"
     left_word: "글자 남았어요!"
+    evaluated: "이미 평가한 강의입니다."
 
   comment:
     placeholder: "Add Comment!"
 
   like_form:
+    i: "나는 이 강의가"
     like:   "Good"
     dislike: "Bad"
+
+  point:
+    notice: "강의평 하나당 200점이 적립됩니다!"
+
+  role:
+    evaluator: "강평열람권한"
+    wikier: "위키열람권한"
+    lack:
+      evaluator: "강평열람권한을 오픈하기 위해 강평을 작성해주세요!"
+      wikier: "위키열람권한을 오픈하기 위해 강평을 작성해주세요!"
+
+  user:
+    sign_in: "로그인"
+    sign_up: "회원가입"
+    sign_out: "로그아웃"
+    email: "이메일"
+    password: "비밀번호"
+    forgot: "아이디/비밀번호를 잊어버리셨나요?"
+    already: "이미 회원이신가요?"
+    remember: "로그인 상태 유지"
+    facebook: "페이스북으로 로그인"
+    kakaotalk: "카카오톡으로 로그인"
+    goto_login: "로그인이 필요한 페이지입니다."
+
+  course:
+    choose: "선택해주세요"
+    identical: "같은 강의"
+    related: "연관 강의"
+    is_null: "가 없습니다"
+    major: "전공"
+    general: "교양"
+    professor: "교수"
+    credit: "학점"
+    like_total: "명의 학생이 평가했습니다"
+    wiki: "WIKI"
+    evaluations: "강의평가"
+    filter:
+      by_date: "최신순"
+      by_like: "좋아요만"
+      by_dislike: "싫어요만"
+    no_search_result: "검색결과가 없습니다"
+    search_result: "%{search_param}에 대한 검색결과입니다"
+    search_count: "%{search_count}개의 수업을 찾았습니다"
+    subject_name: "과목명"
+    professor_name: "교수명"
+
+
+  evaluation:
+    writer: "작성자"
+    no_evaluation: "아직 작성된 평가가 없어요!"
+    recomment: "지금 소중한 강의평가를 남겨주세요"
+    main_head1: "앗! 뜨거워! 방금 막 올라온 강의평"
+    main_head2: "학우들이 쓴 강의평을 실시간으로 확인해보세요!"
+    report: "신고하기"
+
+  home:
+    classlion: "CLASSLION"
+
+
 
   user:
     sign_in: "Sign In"
@@ -25,3 +92,12 @@ en:
     forgot: "Forgot your email or password?"
     remember: "Remember me?"
     facebook: "Login with Facebook?"
+    p1: |
+      %{email}으로 인증메일이 발송되었습니다!
+    p2: |
+      3시간 이내에 이메일의 인증 링크를 클릭하시면
+      회원 가입이 완료됩니다.
+      이메일이 인증되지 않았을 경우, 로그인을 할 수 없습니다.
+    p3: |
+      이메일을 받지 못하셨다면,
+      인증메일을 재발송하여 다시 메일을 확인해주세요.
