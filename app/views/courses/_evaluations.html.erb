@@ -8,6 +8,7 @@
       <% end %>
         <div class="row">
           <div class="col-xs-12 col-sm-12 feed_each_div">
+            <%# 강평부분 %>
             <div class="col-xs-12">
               <p class="feed_course">
                 <% if e.like.is_like %>
@@ -49,49 +50,48 @@
               </p>
               <br>
             </div>
+            <%# 강평부분 끝 %>
 
-            <%# 댓글 달때 빵빵 달리는 부분%>
-            <div class="col-xs-12 reply_list_wrap" id="reply_list_wrap<%=e.id%>" style="display: none;">
-              <div class="reply_div col-xs-12">
-                <div class="reply_right col-xs-12" id="reply_list<%=e.id%>">
-                  <% e.comments.each do |c| %>
-                      <div class="bubble_content" id="reply_list_child<%=c.id%>">
-                        <%= c.user.nickname %>
-                        <span class="bubble_top_right">
-                      <%= c.time_ago %>
-                          <% if c.user == @current_user %>
-                        &nbsp;·&nbsp;
-                              <%# 수정 - 구현해야함 %>
-                              <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                        &nbsp;·&nbsp;
-                              <%# 삭제 %>
-                              <%= link_to comment_path(c), remote: true, method: :delete do %>
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        <% end %>
-                      <% end %>
-                      </span>
-                        <br>
-                        <p>
-                          <%= c.body %><br>
-                        </p>
-                      </div>
-                  <% end %>
-                </div>
+            <%# TODO 임의로 프론트 드러낸거라 나중에 프론트 수정필요%>
+            <%# 댓글 작성 부분 %>
+            <div style="margin: 30px 0px;">
+              <%= form_for Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), :html => { :id => "new_comment#{e.id}"} do |f| %>
+              <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t 'comment.placeholder'), rows: 3, class: 'bubble_content bubble_write reply_box', autocomplete: 'off' %>
+              <div class="bubble_content reply_btn_div bubble_btn">
+                <%= f.button (t 'form.submit_button'), type: 'submit',class: 'reply_write_btn',id: "reply_write_btn#{e.id}", value:"#{e.id}" %>
               </div>
-              <div class="reply_div col-xs-12">
-                <div class="bubble_list">
-                  <div class="bubble clearfix"></div>
-                </div>
-                <div class="reply_right col-xs-12">
-                  <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
-                      <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
-                      <div class="bubble_content reply_btn_div bubble_btn">
-                        <%= f.submit (t "form.submit_button"), class: "reply_write_btn" %>
-                      </div>
-                  <% end %>
-                </div>
-              </div>
+            <% end %>
             </div>
+            <%# 댓글 작성 부분 끝 %>
+
+            <%# 댓글 달때 빵빵 달리는 부분 %><%# TODO 댓글 많이 달리면 나눠지게끔할것%>
+            <div>
+              <% e.comments.order( created_at: :desc).each do |c| %>
+                  <div class="bubble_content" id="comment_list_child<%=c.id%>">
+                    <%= c.user.nickname %>
+                    <span class="bubble_top_right">
+                        <%= c.time_ago %>
+                      <% if c.user == @current_user %>
+                          &nbsp;·&nbsp;
+                          <%# 수정 - 구현해야함 %>
+                          <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          &nbsp;·&nbsp;
+                          <%# 삭제 %>
+                          <%= link_to comment_path(c), remote: true, method: :delete do %>
+                              <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <% end %>
+                        <% end %>
+                        </span>
+                    <br>
+                    <p>
+                      <%= c.body %><br>
+                    </p>
+                  </div>
+              <% end %>
+            </div>
+            <%# 댓글 달때 빵빵 달리는 부분 끝%>
+
+
           </div>
         </div>
       </div>
@@ -133,12 +133,12 @@
 
 <script>
   <%# 댓글리스트 보였다 안보였다 %>
-  $(".reply_btn").click(function(){
-    var id = $(this).attr('id');
-    var $target = $('#reply_list_wrap'+id);
-
-    $target.slideToggle( 500, function () {
-      $target.is(':visible') ? 'Hide' : 'Show';
-    });
-  });
+//  $(".reply_btn").click(function(){
+//    var id = $(this).attr('id');
+//    var $target = $('#reply_list_wrap'+id);
+//
+//    $target.slideToggle( 500, function () {
+//      $target.is(':visible') ? 'Hide' : 'Show';
+//    });
+//  });
 </script>

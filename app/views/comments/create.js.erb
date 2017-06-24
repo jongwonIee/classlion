@@ -1,5 +1,0 @@
-var eval_id = '<%= @comment.evaluation_id %>';<%# 강의 아이디 겟 %>
-$("<%= escape_javascript(render @comment) %>").appendTo("#reply_list"+eval_id);
-$("#comment_count"+eval_id).html(parseInt($("#comment_count"+eval_id).html(), 10)+1);
-$("#comment_body"+eval_id).focus();
-$("#comment_body"+eval_id).val(' ');<%# 전송 완료시 공백 %>
