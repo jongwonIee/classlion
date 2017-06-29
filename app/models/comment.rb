@@ -17,4 +17,16 @@ class Comment < ApplicationRecord
       return ActionController::Base.helpers.time_tag(self.created_at, :format=>'%Y년 %m월 %d일')
     end
   end
+
+  def self.create_comment(body, user_id, evaluation_id)
+    comment = Comment.new
+    comment.body = body
+    comment.user_id = user_id
+    comment.evaluation_id = evaluation_id
+    if comment.save
+      { message: '댓글작성이 완료!', comment_id: comment.id, status: :ok }
+    else
+      { message: '문제가 발생했습니다.', status: :bad_request }
+    end
+  end
 end

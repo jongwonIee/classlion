@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
   #강의평가 및 강의평가에 대한 댓글
   resources :evaluations do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create], via: [:get, :post]
   end
 
   #댓글 수정 및 삭제
