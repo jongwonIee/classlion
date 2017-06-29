@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
     comment.user_id = user_id
     comment.evaluation_id = evaluation_id
     if comment.save
-      { message: '댓글작성이 완료!', status: :ok }
+      { message: '댓글작성이 완료!', comment_id: comment.id, status: :ok }
     else
       { message: '문제가 발생했습니다.', status: :bad_request }
     end

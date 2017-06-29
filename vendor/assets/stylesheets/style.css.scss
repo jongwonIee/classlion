@@ -360,6 +360,11 @@ body {
 
 
 /* 우리 임의 추가 */
+
+//강평과 댓글에 쓰이는 가운데 온점
+.spot {
+    padding: 0 3px;
+}
 .error{
     font-size: 13px;
 }
@@ -1019,7 +1024,7 @@ body {
 }
 
 .fa {
-    margin-right: 5px;
+    margin: 0 2px;
 }
 
 //bar graph css start

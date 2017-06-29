@@ -29,19 +29,16 @@
             <div class="feed_etc col-xs-12">
               <p class="feed_etc_left">
                 <%= e.time_ago %>
-                &nbsp;·&nbsp;
-
+                <span class="spot">·</span>
                 <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
                 <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
-                &nbsp;·&nbsp;
-
+                <span class="spot">·</span>
                 <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
 
-                <%# 만약 글쓴이라면! %>
-                &nbsp;·&nbsp;
-
+                <%# TODO 만약 글쓴이라면! %>
+                <span class="spot">·</span>
                 <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
-                &nbsp;·&nbsp;
+                <span class="spot">·</span>
                 <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
                 <%# end %>
               </p>
@@ -64,29 +61,28 @@
             </div>
             <%# 댓글 작성 부분 끝 %>
 
-            <%# 댓글 달때 빵빵 달리는 부분 %><%# TODO 댓글 많이 달리면 나눠지게끔할것%>
-            <div>
+            <%# 댓글 달때 빵빵 달리는 부분 %><%# TODO 댓글 많이 달리면 나눠지게끔할것, 프론트 수정, 바뀐 프론트 js에 반영%>
+            <div id="comment_list<%=e.id%>">
               <% e.comments.order( created_at: :desc).each do |c| %>
-                  <div class="bubble_content" id="comment_list_child<%=c.id%>">
-                    <%= c.user.nickname %>
-                    <span class="bubble_top_right">
-                        <%= c.time_ago %>
-                      <% if c.user == @current_user %>
-                          &nbsp;·&nbsp;
-                          <%# 수정 - 구현해야함 %>
-                          <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                          &nbsp;·&nbsp;
-                          <%# 삭제 %>
-                          <%= link_to comment_path(c), remote: true, method: :delete do %>
-                              <i class="fa fa-trash-o" aria-hidden="true"></i>
-                          <% end %>
+                <div class="bubble_content" id="comment_list_child<%=c.id%>">
+                  <%= c.user.nickname %>
+                  <span class="bubble_top_right"><%= c.time_ago %>
+                    <% if c.user == @current_user %>
+                        <span class="spot">·</span>
+                        <%# 수정 - 구현해야함 %>
+                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <span class="spot">·</span>
+                        <%# 삭제 %>
+                        <%= link_to comment_path(c), remote: true, method: :delete do %>
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
                         <% end %>
-                        </span>
-                    <br>
-                    <p>
-                      <%= c.body %><br>
-                    </p>
-                  </div>
+                      <% end %>
+                  </span>
+                  <br>
+                  <p>
+                    <%= c.body %><br>
+                  </p>
+                </div>
               <% end %>
             </div>
             <%# 댓글 달때 빵빵 달리는 부분 끝%>
