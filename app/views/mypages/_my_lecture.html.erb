@@ -1,41 +1,46 @@
 <div class="container-fluid">
-    <div>
-      <% @favorite_courses.each do |f| %>
-      <ul class="my_lect_div">
-        <%= image_tag "/assets/prof.svg", class: "", alt: "professor" %>
-        <p class="feed_course">
-          <a href="/courses/<%=f.id%>"><%= f.lecture.name %></a>
-        </p>
-        <% if f.is_major %>
-            <p class="feed_prof_major">
-              <span class="lec_cate lec_major">전공</span><%= f.professor.name %> 교수님
-            </p>
-        <% else %>
-            <p class="feed_prof_kyo">
-              <span class="lec_cate lec_kyo">교양</span><%= f.professor.name %> 교수님
-            </p>
-        <% end %>
-        
-        <% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>
-              <%= button_tag class: 'favorite_btn my_favorite_btn', id: 'favorite_delete_btn' do %>
-                <i class="fa fa-heart favorite" aria-hidden="true"></i>
-              <% end %>
-          <% else %>
-              <%= button_tag class: 'favorite_btn my_favorite_btn', id: 'favorite_add_btn' do %>
-                <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
-              <% end %>
+  <div class="row my_lect_div">
+    <% @favorite_courses.each do |f| %>
+    <div class="lecture_box col-lg-3 col-md-6 col-sm-6 col-xs-12 row">
+    <div class="lecture_list col-xs-12">
+      <div class="lect_name">
+        <a href="/courses/<%=f.id%>"><%= f.lecture.name %></a>
+        <% if @current_user %>
+          <%= hidden_field_tag 'f_id', user_id: @current_user.id %>
+          <% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>
+            <%= button_tag class: 'favorite_btn', id: 'favorite_delete_btn' do %>
+              <i class="fa fa-heart favorite" aria-hidden="true"></i>
           <% end %>
-
-
-        
-        <!--<#% if @current_user %>-->
-        
-        <!--  <#% if Favorite.exists?(course_id: f.id, user_id: @current_user.id) %>-->
-        <!--      <#%= button_to '관심강의에서제거', users_favorites_delete_path(u_id: @current_user.id, c_id: f.id),-->
-        <!--                    #method: :post, :onClick => 'alert("관심강의에서 제거되었습니다!")' %>-->
-        <!--  <#% end %>-->
-     
+          <% else %>
+            <%= button_tag class: 'favorite_btn', id: 'favorite_add_btn' do %>
+            <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
+        <% end %>
       </div>
+      
+      <% if f.is_major %>
+          <div class="prof_name">
+            <span class="lec_cate">전공</span><%= f.professor.name %> 교수</span>
+        </div>
+      <% else %>
+          <div class="prof_name">
+            <span class="lec_cate">교양</span><%= f.professor.name %> 교수</span>
+          </div>
       <% end %>
+      <hr class="my_lect_div_hr">
+      <div class="thumbs_count">
+        <span class="thumbs_up_count">
+          <img src="/assets/thumbs_up_ox.svg">
+          <!--<span id="like_count<%=f.id%>" class="like_number"><%= @thumbs_up_count %>명</span>-->
+        </span>
+        <span class="thumbs_down_count">
+          <img src="/assets/thumbs_down_ox.svg">
+          <!--<span class="like_count"><%= @thumbs_down_count %>명</span>-->
+        </span>
+      </div>
     </div>
+    </div>
+    <% end %>
+  </div>
 </div>

@@ -677,7 +677,15 @@ Sidebar
   background-color: #f2f2f2;
 }
 .has-children ul li {
+  list-style-type: none;
   border-bottom: 1px solid #dce0e0;
+  size: 15px;
+  a {
+    size: 15px;
+    &:hover {
+      color: #484848 !important;
+    }
+  }
 }
 .has-children > a::after {
   /* arrow icon */
@@ -718,7 +726,7 @@ Sidebar
     /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);*/
   }
   .has-children ul a {
-    text-align: left;
+    text-align: center;
     border: none;
     padding: 1em;
   }

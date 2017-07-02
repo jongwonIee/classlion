@@ -121,24 +121,22 @@
 #content {
     background: rgba(89, 88, 88, 0.03);
     min-height: 100%;
-    // margin-bottom: -100px;
 }
 
 #foot{
-    // margin-top: 50px;
     height: 100px;
     width: 100%;
     display: inline-block;
     border-top: 1px solid #dce0e0;
     text-align: center;
-
-    /*임시 css*/
-    // background-color: black;
 }
 
 .foot_top {
     margin-top: 20px;
     font-size: 14px;
+    ul {
+        -webkit-padding-start: 0px !important;
+    }
 }
 
 .foot_top > ul > li {
@@ -153,9 +151,17 @@
 .foot_middle > ul > li {
     margin: 0px 6px 0px 6px;
 }
+
 .foot_bottom {
     margin-bottom: 20px;
     font-size: 12px;
+}
+
+.foot_lang {
+    margin-top: 6px;
+    a {
+        color: #292B2C;
+    }
 }
 
 /*all end*/
@@ -1465,7 +1471,7 @@ ul.tab li img {
 
 .bubble_top_right {
     float: right;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: -0.3px;
 }
 
@@ -1689,6 +1695,11 @@ ul.tab li img {
     }
 }
 
+.comment_box {
+    color: #484848;
+    font-size: 15px;
+    line-height: 25px;
+}
 /*리뷰 write page end*/
 
 /*wiki page start*/
@@ -1934,13 +1945,8 @@ ul.tab li img {
 /*my page layout end*/
 
 /*my info start*/
-#my_info {
-    text-align: center;
-    width: 100%;
-}
-
 .info_container {
-    width: 900px;
+    width: 850px;
     margin: 0 auto;
     padding: 0 5px;
     padding-top: 120px;
@@ -1955,15 +1961,15 @@ ul.tab li img {
     }
 }
 
-.myinfo_div {
+.info_div {
     min-height: 403px;
     box-sizing: border-box;
     background: #fff;
-    border: none;
-    border-radius: 6px;
     padding: 25px;
     font-size: 14px;
-    box-shadow: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    border-radius: 3px;
 }
 
 .info_head {
@@ -2045,7 +2051,7 @@ ul.tab li img {
 .input_edit{
     padding: 0px 8px;
     margin-bottom: 4px;
-    width: 100%;
+    width: 150%;
     text-align: center;
     border-radius: 4px;
     border: none;
@@ -2080,6 +2086,12 @@ ul.tab li img {
     line-height: 30px;
 }
 
+@media (max-width: 768px) {
+    .info_container {
+        width: 100%;
+    }
+}
+
 /*my info end*/
 
 /*my review, reply start*/
@@ -2110,25 +2122,6 @@ ul.tab li img {
     top: -2px;
 }
 
-.my_lect_div {
-    text-align: center;
-    height: 280px;
-    img {
-        // width: 90%;
-        width: 140px;
-        display: inline-block;
-        margin: 0 auto;
-    }
-    .feed_course {
-        margin-top: 8px;
-        margin-bottom: 3px;
-    }
-    .feed_prof_major {
-        margin-left: 0px;
-        margin-bottom: 0px;
-    }
-}
-
 .no_review_div {
     margin-top: 85px;
     text-align: center;
@@ -2157,17 +2150,93 @@ ul.tab li img {
         margin: 0;
     }
 }
+
+.my_page_feed_bottom {
+    margin-top: 15px;
+}
+
+.my_page_feed {
+    width: 100%;
+    .feed_course {
+        a {
+            padding-left: 0px;
+        }
+    }
+}
 /*my review, reply end*/
 
 /*my lecture start*/
+.my_lect_div {
+    width: 100%;
+}
+
+.lecture_list {
+    min-height: 120px;
+    width: 100%;
+    margin: 10px 0px;
+    padding: 23px 25px 23px;
+    text-align: left;
+    border: 1px solid #dce0e0;
+    border-radius: 2px;
+    background: #fff;
+    font-size: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    display: inline-block;
+}
+
+.lect_name > a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #484848;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    margin-bottom: -3px;
+}
+
+.lect_name {
+    i {
+        font-size: 16px;
+        position: relative;
+    }
+}
+
+.prof_name {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.thumbs_up_count > img {
+    width: 30px;
+    margin-top: 8px;
+}
+
+.thumbs_down_count > img {
+    width: 30px;
+    margin-top: 8px;
+}
+
 .my_favorite_btn {
     padding: 0;
     .fa {
         margin-right: 0;
     }
 }
-/*my favorite end*/
 
+.my_lect_div_hr {
+    width: 25%;
+    margin: 18px 80px 0 0;
+}
+
+// @media only screen and (max-width: 1160px) {
+//     .lecture_list {
+//         min-width: 300px;
+//     }
+// }
+
+/*my lecture end*/
 /*my page end*/
 
 

@@ -1,43 +1,40 @@
 <div class="container-fluid">
   <div>
     <% @comments.each do |c,i| %>
-          <% unless i == 0 %>
-              <hr class="feed_hr">
-          <% end %>
-          <div class="feed_each">
-            <div class="row">
-              <div class="col-xs-12">
-                <p class="feed_course">
-                  <a href='/courses/<%= c.evaluation.course.id %>'><%= c.evaluation.course.lecture.name %></a>
+      <div class="feed_each">
+        <div class="row">
+          <div class="col-xs-12 my_page_feed">
+            <p class="feed_course">
+              <a href='/courses/<%= c.evaluation.course.id %>'><%= c.evaluation.course.lecture.name %></a>
+            </p>
+            <% if c.evaluation.course.is_major %>
+                <p class="feed_prof_major">
+                  <span class="lec_cate lec_major">전공</span><%= c.evaluation.course.professor.name %> 교수님
                 </p>
-                <% if c.evaluation.course.is_major %>
-                    <p class="feed_prof_major">
-                      <span class="lec_cate lec_major">전공</span><%= c.evaluation.course.professor.name %> 교수님
-                    </p>
-                <% else %>
-                    <p class="feed_prof_kyo">
-                      <span class="lec_cate lec_kyo">교양</span><%= c.evaluation.course.professor.name %> 교수님
-                    </p>
-                <% end %>
-              </div>
-  
-              <div class="col-xs-12 feed_each_div">
-                <p class="feed_content my_reply_content col-xs-12">
-                    <%= image_tag "reply_icon.svg", class: "reply_icon", alt: "reply" %>
-                    <!--수정사항 : 클릭하면, 해당 댓글이 달린 강평으로 바로 이동.댓글 열려진 상태로 바로 보여지도록-->
-                    <a href='/courses/<%= c.evaluation.course.id %>'>
-                      <%= c.body %>
-                    </a>
+            <% else %>
+                <p class="feed_prof_kyo">
+                  <span class="lec_cate lec_kyo">교양</span><%= c.evaluation.course.professor.name %> 교수님
                 </p>
-                
-                <p class="feed_etc col-xs-12">
-                  <%= c.time_ago %>
-                  <br>
-                </p>
-              </div>
-  
-            </div>
+            <% end %>
           </div>
-      <% end %>
+
+          <div class="col-xs-12 feed_each_div my_page_feed my_page_feed_bottom">
+            <p class="feed_content my_reply_content col-xs-12">
+                <%= image_tag "reply_icon.svg", class: "reply_icon", alt: "reply" %>
+                <!--수정사항 : 클릭하면, 해당 댓글이 달린 강평으로 바로 이동.댓글 열려진 상태로 바로 보여지도록-->
+                <a href='/courses/<%= c.evaluation.course.id %>'>
+                  <%= c.body %>
+                </a>
+            </p>
+            
+            <p class="feed_etc col-xs-12">
+              <%= c.time_ago %>
+              <br>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
