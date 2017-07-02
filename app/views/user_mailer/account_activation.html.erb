@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    <%= image_tag 'https://s3.ap-northeast-2.amazonaws.com/wr-classlion/logo.png'%><br>
+    <%= image_tag 'https://s3.ap-northeast-2.amazonaws.com/wr-classlion/confirm_mail_img-06.png' %>
+    <h2><%= @user.nickname %>님, 안녕하세요.</h2>
+    <p>클래스 라이언에 가입해주셔서 감사합니다.<br>
+    아래 버튼을 눌러, 이메일 인증을 해주시면 가입이 완료됩니다.<br>
+    이제 <%= Evaluation.count %>개의 강의평가는 당신의 것!</p>
+
+    <a href="<%= ENV["MAIL_HOST_WITH_PORT"] %>/activate/<%= @at.token %>">이메일 인증하기</a>
+
+    <p>love from classlion</p>
+    <p><a href="http://classlion.net">classlion.net</a></p>
+  </body>
+</html>

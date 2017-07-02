@@ -1,0 +1,29 @@
+<div id="foot">
+  <div class="foot_top">
+    <ul>
+      <li>공지사항</li>
+      <li>·</li>
+      <li>소개</li>
+      <li>·</li>
+      <li>만든사람들</li>
+      <li>·</li>
+      <li>개인정보취급방침</li>
+    </ul>
+  </div>
+
+  <div class="foot_top foot_middle">
+    <ul>
+      <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+      <li><i class="fa fa-facebook-square" aria-hidden="true"></i></li>
+    </ul>
+  </div>
+
+  <div class="foot_bottom">
+    <p>COPYRIGHT © 사단법인 멋쟁이사자처럼 ALL RIGHTS RESERVED</p>
+    <p class="foot_lang">
+        Language :
+          <%= link_to_unless_current "KOR", locale: "ko" %> |
+          <%= link_to_unless_current "ENG", locale: "en" %>
+    </p>
+  </div>
+</div>

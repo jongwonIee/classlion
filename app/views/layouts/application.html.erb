@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>Classlion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%= csrf_meta_tags %>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="<%= asset_path 'theme/bars-movie.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/bootstrap-stars.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/css-stars.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'theme/fontawesome-stars-o.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'sweetalert2.min.css' %>">
+<link rel="stylesheet" href="<%= asset_path 'nav_reset.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'nav_style.css.scss' %>">
+<link rel="stylesheet" href="<%= asset_path 'style.css.scss' %>">
+<script src="<%= asset_path 'jquery.barrating.js' %>"></script>
+<script src="<%= asset_path 'jquery.autocomplete.js' %>"></script>
+<script src="<%= asset_path 'sweetalert2.min.js' %>"></script>
+<script src="<%= asset_path 'jquery.jscroll.min.js' %>"></script>
+
+<%= stylesheet_link_tag    'application', media: 'all'  %>
+<%= javascript_include_tag 'application' %>
+</head>
+
+<body>
+<% flash.each do |name, msg| %>
+  <%= render 'flash', name: name, msg: msg %>
+<% end %>
+
+<% if logged_in? %>
+  <%= render :partial => "/layouts/header" %>
+  <div id="content">
+    <%= yield %>
+  </div>
+  <%= render :partial => "/layouts/footer" %>
+<% else %>
+  <%= yield %>
+<% end %>
+<script src="<%= asset_path 'nav/nav_jquery.menu-aim.js' %> "></script>
+<script src="<%= asset_path 'nav/nav_main.js' %> "></script>
+<script src="<%= asset_path 'nav/nav_modernizr.js' %> "></script>
+</body>
+</html>

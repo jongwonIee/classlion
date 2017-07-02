@@ -1,0 +1,12 @@
+<br><br><br><br>
+<h1>관리자 페이지 입니다.</h1>
+<h2>신고내역</h2>
+<% @reports.each do |r| %>
+  신고자<%= r.user.nickname %>
+  강의명<%= r.evaluation.course.lecture.name %>
+  교수명<%= r.evaluation.course.lecture.name %>
+  강평내용<%= r.evaluation.body %>
+  신고제목<%= r.title %>
+  신고내용<%= r.body %>
+  <hr>
+<% end %>

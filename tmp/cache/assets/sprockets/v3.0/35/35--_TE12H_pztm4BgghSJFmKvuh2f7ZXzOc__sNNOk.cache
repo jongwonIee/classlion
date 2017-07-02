@@ -1,0 +1,15 @@
+I"U(function() {
+  jQuery(function() {
+    if ($('div.flash').length) {
+      setTimeout(function() {
+        return $('div.flash').fadeOut(1000);
+      }, 1000);
+    }
+    return $(document).on('click', 'div.flash a.flash_close', function(e) {
+      e.preventDefault();
+      return $('div.flash').fadeOut(1000);
+    });
+  });
+
+}).call(this);
+:ET

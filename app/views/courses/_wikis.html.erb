@@ -1,0 +1,54 @@
+<script src="<%= asset_path 'tinymce/tinymce.min.js' %>"></script>
+<script>
+  tinymce.init({
+    selector: '#wiki_editor', 
+    theme: 'inlite',
+    insert_toolbar: 'quickimage quicktable',
+    selection_toolbar: 'bold italic | quicklink h2 h3 blockquote',
+    inline: true
+  });
+</script>
+<% wiki = @course.recent_wiki %>
+<% if wiki.nil? %>
+  <div id="wiki_editor">
+  아직 위키가 없습니다. 여기를 클릭하여 새로 만들어보세요!<br>
+  사용법 : 마우스 우클릭하면 이미지 넣을 수 있고 blah blah
+  </div>
+<% else %>
+  <div class="history_top">
+    <a href="/wiki/<%= @course.id %>/history" class="history_btn">
+      <i class="fa fa-history" aria-hidden="true"></i>히스토리
+    </a>
+  </div>
+  <div id="wiki_editor">
+    <%= wiki.body.html_safe %>
+  </div>
+<% end %>
+<a href="#" id="send_wiki_content">위키 전송</a>||
+<!--<a href="/wiki/<#%= @course.id %>/history">지난 기록 보기</a>-->
+
+<script>
+$(function(){
+  $("#send_wiki_content").on("click", function(e){
+    e.preventDefault();
+    $.ajax({
+      headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+      url: '/send_wiki', 
+      method: 'post',
+      data: {
+        course_id: <%= @course.id %>,
+        comment: "우왕굳ㅋ",
+        content: $("#wiki_editor").html()
+      },
+      dataType: "json",
+      success: function(e){
+        alert("저장되었습니다.");
+      },
+      error: function(e){
+        alert("실패하였습니다.");
+      }
+    });
+  });
+});
+
+</script>

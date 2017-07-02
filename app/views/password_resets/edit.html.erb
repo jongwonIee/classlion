@@ -1,0 +1,38 @@
+<%# 비밀번호 재설정 %>
+<div class="main_container">
+  <div class="outer">
+    <div class="inner">
+      <div class="centered main_center">
+
+        <p class="logo">비밀번호 재설정</p>
+        <p class="main_msg">새로 설정하실 비빌번호를 입력해주세요.</p>
+
+        <%= form_for(@user, url: password_reset_path(params[:id])) do |f|%>
+            <%# 이거 보안상 수정해야할 듯%>
+            <%= render 'shared/error_messages' %>
+            <%= hidden_field_tag :email, @user.email %>
+
+            <div class="input_group login_input email_input fit_div">
+              <div class="full_input input_div">
+                <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호(8자~32자)", maxlength: 32%>
+              </div>
+            </div>
+
+            <div class="input_group login_input fit_div">
+              <div class="join_gp">
+                <div class="input_div">
+                  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호 확인(8~32자)",  maxlength: 32 %>
+                </div>
+                <div class="check_div">
+                  <span class="error" id="password_confirmation_error"></span>
+                </div>
+              </div>
+            </div>
+            <p class="error" id="password_validate"></p>
+
+            <%= f.submit "비밀번호 재설정", class: "login_btn", id: "login_btn"%><br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

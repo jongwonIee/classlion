@@ -1,0 +1,168 @@
+<div class="info_container">
+  <div class="info_content clearfix">
+    <div class="info_div">
+      <div class="info_form">
+        <h2 class="info_head">계정 설정</h2>
+          <div class="nickname_group setting_group">
+            <div class="group_title">
+              <div class="info_title">닉네임</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content 1_nick">
+                <div class="edit_value">
+                <%= @current_user.nickname %>
+                </div>
+                <i class="fa fa-pencil" aria-hidden="true" onclick="edit_open('nick');"></i>
+              </div>
+              <div class="edit_content 2_nick" style="display: none;">
+                <%= form_for(@current_user) do |f| %>
+                  <%= f.hidden_field :email, value: @current_user.email %>
+                <div class="edit_value">
+                  <%= f.text_field :nickname, placeholder: "새 닉네임(8자 이내)", class: "input_edit" %>
+                </div>
+                <div class="button_group">
+                  <button class="edit_cancel_btn" onclick="edit_close('nick')" type="button">
+                    <span class="label">취소</span>
+                  </button>
+                  <button class="edit_save_btn" type="submit">
+                    <span class="label">저장</span>
+                  </button>
+                </div>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="email_group setting_group">
+            <div class="group_title">
+              <div class="info_title">이메일</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.email %>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+          <div class="password_group setting_group">
+            <div class="group_title">
+              <div class="info_title">비밀번호</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content 1_pw">
+                <div class="edit_value">
+                  ●●●●●●●●
+                </div>
+                <i class="fa fa-pencil pencil_pw" aria-hidden="true" onclick="edit_open('pw');"></i>
+              </div>
+              
+              <div class="edit_content 2_pw" style="display: none;">
+                <%= form_for(@current_user) do |f| %>
+                  <%= f.hidden_field :email, value: @current_user.email %>
+                  <%#= f.hidden_field :password, value: @current_user.password %>
+                  <div class="edit_value">
+                    <%= f.password_field :password, placeholder: "현재 비밀번호", class: "input_edit" %>
+                    <%= f.password_field :password, placeholder: "새 비밀번호", class: "input_edit" %>
+                    <%= f.password_field :password, placeholder: "새 비밀번호 확인", class: "input_edit" %>
+                  </div>
+                  <div class="edit_btns edit_btns_nickname">
+                    <button class="edit_cancel_btn" onclick="edit_close('pw')" type="button">
+                      <span class="label">취소</span>
+                    </button>
+                    <button class="edit_save_btn" type="submit">
+                      <span class="label">저장</span>
+                    </button>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="sex_group setting_group">
+            <div class="group_title">
+              <div class="info_title">성별</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <% if :is_boy === true %>
+                  남자
+                  <% else %>
+                  여자
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="confirm_group setting_group">
+            <div class="group_title">
+              <div class="info_title">인증여부</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.activated %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="review_group setting_group">
+            <div class="group_title">
+              <div class="info_title">강의평가 권한</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.activated %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wiki_group setting_group_last">
+            <div class="group_title">
+              <div class="info_title">위키열람 권한</div>
+            </div>
+            <div class="group_content">
+              <div class="edit_content_div">
+                <div class="edit_value">
+                  <%= @current_user.activated %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<%#= f.submit "변경사항 저장하기" %>
+<%# end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //수정하기
+  function edit_open(editData) {
+    $(".1_"+editData).toggle();
+    $(".2_"+editData).toggle(250);
+    
+    //추후 수정 필요. 임시
+    $(".edit_title").css("color", "#DBDBDB");
+    $(".title_"+editData).css("color", "#484848");
+    $(".edit_value").css("color", "#DBDBDB");
+  }
+  
+  //수정 취소
+  function edit_close(editData) {
+    $(".2_"+editData).toggle(250);
+    $(".1_"+editData).toggle(10);
+    
+    //추후 수정 필요. 임시
+    $(".edit_title").css("color", "#484848");
+    $(".edit_value").css("color", "#484848");
+  }
+  
+</script>

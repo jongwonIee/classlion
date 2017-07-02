@@ -1,0 +1,287 @@
+<div class="index_container course_show_index">
+  <div class="container-fluid">
+    <div class="course_top">
+      <div class="course_info_div">
+        <div class="info_right_1">
+          <div>
+            <span class="info_course">
+              <%= @course.lecture.name %>
+              <% if @current_user %>
+                <%= hidden_field_tag 'c_id', @course.id %>
+                <% if Favorite.exists?(course_id: @course.id, user_id: @current_user.id) %>
+                  <%= button_tag class: 'favorite_btn', id: 'favorite_delete_btn' do %>
+                    <i class="fa fa-heart favorite" aria-hidden="true"></i>
+                  <% end %>
+                <% else %>
+                  <%= button_tag class: 'favorite_btn', id: 'favorite_add_btn' do %>
+                    <i class="fa fa-heart not_favorite" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </span>
+            <% if @course.is_major == true %>
+              <span class="info_prof">
+                <span class="lec_cate"><%= t "course.major" %></span><%= @course.professor.name %> <%= t "course.professor" %>
+              </span>
+            <% else %>
+              <span class="info_prof">
+                <span class="lec_cate"><%= t "course.general" %></span><%= @course.professor.name %> <%= t "course.professor" %>
+              </span>
+            <% end %>
+          </div>
+        </div><%#////info_right_1%>
+
+        <div class="info_right_2">
+          <hr class="info_hr">
+          <div class="info_p_div">
+            <p class="info_1">
+              <span class="info_title">학점</span> <%= @course.lecture.unit %><%= t "course.credit" %>
+            </p>
+            <p class="info_2">
+              <span class="info_title"><%= (t"course.identical") %></span>
+              <% if !@identical_courses.present? %>
+                  <%= (t"course.identical") %><%= t "course.is_null" %>
+              <% else %>
+                  <% @other_course = [] %>
+                  <% @identical_courses.each do |id| %>
+                      <% @other_course << Course.find(id) %>
+                  <% end %>
+                  <%= select_tag 'identical', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [(t"course.choose"),(t"course.choose")])), selected: (t"course.choose"), onchange: "window.location.replace('/courses/'+this.value);" %>
+              <% end %>
+            </p>
+            <p class="info_3">
+              <span class="info_title"><%= (t"course.related") %></span>
+              <% if !@related_courses.present? %>
+                  <%= (t"course.related") %><%= t "course.is_null" %>
+              <% else %>
+                  <% @other_course = [] %>
+                  <% @related_courses.each do |id| %>
+                      <% @other_course << Course.find(id) %>
+                  <% end %>
+                  <%= select_tag 'related', options_for_select(  @other_course.collect{ |u| [u.lecture.name+"("+u.professor.name+")", u.id] }.insert(0, [(t"course.choose"),(t"course.choose")])  ), selected: (t"course.choose"), onchange: "window.location.replace('/courses/'+this.value);" %>
+              <% end %>
+            </p>
+          </div><%#////info_p_div%>
+        </div><%#////info_right_2%>
+      </div><%#////course_info_div%>
+    </div><%#////course_top %>
+
+    <div class="course_score">
+      <% if @course.evaluations.exists? %>
+        <!--<button onclick="moveBar(20, 80)">Click Me</button> <br> -->
+        
+        <div class="bar_bg">
+          <div id="bar_left" class="review_bar"></div>
+          <div id="bar_right" class="review_bar"></div>
+        </div>
+        <div class="bar_comment"><%= @like_count %><%= t "course.like_total" %></div>
+        
+      <% else %>
+        <%= render "no_evaluations" %>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="container-fluid">  
+    <div class="tab_div">
+      <div class="tab_menu">
+      <ul class="tab">
+        <li>
+          <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openTab(event, 'wiki');" id="defaultOpen">
+            <%= image_tag "/assets/wiki_on.svg", class: "tab_img", alt: "wiki"%>
+            <%= t "course.wiki" %>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="review_tab tablinks" onclick="openTab(event, 'review');">
+            <%= image_tag "/assets/review_on.svg", class: "tab_img", alt: "review" %>
+            <%= t "course.evaluations" %>
+          </a>
+        </li>
+        <li id="filter" class="filter">
+          <% if @current_user.has_role?('evaluator') %>
+            <%# TODO partial refresh needed %>
+            <%= form_tag do %>
+                <%= select_tag 'order', options_for_select({(t "course.filter.by_date") => 1, (t "course.filter.by_like") => 2, (t "course.filter.by_dislike") => 3}, @params), onchange: "$('#order').submit();" %>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+      </div>
+
+      <div id="wiki" class="tabcontent">
+      <% if @current_user.has_role?('wikier') %>
+        <%= render "wikis" %>
+      <% else %>
+            <br>위키 열람 권한을 획득해주세요..(blurred img)
+      <% end %>
+      </div>
+      
+      <div id="review" class="tabcontent">
+        <% if @evaluated_list.include?(@course.id) %>
+
+          <span class="before_like_btn"><%= (t "form.evaluated") %></span>
+        <% else %>
+          <%= render 'like_form' %>
+          <%= render 'form' %>
+        <% end %>
+
+        <% if @current_user.has_role?('evaluator') && (@course.evaluations.count > 0) %>
+            <%= render 'evaluations' %>
+        <% else %>
+            <br>
+            강평 열람 권한을 획득해주세요..(blurred img)
+            <%# 내가 쓴 강의평 %>
+            <%= render 'evaluations' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+// $(document).ready(function() {
+//   $('select').niceSelect();
+// });
+
+  <%# 관심강의 제거 %>
+  $(document).on("click","#favorite_delete_btn",function() {
+    var course_id = $('#c_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/favorites_delete',
+      data: {c_id: course_id},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.favorite_btn i').addClass('not_favorite');
+          $('.favorite_btn i').removeClass('favorite');
+          $('.favorite_btn').attr("id", "favorite_add_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+  <%# 관심강의 추가 %>
+  $(document).on("click","#favorite_add_btn",function() {
+    var course_id = $('#c_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/favorites_add',
+      data: {c_id: course_id},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.favorite_btn i').addClass('favorite');
+          $('.favorite_btn i').removeClass('not_favorite');
+          $('.favorite_btn').attr("id", "favorite_delete_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+
+  function hideTarget(target) {
+    tar = document.getElementById(target);
+    tar.className += " hide";
+  }
+  
+  function showTarget(target) {
+    tar = document.getElementById(target)
+    tar.className = tar.className.replace(" hide", "");
+  }
+  
+  //tab start//
+  function openTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // for image change
+    var wiki_on = '/assets/wiki_on.svg';
+    var wiki_off = '/assets/wiki_off.svg';
+
+    var review_on = '/assets/review_on.svg';
+    var review_off = '/assets/review_off.svg';
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
+    }
+    tablinks[0].children[0].src = wiki_off;
+    tablinks[1].children[0].src = review_off;
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    evt.currentTarget.parentNode.className += " active_li";
+
+    if (evt.currentTarget.className.match('review_tab')) {
+      evt.currentTarget.children[0].src = review_on;
+      showTarget("filter");
+      // hideTarget("history");
+    }
+    else {
+      evt.currentTarget.children[0].src = wiki_on;
+      hideTarget("filter");
+      // showTarget("history");
+    };
+  }
+  //change tab img end//
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  //tab end//
+  
+  //bar graph//
+  function moveBar(left_per, right_per) {
+    var left = document.getElementById("bar_left");   
+    var right = document.getElementById("bar_right");   
+    var left_width = 0; //default width set 
+    var right_width = 0; //default width set 
+    var left_time = setInterval(left_frame, 10); 
+    var right_time = setInterval(right_frame, 10); 
+    
+    // .animate({marginTop:  '50px'  }, 1000, 'easeOutBounce')
+
+    function left_frame() {
+      if (left_width >= left_per) {
+        clearInterval(left_time);
+      } else {
+        left_width++; 
+        left.style.width = left_width + '%'; 
+        left.innerHTML = left_width * 1  + '%&nbsp;&nbsp;&nbsp;';
+      }
+    }
+    function right_frame() {
+      if (right_width >= right_per) {
+        clearInterval(right_time);
+      } else {
+        right_width++; 
+        right.style.width = right_width + '%'; 
+        right.innerHTML = '&nbsp;&nbsp;&nbsp;' + right_width * 1  + '%';
+      }
+    }
+  }
+  
+  moveBar(<%= @like_per %>, <%= @dislike_per %>);
+  //bar graph end//
+</script>

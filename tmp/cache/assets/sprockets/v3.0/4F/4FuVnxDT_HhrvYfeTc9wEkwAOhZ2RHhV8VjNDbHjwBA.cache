@@ -1,0 +1,9 @@
+I"­(function() {
+  $(document).ready(function() {
+    return $("select#order").change(function() {
+      return $(this).closest("form").submit();
+    });
+  });
+
+}).call(this);
+:ET

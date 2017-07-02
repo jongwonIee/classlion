@@ -1,0 +1,63 @@
+<% since_id = 1 %>
+<% @evaluations.each_with_index do |e, i| %>
+  <% if e.like.is_like %> <div class="feed_each"> <% else %> <div class="feed_each feed_each_dislike"> <% end %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 feed_each_div">
+        <div class="col-xs-12">
+          <p class="feed_course">
+            <% if e.like.is_like %>
+              <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
+            <% else %>
+              <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_down"%>
+            <% end %>
+            <a href='/courses/<%= e.course.id %>'>
+              <%= e.course.lecture.name %>(<%= e.course.professor.name %> <%= (I18n.t 'course.professor') %>)
+            </a>
+          </p>
+        </div>
+
+        <p class="feed_content col-xs-12">
+          <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
+        </p>
+
+        <div class="feed_etc col-xs-12">
+          <p class="feed_etc_left">
+            <%= e.time_ago %>
+            &nbsp;·&nbsp;
+            <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
+          </p>
+          <p class="feed_etc_right">
+            <span>작성자</span> <%= e.user.nickname %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+  <%# report modal form begin %>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p class="modal-title"><%= (I18n.t 'evaluation.report') %></p>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <%= form_for Report.new do |f| %>
+              <%= f.hidden_field :evaluation_id, value: e.id %>
+              <%= f.text_area :body, placeholder: (I18n.t "report.placeholder" ), rows: 8, class: "write_comment_box report_box" %>
+              <%= f.submit (I18n.t "report.submit_button"), class: "review_write_btn report_write_btn" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# report modal form end %>
+    
+  <% since_id = e.id %>
+<% end %>
+</div>
+
+<% if @evaluations.count > 0 %>
+  <a href="/recent_evaluations?since=<%= since_id %>" class="next_content"></a>
+<% end %>

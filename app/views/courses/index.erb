@@ -1,0 +1,42 @@
+<div class="index_container">
+  <div class="container">
+    <div>
+      <% if @courses.empty? %>
+        <%= t "course.no_search_result" %>
+        (image)<%# TODO %>
+      <% else %>
+        <table class="search_tbl">
+        <p class="search_sen1"><span class="search_keyword"></span><%= t( 'course.search_result', search_param: @search_param ) %></p>
+        <p class="search_sen2"><%= t( 'course.search_count', search_count: @courses.count) %></p>
+          <thead>
+            <tr>
+              <th><%= t "course.subject_name" %></th>
+              <th><%= t "course.professor_name" %></th>
+            </tr>
+          </thead>
+          <% @courses.each do |c| %>
+          <tbody>
+              <tr data-href='/courses/<%= c.id %>' style="cursor: pointer;">
+                <td>
+                  <% if c.is_major %>
+                    <span class="lec_cate lec_major"><%= t "course.major" %></span>
+                  <% else %>
+                    <span class="lec_cate lec_kyo"><%= t "course.general" %></span>
+                  <% end %>
+                  <%= c.lecture.name %>
+                </td>
+                <td><%= c.professor.name %></td>
+              </tr>
+          </tbody>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('tr[data-href]').on("click", function() {
+  document.location = $(this).data('href');
+  });
+</script>

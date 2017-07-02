@@ -1,0 +1,42 @@
+<div class="main_container">
+  <div class="outer">
+    <div class="inner">
+      <div class="centered main_center">
+        <img src="/assets/mail_icon.svg" class="mail_icon" alt="mail">
+
+        <div class="mail_div">
+          <p class="mail_p1">
+            <span class="mail_to"></span>
+            <%= (I18n.t 'user.p1', email: @email).gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+          </p>
+          <p class="mail_p2">
+            <%= (I18n.t 'user.p2').gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+          </p>
+            <%= (I18n.t 'user.p3').gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+          <p class="mail_p3">
+
+          </p>
+        </div>
+      </div>
+      <br>
+      <div class="centered main_center fit_div">
+        <p class="logo fit_logo">CLASSLION</p>
+        <a href="/retry_activation"><button type="button" class="login_btn mail_btn">인증메일 재발송</button></a><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  <%# 로고 숨기고 로고만큼 넓이 맞추기 위한 jquery %>
+  function setwidth() {
+    var fit_logo = $(".fit_logo");
+    var fit_div = $(".fit_div");
+    var fitwidth = fit_div.outerwidth();
+    fit_div.css({ width: fitwidth });
+    fit_logo.css({ display: "none" });
+  }
+
+  setwidth();
+
+</script>

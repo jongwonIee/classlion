@@ -1,0 +1,244 @@
+<% if @current_user %>
+  <span class="before_like_btn"><%= (t "like_form.i") %></span>
+  <%= hidden_field_tag 'c_id', @course.id %>
+  <%# 좋아요가 아예 없는 경우, 좋아요 %>
+  <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
+    <%= button_tag class: 'like_btn grey_like_btn', id: 'like_create_btn' do %>
+      <img src="/assets/thumbs_up_ox.svg">
+      <%= t "like_form.like" %>
+      <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
+    <% end %>
+
+  <%# 좋아요가 눌린 경우 %>
+  <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == true %>
+    <%= button_tag class: 'like_btn', id: 'like_delete_btn' do %>
+        <img src="/assets/thumbs_up_ox.svg">
+        <%= t "like_form.like" %>
+        <!--<i class="fa fa-heart favorite" aria-hidden="true"></i>-->
+    <% end %>
+
+  <%# 싫어요가 눌린 경우 %>
+  <% else %>
+      <%= button_tag class: 'like_btn grey_like_btn', id: 'like_create_dislike_delete_btn' do %>
+          <img src="/assets/thumbs_up_ox.svg">
+          <%= t "like_form.like" %>
+          <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
+      <% end %>
+  <% end %>
+<% end %>
+
+<% if @current_user %>
+    <%= hidden_field_tag 'c_id', @course.id %>
+    <%# 좋아요가 아예 없는 경우, 싫어요 %>
+    <% if !(Like.exists?(course_id: @course.id, user_id: @current_user.id)) %>
+        <%= button_tag class: 'dislike_btn grey_dislike_btn', id: 'dislike_create_btn' do %>
+            <img src="/assets/thumbs_down_ox.svg">
+            <%= t "like_form.dislike" %>
+            <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
+        <% end %>
+        
+    <%# 싫어요가 눌린 경우 %>
+    <% elsif (Like.find_by(course_id: @course.id, user_id: @current_user.id)).is_like == false %>
+        <%= button_tag class: 'dislike_btn', id: 'dislike_delete_btn' do %>
+            <img src="/assets/thumbs_down_ox.svg">
+            <%= t "like_form.dislike" %>
+            <!--<i class="fa fa-heart favorite" aria-hidden="true"></i>-->
+        <% end %>
+        
+    <%# 좋아요가 눌린 경우 %>
+    <% else %>
+        <%= button_tag class: 'dislike_btn grey_dislike_btn', id: 'dislike_create_like_delete_btn' do %>
+          <img src="/assets/thumbs_down_ox.svg">
+          <%= t "like_form.dislike" %>
+          <!--<i class="fa fa-heart not_favorite" aria-hidden="true"></i>-->
+        <% end %>
+    <% end %>
+<% end %>
+
+<script>
+  <%# 좋아요 생성 %>
+  $(document).on("click","#like_create_btn",function() {
+    
+    var $target = $('#new_evaluation');
+
+    function slide() {
+      $target.slideToggle(500, function () {
+        $target.is(':visible') ? 'Hide' : 'Show';
+      });
+    }
+
+    var course_id = $('#c_id').val();
+    var boolean = $('#boolean').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/is_like_create',
+      data: {c_id: course_id, boolean: true},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.like_btn').removeClass('grey_like_btn');
+          $('.like_btn').attr("id", "like_delete_btn");
+          $('.dislike_btn').attr("id", "dislike_create_like_delete_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+
+    slide();
+  });
+  <%# 좋아요 취소 %>
+  $(document).on("click","#like_delete_btn",function() {
+
+    var $target = $('#new_evaluation');
+
+    function slide() {
+      $target.slideToggle(500, function () {
+        $target.is(':visible') ? 'Hide' : 'Show';
+      });
+    }
+
+    var course_id = $('#c_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/is_like_delete',
+      data: {c_id: course_id},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.like_btn').addClass('grey_like_btn');
+          $('.like_btn').attr("id", "like_create_btn");
+          $('.dislike_btn').attr("id", "dislike_create_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+
+    slide();
+  });
+
+  <%# 좋아요 생성하면서 싫어요 취소 %>
+  $(document).on("click","#like_create_dislike_delete_btn",function() {
+    var course_id = $('#c_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/is_like_update',
+      data: {c_id: course_id, boolean: true},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.dislike_btn').addClass('grey_dislike_btn');
+          $('.like_btn').removeClass('grey_like_btn');
+          $('.like_btn').attr("id", "like_delete_btn");
+          $('.dislike_btn').attr("id", "dislike_create_like_delete_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+
+
+  <%# 싫어요 생성 %>
+  $(document).on("click","#dislike_create_btn",function() {
+
+    var $target = $('#new_evaluation');
+
+    function slide() {
+      $target.slideToggle(500, function () {
+        $target.is(':visible') ? 'Hide' : 'Show';
+      });
+    }
+
+    var course_id = $('#c_id').val();
+    var boolean = $('#boolean').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/is_like_create',
+      data: {c_id: course_id, boolean: false},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.dislike_btn').removeClass('grey_dislike_btn');
+          $('.dislike_btn').attr("id", "dislike_delete_btn");
+          $('.like_btn').attr("id", "like_create_dislike_delete_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+
+    slide();
+  });
+
+  <%# 싫어요 취소 %>
+  $(document).on("click","#dislike_delete_btn",function() {
+
+    var $target = $('#new_evaluation');
+
+    function slide() {
+      $target.slideToggle(500, function () {
+        $target.is(':visible') ? 'Hide' : 'Show';
+      });
+    }
+
+    var course_id = $('#c_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/is_like_delete',
+      data: {c_id: course_id},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.dislike_btn').addClass('grey_dislike_btn');
+          $('.dislike_btn').attr("id", "dislike_create_btn");
+          $('.like_btn').attr("id", "like_create_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+
+    slide();
+  });
+
+  <%# 싫어요 생성하면서 좋아요 취소 %>
+  $(document).on("click","#dislike_create_like_delete_btn",function() {
+    var course_id = $('#c_id').val();
+    $.ajax({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      method: "POST",
+      url: '/users/is_like_update',
+      data: {c_id: course_id, boolean: false},
+      dataType: "json",
+      success: function ( result) {
+        if(result.msg === "ok"){
+          $('.like_btn').addClass('grey_like_btn');
+          $('.dislike_btn').removeClass('grey_dislike_btn');
+          $('.dislike_btn').attr("id", "dislike_delete_btn");
+          $('.like_btn').attr("id", "like_create_dislike_delete_btn");
+        }else if(result.msg === "error"){
+          console.log(result.msg);
+        }
+      }
+    });
+  });
+</script>

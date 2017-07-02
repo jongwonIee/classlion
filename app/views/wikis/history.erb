@@ -1,0 +1,181 @@
+<div class="index_container course_show_index">
+  <div class="container-fluid">
+    <div class="course_top wiki_top">
+      <div class="course_info_div">
+        <div>
+          <span class="info_course">
+            <%= @course.lecture.name %>
+            <% if @course.is_major == true %>
+              <span class="info_prof wiki_prof">
+                <span class="lec_cate">전공</span><%= @course.professor.name %> 교수
+              </span>
+            <% else %>
+              <span class="info_prof wiki_prof">
+                <span class="lec_cate">교양</span><%= @course.professor.name %> 교수
+              </span>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid">  
+    <div class="tab_div">
+      <div class="tab_menu wiki_tab_menu">
+      <ul class="tab">
+        <li>
+          <a href="javascript:void(0)" class="wiki_tab tablinks" onclick="openTab(event, 'wiki_history');" id="defaultOpen">
+            히스토리
+          </a>
+        </li>
+        <!--<li>-->
+        <!--  <a href="javascript:void(0)" class="review_tab tablinks" onclick="openTab(event, 'compare');">-->
+        <!--    수정비교-->
+        <!--  </a>-->
+        <!--</li>-->
+        <!--<li class="filter tab_move">-->
+        <!--  <a href="/courses/<%= @course.id %>">-->
+        <!--    최신판/편집하기 <i class="fa fa-angle-right" aria-hidden="true"></i>-->
+        <!--  </a>-->
+        <!--</li>-->
+      </ul>
+      </div>
+
+      <div id="wiki_history" class="tabcontent">
+        <div>
+          <div class="history_top">
+          <!--<span class="history_show_title">6판(몇판인지 써주는 백엔드 처리 필요)</span>-->
+          
+          <a href="/courses/<%= @course.id %>" class="history_btn ">
+            <i class="fa fa-pencil" aria-hidden="true"></i>편집
+          </a>
+        </div>
+        
+          <% if @wiki_history.size > 1 %>
+            <a href="#" id="diff_revisions">선택된 리비전 비교하기</a>
+          <% end %>
+            
+          <ul class="history_ul">
+          <% @wiki_history.each do |w| %>
+            <li class="history_list">
+              <%= w.created_at %>
+                            
+              <span class="history_go">              
+              (
+              <a href="/wiki/<%= w.course_id %>/show/<%= w.revision %>">보기</a>
+              |
+              <a href="/wiki/<%= w.course_id %>/rollback/<%= w.revision %>">이 리비전으로 돌리기</a>
+              |
+              <a href="/wiki/<%= w.course_id %>/diff/<%= w.revision%>/<%= w.course.recent_wiki.revision %>">바뀐점</a>
+              )
+              </span>
+  
+              <% if @wiki_history.size > 1 %>
+              <input type="radio" class="revision_left" id="revision_left_<%= w.revision %>" name="left" value="<%= w.revision %>">
+              <label for="revision_left_<%= w.revision %>" class="revision_label" id="label_left_<%= w.revision %>" ></label>
+              
+              <input type="radio" class="revision_right" id="revision_right_<%= w.revision %>" name="right" value="<%= w.revision %>">
+              <label for="revision_right_<%= w.revision %>" class="revision_label" id="label_right_<%= w.revision %>"></label>
+              <% end %>
+           
+              <%= w.revision %>
+              (<%= w.user.nickname %>)
+              <%= w.comment %>
+              
+              <% if w.rollback >= 0 %>
+              <span>Roll back from <%= w.rollback%><span>
+              <% end %>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  function hideTarget(target) {
+    tar = document.getElementById(target);
+    tar.className += " hide";
+  }
+  
+  function showTarget(target) {
+    tar = document.getElementById(target)
+    tar.className = tar.className.replace(" hide", "");
+  }
+  
+  //tab start//
+  function openTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    evt.currentTarget.parentNode.className += " active_li";
+  }
+  //change tab img end//
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  //tab end//
+
+  $(function(){
+    <% if @wiki_history.size > 1 %>
+    $("#diff_revisions").on("click touchstart", function(){
+      window.location.replace("/wiki/<%= params[:id] %>/diff/" + $("input[name='left']:checked").val() + "/" + $("input[name='right']:checked").val());
+    });
+    function left_flush(left_number){
+      $(".revision_left").each(function() {
+      var label = $("label[for='"+$(this).attr('id')+"']");
+        if(parseInt($(this).val()) >= left_number){
+          // $(this).css("visibility", "hidden");
+          label.css("visibility", "hidden");
+        }else{
+          // $(this).css("visibility", "visible");
+          label.css("visibility", "visible");
+        }
+      });
+    }
+    function right_flush(right_number){
+      $(".revision_right").each(function() {
+              var label = $("label[for='"+$(this).attr('id')+"']");
+        if(parseInt($(this).val()) <= right_number){
+          label.css("visibility", "hidden");
+        }else{
+          label.css("visibility", "visible");
+        }
+      });
+    }
+    $(".revision_right").on("click touchstart", function(){
+      left_flush(parseInt($(this).val()));
+    });
+    $(".revision_left").on("click touchstart", function(){
+      right_flush(parseInt($(this).val()));
+    });
+  
+    $("#revision_left_" + <%= @wiki_history.first.revision - 1 %>).attr('checked', 'checked');
+    $("#revision_right_" + <%= @wiki_history.first.revision %>).attr('checked', 'checked');
+  
+    left_flush(<%= @wiki_history.first.revision %>);
+    right_flush(<%= @wiki_history.first.revision - 1 %>);
+    <% end %>
+  });
+</script>

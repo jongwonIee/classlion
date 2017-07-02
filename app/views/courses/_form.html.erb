@@ -1,0 +1,89 @@
+<div>
+  <%= form_for @evaluation, html: {novalidate: 'novalidate'} do |f| %>
+      <div class="score_bar write_comment_div">
+        <%= f.hidden_field :course_id, value: @course.id %>
+        <%= f.text_area :body, minlength: @minimum_length, placeholder: (t "form.placeholder" ), rows: 8, class: "write_comment_box" %>
+        <br>
+        <span id="body_counter" data-minimum-length="<%= @minimum_length %>"></span><br>
+
+        <%= f.submit (t "form.submit_button"), class: "review_write_btn" %>
+      </div>
+  <% end %>
+</div>
+
+<%# form render %>
+<script>
+  $(document).ready(function() {
+
+    function form_initial_setting() {
+      var $target = $('#new_evaluation');
+      {
+        $target.slideToggle(500, function () {
+          $target.is(':visible') ? 'Hide' : 'Show';
+        })
+      }
+    }
+
+    var bool = <%= @like_exists %>
+    if (bool) {
+      console.log(bool);
+      console.log("nothing happens");
+    }else{
+      form_initial_setting();
+      console.log(bool);
+      console.log("form is hidden");
+    }
+  })
+</script>
+<%# 워드 카운터 %>
+<script>
+  $(document).ready(function() {
+    body_validation();
+    function body_validation() {
+      var body = $("#evaluation_body");
+      var body_counter     = $("#body_counter");
+      var min_length  = body_counter.data("minimum-length");
+
+      if ((body.val().replace(/ /g,'').length) >= min_length){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    $('#new_evaluation').submit(function(){
+      if(body_validation()){
+        console.log('true');
+        return true;
+      }else{
+        console.log('false');
+        return false;
+      }
+    });
+
+    $('#new_evaluation').submit(function() {
+      show_body_validation();
+    });
+
+    function show_body_validation() {
+      var body = $("#evaluation_body");
+      var body_counter     = $("#body_counter");
+      var min_length  = body_counter.data("minimum-length");
+      if(body_validation()){
+        body_counter.text("");
+      }else{
+        body_counter.text("<%= t "form.lack_word" %>");
+      }
+      body.keyup(function() {
+        var current_length = $(this).val().replace(/ /g, '').length
+        var left_length = min_length - current_length
+        if(body_validation()) {
+          body_counter.text("<%= t "form.complete" %>");
+        }else{
+          body_counter.text(current_length + '/' + min_length + ' ' + left_length + "<%= t "form.left_word" %>");
+        }
+      });
+    }
+
+  });
+</script>

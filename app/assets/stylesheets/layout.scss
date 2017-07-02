@@ -1,0 +1,37 @@
+.flash {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  min-height: 55px;
+  text-align: center;
+  z-index: 2147483647;
+  background:  #262626;
+
+  span {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 18px;
+    line-height: 27px;
+    color: #fff;
+  }
+
+  a.flash_close {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 18px;
+    line-height: 27px;
+    color: #999999;
+  }
+}
+
+.flash.notice {
+  span { color: #f2f2f2; }
+}
+
+.flash.warning {
+  span { color: #ff5a5f; }
+}
+
+.flash.success {
+  span { color: #27b5af; }
+}

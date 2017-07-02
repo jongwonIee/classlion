@@ -1,0 +1,149 @@
+<div class="index_container course_show_index my_page">
+  <div class="container-fluid">
+    <div class="course_top my_page_top">
+        <div class="course_info_div my_page_top_div">
+          <div class="my_page_top_info">
+            <%= image_tag "/assets/lion_1.svg", class: "my_page_lion", alt: "lion"%><br>
+            <p class="my_page_name">
+              <%= @current_user.nickname %>
+            <a href="/mypage/info">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            </a>
+            </p>
+            <hr class="info_hr my_page_hr">
+            <div class="my_page_top_icons">
+              <ul>
+                <li>
+                  <span><%= @current_user.university.local_name %></span>
+                </li>
+                <li>
+                  포인트
+                  <span><%= @current_user.point %></span>
+                </li>
+                <li>
+                  강의평가
+                  <span><%= @current_user.evaluations.count %></span>
+                </li>
+                <li>
+                  댓글
+                  <span><%= @current_user.comments.count %></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <div class="container-fluid">  
+    <div class="tab_div">
+      <div class="my_page_tab_menu">
+      <ul class="tab">
+        <li>
+  	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_review')" id="defaultOpen">
+  	  		  내가 쓴 강의평가
+  	    	</a>
+  	    </li>
+  	    <li>
+  	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_reply')">
+  	    		내가 쓴 댓글
+  	  	  </a>
+  	    </li>
+  	    <li>
+  	  	  <a href="javascript:void(0)" class="mypage_tab_1 tablinks" onclick="openTab(event, 'my_lecture')">
+  	  		  관심강의
+  	  	  </a>
+  	    </li>
+      </ul>
+      </div>
+
+      <div id="my_review" class="tabcontent">
+    	  <%#프론트 확인 위해 임시로 둘다 열어놓음%>
+        <% if @evaluations.empty? %>
+    	    <%= render "no_review" %>
+        <% else %>
+    	    <%= render "my_review" %>
+        <% end %>
+    	</div>
+    	
+    	<div id="my_reply" class="tabcontent">
+        <% if @comments.nil? %>
+          <%= render "no_reply" %>
+        <% else %>
+          <%= render "my_reply" %>
+        <% end %>
+    	</div>
+    	
+    	<div id="my_lecture" class="tabcontent">
+        <% if @favorite_courses.nil? %>
+    	    <%= render "no_lecture" %>
+        <% else %>
+    	    <%= render "my_lecture" %>
+        <% end %>
+    	</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //nav 바로 아래로 붙이기
+  $(".index_container").css("padding-top",$(".cd-main-header").height());
+  
+  $( window ).resize(function() {
+    $(".index_container").css("padding-top",$(".cd-main-header").height());
+  });
+
+	//tab start//
+  function openTab(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // for image change
+    // var wiki_on = '/assets/wiki_on.svg';
+    // var wiki_off = '/assets/wiki_off.svg';
+
+    // var review_on = '/assets/review_on.svg';
+    // var review_off = '/assets/review_off.svg';
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks[i].parentNode.className = tablinks[i].parentNode.className.replace(" active_li", "");
+    }
+    // tablinks[0].children[0].src = wiki_off;
+    // tablinks[1].children[0].src = review_off;
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    evt.currentTarget.parentNode.className += " active_li";
+
+    // if (evt.currentTarget.className.match('review_tab')) {
+    //   evt.currentTarget.children[0].src = review_on;
+    //   showFilter();
+    // }
+    // else {
+    //   evt.currentTarget.children[0].src = wiki_on;
+    //   hideFilter();
+    // };
+  }
+  //change tab img end//
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  //tab end//
+</script>
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+<div class="index_container">
+  <div class="container-fluid">
+    <div class="main_feed">
+      <p class="feed_head"><%= (I18n.t 'evaluation.main_head1') %></p>
+      <p class="feed_head2"><%= (I18n.t 'evaluation.main_head2') %></p>
+      <div id="infinite_scroll">
+      <a href="/recent_evaluations?since=0" class="next_content"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#infinite_scroll').jscroll({
+    nextSelector: '.next_content'
+  });
+</script>
