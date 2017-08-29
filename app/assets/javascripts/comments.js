@@ -16,12 +16,13 @@ $(function(){
             success: function(e){
                 // 댓글 달기
                 var str =
-                "<div class='bubble_content' id='comment_list_child" + e.comment + "'>" + e.nickname +
+                "<div class='bubble_content' id='comment_list_child" + e.comment + "'>" + 
+                "<div class='bubble_top'>" + 
+                "<span class='bubble_top_left'>" + e.nickname + "</span>" +  
                 "<span class='bubble_top_right'> 방금 전 " +
-                "<span class='spot'>·</span><a href='#'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
                 "<span class='spot'>·</span> <a href='#'><i class='fa fa-trash-o' aria-hidden='true'></i></a>" +
-                "</span><br><p>" + e.body + "<br> </p> </div>";
-                $('#comment_list'+eval_id).prepend(str);
+                "</span></div><p>" + e.body + "</p></div>";
+                $('#comment_list_div'+eval_id).append(str);
 
                 //댓글수 증가
                 $(comment_count).html(parseInt($(comment_count).html(), 10)+1);

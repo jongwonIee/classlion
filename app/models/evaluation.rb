@@ -9,7 +9,7 @@ class Evaluation < ApplicationRecord
   has_many :reports
 
   # validations 
-  validates :body, length: { minimum: 100 }, presence: true
+  # validates :body, length: { minimum: 100 }, presence: true
   validates :body, length: { minimum: 100 }, presence: true
 
   #TODO i18nize needed

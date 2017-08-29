@@ -90,6 +90,23 @@
     background-position:center;
 }
 
+.main_container_middle {
+    display: table;
+    font-family: 'Nanum Barun Gothic', 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    width: 100%;
+    height: 100%;
+    min-height: 100% !important;
+    background-image: image-url('main_photo.png');
+    //background: url('main_bg.png');
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
+}
+
 // .index_before {
 //     overflow: auto;
 // }
@@ -277,11 +294,33 @@ body {
 /*index end*/
 
 /*about start*/
-.linkheader {
-    box-sizing: border-box;
+.middle-header {
+    height: 55px;
+    width: 100%;
+    position: fixed;
 }
-.signup_link login-button {
+
+.linkheader {
     float: right;
+    height: 32px;
+    margin-top: 10px;
+    margin-right: 0;
+    position: relative;
+    vertical-align: top;
+}
+
+.signup_link {
+    border: 1px solid rgba(0,0,0,.0941176);
+    border-radius: 5px;
+    background-color: rgba(0,0,0,.0941176);
+    color: #fff;
+}
+
+.login_link {
+    border: 1px solid #ff5a5f;
+    border-radius: 5px;
+    background-color: #ff5a5f;
+    color: #fff;
 }
 /*about end*/
 
@@ -450,7 +489,7 @@ body {
     border: 1px solid white;
     border-radius: 3px;
     font-size: 15px;
-    padding: 4%;
+    padding: 4.5%;
     margin-bottom: 4%;
 }
 
@@ -701,6 +740,7 @@ body {
 .feed_etc {
     color: #484848;
     font-size: 14px;
+    margin: 0 0 55px 0;
     .feed_etc_left {
         margin: 0 !important;
         float: left;
@@ -1466,7 +1506,8 @@ ul.tab li img {
     border: 0;
     box-shadow: none;
     margin: 0;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    font-weight: 400;
 }
 
 .bubble_top_right {

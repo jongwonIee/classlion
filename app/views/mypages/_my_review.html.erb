@@ -1,100 +1,195 @@
-<div class="container-fluid">
-    <div>
-        <% @evaluations.each_with_index do |e|  %>
-        <div class="feed_each">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 feed_each_div">
-              <div class="col-xs-12">
-                <p class="feed_course">
-                  <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
-                  <a href='/courses/<%= e.course.id %>'>
-                    <%= e.course.lecture.name %>(<%= e.course.professor.name %> 교수)
-                  </a>
-                </p>
-              </div>
-  
-              <p class="feed_content col-xs-12">
-                <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
-              </p>
+<!--<div class="container-fluid">-->
+<!--  <div>-->
+<!--    <% @evaluations.each_with_index do |e|  %>-->
+<!--      <% if e.like.is_like %>-->
+<!--        <div class="feed_each">-->
+<!--      <% else %>-->
+<!--        <div class="feed_each feed_each_dislike">-->
+<!--      <% end %>-->
+<!--        <div class="row">-->
+<!--          <div class="col-xs-12 col-sm-12 feed_each_div">-->
+<!--            <div class="col-xs-12">-->
+<!--              <p class="feed_course">-->
+<!--                <% if e.like.is_like %>-->
+<!--                  <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>-->
+<!--                <% else %>-->
+<!--                  <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_down"%>-->
+<!--                <% end %>-->
+<!--                <a href='/courses/<%= e.course.id %>'>-->
+<!--                  <%= e.course.lecture.name %>(<%= e.course.professor.name %> <%= (I18n.t 'course.professor') %>)-->
+<!--                </a>-->
+<!--              </p>-->
+<!--            </div>-->
+
+<!--            <p class="feed_content col-xs-12">-->
+<!--              <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>-->
+<!--            </p>-->
+            
+<!--            <div class="feed_etc col-xs-12">-->
+<!--              <p class="feed_etc_left">-->
+<!--                <%= e.time_ago %>-->
+<!--                <span class="spot">·</span>-->
+<!--                <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>-->
+<!--                <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>-->
+                <!--&nbsp;·&nbsp;-->
+                <!--<a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>-->
+                <!--&nbsp;·&nbsp;-->
+                <!--<i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>-->
+                <%# end %>
+<!--              </p>-->
+<!--              <p class="feed_etc_right">-->
+<!--                <span><%= I18n.t "evaluation.writer" %></span> <%= e.user.nickname %>-->
+<!--              </p>-->
+<!--            </div>-->
+            
+            
+
+            <%# 댓글 달때 빵빵 달리는 부분%>
+<!--            <div class="col-xs-12 reply_list_wrap" id="reply_list_wrap<%=e.id%>" style="display: none;">-->
+<!--              <div class="reply_div col-xs-12">-->
+<!--                <div class="bubble_list">-->
+<!--                  <div class="bubble clearfix"></div>-->
+<!--                </div>-->
+<!--                <div class="reply_right col-xs-12">-->
+<!--                  <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>-->
+<!--                      <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>-->
+<!--                      <div class="bubble_content reply_btn_div bubble_btn">-->
+<!--                        <%= f.submit "작성하기", class: "reply_write_btn" %>-->
+<!--                      </div>-->
+<!--                  <% end %>-->
+<!--                </div>-->
+<!--              </div>-->
               
-              <div class="feed_etc col-xs-12">
-                <p class="feed_etc_left">
-                  <%= e.time_ago %>
-                  &nbsp;·&nbsp;
-    
-                  <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
-                  <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
-                  &nbsp;·&nbsp;
+<!--              <div class="reply_div col-xs-12">-->
+<!--                <div class="reply_right col-xs-12" id="reply_list<%=e.id%>">-->
+<!--                  <% e.comments.each do |c| %>-->
+<!--                      <div class="bubble_content" id="reply_list_child<%=c.id%>">-->
+<!--                        <span class="bubble_top_left">-->
+<!--                          <%= c.user.nickname %>-->
+<!--                        </span>-->
+<!--                        <span class="bubble_top_right">-->
+<!--                          <%= c.time_ago %>-->
+                          <%# if c.user == @current_user %>
+                        <!--&nbsp;·&nbsp;-->
+                              <%# 수정 - 구현해야함 %>
+                        <!--      <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>-->
+                        <!--&nbsp;·&nbsp;-->
+                          <%# 삭제 %>
+<!--                          <%= link_to comment_path(c), remote: true, method: :delete do %>-->
+<!--                            <i class="fa fa-trash-o" aria-hidden="true"></i>-->
+<!--                          <% end %>-->
+                      <%# end %>
+<!--                        </span>-->
+<!--                        <p>-->
+<!--                          <%= c.body %>-->
+<!--                        </p>-->
+<!--                      </div>-->
+<!--                  <% end %>-->
+<!--                </div>-->
+<!--              </div>-->
 
-                  <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
-                  &nbsp;·&nbsp;
-                  <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
-                  <%# end %>
-                </p>
-                <p class="feed_etc_right">
-                  <span>작성자</span> <%= e.user.nickname %>
-                </p>
-                <br>
-              </div>
-
-              <%# 댓글 달때 빵빵 달리는 부분%>
-              <div class="col-xs-12 reply_list_wrap" id="reply_list_wrap<%=e.id%>" style="display: none;">
-                <div class="reply_div col-xs-12">
-                  <div class="reply_right col-xs-12" id="reply_list<%=e.id%>">
-                    <% e.comments.each do |c| %>
-                        <div class="bubble_content" id="reply_list_child<%=c.id%>">
-                          <%= c.user.nickname %>
-                          <span class="bubble_top_right">
-                        <%= c.time_ago %>
-                            <% if c.user == @current_user %>
-                          &nbsp;·&nbsp;
-                                <%# 수정 - 구현해야함 %>
-                                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                          &nbsp;·&nbsp;
-                                <%# 삭제 %>
-                                <%= link_to comment_path(c), remote: true, method: :delete do %>
-                              <i class="fa fa-trash-o" aria-hidden="true"></i>
-                          <% end %>
-                        <% end %>
-                        </span>
-                          <br>
-                          <p>
-                            <%= c.body %><br>
-                          </p>
-                        </div>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="reply_div col-xs-12">
-                  <div class="bubble_list">
-                    <div class="bubble clearfix"></div>
-                  </div>
-                  <div class="reply_right col-xs-12">
-                    <%= form_for(Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), remote: true) do |f| %>
-                        <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t "comment.placeholder"), rows: 3, class: "bubble_content bubble_write reply_box", autocomplete: "off" %>
-                        <div class="bubble_content reply_btn_div bubble_btn">
-                          <%= f.submit "작성하기", class: "reply_write_btn" %>
-                        </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>    
-        <% end %>
-    </div>
-</div>
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>    -->
+<!--    <% end %>-->
+<!--  </div>-->
+<!--</div>-->
 
 
-<script>
+<!--<script>-->
   <%# 댓글리스트 보였다 안보였다 %>
-  $(".reply_btn").click(function(){
-    var id = $(this).attr('id');
-    var $target = $('#reply_list_wrap'+id);
+<!--  $(".reply_btn").click(function(){-->
+<!--    var id = $(this).attr('id');-->
+<!--    var $target = $('#reply_list_wrap'+id);-->
 
-    $target.slideToggle( 500, function () {
-      $target.is(':visible') ? 'Hide' : 'Show';
-    });
-  });
-</script>
+<!--    $target.slideToggle( 500, function () {-->
+<!--      $target.is(':visible') ? 'Hide' : 'Show';-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+
+
+
+<div class="container-fluid">
+    <% @evaluations.each_with_index do |e|  %>
+      <% if e.like.is_like %>
+        <div class="feed_each">
+      <% else %>
+        <div class="feed_each feed_each_dislike">
+      <% end %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 feed_each_div">
+            <%# 강평부분 %>
+            <div class="col-xs-12">
+              <p class="feed_course">
+                <% if e.like.is_like %>
+                  <%= image_tag "/assets/thumbs_up.svg", class: "", alt: "thumbs_up"%>
+                <% else %>
+                  <%= image_tag "/assets/thumbs_down.svg", class: "", alt: "thumbs_down"%>
+                <% end %>
+                <a href='/courses/<%= e.course.id %>'>
+                  <%= e.course.lecture.name %>(<%= e.course.professor.name %> <%= (I18n.t 'course.professor') %>)
+                </a>
+              </p>
+            </div>
+            
+            <p class="feed_content col-xs-12">
+              <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+            </p>
+
+            <div class="feed_etc col-xs-12">
+              <p class="feed_etc_left">
+                <%= e.time_ago %>
+                <span class="spot">·</span>
+                <%= image_tag "reply.svg", alt: "reply", id: "#{e.id}", class: "reply_count reply_btn" %>
+                <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
+              </p>
+              <p class="feed_etc_right">
+                <span><%= I18n.t "evaluation.writer" %></span> <%= e.user.nickname %>
+              </p>
+            </div>
+            <%# 강평부분 끝 %>
+
+            <%# 댓글 달때 빵빵 달리는 부분 %><%# TODO 댓글 많이 달리면 나눠지게끔할것, 프론트 수정, 바뀐 프론트 js에 반영%>
+            <div id="comment_list<%=e.id%>">
+              <%# 댓글 작성 부분 %>
+              <div id="comment_list_div<%=e.id%>">
+                <%= form_for Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), :html => { :id => "new_comment#{e.id}"} do |f| %>
+                <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t 'comment.placeholder'), rows: 3, class: 'bubble_content bubble_write reply_box', autocomplete: 'off' %>
+                <div class="bubble_content reply_btn_div bubble_btn">
+                  <%= f.button (t 'form.submit_button'), type: 'submit',class: 'reply_write_btn',id: "reply_write_btn#{e.id}", value:"#{e.id}" %>
+                </div>
+                <% end %>
+              </div>
+              <%# 댓글 작성 부분 끝 %>
+            
+              <% e.comments.order( created_at: :desc).each do |c| %>
+                <div class="bubble_content" id="comment_list_child<%=c.id%>">
+                  <div class="bubble_top">
+                    <span class="bubble_top_left">
+                      <%= c.user.nickname %>
+                    </span>
+                    <span class="bubble_top_right">
+                      <%= c.time_ago %>
+                      <% if c.user == @current_user %>
+                        <span class="spot">·</span>
+                        <%# 삭제 %>
+                        <%= link_to comment_path(c), remote: true, method: :delete do %>
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        <% end %>
+                      <% end %>
+                    </span>
+                  </div>
+                  <p>
+                    <%= c.body %>
+                  </p>
+                </div>
+              <% end %>
+            </div>
+            <%# 댓글 달때 빵빵 달리는 부분 끝%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>

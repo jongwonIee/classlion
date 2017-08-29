@@ -1,1 +1,39 @@
-<%= render 'main_top'%>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/app/assets/stylesheet/theme/swiper.min.css">
+</head>
+<body>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <%= render 'main_top'%>                        
+      </div>
+      <div class="swiper-slide">
+        <%= render 'main_middle'%>
+      </div>
+      <div class="swiper-slide">
+        <%= render 'main_bottom'%>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+    <!-- Swiper JS -->
+    <script src="/app/assets/javascripts/swiper.min.js"></script>
+    
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        direction: 'vertical',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 0,
+        mousewheelControl: true
+    });
+    </script>
+</body>
+</html>

@@ -21,8 +21,9 @@
                 </a>
               </p>
             </div>
+            
             <p class="feed_content col-xs-12">
-              <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %></p>
+              <%= e.body.gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
             </p>
 
             <div class="feed_etc col-xs-12">
@@ -33,52 +34,56 @@
                 <span id="comment_count<%=e.id%>" class="reply_count"><%= e.comments.count %></span>
                 <span class="spot">·</span>
                 <%= link_to (image_tag "siren.svg"), reports_path,  {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#myModal'}  %>
-                <% if e.user.id == current_user.id %>
-                  <span class="spot">·</span>
-                  <a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>
-                  <span class="spot">·</span>
-                  <i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>
-                <% end %>
+                <%# if e.user.id == current_user.id %>
+                  <!--<span class="spot">·</span>-->
+                  <!--<a href="#"><i class="fa fa-pencil-square-o writer_icon" aria-hidden="true"></i></a>-->
+                  <!--<span class="spot">·</span>-->
+                  <!--<i class="fa fa-trash-o writer_icon" aria-hidden="true"></i>-->
+                <%# end %>
               </p>
               <p class="feed_etc_right">
                 <span><%= I18n.t "evaluation.writer" %></span> <%= e.user.nickname %>
               </p>
-              <br>
             </div>
             <%# 강평부분 끝 %>
 
             <%# TODO 임의로 프론트 드러낸거라 나중에 프론트 수정필요%>
-            <%# 댓글 작성 부분 %>
-            <div style="margin: 30px 0px;">
-              <%= form_for Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), :html => { :id => "new_comment#{e.id}"} do |f| %>
-              <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t 'comment.placeholder'), rows: 3, class: 'bubble_content bubble_write reply_box', autocomplete: 'off' %>
-              <div class="bubble_content reply_btn_div bubble_btn">
-                <%= f.button (t 'form.submit_button'), type: 'submit',class: 'reply_write_btn',id: "reply_write_btn#{e.id}", value:"#{e.id}" %>
-              </div>
-            <% end %>
-            </div>
-            <%# 댓글 작성 부분 끝 %>
 
             <%# 댓글 달때 빵빵 달리는 부분 %><%# TODO 댓글 많이 달리면 나눠지게끔할것, 프론트 수정, 바뀐 프론트 js에 반영%>
             <div id="comment_list<%=e.id%>">
-              <% e.comments.order( created_at: :desc).each do |c| %>
+              <%# 댓글 작성 부분 %>
+              <div id="comment_list_div<%=e.id%>">
+                <%= form_for Comment.new, url: evaluation_comments_path(evaluation_id: e.id ), :html => { :id => "new_comment#{e.id}"} do |f| %>
+                <%= f.text_area :body, id: "comment_body#{e.id}" ,placeholder: (t 'comment.placeholder'), rows: 3, class: 'bubble_content bubble_write reply_box', autocomplete: 'off' %>
+                <div class="bubble_content reply_btn_div bubble_btn">
+                  <%= f.button (t 'form.submit_button'), type: 'submit',class: 'reply_write_btn',id: "reply_write_btn#{e.id}", value:"#{e.id}" %>
+                </div>
+              <% end %>
+              </div>
+              <%# 댓글 작성 부분 끝 %>
+            
+              <% e.comments.order(created_at: :desc).each do |c| %>
                 <div class="bubble_content" id="comment_list_child<%=c.id%>">
-                  <%= c.user.nickname %>
-                  <span class="bubble_top_right"><%= c.time_ago %>
-                    <% if c.user == @current_user %>
-                        <span class="spot">·</span>
-                        <%# 수정 - 구현해야함 %>
-                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                        <span class="spot">·</span>
-                        <%# 삭제 %>
-                        <%= link_to comment_path(c), remote: true, method: :delete do %>
+                  <div class="bubble_top">
+                    <span class="bubble_top_left">
+                      <%= c.user.nickname %>
+                    </span>
+                    <span class="bubble_top_right">
+                      <%= c.time_ago %>
+                      <% if c.user == @current_user %>
+                          <span class="spot">·</span>
+                          <%# 수정 - 구현해야함 %>
+                          <!--<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>-->
+                          <!--<span class="spot">·</span>-->
+                          <%# 삭제 %>
+                          <%= link_to comment_path(c), remote: true, method: :delete do %>
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <% end %>
                         <% end %>
-                      <% end %>
-                  </span>
-                  <br>
+                    </span>
+                  </div>
                   <p>
-                    <%= c.body %><br>
+                    <%= c.body %>
                   </p>
                 </div>
               <% end %>

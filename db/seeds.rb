@@ -24,6 +24,7 @@ puts "Inserting user data.."
               password: x[5], password_confirmation: x[6], activated: x[7], activated_at: x[8], renew_password: true, skip_activation: true)
 end
 
+
 #admin role for admin@snu.ac.kr
 user = User.find(1)
 user.add_role('admin')

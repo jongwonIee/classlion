@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div>
     <% @comments.each do |c,i| %>
-      <div class="feed_each">
+      <div class="feed_each" style="border-left: none;">
         <div class="row">
           <div class="col-xs-12 my_page_feed">
             <p class="feed_course">
@@ -29,7 +29,6 @@
             
             <p class="feed_etc col-xs-12">
               <%= c.time_ago %>
-              <br>
             </p>
           </div>
 
